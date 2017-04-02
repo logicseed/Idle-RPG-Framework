@@ -5,9 +5,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public enum HazardType
+public class PlaceableController : MonoBehaviour
 {
-    Force,
-    Damage,
-    Stun
+
 }

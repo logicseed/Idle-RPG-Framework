@@ -2,10 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-///
-/// </summary>
-public class ObstableController : PlaceableController
+public static class Vector3Extensions
 {
 
 }

@@ -5,9 +5,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public enum HazardType
+public class BossAttributeManager : EnemyAttributeManager
 {
-    Force,
-    Damage,
-    Stun
+
 }

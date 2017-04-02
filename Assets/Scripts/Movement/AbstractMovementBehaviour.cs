@@ -5,9 +5,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public enum HazardType
+public abstract class AbstractMovementBehaviour
 {
-    Force,
-    Damage,
-    Stun
+    public abstract Vector2 Steering();
 }

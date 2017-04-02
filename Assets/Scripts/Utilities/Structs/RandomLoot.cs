@@ -5,9 +5,8 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public enum HazardType
+public struct RandomLoot
 {
-    Force,
-    Damage,
-    Stun
+    public Equipment equipment;
+    public float randomChance;
 }

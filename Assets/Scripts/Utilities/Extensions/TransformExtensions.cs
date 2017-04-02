@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlaceableBehaviour : MonoBehaviour {
+/// <summary>
+///
+/// </summary>
+public static class TransformExtensions
+{
 
 }

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HazardController : PlaceableBehaviour {
-
+/// <summary>
+///
+/// </summary>
+public class HazardController : PlaceableController
+{
     public HazardType type;
     public float potency;
     public bool isOneTime;
@@ -12,11 +15,17 @@ public class HazardController : PlaceableBehaviour {
     [HideInInspector]
     public bool hasTriggered;
 
+    /// <summary>
+    ///
+    /// </summary>
     public void ApplyEffect()
     {
 
     }
 
+    /// <summary>
+    ///
+    /// </summary>
     public void OnTriggerEnter2D()
     {
 
