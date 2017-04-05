@@ -7,7 +7,10 @@ using UnityEngine;
 /// </summary>
 public class MovementController : MonoBehaviour
 {
-    public AbstractMovementBehaviour movementBehaviour;
+    public float maxSpeed;
+    public float maxAccel;
+    [HideInInspector] public AbstractMovementBehaviour movementBehaviour;
+    [HideInInspector] public Vector2 currentVelocity;
 
     /// <summary>
     ///

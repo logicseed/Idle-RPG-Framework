@@ -6,6 +6,7 @@
 /// </summary>
 public class AvoidMovementBehaviour : DirectMovementBehaviour
 {
+
     /// <summary>
     /// Constructor for AvoidMovementBehaviour instances.
     /// </summary>
@@ -18,9 +19,11 @@ public class AvoidMovementBehaviour : DirectMovementBehaviour
     /// <summary>
     /// The steering vector desired by this movement behaviour.
     /// </summary>
-    /// <returns>The optimal sterring vector to accomplish this movement behaviour.</returns>
+    /// <returns>The optimal steering vector to accomplish this movement behaviour.</returns>
     public override Vector2 Steering()
     {
-        return movementBehaviour.Steering();
+        var desiredSteering = CalculateDesiredSteering(target.transform.position, agent.transform.position);
+
+        return desiredSteering + movementBehaviour.Steering();
     }
 }

@@ -26,6 +26,8 @@ public class WalkMovementBehaviour : DirectMovementBehaviour
     /// <returns>The optimal steering vector to accomplish this movement behaviour.</returns>
     public override Vector2 Steering()
     {
-        return movementBehaviour.Steering();
+        var desiredSteering = CalculateDesiredSteering(agent.transform.position, location);
+
+        return desiredSteering + movementBehaviour.Steering();
     }
 }
