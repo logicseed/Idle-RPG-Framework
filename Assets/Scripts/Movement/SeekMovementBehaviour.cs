@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// When an agent has this movement behaviour it will actively desire to move
@@ -12,17 +13,25 @@ public class SeekMovementBehaviour : DirectMovementBehaviour
     /// <param name="movementBehaviour">The movement behaviour to decorate.</param>
     /// <param name="agent">The GameObject that desires this movement behaviour.</param>
     /// <param name="target">The target of this movement behaviour.</param>
-    public SeekMovementBehaviour(AbstractMovementBehaviour movementBehaviour, GameObject agent, GameObject target)
-         : base(movementBehaviour, agent, target) { }
+    /// <param name="radius">The radius at which this behaviour is completed.</param>
+    public SeekMovementBehaviour(AbstractMovementBehaviour movementBehaviour, GameObject agent, GameObject target, float radius)
+         : base(movementBehaviour, agent, target, radius) { }
 
     /// <summary>
-    /// The steering vector desired by this movement behaviour.
+    /// The velocity desired by this movement behaviour.
     /// </summary>
-    /// <returns>The optimal steering vector to accomplish this movement behaviour.</returns>
-    public override Vector2 Steering()
+    /// <returns>The optimal velocity vector to accomplish this movement behaviour.</returns>
+    public override Vector2 CalculateDesiredVelocity()
     {
-        var desiredSteering = CalculateDesiredSteering(agent.transform.position, target.transform.position);
+        var desiredVelocity = CalculateMaximumVelocity(agent.transform.position, target.transform.position);
 
-        return desiredSteering + movementBehaviour.Steering();
+        var distance = Vector2.Distance(agent.transform.position, target.transform.position);
+        var radiusFactor = Mathf.Clamp(distance / radius, 0.0f, 1.0f);
+        desiredVelocity *= radiusFactor;
+
+        if (distance < 0.3f) desiredVelocity = Vector2.zero;
+
+        Debug.DrawRay(agent.transform.position, desiredVelocity * 10, Color.green);
+        return  desiredVelocity + movementBehaviour.CalculateDesiredVelocity();
     }
 }

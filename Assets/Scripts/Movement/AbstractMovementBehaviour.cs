@@ -12,4 +12,10 @@ public abstract class AbstractMovementBehaviour
     /// </summary>
     /// <returns>The optimal steering vector to accomplish this movement behaviour.</returns>
     public abstract Vector2 Steering();
+
+    /// <summary>
+    /// The velocity desired by this movement behaviour.
+    /// </summary>
+    /// <returns>The optimal velocity vector to accomplish this movement behaviour.</returns>
+    public abstract Vector2 CalculateDesiredVelocity();
 }

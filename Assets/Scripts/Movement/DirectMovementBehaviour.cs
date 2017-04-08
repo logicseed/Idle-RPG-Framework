@@ -8,28 +8,26 @@ using UnityEngine;
 /// </summary>
 public abstract class DirectMovementBehaviour : AbstractMovementDecorator
 {
-    protected MovementController movementController;
     /// <summary>
     /// Constructor for DirectMovementBehaviour instances.
     /// </summary>
     /// <param name="movementBehaviour">The movement behaviour to decorate.</param>
     /// <param name="agent">The GameObject that desires this movement behaviour.</param>
     /// <param name="target">The target of this movement behaviour.</param>
-    public DirectMovementBehaviour(AbstractMovementBehaviour movementBehaviour, GameObject agent, GameObject target)
-         : base(movementBehaviour, agent, target) { }
+    /// <param name="radius">The radius at which this behaviour is completed.</param>
+    public DirectMovementBehaviour(AbstractMovementBehaviour movementBehaviour, GameObject agent, GameObject target, float radius)
+         : base(movementBehaviour, agent, target, radius) { }
 
     /// <summary>
-    /// Calculates the desired steering of this direct movement behaviour.
+    /// Calculates the maximum velocity of this direct movement behaviour.
     /// </summary>
     /// <param name="fromPosition">The start position.</param>
     /// <param name="toPosition">The end position.</param>
-    /// <returns>Desired steering to go from start position to end position.</returns>
-    protected Vector2 CalculateDesiredSteering(Vector2 fromPosition, Vector2 toPosition)
+    /// <returns>Maximum velocity to go from start position to end position.</returns>
+    public Vector2 CalculateMaximumVelocity(Vector2 fromPosition, Vector2 toPosition)
     {
-        var desiredVelocity = (toPosition - fromPosition) * maxSpeed;
-        var desiredAcceleration = (desiredVelocity - controller.currentVelocity).normalized * maxAccel;
-        var desiredSteering = controller.currentVelocity - desiredAcceleration;
+        var maximumVelocity = (toPosition - fromPosition).normalized * maxSpeed;
 
-        return desiredSteering;
+        return maximumVelocity;
     }
 }

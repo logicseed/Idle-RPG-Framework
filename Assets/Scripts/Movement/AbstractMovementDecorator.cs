@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 /// <summary>
 /// Movement behaviours that can be wrapped around other movement behaviours
@@ -37,18 +38,38 @@ public abstract class AbstractMovementDecorator : AbstractMovementBehaviour
     protected GameObject target;
 
     /// <summary>
+    /// The radius at which the behaviour is considered completed.
+    /// </summary>
+    protected float radius;
+
+    /// <summary>
     /// Base constructor for movement decorators.
     /// </summary>
     /// <param name="movementBehaviour">The movement behaviour to decorate.</param>
     /// <param name="agent">The GameObject that desires this movement behaviour.</param>
     /// <param name="target">The target of this movement behaviour.</param>
     public AbstractMovementDecorator(AbstractMovementBehaviour movementBehaviour,
-                                     GameObject agent, GameObject target)
+                                     GameObject agent, GameObject target, float radius)
     {
+        this.movementBehaviour = movementBehaviour;
         this.agent = agent;
         this.controller = agent.GetComponent<MovementController>();
         this.maxSpeed = controller.maxSpeed;
         this.maxAccel = controller.maxAccel;
         this.target = target;
+        this.radius = radius;
+    }
+
+    /// <summary>
+    /// The steering vector desired by the movement behaviours.
+    /// </summary>
+    /// <returns>The optimal steering vector to accomplish this movement behaviour.</returns>
+    public override Vector2 Steering()
+    {
+        var desiredVelocity = CalculateDesiredVelocity().normalized * maxSpeed;
+        var desiredAcceleration = (desiredVelocity - controller.currentVelocity).normalized * maxAccel;
+        var desiredSteering = controller.currentVelocity + desiredAcceleration;
+
+        return desiredSteering;
     }
 }
