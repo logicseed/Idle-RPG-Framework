@@ -23,3 +23,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/_DevAssets/Shri.unity
     guid: fbcbd5eae9e99f04dbeb04a00767e963
+  - enabled: 1
+    path: Assets/Tests/MovementBehaviourTests.unity
+    guid: 6812e8f8a4ce44e4c967a684af7419ac

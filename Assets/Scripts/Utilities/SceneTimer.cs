@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 /// <summary>
 /// Loads a scene after a specified amount of time.
@@ -9,10 +10,20 @@ public class SceneTimer : MonoBehaviour
 {
     public string scene;
     public float delay;
+    public float remaining;
+    public Scrollbar progress;
 
-	void Start ()
+    void Start ()
     {
-        StartCoroutine("DelayLoad");
+        remaining = delay;
+        //StartCoroutine("DelayLoad");
+    }
+
+    private void Update()
+    {
+        remaining -= Time.deltaTime;
+        if (progress != null) progress.size = 1 - (remaining / delay);
+        if (remaining <= 0) SceneManager.LoadScene(scene);
     }
 
     IEnumerator DelayLoad()

@@ -12,21 +12,21 @@ public class MovementBehaviourTests : MonoBehaviour
     private MovementController controller;
     public float seekRadius;
     public float avoidRadius;
-    
+    public float maxSpeed;
 
-	// Use this for initialization
-	void Awake ()
+    // Use this for initialization
+    void Awake ()
     {
-		controller = gameObject.GetComponent<MovementController> ();
-	}
-	
-	// Update is called once per frame
-	void FixedUpdate ()
+        controller = gameObject.GetComponent<MovementController>();
+    }
+
+    // Update is called once per frame
+    void FixedUpdate ()
     {
-		if (movementBehaviour == null)
-		{
-            
-			movementBehaviour = new IdleMovementBehaviour();
+        if (movementBehaviour == null)
+        {
+
+            movementBehaviour = new IdleMovementBehaviour();
             movementBehaviour = new SeekMovementBehaviour(movementBehaviour, gameObject, seekTarget, seekRadius);
             movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, avoidTarget, avoidRadius);
             movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, avoidTarget2, avoidRadius);
@@ -34,5 +34,5 @@ public class MovementBehaviourTests : MonoBehaviour
         }
         var newPosition = movementBehaviour.Steering().normalized * controller.maxSpeed;
         transform.Translate(newPosition);
-	}
+    }
 }
