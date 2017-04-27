@@ -44,3 +44,18 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2585226795
+    locked: 0
+  - name: Hazard
+    uniqueID: 2584682633
+    locked: 0
+  - name: Obstacle
+    uniqueID: 907359057
+    locked: 0
+  - name: Loot
+    uniqueID: 1061117575
+    locked: 0
+  - name: Character
+    uniqueID: 238355861
+    locked: 0

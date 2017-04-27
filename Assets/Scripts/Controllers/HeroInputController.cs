@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 /// <summary>
 ///
@@ -32,6 +33,8 @@ public class HeroInputController : MonoBehaviour
         {
             ProcessTap(Input.mousePosition);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("World"); }
     }
 
     private void ProcessTap(Vector2 position)

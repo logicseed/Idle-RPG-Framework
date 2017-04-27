@@ -25,8 +25,10 @@ public class AvoidMovementBehaviour : DirectMovementBehaviour
         var desiredVelocity = CalculateMaximumVelocity(target.transform.position, agent.transform.position);
 
         var distance = Vector2.Distance(agent.transform.position, target.transform.position);
-        var radiusFactor = Mathf.Clamp((1.0f - (distance / radius))*2, 0.0f, 2.0f);
+        var radiusFactor = Mathf.Clamp((1.0f - (distance / radius)), 0.0f, 1.0f);
         desiredVelocity *= radiusFactor;
+
+        if (desiredVelocity.sqrMagnitude < 0.0001f) desiredVelocity = Vector2.zero;
 
         Debug.DrawRay(agent.transform.position, desiredVelocity * 10, Color.red);
         return desiredVelocity + movementBehaviour.CalculateDesiredVelocity();

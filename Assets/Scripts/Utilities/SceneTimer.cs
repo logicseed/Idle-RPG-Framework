@@ -12,6 +12,7 @@ public class SceneTimer : MonoBehaviour
     public float delay;
     public float remaining;
     public Scrollbar progress;
+    public bool waitForTap;
 
     void Start ()
     {
@@ -21,9 +22,30 @@ public class SceneTimer : MonoBehaviour
 
     private void Update()
     {
-        remaining -= Time.deltaTime;
-        if (progress != null) progress.size = 1 - (remaining / delay);
-        if (remaining <= 0) SceneManager.LoadScene(scene);
+        if (waitForTap)
+        {
+            if (Input.touchCount > 0)
+            {
+                foreach (var touch in Input.touches)
+                {
+                    if (touch.phase == TouchPhase.Ended)
+                    {
+                        SceneManager.LoadScene(scene);
+                    }
+                }
+            }
+
+            if (Input.GetMouseButton(0))
+            {
+                SceneManager.LoadScene(scene);
+            }
+        }
+        else
+        {
+            remaining -= Time.deltaTime;
+            if (progress != null) progress.size = 1 - (remaining / delay);
+            if (remaining <= 0) SceneManager.LoadScene(scene);
+        }
     }
 
     IEnumerator DelayLoad()
