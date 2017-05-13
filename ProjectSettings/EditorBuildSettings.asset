@@ -4,4 +4,25 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/Start.unity
+    guid: 0732603976a47b44fb5443962297ff67
+  - enabled: 1
+    path: Assets/Scenes/World.unity
+    guid: b5474a400f0473d44b7ff2e01a8f3906
+  - enabled: 1
+    path: Assets/_DevAssets/Ali.unity
+    guid: b3a69fa1d7c273349a2bb148cf79b0c8
+  - enabled: 1
+    path: Assets/_DevAssets/Marc.unity
+    guid: c7dae5b4c519b2b4daca57f5e885143f
+  - enabled: 1
+    path: Assets/_DevAssets/Mark.unity
+    guid: 7873c3a1a81797544b49ee88f17bdef3
+  - enabled: 1
+    path: Assets/_DevAssets/Shri.unity
+    guid: fbcbd5eae9e99f04dbeb04a00767e963
+  - enabled: 1
+    path: Assets/Tests/MovementBehaviourTests.unity
+    guid: 6812e8f8a4ce44e4c967a684af7419ac
