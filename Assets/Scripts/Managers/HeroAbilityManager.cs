@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public class AbilityManager : MonoBehaviour
+public class HeroAbilityManager : MonoBehaviour
 {
     public List<Ability> unlockedAbilities;
     public List<Ability> activeAbilities;

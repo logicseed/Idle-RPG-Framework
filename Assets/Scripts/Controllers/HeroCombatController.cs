@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public class HeroCombatManager : BaseCombatController
+public class HeroCombatController : BaseCombatController
 {
     /// <summary>
     ///
