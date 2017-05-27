@@ -68,7 +68,11 @@ public class MovementController : MonoBehaviour
     public void Move()
     {
         var newPosition = movementBehaviour.Steering().normalized * maxSpeed;
-        lastMoveDirection = newPosition.x > 0 ? MoveDirection.Right : MoveDirection.Left;
+
+        if (newPosition.x == 0)
+            lastMoveDirection = MoveDirection.none;
+        else
+            lastMoveDirection = newPosition.x > 0 ? MoveDirection.Right : MoveDirection.Left;
         transform.Translate(newPosition);
     }
 

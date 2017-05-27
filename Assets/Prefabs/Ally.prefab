@@ -24,6 +24,7 @@ GameObject:
   - component: {fileID: 114984039838512662}
   - component: {fileID: 212412252964831770}
   - component: {fileID: 114006626552816356}
+  - component: {fileID: 95275934231010100}
   m_Layer: 0
   m_Name: Ally
   m_TagString: Ally
@@ -44,6 +45,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &95275934231010100
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118496099470282}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &114006626552816356
 MonoBehaviour:
   m_ObjectHideFlags: 1
