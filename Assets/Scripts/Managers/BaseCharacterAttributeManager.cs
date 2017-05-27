@@ -7,8 +7,9 @@ using UnityEngine;
 /// </summary>
 public abstract class BaseCharacterAttributeManager : MonoBehaviour
 {
-    public CharacterAttributes baseAttributes;
-    public CharacterAttributes finalAttributes;
+
+    public BaseCharacterAttributes baseAttributes;
+    public BaseCharacterAttributes finalAttributes;
     public int currentHealth;
     public int currentEnergy;
 
