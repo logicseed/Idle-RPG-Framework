@@ -8,6 +8,8 @@ using UnityEngine;
 /// </summary>
 public class HeroAttributeManager : BaseCharacterAttributeManager
 {
+    public override CharacterType characterType { get { return CharacterType.Hero; } }
+
     /// <summary>
     ///
     /// </summary>
@@ -15,4 +17,5 @@ public class HeroAttributeManager : BaseCharacterAttributeManager
     {
         throw new NotImplementedException();
     }
+
 }

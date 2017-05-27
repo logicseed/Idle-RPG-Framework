@@ -8,6 +8,11 @@ using UnityEngine;
 /// </summary>
 public class HeroCombatController : BaseCombatController
 {
+    //public override void GetAttributeManager()
+    //{
+    //    attributeManager = GetComponent<HeroAttributeManager>();
+    //}
+
     /// <summary>
     ///
     /// </summary>

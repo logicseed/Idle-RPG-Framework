@@ -13,6 +13,8 @@ public abstract class BaseCharacterAttributeManager : MonoBehaviour
     public int currentHealth;
     public int currentEnergy;
 
+    public virtual CharacterType characterType { get { return CharacterType.None; } }
+
     /// <summary>
     ///
     /// </summary>

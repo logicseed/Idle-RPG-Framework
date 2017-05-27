@@ -10,10 +10,12 @@ using UnityEngine.SceneManagement;
 public class HeroInputController : MonoBehaviour
 {
     MovementController movementController;
+    BaseCombatController combatController;
 
     private void Start()
     {
         movementController = gameObject.GetComponent<MovementController>();
+        combatController = gameObject.GetComponent<BaseCombatController>();
     }
 
     private void Update()
@@ -46,9 +48,30 @@ public class HeroInputController : MonoBehaviour
     /// <param name="position"></param>
     private void ProcessTap(Vector2 position)
     {
+        var worldPosition = Camera.main.ScreenToWorldPoint(position);
+
+        // Character tap
+        foreach ( var character in GameManager.Instance.Characters)
+        {
+            if (Vector2.Distance(worldPosition, character.transform.position) < 0.1f) //TODO: No magic numbers
+            {
+                try
+                {
+                    combatController.characterTarget = character;
+                    return;
+                }
+                catch (NullReferenceException)
+                {
+                    combatController = gameObject.GetComponent<BaseCombatController>();
+                    return;
+                }
+            }
+        }
+
+        // Location tap
         try
         {
-            movementController.SetLocationTarget(Camera.main.ScreenToWorldPoint(position));
+            movementController.SetLocationTarget(worldPosition);
         }
         catch (NullReferenceException)
         {

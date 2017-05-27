@@ -7,5 +7,5 @@ using UnityEngine;
 /// </summary>
 public class BossAttributeManager : EnemyAttributeManager
 {
-
+    public override CharacterType characterType { get { return CharacterType.Boss; } }
 }

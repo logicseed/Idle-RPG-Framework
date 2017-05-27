@@ -8,6 +8,8 @@ using UnityEngine;
 /// </summary>
 public class AllyAttributeManager : BaseCharacterAttributeManager
 {
+    public override CharacterType characterType { get { return CharacterType.Ally; } }
+
     /// <summary>
     ///
     /// </summary>

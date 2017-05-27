@@ -8,6 +8,8 @@ using UnityEngine;
 /// </summary>
 public class EnemyAttributeManager : BaseCharacterAttributeManager
 {
+    public override CharacterType characterType { get { return CharacterType.Enemy; } }
+
     /// <summary>
     ///
     /// </summary>
