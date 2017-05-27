@@ -10,11 +10,25 @@ public class MovementController : MonoBehaviour
     public bool demoMode;
     public float maxSpeed;
     public float maxAccel;
+    private MoveDirection lastMoveDirection = MoveDirection.Right;
 
     public Vector2 locationTarget;
 
     [HideInInspector] public AbstractMovementBehaviour movementBehaviour;
     [HideInInspector] public Vector2 currentVelocity;
+
+    public MoveDirection LastMoveDirection
+    {
+        get
+        {
+            return lastMoveDirection;
+        }
+
+        set
+        {
+            lastMoveDirection = value;
+        }
+    }
 
     public void Start()
     {
@@ -54,6 +68,7 @@ public class MovementController : MonoBehaviour
     public void Move()
     {
         var newPosition = movementBehaviour.Steering().normalized * maxSpeed;
+        lastMoveDirection = newPosition.x > 0 ? MoveDirection.Right : MoveDirection.Left;
         transform.Translate(newPosition);
     }
 

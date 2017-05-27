@@ -6,11 +6,13 @@ using UnityEngine;
 public class GraphicsController : MonoBehaviour
 {
     private SpriteRenderer spriteRenderer;
+    private MovementController movementController;
 
     // Use this for initialization
     private void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        movementController = GetComponent<MovementController>();
     }
 
     // Update is called once per frame
@@ -25,7 +27,16 @@ public class GraphicsController : MonoBehaviour
     /// </summary>
     private void UpdateAnimationState()
     {
-
+        // Get the last move direction
+        try
+        {
+            var lastMoveDirection = movementController.LastMoveDirection;
+            // Update animtion based on direction
+        }
+        catch (NullReferenceException)
+        {
+            movementController = GetComponent<MovementController>();
+        }
     }
 
     /// <summary>
