@@ -19,9 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4323655745426706}
-  - component: {fileID: 212412252964831770}
-  - component: {fileID: 114198153172584502}
   - component: {fileID: 114963300823022754}
+  - component: {fileID: 114934039038697484}
+  - component: {fileID: 114984039838512662}
+  - component: {fileID: 212412252964831770}
+  - component: {fileID: 114006626552816356}
   m_Layer: 0
   m_Name: Ally
   m_TagString: Ally
@@ -42,7 +44,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114198153172584502
+--- !u!114 &114006626552816356
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -50,16 +52,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1118496099470282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6772e5c3b9812147aa68e14d4a8e659, type: 3}
+  m_Script: {fileID: 11500000, guid: d2654d1e933bf6448a8710150ef50e1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  seekTarget: {fileID: 0}
-  avoidTarget: {fileID: 0}
-  avoidTarget2: {fileID: 0}
-  avoidTarget3: {fileID: 0}
-  seekRadius: 3
-  avoidRadius: 1
-  maxSpeed: 0
+--- !u!114 &114934039038697484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118496099470282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b1ccb250f580124994176b7e36d29d5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &114963300823022754
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,11 +77,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0c89e06041326542ae370b1a81f585c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  demoMode: 1
+  demoMode: 0
   maxSpeed: 0.02
   maxAccel: 1
   locationTarget: {x: 0, y: 0}
   currentVelocity: {x: 0, y: 0}
+--- !u!114 &114984039838512662
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1118496099470282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea042b6455fc20642a7b6f8075fbc6c3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseAttributes:
+    attackDamage: 0
+    abilityDamage: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    defense: 0
+    cooldownReduction: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeration: 0
+    lifeDrain: 0
+    movementSpeed: 0
+  finalAttributes:
+    attackDamage: 0
+    abilityDamage: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    defense: 0
+    cooldownReduction: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeration: 0
+    lifeDrain: 0
+    movementSpeed: 0
+  currentHealth: 0
+  currentEnergy: 0
 --- !u!212 &212412252964831770
 SpriteRenderer:
   m_ObjectHideFlags: 1

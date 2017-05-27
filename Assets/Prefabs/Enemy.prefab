@@ -19,11 +19,11 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4572533923966040}
-  - component: {fileID: 212704486074258586}
   - component: {fileID: 114583253140473724}
   - component: {fileID: 114440799395904452}
   - component: {fileID: 114430348352296632}
-  - component: {fileID: 114480587348827316}
+  - component: {fileID: 212704486074258586}
+  - component: {fileID: 114952526425591536}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -71,17 +71,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa07372c182022948af50aad4e27b9bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &114480587348827316
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1253877551690842}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2654d1e933bf6448a8710150ef50e1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114583253140473724
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,8 +82,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9cab6bb5a0b4854fb077b41b205eef1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  baseAttributes:
+    attackDamage: 0
+    abilityDamage: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    defense: 0
+    cooldownReduction: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeration: 0
+    lifeDrain: 0
+    movementSpeed: 0
+  finalAttributes:
+    attackDamage: 0
+    abilityDamage: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    defense: 0
+    cooldownReduction: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeration: 0
+    lifeDrain: 0
+    movementSpeed: 0
   currentHealth: 0
   currentEnergy: 0
+--- !u!114 &114952526425591536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1253877551690842}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2654d1e933bf6448a8710150ef50e1a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &212704486074258586
 SpriteRenderer:
   m_ObjectHideFlags: 1
