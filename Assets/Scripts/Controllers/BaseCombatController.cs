@@ -97,20 +97,18 @@ public abstract class BaseCombatController : MonoBehaviour
     private void GetClosestHostile(List<GameObject> hostiles)
     {
         GameObject closestHostile = null;
+        var closestSquaredDistance = Mathf.Infinity;
 
         foreach (var hostile in hostiles)
         {
-            // First hostile is closest
-            if (closestHostile == null)
+            var directionToHostile = hostile.transform.position - transform.position;
+            var squaredDistance = directionToHostile.sqrMagnitude;
+
+            if (squaredDistance < closestSquaredDistance)
             {
+                closestSquaredDistance = squaredDistance;
                 closestHostile = hostile;
-                continue;
             }
-
-            var currentDistance = Vector2.Distance(transform.position, closestHostile.transform.position);
-            var newDistance = Vector2.Distance(transform.position, hostile.transform.position);
-
-            if (newDistance < currentDistance) closestHostile = hostile;
         }
 
         if (closestHostile != null) characterTarget = closestHostile;
