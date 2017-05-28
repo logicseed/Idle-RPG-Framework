@@ -39,17 +39,41 @@ public class GameManager : Singleton<GameManager>
         hero = new List<GameObject>(GameObject.FindGameObjectsWithTag("Hero"));
     }
 
-    public List<GameObject> Characters
+    public List<GameObject> AllCharacters
     {
         get
         {
-            var characters = new List<GameObject>();
-            characters.AddRange(allies);
-            characters.AddRange(enemies);
+            var allCharacters = new List<GameObject>();
+            allCharacters.AddRange(allies);
+            allCharacters.AddRange(enemies);
             //characters.AddRange(bosses);
-            characters.AddRange(hero);
+            allCharacters.AddRange(hero);
 
-            return characters;
+            return allCharacters;
+        }
+    }
+
+    public List<GameObject> AllEnemies
+    {
+        get
+        {
+            var allEnemies = new List<GameObject>();
+            allEnemies.AddRange(enemies);
+            //enemies.AddRange(bosses);
+
+            return allEnemies;
+        }
+    }
+
+    public List<GameObject> AllFriendlies
+    {
+        get
+        {
+            var allFriendlies = new List<GameObject>();
+            allFriendlies.AddRange(allies);
+            allFriendlies.AddRange(hero);
+
+            return allFriendlies;
         }
     }
 }

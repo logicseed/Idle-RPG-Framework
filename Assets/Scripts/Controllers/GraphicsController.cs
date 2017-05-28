@@ -52,7 +52,7 @@ public class GraphicsController : MonoBehaviour
             var lastMoveDirection = movementController.LastMoveDirection;
 
             // Update animtion based on direction
-            if(lastMoveDirection == MoveDirection.none)
+            if(lastMoveDirection == MoveDirection.None)
             {
                 //If prev animation played is left
                 if(anim.GetInteger("state") == 2)

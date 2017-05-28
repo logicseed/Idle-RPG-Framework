@@ -70,7 +70,7 @@ public class MovementController : MonoBehaviour
         var newPosition = movementBehaviour.Steering().normalized * maxSpeed;
 
         if (newPosition.x == 0)
-            lastMoveDirection = MoveDirection.none;
+            lastMoveDirection = MoveDirection.None;
         else
             lastMoveDirection = newPosition.x > 0 ? MoveDirection.Right : MoveDirection.Left;
         transform.Translate(newPosition);

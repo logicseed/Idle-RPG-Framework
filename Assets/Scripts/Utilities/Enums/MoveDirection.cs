@@ -1,11 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public enum MoveDirection
+﻿public enum MoveDirection
 {
+    None,
     Left,
-    Right,
-    none
+    Right
 }
 

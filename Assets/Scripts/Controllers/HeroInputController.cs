@@ -51,7 +51,7 @@ public class HeroInputController : MonoBehaviour
         var worldPosition = Camera.main.ScreenToWorldPoint(position);
 
         // Character tap
-        foreach ( var character in GameManager.Instance.Characters)
+        foreach ( var character in GameManager.Instance.AllCharacters)
         {
             if (Vector2.Distance(worldPosition, character.transform.position) < 0.1f) //TODO: No magic numbers
             {
