@@ -5,6 +5,7 @@ using UnityEngine;
 public enum MoveDirection
 {
     Left,
-    Right
+    Right,
+    none
 }
 
