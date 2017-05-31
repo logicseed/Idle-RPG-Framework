@@ -69,8 +69,8 @@ public class HeroInputController : MonoBehaviour
         // Location tap
         try
         {
-            Debug.Log(worldPosition);
             ((HeroMovementController)hero.movement).location = worldPosition;
+            hero.combat.target = null;
         }
         catch (NullReferenceException)
         {
