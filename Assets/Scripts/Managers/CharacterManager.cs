@@ -8,8 +8,13 @@ using UnityEngine;
 /// </summary>
 public class CharacterManager : MonoBehaviour
 {
+    public RuntimeAnimatorController animatorController;
+
+    protected Animator animatorReference;
     protected CombatController combatControllerReference;
+    protected GraphicsController graphicsControllerReference;
     protected MovementController movementControllerReference;
+    protected Rigidbody2D rigidbodyReference;
 
     public BaseAttributes baseAttributes;
     public BaseAttributes bonusAttributes;
@@ -102,10 +107,47 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    protected virtual void Awake()
+    {
+        CreateAnimator();
+        CreateCombatController();
+        CreateGraphicsController();
+        //CreateMovementController();
+        CreateRigidbody2D();
+    }
+
+    protected virtual void CreateAnimator()
+    {
+        animatorReference = gameObject.AddComponent<Animator>();
+        animatorReference.runtimeAnimatorController = animatorController;
+        animatorReference.StartPlayback();
+    }
+
+    protected virtual void CreateCombatController()
+    {
+        combatControllerReference = gameObject.AddComponent<CombatController>();
+    }
+
+    protected virtual void CreateGraphicsController()
+    {
+        graphicsControllerReference = gameObject.AddComponent<GraphicsController>();
+    }
+
+    protected virtual void CreateMovementController()
+    {
+        movementControllerReference = gameObject.AddComponent<MovementController>();
+    }
+
+    protected virtual void CreateRigidbody2D()
+    {
+        rigidbodyReference = gameObject.AddComponent<Rigidbody2D>();
+        rigidbodyReference.bodyType = RigidbodyType2D.Kinematic;
+        rigidbodyReference.isKinematic = true;
+        rigidbodyReference.useFullKinematicContacts = true;
+    }
 
     protected virtual void Start()
     {
-        combatControllerReference = GetComponent<CombatController>();
         GetMovementController();
         CalculateBonusAttributes();
         derivedAttributes = new DerivedAttributes(this);

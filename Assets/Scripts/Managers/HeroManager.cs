@@ -22,4 +22,14 @@ public class HeroManager : CharacterManager
     {
         movementControllerReference = GetComponent<HeroMovementController>();
     }
+
+    protected override void CreateCombatController()
+    {
+        combatControllerReference = gameObject.AddComponent<HeroCombatController>();
+    }
+
+    protected override void CreateMovementController()
+    {
+        movementControllerReference = gameObject.AddComponent<HeroMovementController>();
+    }
 }

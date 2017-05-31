@@ -22,9 +22,6 @@ GameObject:
   - component: {fileID: 114830835161598166}
   - component: {fileID: 114963300823022754}
   - component: {fileID: 212412252964831770}
-  - component: {fileID: 114006626552816356}
-  - component: {fileID: 95275934231010100}
-  - component: {fileID: 50895137609357366}
   - component: {fileID: 70682306600480396}
   m_Layer: 0
   m_Name: Ally
@@ -46,26 +43,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50895137609357366
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118496099470282}
-  m_BodyType: 1
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 1
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 0
 --- !u!70 &70682306600480396
 CapsuleCollider2D:
   m_ObjectHideFlags: 1
@@ -81,34 +58,6 @@ CapsuleCollider2D:
   m_Offset: {x: 0, y: -0.275}
   m_Size: {x: 0.4, y: 0.2}
   m_Direction: 0
---- !u!95 &95275934231010100
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118496099470282}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 22100000, guid: 8bc675f19eb73974bb1977f23b5652af, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &114006626552816356
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1118496099470282}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d2654d1e933bf6448a8710150ef50e1a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114830835161598166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -120,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e709505f7b6b34cb7ba61f3802133b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animatorController: {fileID: 22100000, guid: 8bc675f19eb73974bb1977f23b5652af, type: 2}
   baseAttributes:
     attackDamage: 0
     abilityDamage: 0
