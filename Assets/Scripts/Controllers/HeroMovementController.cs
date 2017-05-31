@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class HeroMovementController : MovementController
 {
-    public const float SEEK_LOCATION_DISTANCE = 0.2f;
+    public const float SEEK_LOCATION_DISTANCE = 0.01f;
     public const float SEEK_LOCATION_DISTANCE_SQR = SEEK_LOCATION_DISTANCE * SEEK_LOCATION_DISTANCE;
 
     public bool seekLocation;
@@ -47,7 +47,7 @@ public class HeroMovementController : MovementController
         if (seekLocation)
         {
             // Check if hero has reached location.
-            if (transform.position.SqrDistance(locationTarget) < SEEK_TARGET_DISTANCE_SQR)
+            if (transform.position.SqrDistance(locationTarget) < SEEK_LOCATION_DISTANCE)
             {
                 seekLocation = false;
                 character.state = CharacterState.Idle;

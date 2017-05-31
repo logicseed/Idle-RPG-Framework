@@ -7,7 +7,7 @@ using UnityEngine;
 public class MovementController : MonoBehaviour
 {
     public const float AVOID_DISTANCE = 0.5f;
-    public const float SEEK_TARGET_DISTANCE = 1.0f;
+    public const float SEEK_TARGET_DISTANCE = 0.5f;
     public const float SEEK_TARGET_DISTANCE_SQR = SEEK_TARGET_DISTANCE * SEEK_TARGET_DISTANCE;
 
     // These will be derived from attributes
@@ -73,10 +73,19 @@ public class MovementController : MonoBehaviour
         {
             if (character.combat.target != null)
             {
-                var location = character.combat.target.transform.position;
-                movementBehaviour = new WalkMovementBehaviour(
-                    movementBehaviour, gameObject, location, SEEK_TARGET_DISTANCE);
-                character.state = CharacterState.Walk;
+                var squareDistance = transform.position.SqrDistance(character.combat.target.transform.position);
+
+                if (squareDistance > SEEK_TARGET_DISTANCE_SQR)
+                {
+                    var location = character.combat.target.transform.position;
+                    movementBehaviour = new WalkMovementBehaviour(
+                        movementBehaviour, gameObject, location, SEEK_TARGET_DISTANCE);
+                    character.state = CharacterState.Walk;
+                }
+                else
+                {
+                    if (character.state == CharacterState.Walk) character.state = CharacterState.Idle;
+                }
             }
         }
         catch (NullReferenceException)

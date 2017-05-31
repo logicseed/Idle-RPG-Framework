@@ -42,6 +42,8 @@ public class CharacterManager : MonoBehaviour
         }
     }
 
+    public Vector3 location { get { return gameObject.transform.position; } }
+
     /// <summary>
     /// Character state change delegate signature.
     /// </summary>
@@ -120,7 +122,8 @@ public class CharacterManager : MonoBehaviour
     {
         animatorReference = gameObject.AddComponent<Animator>();
         animatorReference.runtimeAnimatorController = animatorController;
-        animatorReference.StartPlayback();
+        animatorReference.Play("IdleRight");
+        //animatorReference.StartPlayback();
     }
 
     protected virtual void CreateCombatController()
