@@ -11,5 +11,5 @@ public class Equipment : ScriptableObject
     public EquipmentType type;
     public EquipmentSlot slot;
     public Texture2D texture;
-    public BaseCharacterAttributes attributeModifiers;
+    public BaseAttributes attributeModifiers;
 }

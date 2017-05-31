@@ -24,4 +24,26 @@ public static class GameObjectExtensions
 
         return component;
     }
+
+    /// <summary>
+    /// Determines which GameObject is closer to the calling GameObject.
+    /// </summary>
+    /// <param name="source">The calling GameObject.</param>
+    /// <param name="gameObjectA">First GameObject to compare.</param>
+    /// <param name="gameObjectB">Second GameObject to compare.</param>
+    /// <returns>Reference to the closest GameObject; or gameObjectA if they are equidistant.</returns>
+    public static GameObject CloserGameObject(this GameObject source, GameObject gameObjectA, GameObject gameObjectB)
+    {
+        var distanceToA = source.transform.position.SqrDistance(gameObjectA.transform.position);
+        var distanceToB = source.transform.position.SqrDistance(gameObjectB.transform.position);
+
+        if (distanceToB < distanceToA)
+        {
+            return gameObjectB;
+        }
+        else
+        {
+            return gameObjectA;
+        }
+    }
 }

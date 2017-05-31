@@ -9,13 +9,11 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class HeroInputController : MonoBehaviour
 {
-    MovementController movementController;
-    BaseCombatController combatController;
+    private HeroManager hero;
 
     private void Start()
     {
-        movementController = gameObject.GetComponent<MovementController>();
-        combatController = gameObject.GetComponent<BaseCombatController>();
+        hero = GetComponent<HeroManager>();
     }
 
     private void Update()
@@ -57,12 +55,12 @@ public class HeroInputController : MonoBehaviour
             {
                 try
                 {
-                    combatController.characterTarget = character;
+                    hero.combat.target = character;
                     return;
                 }
                 catch (NullReferenceException)
                 {
-                    combatController = gameObject.GetComponent<BaseCombatController>();
+                    hero = GetComponent<HeroManager>();
                     return;
                 }
             }
@@ -71,11 +69,12 @@ public class HeroInputController : MonoBehaviour
         // Location tap
         try
         {
-            movementController.SetLocationTarget(worldPosition);
+            Debug.Log(worldPosition);
+            ((HeroMovementController)hero.movement).location = worldPosition;
         }
         catch (NullReferenceException)
         {
-            movementController = gameObject.GetComponent<MovementController>();
+            hero = GetComponent<HeroManager>();
         }
     }
 }

@@ -76,4 +76,21 @@ public class GameManager : Singleton<GameManager>
             return allFriendlies;
         }
     }
+
+    public List<GameObject> AllCharactersExcept(GameObject self)
+    {
+        var allExceptSelf = AllCharacters;
+        allExceptSelf.Remove(self);
+        return allExceptSelf;
+    }
+
+    public void ResetGame()
+    {
+
+    }
+
+    public void StartStage()
+    {
+        InitializeCharacterLists();
+    }
 }

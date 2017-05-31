@@ -1,10 +1,10 @@
 ﻿public enum CharacterState
 {
     Idle,
-    Moving,
-    AttackingMelee,
-    AttackingRanged,
-    Defending,
-    Casting,
+    Walk,
+    Melee,
+    Ranged,
+    Defend,
+    Cast,
     Dead
 }

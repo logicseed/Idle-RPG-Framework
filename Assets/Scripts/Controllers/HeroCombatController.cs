@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public class HeroCombatController : BaseCombatController
+public class HeroCombatController : CombatController
 {
     //public override void GetAttributeManager()
     //{
@@ -18,6 +18,6 @@ public class HeroCombatController : BaseCombatController
     /// </summary>
     public override void PerformCombatRound()
     {
-        throw new NotImplementedException();
+
     }
 }

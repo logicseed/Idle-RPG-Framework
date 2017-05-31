@@ -1,18 +1,15 @@
 ﻿using UnityEngine;
 
 /// <summary>
-///
+/// A Unity Singleton pattern GameObject
 /// </summary>
 /// <typeparam name="T"></typeparam>
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
-    /// <summary>
-    ///
-    /// </summary>
     private static T instance;
 
     /// <summary>
-    ///
+    /// Gets the current instance of this Singleton.
     /// </summary>
     public static T Instance
     {

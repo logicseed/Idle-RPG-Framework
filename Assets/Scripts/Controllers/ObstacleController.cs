@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-public class ObstableController : PlaceableController
+public class ObstableController : MonoBehaviour
 {
 
 }

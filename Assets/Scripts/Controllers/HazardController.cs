@@ -1,11 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 ///
 /// </summary>
-public class HazardController : PlaceableController
+public class HazardController : MonoBehaviour
 {
     public HazardType type;
     public float potency;
@@ -18,16 +16,34 @@ public class HazardController : PlaceableController
     /// <summary>
     ///
     /// </summary>
-    public void ApplyEffect()
+    public void ApplyEffect(CharacterManager character)
     {
-
+        switch (type)
+        {
+            case HazardType.Damage:
+                character.combat.ApplyDamage((int)potency);
+                break;
+            case HazardType.Force:
+                character.movement.ApplyForce(potency, transform.position);
+                break;
+            case HazardType.Stun:
+                character.combat.ApplyStun(potency);
+                break;
+            default:
+                break;
+        }
     }
 
     /// <summary>
     ///
     /// </summary>
-    public void OnTriggerEnter2D()
+    public void OnTriggerEnter2D(Collider2D other)
     {
-
+        if (!hasTriggered || !isOneTime)
+        {
+            var character = other.gameObject.GetComponent<CharacterManager>();
+            if (isOneTime) hasTriggered = true;
+            ApplyEffect(character);
+        }
     }
 }

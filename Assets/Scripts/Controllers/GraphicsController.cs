@@ -1,75 +1,76 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Responsible for updating character graphics.
+/// </summary>
 public class GraphicsController : MonoBehaviour
 {
-    /*
-	 * Animation States:
-	 * 0 : Idle Left
-	 * 1 : Idle Right
-     * 2 : Walk Left
-     * 3 : Walk Right
-	 */
-
+    private CharacterManager character;
     private SpriteRenderer spriteRenderer;
-    private MovementController movementController;
-    private Animator anim;
+    private Animator animator;
 
-    // Use this for initialization
     private void Start()
     {
+        GetCharacterComponent();
+
         spriteRenderer = GetComponent<SpriteRenderer>();
-        movementController = GetComponent<MovementController>();
-        anim = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+    private void GetCharacterComponent()
+    {
+        character = GetComponent<CharacterManager>();
+
+        if (character != null)
+        {
+            character.OnStateChanged += CharacterStateChanged;
+            character.OnDirectionChanged += CharacterStateChanged;
+        }
+    }
+
     private void Update()
     {
         UpdateSortingOrder();
-        UpdateAnimationState();
     }
 
     /// <summary>
-    ///
+    /// Event handler for a character's state changing. Updates the character's
+    /// animation based on the new state.
     /// </summary>
-    private void UpdateAnimationState()
+    public void CharacterStateChanged()
     {
-        //Update the movement animation
-        MovementAnimationState();
-    }
-
-    /// <summary>
-    /// Keeps track of the movement animation states and updates them accordingly
-    /// </summary>
-    private void MovementAnimationState()
-    {
-        // Get the last move direction
         try
         {
-            var lastMoveDirection = movementController.LastMoveDirection;
-
-            // Update animtion based on direction
-            if(lastMoveDirection == MoveDirection.None)
-            {
-                //If prev animation played is left
-                if(anim.GetInteger("state") == 2)
-                    anim.SetInteger("state", 0);
-
-                //If prev animation played is right
-                if (anim.GetInteger("state") == 3)
-                    anim.SetInteger("state", 1);
-            }
-            else if(lastMoveDirection == MoveDirection.Left)
-                anim.SetInteger("state", 2);
-            else if (lastMoveDirection == MoveDirection.Right)
-                anim.SetInteger("state", 3);
+            animator.Play(GetStateAnimationString());
         }
         catch (NullReferenceException)
         {
-            movementController = GetComponent<MovementController>();
+            animator = GetComponent<Animator>();
+        }
+    }
+
+    /// <summary>
+    /// Combines a character's state and direction to become an animation state.
+    /// </summary>
+    /// <returns>A string in the form of (state)(direction) (e.g. "WalkLeft").</returns>
+    private string GetStateAnimationString()
+    {
+        try
+        {
+            if (character.state == CharacterState.Dead)
+            {
+                return character.state.ToString();
+            }
+            else
+            {
+                return character.state.ToString() + character.direction.ToString();
+            }
+        }
+        catch (NullReferenceException)
+        {
+            GetCharacterComponent();
+            return String.Empty;
         }
     }
 
@@ -81,7 +82,6 @@ public class GraphicsController : MonoBehaviour
     {
         try
         {
-            //spriteRenderer.sortingOrder = Convert.ToInt32( Mathf.Ceil(transform.position.y * -100) );
             spriteRenderer.sortingOrder = (int) (transform.position.y * -100);
         }
         catch (NullReferenceException)
@@ -89,4 +89,46 @@ public class GraphicsController : MonoBehaviour
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
+
+    ///// <summary>
+    /////
+    ///// </summary>
+    //private void UpdateAnimationState()
+    //{
+    //    //Update the movement animation
+    //    MovementAnimationState();
+    //}
+
+    ///// <summary>
+    ///// Keeps track of the movement animation states and updates them accordingly
+    ///// </summary>
+    //private void MovementAnimationState()
+    //{
+    //    // Get the last move direction
+    //    try
+    //    {
+    //        var lastMoveDirection = movementController.LastMoveDirection;
+
+    //        // Update animtion based on direction
+    //        if(lastMoveDirection == MoveDirection.None)
+    //        {
+    //            //If prev animation played is left
+    //            if(animator.GetInteger("state") == 2)
+    //                animator.SetInteger("state", 0);
+
+    //            //If prev animation played is right
+    //            if (animator.GetInteger("state") == 3)
+    //                animator.SetInteger("state", 1);
+    //        }
+    //        else if(lastMoveDirection == MoveDirection.Left)
+    //            animator.SetInteger("state", 2);
+    //        else if (lastMoveDirection == MoveDirection.Right)
+    //            animator.SetInteger("state", 3);
+    //    }
+    //    catch (NullReferenceException)
+    //    {
+    //        movementController = GetComponent<MovementController>();
+    //    }
+    //}
+
 }
