@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="HeroManager" Collapsed="true">
+    <Position X="6.25" Y="1" Width="1.5" />
+    <AssociationLine Name="abilityManagerReference" Type="AbilityManager" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7" Y="1.63" />
+        <Point X="7" Y="2.625" />
+        <Point X="2.5" Y="2.625" />
+        <Point X="2.5" Y="3" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>MAgABAAAECAgAAAAAAAAAAAAAAAAAAAAAIBAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\HeroManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="abilityManagerReference" />
+      <Field Name="inventoryManagerReference" />
+      <Field Name="rosterManagerReference" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="AbilityManager">
+    <Position X="1.25" Y="3" Width="2.5" />
+    <AssociationLine Name="activeAbilities" Type="Ability">
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-1.882" Y="0.096" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAIAAgAAAAAAAGAAAAAAAAAAAAEAACABAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\AbilityManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="activeAbilities" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="InventoryManager">
+    <Position X="5" Y="3" Width="2.75" />
+    <AssociationLine Name="equipped" Type="Equipment" FixedFromPoint="true">
+      <Path>
+        <Point X="6.625" Y="4.43" />
+        <Point X="6.625" Y="6" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-3.065" Y="0.089" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="inventory" Type="Equipment" FixedToPoint="true">
+      <Path>
+        <Point X="6.375" Y="4.43" />
+        <Point X="6.375" Y="6" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="-2.142" Y="0.333" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <AssociationLine Name="attributeModifiers" Type="BaseAttributes" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.25" Y="4.43" />
+        <Point X="5.25" Y="7.005" />
+        <Point X="6.25" Y="7.005" />
+      </Path>
+      <MemberNameLabel ManuallyPlaced="true">
+        <Position X="0.339" Y="-0.294" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQACAAABAAAAAAAAAAAAAiAAAAAAAAAEA=</HashCode>
+      <FileName>Assets\Scripts\Managers\InventoryManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="attributeModifiers" />
+    </ShowAsAssociation>
+    <ShowAsCollectionAssociation>
+      <Field Name="equipped" />
+      <Field Name="inventory" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RosterManager">
+    <Position X="8.5" Y="3" Width="3" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAIAAQAAAAAAAAhAgAAAAAAAAAAAAAAAE=</HashCode>
+      <FileName>Assets\Scripts\Managers\RosterManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HeroInputController">
+    <Position X="1.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAGAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Controllers\HeroInputController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="hero" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Ability">
+    <Position X="1.25" Y="5.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAACAAAgAAAAAAIAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\Ability.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Equipment" Collapsed="true">
+    <Position X="6.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAABAgAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\Equipment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="BaseAttributes" Collapsed="true">
+    <Position X="6.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiAAAEAAAEQAQAQAAAEAAAAEAAAAAIIAABAAAAAAo=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Structs\BaseAttributes.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

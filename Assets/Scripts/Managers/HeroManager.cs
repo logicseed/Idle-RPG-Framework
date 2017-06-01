@@ -5,17 +5,19 @@ using UnityEngine;
 public class HeroManager : CharacterManager
 {
     public int experience = 0;
-    public InventoryManager inventory;
+    protected InventoryManager inventoryManagerReference;
+    protected RosterManager rosterManagerReference;
+    protected AbilityManager abilityManagerReference;
 
     protected override void Start()
     {
-        inventory = GetComponent<InventoryManager>();
+        inventoryManagerReference = GetComponent<InventoryManager>();
         base.Start();
     }
 
     protected override void CalculateBonusAttributes()
     {
-        bonusAttributes = inventory.attributeModifiers;
+        bonusAttributes = inventoryManagerReference.attributeModifiers;
     }
 
     protected override void GetMovementController()

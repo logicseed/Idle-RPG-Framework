@@ -15,6 +15,7 @@ public class CharacterManager : MonoBehaviour
     protected GraphicsController graphicsControllerReference;
     protected MovementController movementControllerReference;
     protected Rigidbody2D rigidbodyReference;
+    protected LootDropManager lootDropManagerReference;
 
     public BaseAttributes baseAttributes;
     public BaseAttributes bonusAttributes;

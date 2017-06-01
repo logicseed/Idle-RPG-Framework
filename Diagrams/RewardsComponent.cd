@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="StaticLootCollection">
+    <Position X="2.75" Y="3" Width="2.5" />
+    <InheritanceLine Type="LootCollection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.688" Y="2.016" />
+        <Point X="5.688" Y="2.625" />
+        <Point X="3.938" Y="2.625" />
+        <Point X="3.938" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>gAAAAAAAAAAAAAAAAAQAAAAAAAAEAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\StaticLootCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="equipment" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="RandomLootCollection">
+    <Position X="6" Y="3" Width="2.5" />
+    <InheritanceLine Type="LootCollection" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="5.688" Y="2.016" />
+        <Point X="5.688" Y="2.625" />
+        <Point X="7.25" Y="2.625" />
+        <Point X="7.25" Y="3" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAQAEAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\RandomLootCollection.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="equipment" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="LootCollection">
+    <Position X="4.5" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\LootCollection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Equipment">
+    <Position X="3.25" Y="5.25" Width="1.75" />
+    <AssociationLine Name="attributeModifiers" Type="BaseAttributes" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.562" Y="6.351" />
+        <Point X="4.562" Y="7" />
+        <Point X="6" Y="7" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="slot" Type="EquipmentSlot" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3.688" Y="6.351" />
+        <Point X="3.688" Y="8.505" />
+        <Point X="6" Y="8.505" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="type" Type="EquipmentType" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="4.125" Y="6.351" />
+        <Point X="4.125" Y="7.755" />
+        <Point X="6" Y="7.755" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAAAAAAAAAAABAgAAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\ScriptableObjects\Equipment.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="attributeModifiers" />
+      <Field Name="slot" />
+      <Field Name="type" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="LootDropManager">
+    <Position X="0.75" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\LootDropManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="possibleLoot" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Class Name="IdleRewardManager">
+    <Position X="9.25" Y="0.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAEAAABAAAA=</HashCode>
+      <FileName>Assets\Scripts\Managers\IdleRewardManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsCollectionAssociation>
+      <Field Name="possibleLoot" />
+    </ShowAsCollectionAssociation>
+  </Class>
+  <Struct Name="RandomLoot">
+    <Position X="6.5" Y="5.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAEAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Structs\RandomLoot.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="equipment" />
+    </ShowAsAssociation>
+  </Struct>
+  <Struct Name="BaseAttributes" Collapsed="true">
+    <Position X="6" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAiAAAEAAAEQAQAQAAAEAAAAEAAAAAIIAABAAAAAAo=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Structs\BaseAttributes.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Enum Name="EquipmentSlot" Collapsed="true">
+    <Position X="6" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAAAAAAAAAABAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Enums\EquipmentSlot.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="EquipmentType" Collapsed="true">
+    <Position X="6" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAABAEAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scripts\Utilities\Enums\EquipmentType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Tahoma" Size="8.25" />
+</ClassDiagram>

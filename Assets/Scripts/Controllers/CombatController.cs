@@ -88,7 +88,14 @@ public class CombatController : MonoBehaviour
     /// </summary>
     public virtual void PerformCombatRound()
     {
-
+        // Check if in range
+        // check if able to attack (attack speed)
+            // change state to melee or ranged
+            // check for critical hit
+            // calculate damage
+                // derived attack damage
+                // * derived critical hit damage
+            // apply damage to target
     }
 
 
