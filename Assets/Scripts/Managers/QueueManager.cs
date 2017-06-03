@@ -12,38 +12,38 @@ public class QueueManager : MonoBehaviour
     private int spawnIndex;
     private float lastSpawnTime;
     [SerializeField]
-    private bool repeating;
-    private bool spawning = true;
+    private bool isRepeating;
+    private bool isSpawning = true;
 
     /// <summary>
     /// Whether this queue is repeating the spawn list.
     /// </summary>
-    public bool Repeating
+    public bool repeating
     {
         get
         {
-            return repeating;
+            return isRepeating;
         }
         set
         {
-            repeating = value;
+            isRepeating = value;
         }
     }
 
     /// <summary>
     /// Whether this queue is actively spawning characters.
     /// </summary>
-    public bool Spawning
+    public bool spawning
     {
         get
         {
-            return spawning;
+            return isSpawning;
         }
         set
         {
             // Spawn next enemy immediately.
             lastSpawnTime = Time.time - timeBetweenSpawns;
-            spawning = value;
+            isSpawning = value;
         }
     }
 
@@ -54,7 +54,7 @@ public class QueueManager : MonoBehaviour
 
     private void Update()
     {
-        if (spawning)
+        if (isSpawning)
         {
             // Is it time to spawn?
             if (spawnIndex < characters.Count &&
@@ -66,7 +66,7 @@ public class QueueManager : MonoBehaviour
             }
 
             // Should we repeat the queue?
-            if (spawnIndex >= characters.Count && repeating)
+            if (spawnIndex >= characters.Count && isRepeating)
             {
                 spawnIndex = 0;
             }

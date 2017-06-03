@@ -34,6 +34,7 @@ public class MovementController : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
+        if (character.state == CharacterState.Dead) return;
         GenerateMovementBehaviours();
         Move();
     }

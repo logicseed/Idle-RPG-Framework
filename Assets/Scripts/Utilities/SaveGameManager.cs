@@ -7,6 +7,11 @@ public static class SaveGameManager
 {
     public static bool SaveGame(SaveGame saveGame)
     {
+        if (!saveGame.isFilled)
+        {
+            throw new ArgumentException("Tried to save an empty save game file.");
+        }
+
         var binaryFormatter = new BinaryFormatter();
 
         using (var stream = new FileStream(SavePath, FileMode.Create))

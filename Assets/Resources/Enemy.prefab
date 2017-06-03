@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1253877551690842}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.66, y: 0.33, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -96,21 +96,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e709505f7b6b34cb7ba61f3802133b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animatorController: {fileID: 22100000, guid: 2d672e8b53df09848855e65cdb6aa856, type: 2}
+  animatorController: {fileID: 22100000, guid: 7195edcfbd4f9cf499829718d9ead37e, type: 2}
   baseAttributes:
-    attackDamage: 0
-    abilityDamage: 0
-    defense: 0
-    health: 0
-    healthRegeneration: 0
-    energy: 0
-    energyRegeneration: 0
-    attackSpeed: 0
-    criticalHitChance: 0
-    criticalHitDamage: 0
-    cooldownReduction: 0
-    lifeDrain: 0
-    movementSpeed: 0
+    attackDamage: 20
+    abilityDamage: 20
+    defense: 20
+    health: 20
+    healthRegeneration: 20
+    energy: 20
+    energyRegeneration: 20
+    attackSpeed: 20
+    criticalHitChance: 20
+    criticalHitDamage: 20
+    cooldownReduction: 20
+    lifeDrain: 20
+    movementSpeed: 20
   bonusAttributes:
     attackDamage: 0
     abilityDamage: 0
@@ -160,7 +160,7 @@ SpriteRenderer:
   m_SortingLayerID: 238355861
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c277c7df85a19a4ab89f1a507be872e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9b2fbda613536814c8e8b3d3874f34c9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

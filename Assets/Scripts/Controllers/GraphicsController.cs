@@ -42,6 +42,7 @@ public class GraphicsController : MonoBehaviour
     {
         try
         {
+            animator.StopPlayback();
             animator.Play(GetStateAnimationString());
         }
         catch (NullReferenceException)
@@ -83,6 +84,7 @@ public class GraphicsController : MonoBehaviour
         try
         {
             spriteRenderer.sortingOrder = (int) (transform.position.y * -100);
+            if (character.state == CharacterState.Dead) spriteRenderer.sortingOrder -= 2000;
         }
         catch (NullReferenceException)
         {

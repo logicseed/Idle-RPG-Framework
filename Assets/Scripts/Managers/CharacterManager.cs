@@ -16,6 +16,7 @@ public class CharacterManager : MonoBehaviour
     protected MovementController movementControllerReference;
     protected Rigidbody2D rigidbodyReference;
     protected LootDropManager lootDropManagerReference;
+    protected GameObject floatingHealthBarReference;
 
     public BaseAttributes baseAttributes;
     public BaseAttributes bonusAttributes;
@@ -79,6 +80,12 @@ public class CharacterManager : MonoBehaviour
             {
                 characterState = value;
                 if (OnStateChanged != null) OnStateChanged();
+                // If dead we don't want it counted as a character anymore
+                if (characterState == CharacterState.Dead)
+                {
+                    gameObject.tag = "DeadBody";
+                    GameObject.Destroy(floatingHealthBarReference);
+                }
             }
         }
     }
@@ -155,6 +162,11 @@ public class CharacterManager : MonoBehaviour
         GetMovementController();
         CalculateBonusAttributes();
         derivedAttributes = new DerivedAttributes(this);
+        if (type != CharacterType.Hero)
+        {
+            floatingHealthBarReference = Instantiate(
+                (GameObject)Resources.Load("UI/FloatingBar"), transform);
+        }
     }
 
     protected virtual void CalculateBonusAttributes()

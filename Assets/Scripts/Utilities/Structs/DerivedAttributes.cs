@@ -15,7 +15,7 @@ public class DerivedAttributes
     private const int FULL_ENERGY_REGENERATION = 15;
     private const float FULL_ATTACK_SPEED = 2.0f;
     private const float FULL_CRITICAL_HIT_CHANCE = 0.5f;
-    private const float FULL_CRITICAL_HIT_DAMAGE = 2.0f;
+    private const float FULL_CRITICAL_HIT_DAMAGE = 1.0f;
     private const float FULL_COOLDOWN_REDUCTION = 0.5f;
     private const float FULL_LIFE_DRAIN = 0.5f;
     private const float FULL_MOVEMENT_SPEED = 0.5f;
@@ -219,7 +219,7 @@ public class DerivedAttributes
 
     private void DeriveCriticalHitDamage()
     {
-        criticalHitDamageDerived = DeriveAttributeFloat(
+        criticalHitDamageDerived = 1 + DeriveAttributeFloat(
             character.baseAttributes.criticalHitDamage,
             FULL_CRITICAL_HIT_DAMAGE,
             character.bonusAttributes.criticalHitDamage);

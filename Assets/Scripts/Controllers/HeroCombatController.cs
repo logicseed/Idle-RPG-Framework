@@ -8,16 +8,23 @@ using UnityEngine;
 /// </summary>
 public class HeroCombatController : CombatController
 {
-    //public override void GetAttributeManager()
-    //{
-    //    attributeManager = GetComponent<HeroAttributeManager>();
-    //}
-
     /// <summary>
     ///
     /// </summary>
     public override void PerformCombatRound()
     {
+        base.PerformCombatRound();
+    }
 
+    /// <summary>
+    /// 
+    /// </summary>
+    public override void UpdateTarget()
+    {
+        if (target != null &&
+            target.GetComponent<CharacterManager>().state == CharacterState.Dead)
+        {
+            target = null;
+        }
     }
 }

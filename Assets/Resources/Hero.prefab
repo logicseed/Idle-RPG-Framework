@@ -75,19 +75,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorController: {fileID: 22100000, guid: e3451c9f074e1b34c9b29a702ae67e1a, type: 2}
   baseAttributes:
-    attackDamage: 0
-    abilityDamage: 0
-    defense: 0
-    health: 0
-    healthRegeneration: 0
-    energy: 0
-    energyRegeneration: 0
-    attackSpeed: 0
-    criticalHitChance: 0
-    criticalHitDamage: 0
-    cooldownReduction: 0
-    lifeDrain: 0
-    movementSpeed: 0
+    attackDamage: 50
+    abilityDamage: 50
+    defense: 50
+    health: 50
+    healthRegeneration: 50
+    energy: 50
+    energyRegeneration: 50
+    attackSpeed: 50
+    criticalHitChance: 50
+    criticalHitDamage: 50
+    cooldownReduction: 50
+    lifeDrain: 50
+    movementSpeed: 50
   bonusAttributes:
     attackDamage: 0
     abilityDamage: 0
@@ -106,7 +106,6 @@ MonoBehaviour:
   level: 1
   characterState: 0
   experience: 0
-  inventory: {fileID: 0}
 --- !u!114 &114068510236138804
 MonoBehaviour:
   m_ObjectHideFlags: 1
