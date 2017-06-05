@@ -1,0 +1,325 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<componentModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" xmlns:dm9="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" dslVersion="1.0.0.0" Id="1a2ecc70-f8f7-491f-9465-4e4eab2cf562" name="UMLComponentDiagram1" linkedPackageId="61c38aff-4ac3-493f-b270-adc6de8761be" xmlns="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="8f07c94b-4aaa-4e56-b8d5-007e5ef36786">
+      <profileInstance Id="594e9ec9-5720-492f-aa72-4894ccc2a6ee" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="b79a6717-af58-4598-b524-b0f9eabd465d">
+      <profileInstance Id="231b7772-a7a0-4787-8a32-c8f0b05a82f3" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <componentModelHasComponents>
+      <component Id="924f83de-ca16-4338-872c-fe59b642b7a9" name="Attributes" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance Id="83eb1c76-dbc3-48c8-8153-b070d1f6683d" name="subsystem" profile="StandardProfileL2">
+            <elementDefinition Id="d3c785ce-da0f-4f8a-843c-2fb335f40c1a" />
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <elementDefinition Id="8061dde9-b80a-43f5-88ee-f06815060d01" />
+        <ownedAttributesInternal>
+          <providedInterface Id="fe74f531-cc27-40e2-89cf-51aff9fe1c7f" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="416bedd9-ca8d-4ff8-8480-253220f75c43" />
+            <type_NamedElement>
+              <interfaceMoniker Id="174bc05f-9306-493d-bbb3-222663e9bbfe" LastKnownName="DerivedAttributes" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface Id="b879db51-afbc-4435-8d61-7ddc8a7ec3e9" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="6ea4f4f4-f43a-498f-ab1b-a410e3c9b157" />
+            <type_NamedElement>
+              <interfaceMoniker Id="6b7702c0-7a57-431e-830d-e877e7ee51d6" LastKnownName="CharacterManager" />
+            </type_NamedElement>
+          </requiredInterface>
+          <part Id="a397b480-7a57-4fbf-a367-d72bc7e5be3e" name="DerivedAttributes" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="Composite" isComposite="true">
+            <elementDefinition Id="bb09ccac-0e87-47d2-af96-2c6f09b2fc92" />
+            <type_NamedElement>
+              <componentMoniker Id="3c4917fe-1224-4d2d-b4ba-700b288bab3d" LastKnownName="DerivedAttributes" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="174bc05f-9306-493d-bbb3-222663e9bbfe" name="DerivedAttributes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f33ce4b2-e0ca-430f-93da-ecdca86c79a5" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="ded82cf5-069e-4c29-a91e-dc2cc1ce512b" name="Characters" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance Id="6be61871-5277-453e-99cb-98176423a46b" name="subsystem" profile="StandardProfileL2">
+            <elementDefinition Id="a5bc7496-2ec6-4adb-9fbe-353680cc257b" />
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <elementDefinition Id="2a8f57f4-7147-4ab7-ba23-8ceb96566a60" />
+        <ownedAttributesInternal>
+          <providedInterface Id="7b56b4ac-2751-4e19-b23b-095db7a1197c" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="417772c3-5000-49d9-b4ce-617872739565" />
+            <type_NamedElement>
+              <interfaceMoniker Id="499fcf2d-b1ba-4173-8f3d-5adf924aae3a" LastKnownName="CharacterManager" />
+            </type_NamedElement>
+          </providedInterface>
+          <providedInterface Id="deaa3fa2-9cf8-4373-b8ba-4a6b71678a0b" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="569b8e27-013b-4b44-ab7c-f1cf9aeee0ee" />
+            <type_NamedElement>
+              <interfaceMoniker Id="434bd8b3-852f-4694-9b6f-e5216e2968ae" LastKnownName="HeroManager" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface Id="7e3243f8-3120-4cc5-8244-c487b2c958bc" name="Port3" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="1f83b863-e4a4-43d1-9049-53498123c7f8" />
+            <type_NamedElement>
+              <interfaceMoniker Id="ed1b3895-a6e1-4ebe-b6b5-d31340fd55ba" LastKnownName="MovementController" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="dadac55b-e95a-4f7d-8b23-488e98003ecc" name="Port4" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="cd8f5cc6-6a22-4f6f-a413-a97a5f06487d" />
+            <type_NamedElement>
+              <interfaceMoniker Id="7e06e4cb-0557-42f8-892c-5749a8fad1ee" LastKnownName="CombatController" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="3718b9fd-520a-42cf-9140-b4684d41f184" name="Port5" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="ca0c63d6-9bd5-4ac1-a847-cb509b398bf2" />
+            <type_NamedElement>
+              <interfaceMoniker Id="4cab7b80-b554-44de-9421-601ccf15d23c" LastKnownName="GraphicsController" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="17b567d0-c929-4178-ab6a-2feda0bab2d9" name="Port6" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="0d3417b4-add7-4d11-afeb-9030b37aadba" />
+            <type_NamedElement>
+              <interfaceMoniker Id="d5832570-9af0-42f3-9f7b-72cb82e4da31" LastKnownName="LootDropManager" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="d5fee4e9-a419-4972-baec-122a58024233" name="Port7" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="31abf673-f1c0-4073-a2f0-1b281b584dc8" />
+            <type_NamedElement>
+              <interfaceMoniker Id="227a309a-7944-4bea-b687-18f4e78547c2" LastKnownName="DerivedAttributes" />
+            </type_NamedElement>
+          </requiredInterface>
+          <providedInterface Id="73f67d06-2dd8-4a34-b689-f983f5acde99" name="Port8" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="069ed071-8a98-4508-8c35-e669a1b496d2" />
+            <type_NamedElement>
+              <interfaceMoniker Id="d1dc2c4e-4f84-4baa-8dd6-50dcc9ac7ce8" LastKnownName="HeroManager" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface Id="b6720c70-6655-4bda-b6f6-29af85fa4e7e" name="Port9" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="015f57dd-89ba-426d-a85f-961798ccfe85" />
+            <type_NamedElement>
+              <interfaceMoniker Id="5c2b263f-b462-430c-a442-bcfafd25122d" LastKnownName="AbilityManager" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="bf800862-b8ed-483e-be28-3e07aa846c4e" name="Port10" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="804fa5f9-36ab-4e07-96a8-8b8657c2d67b" />
+            <type_NamedElement>
+              <interfaceMoniker Id="bc0d9b3d-a1c0-4a7e-88e8-67331e037980" LastKnownName="InventoryManager" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="5b5df445-1e19-4a44-819a-f7bde2d21404" name="Port11" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="93c6880e-7e60-49d7-b57a-189d37f1850a" />
+            <type_NamedElement>
+              <interfaceMoniker Id="ff228b38-4f87-4fad-b3d0-79669f40e555" LastKnownName="Roster Manager" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="32962122-eecb-4630-8e2f-7ac896d0cd0d" name="Port12" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="600a4c34-4325-4611-b520-63c0126e2e1a" />
+            <type_NamedElement>
+              <interfaceMoniker Id="31200017-d9d6-442d-9af9-070233fcd037" LastKnownName="HeroMovementController" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="21384042-3b10-474f-8f42-4ce4dfd9a896" name="Port13" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="32f3b769-9049-408f-bca8-cda457f653b6" />
+            <type_NamedElement>
+              <interfaceMoniker Id="7fa3ce9d-8789-4e15-95f9-9aa50c640267" LastKnownName="HeroCombatController" />
+            </type_NamedElement>
+          </requiredInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="499fcf2d-b1ba-4173-8f3d-5adf924aae3a" name="CharacterManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4cf30a08-c24f-4fe5-852b-649de0f7b06a" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="434bd8b3-852f-4694-9b6f-e5216e2968ae" name="HeroManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="18c66d0e-29bd-40cb-837e-5d5645bf022c" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="6b7702c0-7a57-431e-830d-e877e7ee51d6" name="CharacterManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="4cf30a08-c24f-4fe5-852b-649de0f7b06a" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="3c4917fe-1224-4d2d-b4ba-700b288bab3d" name="DerivedAttributes" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="18fee9ea-dd2c-4c11-8e97-63ef3274d10b" />
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="ed1b3895-a6e1-4ebe-b6b5-d31340fd55ba" name="MovementController" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6df487d0-f0d5-4c3f-898d-2a7707d52858" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="7e06e4cb-0557-42f8-892c-5749a8fad1ee" name="CombatController" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="20998148-b12c-4394-8f9f-64f2a22da154" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="4cab7b80-b554-44de-9421-601ccf15d23c" name="GraphicsController" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="b482ee07-dfc3-47fb-a92e-a0973b1bea6e" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="d5832570-9af0-42f3-9f7b-72cb82e4da31" name="LootDropManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fa7639fb-7ab7-4dca-96d3-e53f9a995365" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="227a309a-7944-4bea-b687-18f4e78547c2" name="DerivedAttributes" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="6ee6c2c4-3584-4ad8-bf4a-53376d9a2ee6" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="d1dc2c4e-4f84-4baa-8dd6-50dcc9ac7ce8" name="HeroManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="ec0bc182-b5b9-4d29-8933-58d5f24b1065" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="5c2b263f-b462-430c-a442-bcfafd25122d" name="AbilityManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f4fa4277-29a4-46da-9c32-570cfec0cd1e" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="bc0d9b3d-a1c0-4a7e-88e8-67331e037980" name="InventoryManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="dc05976a-c815-4207-9ad0-04d77e6ed47e" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="ff228b38-4f87-4fad-b3d0-79669f40e555" name="Roster Manager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="933e2e25-5470-4dae-9783-546029b19237" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="31200017-d9d6-442d-9af9-070233fcd037" name="HeroMovementController" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="f4bad688-46d2-4213-af44-3e6baacbe41f" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="7fa3ce9d-8789-4e15-95f9-9aa50c640267" name="HeroCombatController" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="36d83763-2598-4e26-8b7f-d6658b1c73d7" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="fec02194-64bb-4530-b91e-25d6a668f80c" name="Combat" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance Id="527b8fb4-4a2d-4416-91e5-b7fd0a620673" name="subsystem" profile="StandardProfileL2">
+            <elementDefinition Id="673173b6-c38d-4a35-b346-dfbdbdb5353f" />
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+        <elementDefinition Id="342f7e5e-bd24-441e-8008-3961f6f1235a" />
+        <ownedAttributesInternal>
+          <providedInterface Id="b644e83d-4ed8-4ee8-a313-f3ed028eee54" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="576364d1-b52b-4e09-82e9-1ff9535ec775" />
+            <type_NamedElement>
+              <interfaceMoniker Id="7b823b0f-9dec-42fb-9a92-0eec3a281cf5" LastKnownName="CombatController" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface Id="8824cdc0-54c7-44b2-85b4-cbcdb15c3f6e" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="f5ce3eea-dea4-413f-9984-0a267fd02596" />
+            <type_NamedElement>
+              <interfaceMoniker Id="4e6c4292-05cb-4617-93d0-f584a1a681ac" LastKnownName="CharacterManager" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface Id="381e0e2d-7f8d-4f01-9a84-5f66cf04995a" name="Port3" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="7c2a3e5f-b01e-4a56-a0a9-699082cc1f23" />
+            <type_NamedElement>
+              <interfaceMoniker Id="d3791f6b-a616-4804-ac54-6f96f18b06b4" LastKnownName="HeroManager" />
+            </type_NamedElement>
+          </requiredInterface>
+          <providedInterface Id="87d41f92-cba0-400c-86e6-51ed9cb267e5" name="Port4" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="62bc4fed-278f-4e82-af9d-b94c13d5227b" />
+            <type_NamedElement>
+              <interfaceMoniker Id="af6cb6e2-3228-4a6b-b3d2-d406c71edfa2" LastKnownName="HeroCombatController" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="7b823b0f-9dec-42fb-9a92-0eec3a281cf5" name="CombatController" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="5c50692f-a15e-45b7-931c-32c91da9a3c1" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="4e6c4292-05cb-4617-93d0-f584a1a681ac" name="CharacterManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="169e060b-4962-4ca5-b5c6-a848e2ba7749" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="d3791f6b-a616-4804-ac54-6f96f18b06b4" name="HeroManager" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="22e26b68-7793-43a3-abd4-eb06af283e4a" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="af6cb6e2-3228-4a6b-b3d2-d406c71edfa2" name="HeroCombatController" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="fa82194a-493d-4c7a-92fe-6d92856f5528" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="5c657f18-fe35-4bf5-ae1a-67814f40ab25" name="Editor" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="797dfbdb-d888-4af8-a834-cf606c65c8cb" />
+        <ownedAttributesInternal>
+          <providedInterface Id="2da2ff3a-3485-425b-8987-706629891cc2" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="ae470954-b80c-460c-bf8a-29ed055c08f4" />
+            <type_NamedElement>
+              <interfaceMoniker Id="72e2bc17-7251-4ece-b3cb-784d7885f6a1" LastKnownName="HelpBoxAttribute" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="72e2bc17-7251-4ece-b3cb-784d7885f6a1" name="HelpBoxAttribute" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="d12a749d-67e0-437c-87ea-cf82d99ca731" />
+      </Interface>
+    </modelContainsNamedElements>
+    <componentModelHasComponents>
+      <component Id="9fce07b7-90b9-4c65-b639-6f3669f2a0e5" name="Environment" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="31268a34-2434-4474-98c7-131a7620b191" />
+        <ownedAttributesInternal>
+          <providedInterface Id="2bd26296-56d9-43d3-b590-dcfa24c8d5eb" name="Port1" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="5d9aeac3-15bf-4c3b-95f5-6762b8d33e2b" />
+            <type_NamedElement>
+              <interfaceMoniker Id="0571ea80-9841-4805-afe4-dcc24328bb00" LastKnownName="ZoneController" />
+            </type_NamedElement>
+          </providedInterface>
+          <providedInterface Id="8ac9f1af-07e8-4002-bc14-97828974365a" name="Port2" isLeaf="false" isStatic="false" isReadOnly="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false" isService="false" isBehavior="false">
+            <elementDefinition Id="2900dad0-69d3-4acc-9c64-ac2a1f14e328" />
+            <type_NamedElement>
+              <interfaceMoniker Id="22f6609a-40d4-4ffc-a99b-486d08579817" LastKnownName="StageControler" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </componentModelHasComponents>
+    <modelContainsNamedElements>
+      <Interface Id="0571ea80-9841-4805-afe4-dcc24328bb00" name="ZoneController" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="de2ac76d-9434-42de-b362-673cd7b8723f" />
+      </Interface>
+    </modelContainsNamedElements>
+    <modelContainsNamedElements>
+      <Interface Id="22f6609a-40d4-4ffc-a99b-486d08579817" name="StageControler" isAbstract="false" isLeaf="false">
+        <elementDefinition Id="006f7a9f-9820-4836-a035-75e29a89baac" />
+      </Interface>
+    </modelContainsNamedElements>
+  </packagedElements>
+  <package Id="61c38aff-4ac3-493f-b270-adc6de8761be" name="Idle-RPG">
+    <elementDefinition Id="c5ac2435-96ce-4d0e-a001-b5838484068c" />
+  </package>
+</componentModel>

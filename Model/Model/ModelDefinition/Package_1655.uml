@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner"
+  dslVersion="1.0.0.0"
+  Id="c650a8ec-c40b-42d5-bcc6-521e7efcb148"
+  name="Attribute" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <Interface
+        Id="f33ce4b2-e0ca-430f-93da-ecdca86c79a5"
+        name="DerivedAttributes"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="8061dde9-b80a-43f5-88ee-f06815060d01"
+        name="Attributes"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="d3c785ce-da0f-4f8a-843c-2fb335f40c1a"
+            name="subsystem"
+            profile="StandardProfileL2" />
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="416bedd9-ca8d-4ff8-8480-253220f75c43"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="f33ce4b2-e0ca-430f-93da-ecdca86c79a5"
+                LastKnownName="DerivedAttributes"
+                LastKnownLocation="Package_1655.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface
+            Id="6ea4f4f4-f43a-498f-ab1b-a410e3c9b157"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="4cf30a08-c24f-4fe5-852b-649de0f7b06a"
+                LastKnownName="CharacterManager"
+                LastKnownLocation="Package_1657.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <part
+            Id="bb09ccac-0e87-47d2-af96-2c6f09b2fc92"
+            name="DerivedAttributes"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="Composite"
+            isComposite="true">
+            <type_NamedElement>
+              <componentMoniker
+                Id="18fee9ea-dd2c-4c11-8e97-63ef3274d10b"
+                LastKnownName="DerivedAttributes"
+                LastKnownLocation="Package_1655.uml" />
+            </type_NamedElement>
+          </part>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <component
+        Id="18fee9ea-dd2c-4c11-8e97-63ef3274d10b"
+        name="DerivedAttributes"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="0fd0c763-1511-4e9e-bd2e-01a6bbf29889"
+        name="BaseAttributes"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>

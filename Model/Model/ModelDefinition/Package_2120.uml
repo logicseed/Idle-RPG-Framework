@@ -1,0 +1,129 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner" xmlns:dm9="http://schemas.microsoft.com/VisualStudio/TeamArchitect/ComponentDesigner"
+  dslVersion="1.0.0.0"
+  Id="edb8d15b-5551-4786-922b-6f58d8145e06"
+  name="Combat" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <packagedElements>
+    <packageHasNamedElement>
+      <component
+        Id="342f7e5e-bd24-441e-8008-3961f6f1235a"
+        name="Combat"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="673173b6-c38d-4a35-b346-dfbdbdb5353f"
+            name="subsystem"
+            profile="StandardProfileL2" />
+        </appliedStereotypesInternal>
+        <ownedAttributesInternal>
+          <providedInterface
+            Id="576364d1-b52b-4e09-82e9-1ff9535ec775"
+            name="Port1"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="5c50692f-a15e-45b7-931c-32c91da9a3c1"
+                LastKnownName="CombatController"
+                LastKnownLocation="Package_2120.uml" />
+            </type_NamedElement>
+          </providedInterface>
+          <requiredInterface
+            Id="f5ce3eea-dea4-413f-9984-0a267fd02596"
+            name="Port2"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="169e060b-4962-4ca5-b5c6-a848e2ba7749"
+                LastKnownName="CharacterManager"
+                LastKnownLocation="Package_2120.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <requiredInterface
+            Id="7c2a3e5f-b01e-4a56-a0a9-699082cc1f23"
+            name="Port3"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="22e26b68-7793-43a3-abd4-eb06af283e4a"
+                LastKnownName="HeroManager"
+                LastKnownLocation="Package_2120.uml" />
+            </type_NamedElement>
+          </requiredInterface>
+          <providedInterface
+            Id="62bc4fed-278f-4e82-af9d-b94c13d5227b"
+            name="Port4"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false"
+            isService="false"
+            isBehavior="false">
+            <type_NamedElement>
+              <interfaceMoniker
+                Id="fa82194a-493d-4c7a-92fe-6d92856f5528"
+                LastKnownName="HeroCombatController"
+                LastKnownLocation="Package_2120.uml" />
+            </type_NamedElement>
+          </providedInterface>
+        </ownedAttributesInternal>
+      </component>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="5c50692f-a15e-45b7-931c-32c91da9a3c1"
+        name="CombatController"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="169e060b-4962-4ca5-b5c6-a848e2ba7749"
+        name="CharacterManager"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="22e26b68-7793-43a3-abd4-eb06af283e4a"
+        name="HeroManager"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="fa82194a-493d-4c7a-92fe-6d92856f5528"
+        name="HeroCombatController"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+  </packagedElements>
+</package>
