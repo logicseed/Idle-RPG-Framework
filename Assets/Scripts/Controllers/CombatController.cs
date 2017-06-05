@@ -35,7 +35,7 @@ public class CombatController : MonoBehaviour
     /// </summary>
     public virtual void UpdateTarget()
     {
-        if (target == null || 
+        if (target == null ||
             target.GetComponent<CharacterManager>().state == CharacterState.Dead)
         {
             try
@@ -98,7 +98,8 @@ public class CombatController : MonoBehaviour
         // Make sure we can attack
         if (target == null ||
             !IsTargetInRange() ||
-            !IsTimeToAttack()
+            !IsTimeToAttack() ||
+            !CanAttackTarget()
         ) return;
 
         FaceTarget();
@@ -115,6 +116,33 @@ public class CombatController : MonoBehaviour
         // Apply damage
         target.GetComponent<CombatController>().ApplyDamage(damage, criticalModifier > 1);
         lastAttackTime = Time.time;
+    }
+
+    private bool CanAttackTarget()
+    {
+        var targetCharacter = target.GetComponent<CharacterManager>();
+
+        switch (character.type)
+        {
+            case CharacterType.Ally:
+            case CharacterType.Hero:
+                if (targetCharacter.type == CharacterType.Enemy ||
+                    targetCharacter.type == CharacterType.Boss)
+                {
+                    return true;
+                }
+                return false;
+            case CharacterType.Enemy:
+            case CharacterType.Boss:
+                if (targetCharacter.type == CharacterType.Ally ||
+                    targetCharacter.type == CharacterType.Hero)
+                {
+                    return true;
+                }
+                return false;
+            default:
+                return false;
+        }
     }
 
     private void FaceTarget()
