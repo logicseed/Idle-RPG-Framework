@@ -88,6 +88,26 @@ public class MovementController : MonoBehaviour
                     if (character.state == CharacterState.Walk) character.state = CharacterState.Idle;
                 }
             }
+            else if (character.combat.target == null)
+            {
+                // Have allies walk back to hero when they don't have a target.
+                if (character.type == CharacterType.Ally) //TODO: Make this more generic.
+                {
+                    var squareDistance = transform.position.SqrDistance(GameManager.Instance.hero[0].transform.position);
+
+                    if (squareDistance > SEEK_TARGET_DISTANCE_SQR)
+                    {
+                        var location = GameManager.Instance.hero[0].transform.position;
+                        movementBehaviour = new WalkMovementBehaviour(
+                            movementBehaviour, gameObject, location, SEEK_TARGET_DISTANCE);
+                        character.state = CharacterState.Walk;
+                    }
+                }
+                else
+                {
+                    //if (character.state == CharacterState.Walk) character.state = CharacterState.Idle;
+                }
+            }
         }
         catch (NullReferenceException)
         {
