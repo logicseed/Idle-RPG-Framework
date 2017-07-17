@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab926e5b8a677184b9c545d6345a1caa, type: 3}
+  m_Name: MeleeEnemy
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 21300000, guid: 9b2fbda613536814c8e8b3d3874f34c9, type: 3}
+  animator: {fileID: 22100000, guid: 7195edcfbd4f9cf499829718d9ead37e, type: 2}
+  attack: 0
+  baseAttributes:
+    attackDamage: 13
+    abilityDamage: 14
+    defense: 18
+    health: 14
+    healthRegeneration: 18
+    energy: 15
+    energyRegeneration: 21
+    attackSpeed: 21
+    criticalHitChance: 19
+    criticalHitDamage: 20
+    cooldownReduction: 19
+    lifeDrain: 19
+    movementSpeed: 21
+  bonusAttributes:
+    attackDamage: 0
+    abilityDamage: 0
+    defense: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeneration: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    cooldownReduction: 0
+    lifeDrain: 0
+    movementSpeed: 0
