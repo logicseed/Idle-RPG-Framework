@@ -6,7 +6,7 @@ using UnityEngine;
 /// </summary>
 public class GraphicsController : MonoBehaviour
 {
-    private CharacterManager character;
+    private GameCharacterController character;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
@@ -20,7 +20,7 @@ public class GraphicsController : MonoBehaviour
 
     private void GetCharacterComponent()
     {
-        character = GetComponent<CharacterManager>();
+        character = GetComponent<GameCharacterController>();
 
         if (character != null)
         {

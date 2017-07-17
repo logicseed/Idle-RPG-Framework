@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Represents the type of a character.
+/// </summary>
 public enum CharacterType
 {
     None,

@@ -273,11 +273,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4635603170666572, guid: 64e39e8c8a37fb04890ac297817832a8, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 2.1
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 4635603170666572, guid: 64e39e8c8a37fb04890ac297817832a8, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -1.28
+      value: -0.38
       objectReference: {fileID: 0}
     - target: {fileID: 4635603170666572, guid: 64e39e8c8a37fb04890ac297817832a8, type: 2}
       propertyPath: m_LocalPosition.z
@@ -303,11 +303,6 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 95306981547938944, guid: 64e39e8c8a37fb04890ac297817832a8,
-        type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 313809febfad2d94db9978497dc95216, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 64e39e8c8a37fb04890ac297817832a8, type: 2}
   m_IsPrefabParent: 0
@@ -736,6 +731,7 @@ SpriteRenderer:
   m_Size: {x: 7.04, y: 2.24}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
 --- !u!4 &975497052
 Transform:
   m_ObjectHideFlags: 0

@@ -9,11 +9,11 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class HeroInputController : MonoBehaviour
 {
-    private HeroManager hero;
+    private HeroController hero;
 
     private void Start()
     {
-        hero = GetComponent<HeroManager>();
+        hero = GetComponent<HeroController>();
     }
 
     private void Update()
@@ -49,7 +49,7 @@ public class HeroInputController : MonoBehaviour
         var worldPosition = Camera.main.ScreenToWorldPoint(position);
 
         // Character tap
-        foreach ( var character in GameManager.Instance.AllCharacters)
+        foreach ( var character in GameManager.AllCharacters)
         {
             if (Vector2.Distance(worldPosition, character.transform.position) < 0.1f) //TODO: No magic numbers
             {
@@ -60,7 +60,7 @@ public class HeroInputController : MonoBehaviour
                 }
                 catch (NullReferenceException)
                 {
-                    hero = GetComponent<HeroManager>();
+                    hero = GetComponent<HeroController>();
                     return;
                 }
             }
@@ -74,7 +74,7 @@ public class HeroInputController : MonoBehaviour
         }
         catch (NullReferenceException)
         {
-            hero = GetComponent<HeroManager>();
+            hero = GetComponent<HeroController>();
         }
     }
 }

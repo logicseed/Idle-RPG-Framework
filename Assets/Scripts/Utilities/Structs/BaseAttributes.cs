@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
-///
+/// Contains unscaled attributes for a character.
 /// </summary>
 [System.Serializable]
 public struct BaseAttributes
@@ -52,6 +49,12 @@ public struct BaseAttributes
     [Range(0, 100)]
     public int movementSpeed;
 
+    /// <summary>
+    /// Adds two BaseAttributes together and returns a new one.
+    /// </summary>
+    /// <param name="attributesA">BaseAttributes to add to.</param>
+    /// <param name="attributesB">BaseAttributes to add from.</param>
+    /// <returns>BaseAttributes containing the sum of attributesA and attributesB.</returns>
     public static BaseAttributes operator +(BaseAttributes attributesA, BaseAttributes attributesB)
     {
         var attributes = new BaseAttributes();

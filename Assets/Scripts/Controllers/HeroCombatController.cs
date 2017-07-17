@@ -22,9 +22,17 @@ public class HeroCombatController : CombatController
     public override void UpdateTarget()
     {
         if (target != null &&
-            target.GetComponent<CharacterManager>().state == CharacterState.Dead)
+            target.GetComponent<GameCharacterController>().state == CharacterState.Dead)
         {
             target = null;
         }
+    }
+
+    protected override void Start()
+    {
+        character = GetComponent<HeroController>();
+        currentHealth = character.attributes.health;
+        currentEnergy = character.attributes.energy;
+        lastAttackTime = Time.time - (1 / character.attributes.attackSpeed);
     }
 }

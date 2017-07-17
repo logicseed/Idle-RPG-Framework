@@ -18,7 +18,7 @@ public class DerivedAttributes
     private const float FULL_CRITICAL_HIT_DAMAGE = 1.0f;
     private const float FULL_COOLDOWN_REDUCTION = 0.5f;
     private const float FULL_LIFE_DRAIN = 0.5f;
-    private const float FULL_MOVEMENT_SPEED = 0.5f;
+    private const float FULL_MOVEMENT_SPEED = 0.05f;
 
     // Derived attributes
     private int attackDamageDerived;
@@ -100,13 +100,13 @@ public class DerivedAttributes
     /// </summary>
     public float movementSpeed { get { return movementSpeedDerived; } }
 
-    private CharacterManager character;
+    private Character character;
 
     /// <summary>
     /// Constructor to create derived attributes from
     /// </summary>
     /// <param name="character"></param>
-    public DerivedAttributes(CharacterManager character)
+    public DerivedAttributes(Character character)
     {
         this.character = character;
 

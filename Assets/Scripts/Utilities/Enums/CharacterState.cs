@@ -1,4 +1,7 @@
-﻿public enum CharacterState
+﻿/// <summary>
+/// Represents the current state of a character.
+/// </summary>
+public enum CharacterState
 {
     Idle,
     Walk,

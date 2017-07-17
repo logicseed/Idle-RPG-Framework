@@ -33,7 +33,7 @@ public class HeroMovementController : MovementController
     protected override void Start()
     {
         locationTarget = transform.position;
-        character = GetComponent<CharacterManager>();
+        character = GetComponent<GameCharacterController>();
     }
 
     /// <summary>
