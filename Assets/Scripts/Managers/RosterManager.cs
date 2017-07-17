@@ -1,53 +1,124 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 ///
 /// </summary>
-public class RosterManager : MonoBehaviour
+[System.Serializable]
+public class RosterManager
 {
     public const int MAX_ACTIVE_ROSTER = 3;
+    public const string ALLY_PATH = "Allies/";
 
-    public List<GameObject> allies;
-    public List<GameObject> activeRoster;
+    public List<string> unlockedAllies;
+    public List<string> assignedAllies;
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="ally"></param>
-    public void AddToRoster(GameObject ally)
+    public Dictionary<string, Ally> allyObjects;
+
+    public Dictionary<string, int> allyLevels;
+
+    public RosterManager()
     {
-        if (!activeRoster.Contains(ally) && activeRoster.Count < MAX_ACTIVE_ROSTER)
+        unlockedAllies = new List<string>();
+        assignedAllies = new List<string>();
+        allyObjects = new Dictionary<string, Ally>();
+        allyLevels = new Dictionary<string, int>();
+    }
+
+    public void AddToActive(string ally)
+    {
+        if (!assignedAllies.Contains(ally) && assignedAllies.Count < MAX_ACTIVE_ROSTER)
         {
-            activeRoster.Add(ally);
+            assignedAllies.Add(ally);
         }
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="ally"></param>
-    public void RemoveFromRoster(GameObject ally)
+    public void RemoveFromActive(string ally)
     {
-        if (activeRoster.Contains(ally)) activeRoster.Remove(ally);
+        if (assignedAllies.Contains(ally)) assignedAllies.Remove(ally);
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="ally"></param>
-    public void AddToAllies(GameObject ally)
+    public void AddToAllies(string ally, int experience)
     {
-        if (!allies.Contains(ally)) allies.Add(ally);
+        if (!unlockedAllies.Contains(ally))
+        {
+            unlockedAllies.Add(ally);
+            var allyObject = Resources.Load(ALLY_PATH + ally) as Ally;
+            allyObjects.Add(ally, allyObject);
+            allyLevels.Add(ally, experience);
+        }
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="ally"></param>
-    public void RemoveFromAllies(GameObject ally)
+    public void RemoveFromAllies(string ally)
     {
-        if (allies.Contains(ally)) allies.Remove(ally);
+        if (unlockedAllies.Contains(ally))
+        {
+            unlockedAllies.Remove(ally);
+            allyObjects.Remove(ally);
+            allyLevels.Remove(ally);
+        }
+    }
+
+    public Ally GetAlly(string ally)
+    {
+        if (unlockedAllies.Contains(ally))
+        {
+            if (allyObjects.ContainsKey(ally))
+            {
+                return allyObjects[ally];
+            }
+            else
+            {
+                var allyObject = Resources.Load(ALLY_PATH + ally) as Ally;
+                allyObjects.Add(ally, allyObject);
+                return allyObject;
+            }
+        }
+        return Resources.Load(ALLY_PATH + ally) as Ally;
+    }
+
+    public List<Ally> GetActiveRoster()
+    {
+        var allies = new List<Ally>();
+
+        foreach (var ally in assignedAllies)
+        {
+            allies.Add(allyObjects[ally]);
+        }
+
+        return allies;
+    }
+
+    public void Save(ref SaveGame save)
+    {
+        save.assignedAllies = assignedAllies;
+        save.unlockedAllies = unlockedAllies;
+        save.allyLevels = allyLevels;
+    }
+
+    public static RosterManager Load(SaveGame save = null)
+    {
+        var rosterManager = new RosterManager();
+
+        if (save != null)
+        {
+            foreach (var ally in save.unlockedAllies)
+            {
+                int allyLevel;
+                if (save.allyLevels != null && save.allyLevels.ContainsKey(ally)) allyLevel = save.allyLevels[ally];
+                else allyLevel = 1;
+
+                rosterManager.AddToAllies(ally, allyLevel);
+            }
+
+            foreach (var ally in save.assignedAllies)
+            {
+                rosterManager.AddToActive(ally);
+            }
+        }
+
+        return rosterManager;
     }
 }

@@ -1,48 +1,66 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
 ///
 /// </summary>
-public class InventoryManager : MonoBehaviour
+[System.Serializable]
+public class InventoryManager
 {
-    public Dictionary<EquipmentSlot, Equipment> equipped;
-    public List<Equipment> inventory;
+    public const string EQUIPMENT_PATH = "Equipment/";
 
-    private void Awake()
+    public List<string> unlockedEquipment;
+    public List<string> assignedEquipment;
+
+    public Dictionary<string, Equipment> equipmentObjects;
+
+    public InventoryManager()
     {
-        equipped = new Dictionary<EquipmentSlot, Equipment>();
-        inventory = new List<Equipment>();
+        unlockedEquipment = new List<string>();
+        assignedEquipment = new List<string>();
+        equipmentObjects = new Dictionary<string, Equipment>();
+    }
+
+    public void AddToInventory(string equipment)
+    {
+        if (!unlockedEquipment.Contains(equipment))
+        {
+            unlockedEquipment.Add(equipment);
+            var equipmentObject = Resources.Load(EQUIPMENT_PATH + equipment) as Equipment;
+            equipmentObjects.Add(equipment, equipmentObject);
+        }
+    }
+
+    public void RemoveFromInventory(string equipment)
+    {
+        if (unlockedEquipment.Contains(equipment))
+        {
+            unlockedEquipment.Remove(equipment);
+            equipmentObjects.Remove(equipment);
+            if (assignedEquipment.Contains(equipment)) assignedEquipment.Remove(equipment);
+        }
     }
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="equipment"></param>
-    public void Drop(Equipment equipment)
+    public void Equip(string equipment)
     {
-        if (equipped.ContainsKey(equipment.slot))
+        var equipmentObject = equipmentObjects[equipment];
+        var slot = equipmentObject.slot;
+
+        foreach (var assigned in assignedEquipment)
         {
-            if (equipped[equipment.slot] == equipment)
-            {
-                equipped.Remove(equipment.slot);
-            }
+            if (equipmentObjects[equipment].slot == slot) assignedEquipment.Remove(assigned);
         }
-        inventory.Remove(equipment);
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="equipment"></param>
-    public void Equip(Equipment equipment)
+    public void Unequip(string equipment)
     {
-        if (equipped.ContainsKey(equipment.slot))
-        {
-            equipped.Remove(equipment.slot);
-            equipped.Add(equipment.slot, equipment);
-        }
+        if (assignedEquipment.Contains(equipment)) assignedEquipment.Remove(equipment);
     }
 
     public BaseAttributes attributeModifiers
@@ -50,11 +68,67 @@ public class InventoryManager : MonoBehaviour
         get
         {
             var attributeModifiers = new BaseAttributes();
-            foreach (var equipment in equipped)
+            foreach (var equipment in assignedEquipment)
             {
-                attributeModifiers += equipment.Value.attributeModifiers;
+                attributeModifiers += equipmentObjects[equipment].attributeModifiers;
             }
             return attributeModifiers;
         }
+    }
+
+    public Equipment GetEquipment(string equipment)
+    {
+        if (unlockedEquipment.Contains(equipment))
+        {
+            if (equipmentObjects.ContainsKey(equipment))
+            {
+                return equipmentObjects[equipment];
+            }
+            else
+            {
+                var equipmentObject = Resources.Load(EQUIPMENT_PATH + equipment) as Equipment;
+                equipmentObjects.Add(equipment, equipmentObject);
+                return equipmentObject;
+            }
+        }
+        return Resources.Load(EQUIPMENT_PATH + equipment) as Equipment;
+    }
+
+    public List<Equipment> GetEquipped()
+    {
+        var equippedEquipment = new List<Equipment>();
+
+        foreach (var equipment in assignedEquipment)
+        {
+            equippedEquipment.Add(equipmentObjects[equipment]);
+        }
+
+        return equippedEquipment;
+    }
+
+    internal void Save(ref SaveGame save)
+    {
+        save.unlockedEquipment = unlockedEquipment;
+        save.assignedEquipment = assignedEquipment;
+    }
+
+    public static InventoryManager Load(SaveGame save)
+    {
+        var inventoryManager = new InventoryManager();
+
+        if (save != null)
+        {
+            foreach (var equipment in save.unlockedEquipment)
+            {
+                inventoryManager.AddToInventory(equipment);
+            }
+
+            foreach (var equipment in save.assignedEquipment)
+            {
+                inventoryManager.Equip(equipment);
+            }
+        }
+
+        return inventoryManager;
     }
 }

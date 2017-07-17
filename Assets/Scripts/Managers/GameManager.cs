@@ -2,184 +2,160 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 ///
 /// </summary>
 public class GameManager : Singleton<GameManager>
 {
-    public List<GameObject> allies;
-    public List<GameObject> enemies;
-    //public List<GameObject> bosses;
-    public List<GameObject> hero;
-    public List<GameObject> queues;
-    public string currentStage;
-    public List<string> unlockedZones;
-    public List<string> unlockedStages;
+    [Header("World Entity Managers")]
+    public HeroManager heroManager;
+    public RosterManager rosterManager;
+    public InventoryManager inventoryManager;
+    public AbilityManager abilityManager;
+    public ZoneManager zoneManager;
+    public StageManager stageManager;
 
-    private void Start()
+    [Header("Stage Entity Managers")]
+    public AllyManager allyManager;
+    public EnemyManager enemyManager;
+    public BossManager bossManager;
+    public QueueManager queueManager;
+
+    public static HeroManager HeroManager { get { return GameManager.Instance.heroManager; } }
+    public static RosterManager RosterManager { get { return GameManager.Instance.rosterManager; } }
+    public static InventoryManager InventoryManager { get { return GameManager.Instance.inventoryManager; } }
+    public static AbilityManager AbilityManager { get { return GameManager.Instance.abilityManager; } }
+    public static ZoneManager ZoneManager { get { return GameManager.Instance.zoneManager; } }
+    public static StageManager StageManager { get { return GameManager.Instance.stageManager; } }
+    public static AllyManager AllyManager { get { return GameManager.Instance.allyManager; } }
+    public static EnemyManager EnemyManager { get { return GameManager.Instance.enemyManager; } }
+    public static BossManager BossManager { get { return GameManager.Instance.bossManager; } }
+    public static QueueManager QueueManager { get { return GameManager.Instance.queueManager; } }
+
+    public bool bypassSaveGame;
+
+    private void Awake()
     {
-        InitializeCharacterLists();
+        InitializeWorldEntityManagers();
+        InitializeStageEntityManagers();
     }
 
-    private void InitializeCharacterLists()
+    public void InitializeWorldEntityManagers()
     {
-        allies = new List<GameObject>();
-        enemies = new List<GameObject>();
-        //bosses = new List<GameObject>();
-        hero = new List<GameObject>();
-
-        unlockedZones = new List<string>();
-        unlockedStages = new List<string>();
-    }
-
-    private void Update()
-    {
-        UpdateCharacterLists();
-    }
-
-    private void UpdateCharacterLists()
-    {
-        allies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Ally"));
-        enemies = new List<GameObject>(GameObject.FindGameObjectsWithTag("Enemy"));
-        //bosses = new List<GameObject>(GameObject.FindGameObjectsWithTag("Boss"));
-        hero = new List<GameObject>(GameObject.FindGameObjectsWithTag("Hero"));
-    }
-
-    private void UpdateQueueList()
-    {
-        queues = new List<GameObject>(GameObject.FindGameObjectsWithTag("Queue"));
-    }
-
-    private bool QueuesAreSpawning
-    {
-        get
+        if (!bypassSaveGame)
         {
-            var areSpawning = false;
-            foreach (var queue in queues)
-            {
-                var queueManager = queue.GetComponent<QueueManager>();
-                if (queueManager.spawning) areSpawning = true;
-            }
-            return areSpawning;
+            SaveGame save = null;
+            if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
+
+            heroManager = HeroManager.Load(save);
+            rosterManager = RosterManager.Load(save);
+            inventoryManager = InventoryManager.Load(save);
+            abilityManager = AbilityManager.Load(save);
+            zoneManager = ZoneManager.Load(save);
+            stageManager = StageManager.Load(save);
         }
     }
 
-    public List<GameObject> AllCharacters
+    public void InitializeStageEntityManagers()
+    {
+        allyManager = new AllyManager();
+        enemyManager = new EnemyManager();
+        bossManager = new BossManager();
+        queueManager = new QueueManager();
+    }
+    
+
+
+
+    private void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+    }
+
+
+    private void Update()
+    {
+
+    }
+
+
+
+    public static List<GameCharacterController> AllCharacters
     {
         get
         {
-            var allCharacters = new List<GameObject>();
-            allCharacters.AddRange(allies);
-            allCharacters.AddRange(enemies);
-            //characters.AddRange(bosses);
-            allCharacters.AddRange(hero);
+            var allCharacters = new List<GameCharacterController>();
+
+            EnemyManager.AddAllToList(ref allCharacters);
+            BossManager.AddAllToList(ref allCharacters);
+            AllyManager.AddAllToList(ref allCharacters);
+            HeroManager.AddHeroToList(ref allCharacters);
 
             return allCharacters;
         }
     }
 
-    public List<GameObject> AllEnemies
+    public static List<GameCharacterController> AllEnemies
     {
         get
         {
-            var allEnemies = new List<GameObject>();
-            allEnemies.AddRange(enemies);
-            //enemies.AddRange(bosses);
+            var allEnemies = new List<GameCharacterController>();
+
+            EnemyManager.AddAllToList(ref allEnemies);
+            BossManager.AddAllToList(ref allEnemies);
 
             return allEnemies;
         }
     }
 
-    public List<GameObject> AllFriendlies
+    public static List<GameCharacterController> AllFriendlies
     {
         get
         {
-            var allFriendlies = new List<GameObject>();
-            allFriendlies.AddRange(allies);
-            allFriendlies.AddRange(hero);
+            var allFriendlies = new List<GameCharacterController>();
+
+            AllyManager.AddAllToList(ref allFriendlies);
+            HeroManager.AddHeroToList(ref allFriendlies);
 
             return allFriendlies;
         }
     }
 
-    public List<GameObject> AllCharactersExcept(GameObject self)
+    public static List<GameCharacterController> AllCharactersExcept(GameCharacterController self)
     {
         var allExceptSelf = AllCharacters;
         allExceptSelf.Remove(self);
         return allExceptSelf;
     }
 
+    public void SaveGame()
+    {
+        var save = new SaveGame();
+
+        heroManager.Save(ref save);
+        rosterManager.Save(ref save);
+        inventoryManager.Save(ref save);
+        abilityManager.Save(ref save);
+        zoneManager.Save(ref save);
+        stageManager.Save(ref save);
+        save.isFilled = true;
+
+        SaveGameManager.SaveGame(save);
+    }
+
     public void ResetGame()
     {
-
+        SaveGameManager.SaveGame(new SaveGame());
     }
 
-    public void StartStage()
+    public HeroController hero { get { return heroManager.hero; } }
+
+    public void OnDestroy()
     {
-        InitializeCharacterLists();
+        if (!bypassSaveGame) SaveGame();
     }
 
-    public SaveGame PrepareSaveGame()
-    {
-        var heroManager = hero[0].GetComponent<HeroManager>();
-        var rosterManager = hero[0].GetComponent<RosterManager>();
-        var inventoryManager = hero[0].GetComponent<InventoryManager>();
-        var abilityManager = hero[0].GetComponent<AbilityManager>();
-
-        var saveGame = new SaveGame();
-
-        saveGame.experience = heroManager.experience;
-
-        var unlockedAllies = new List<string>();
-        foreach (var ally in rosterManager.allies)
-        {
-            unlockedAllies.Add("Ally/" + ally.name);
-        }
-        saveGame.unlockedAllies = unlockedAllies;
-
-        var assignedAllies = new List<string>();
-        foreach (var ally in rosterManager.activeRoster)
-        {
-            assignedAllies.Add("Ally/" + ally.name);
-        }
-        saveGame.assignedAllies = assignedAllies;
-
-        saveGame.unlockedZones = unlockedZones;
-        saveGame.unlockedStages = unlockedStages;
-
-        var unlockedEquipment = new List<string>();
-        foreach (var equipment in inventoryManager.inventory)
-        {
-            unlockedEquipment.Add("Equipment/" + equipment.name);
-        }
-        saveGame.unlockedEquipment = unlockedEquipment;
-
-        var assignedEquipment = new List<string>();
-        foreach (var equipment in inventoryManager.equipped)
-        {
-            assignedEquipment.Add("Equipment/" + equipment.Value.name);
-        }
-        saveGame.assignedEquipment = assignedEquipment;
-
-        var unlockedAbilities = new List<string>();
-        foreach (var ability in abilityManager.unlockedAbilities)
-        {
-            unlockedAbilities.Add("Ability/" + ability.name);
-        }
-        saveGame.unlockedAbilities = unlockedAbilities;
-
-        var assignedAbilities = new List<string>();
-        foreach (var ability in abilityManager.activeAbilities)
-        {
-            assignedAbilities.Add("Ability/" + ability.name);
-        }
-        saveGame.assignedAbilities = assignedAbilities;
-
-        saveGame.lastStage = currentStage;
-        saveGame.lastStageTime = DateTime.Now;
-
-        saveGame.isFilled = true;
-        return saveGame;
-    }
+    
 }

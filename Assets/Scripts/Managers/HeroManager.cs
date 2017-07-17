@@ -1,37 +1,37 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroManager : CharacterManager
+[Serializable]
+public class HeroManager : RegisterList<HeroController>
 {
+    public HeroController hero { get { if (list.Count > 0) return list[0]; else return null; } }
     public int experience = 0;
-    protected InventoryManager inventoryManagerReference;
-    protected RosterManager rosterManagerReference;
-    protected AbilityManager abilityManagerReference;
+    public int level = 1;
 
-    protected override void Start()
+    public HeroManager() : base() { }
+
+    public void Save(ref SaveGame save)
     {
-        inventoryManagerReference = GetComponent<InventoryManager>();
-        base.Start();
+        save.experience = experience;
+        save.level = level;
     }
 
-    protected override void CalculateBonusAttributes()
+    public static HeroManager Load(SaveGame save = null)
     {
-        bonusAttributes = inventoryManagerReference.attributeModifiers;
+        var heroManager = new HeroManager();
+
+        if (save != null)
+        {
+            heroManager.experience = save.experience;
+            heroManager.level = save.level;
+        }
+
+        return heroManager;
     }
 
-    protected override void GetMovementController()
+    public void AddHeroToList(ref List<GameCharacterController> addToList)
     {
-        movementControllerReference = GetComponent<HeroMovementController>();
-    }
-
-    protected override void CreateCombatController()
-    {
-        combatControllerReference = gameObject.AddComponent<HeroCombatController>();
-    }
-
-    protected override void CreateMovementController()
-    {
-        movementControllerReference = gameObject.AddComponent<HeroMovementController>();
+        if (list.Count > 0) addToList.Add(list[0]);
     }
 }

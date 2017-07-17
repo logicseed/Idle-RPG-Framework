@@ -54,3 +54,8 @@ MonoBehaviour:
   allies: []
   enemies: []
   hero: []
+  queues: []
+  currentStage: 
+  unlockedZones: []
+  unlockedStages: []
+  progressBar: {fileID: 0}
