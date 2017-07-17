@@ -16,7 +16,7 @@ public class HazardController : MonoBehaviour
     /// <summary>
     ///
     /// </summary>
-    public void ApplyEffect(CharacterManager character)
+    public void ApplyEffect(GameCharacterController character)
     {
         switch (type)
         {
@@ -41,7 +41,7 @@ public class HazardController : MonoBehaviour
     {
         if (!hasTriggered || !isOneTime)
         {
-            var character = other.gameObject.GetComponent<CharacterManager>();
+            var character = other.gameObject.GetComponent<GameCharacterController>();
             if (isOneTime) hasTriggered = true;
             ApplyEffect(character);
         }
