@@ -15,13 +15,13 @@ public class FloatingBarController : MonoBehaviour
     public Color backgroundColor = Color.red;
     public Color foregroundColor = Color.green;
 
-    private CharacterManager character;
+    private GameCharacterController character;
 
     // Use this for initialization
     void Start()
     {
         // Get reference to the character that this bar is attached to.
-        character = transform.parent.gameObject.GetComponent<CharacterManager>();
+        character = transform.parent.gameObject.GetComponent<GameCharacterController>();
 
         // Setup colors
         var backgroundImage = background.gameObject.GetComponent<Image>();
@@ -42,7 +42,7 @@ public class FloatingBarController : MonoBehaviour
         }
         catch (NullReferenceException)
         {
-            character = transform.parent.gameObject.GetComponent<CharacterManager>();
+            character = transform.parent.gameObject.GetComponent<GameCharacterController>();
         }
     }
 }
