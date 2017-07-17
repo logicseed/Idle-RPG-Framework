@@ -20,6 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4114019572881650}
   - component: {fileID: 114748699211807930}
+  - component: {fileID: 114002259996132834}
   m_Layer: 0
   m_Name: EnemyQueue
   m_TagString: Queue
@@ -40,6 +41,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114002259996132834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1608026765373482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b756e65a103f1be449df4360f55e6ea5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  properties:
+    color: {r: 1, g: 0, b: 0, a: 1}
+    shape: 1
+    wireframe: 1
+    size: 0.125
+    showLabel: 1
 --- !u!114 &114748699211807930
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -51,6 +69,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425b4e124c8bc8943b54ab71df772e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characters: []
+  queue: {fileID: 11400000, guid: 8c68b6cb0c9182f4682884e1e2ad4881, type: 2}
   timeBetweenSpawns: 5
   isRepeating: 0
