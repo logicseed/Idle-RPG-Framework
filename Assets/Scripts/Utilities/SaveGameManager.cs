@@ -9,7 +9,7 @@ public static class SaveGameManager
     {
         if (!saveGame.isFilled)
         {
-            throw new ArgumentException("Tried to save an empty save game file.");
+            throw new ArgumentException("Tried to save an incomplete save game file.");
         }
 
         var binaryFormatter = new BinaryFormatter();
@@ -66,6 +66,11 @@ public static class SaveGameManager
         {
             return Path.Combine(Application.persistentDataPath, "progress.save");
         }
+    }
+
+    public static bool SaveGameExists()
+    {
+        return File.Exists(SavePath);
     }
 }
 

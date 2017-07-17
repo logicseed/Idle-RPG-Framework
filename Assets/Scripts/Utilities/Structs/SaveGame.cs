@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using UnityEngine;
 
 /// <summary>
 /// Stores everything that needs to be persisted across plays.
@@ -11,6 +8,7 @@ using UnityEngine;
 [Serializable]
 public class SaveGame : ISerializable
 {
+    // Fields to save
     public int experience;
     public List<string> unlockedAllies;
     public List<string> assignedAllies;
@@ -24,8 +22,18 @@ public class SaveGame : ISerializable
     public DateTime lastStageTime;
     public bool isFilled = false;
 
+    // TODO: need to integ
+    public int level;
+    public Dictionary<string, int> allyLevels;
+
+    // To add fields to the save game, they must be added above, and then
+    // into the serialization methods below.
+
     public SaveGame() { }
 
+    /// <summary>
+    /// Constructor for deserializing save game data.
+    /// </summary>
     public SaveGame(SerializationInfo info, StreamingContext context)
     {
         experience = info.GetInt32("experience");
@@ -39,8 +47,13 @@ public class SaveGame : ISerializable
         assignedAbilities = (List<string>)info.GetValue("assignedAbilities", typeof(List<string>));
         lastStage = info.GetString("lastStage");
         lastStageTime = (DateTime)info.GetValue("lastStageTime", typeof(DateTime));
+        level = info.GetInt32("level");
+        allyLevels = (Dictionary<string, int>)info.GetValue("allyLevels", typeof(Dictionary<string, int>));
     }
 
+    /// <summary>
+    /// Prepares fields for serialization.
+    /// </summary>
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         info.AddValue("experience", experience);
@@ -54,6 +67,8 @@ public class SaveGame : ISerializable
         info.AddValue("assignedAbilities", assignedAbilities);
         info.AddValue("lastStage", lastStage);
         info.AddValue("lastStageTime", lastStageTime);
+        info.AddValue("level", level);
+        info.AddValue("allyLevels", allyLevels);
     }
 }
 
