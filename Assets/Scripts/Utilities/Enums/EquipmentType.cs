@@ -1,10 +1,9 @@
 ﻿/// <summary>
-///
+/// Represents the type of a piece of equipment.
 /// </summary>
 public enum EquipmentType
 {
-    MeleeWeapon,
-    RangedWeapon,
+    Weapon,
     Armor,
     Shield
 }

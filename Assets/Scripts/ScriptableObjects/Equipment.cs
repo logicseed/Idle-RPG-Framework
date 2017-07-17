@@ -5,11 +5,11 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-[CreateAssetMenu(menuName = "Idle RPG/Equipment")]
+[CreateAssetMenu(menuName = "Idle RPG/Reward/Equipment")]
 public class Equipment : ScriptableObject
 {
     public EquipmentType type;
     public EquipmentSlot slot;
-    public Texture2D texture;
+    public Sprite sprite;
     public BaseAttributes attributeModifiers;
 }

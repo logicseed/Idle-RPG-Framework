@@ -6,7 +6,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-[CreateAssetMenu(menuName = "Idle RPG/Loot Collection - Static")]
+[CreateAssetMenu(menuName = "Idle RPG/Reward/Loot Collection - Static")]
 public class StaticLootCollection : LootCollection
 {
     public int currencyAmount;
