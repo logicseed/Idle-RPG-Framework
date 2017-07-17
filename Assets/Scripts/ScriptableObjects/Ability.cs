@@ -8,10 +8,14 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Idle RPG/Ability")]
 public class Ability : ScriptableObject
 {
-    public bool isRanged;
+    //public SpriteAttribute icontest;
+    public Sprite icon;
+    public Sprite effect;
+    public AbilityRange range;
+    public AbilityType type;
     public float cooldown;
+    [Range(0,10)]
     public float potency;
-    public Texture2D texture;
 
     /// <summary>
     ///
