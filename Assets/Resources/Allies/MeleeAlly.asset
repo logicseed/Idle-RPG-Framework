@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e5011aa2f255c4cb6aed061e869615, type: 3}
+  m_Name: MeleeAlly
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 21300000, guid: 2fbd1a5f5bcc88b4a855a72d09a20260, type: 3}
+  animator: {fileID: 22100000, guid: 3f3de416b61d91c409afe44783cf4344, type: 2}
+  attack: 0
+  baseAttributes:
+    attackDamage: 37
+    abilityDamage: 39
+    defense: 43
+    health: 44
+    healthRegeneration: 42
+    energy: 43
+    energyRegeneration: 41
+    attackSpeed: 41
+    criticalHitChance: 41
+    criticalHitDamage: 39
+    cooldownReduction: 42
+    lifeDrain: 42
+    movementSpeed: 40
+  bonusAttributes:
+    attackDamage: 44
+    abilityDamage: 38
+    defense: 37
+    health: 0
+    healthRegeneration: 0
+    energy: 43
+    energyRegeneration: 0
+    attackSpeed: 40
+    criticalHitChance: 0
+    criticalHitDamage: 40
+    cooldownReduction: 0
+    lifeDrain: 0
+    movementSpeed: 0
+  lesson: {fileID: 11400000, guid: 1d3186b7d235c664b9750c17594f0ae5, type: 2}

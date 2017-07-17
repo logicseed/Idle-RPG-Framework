@@ -1,0 +1,59 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e5011aa2f255c4cb6aed061e869615, type: 3}
+  m_Name: CasterAlly
+  m_EditorClassIdentifier: 
+  avatar: {fileID: 21300000, guid: 0a6a54aa4a9bc6145854012f67512543, type: 3}
+  animator: {fileID: 22100000, guid: 774a5260bc01a0342ac6427eed566c13, type: 2}
+  attack: 2
+  level: 1
+  baseAttributes:
+    attackDamage: 27
+    abilityDamage: 18
+    defense: 23
+    health: 31
+    healthRegeneration: 31
+    energy: 28
+    energyRegeneration: 29
+    attackSpeed: 27
+    criticalHitChance: 31
+    criticalHitDamage: 33
+    cooldownReduction: 34
+    lifeDrain: 36
+    movementSpeed: 31
+  bonusAttributes:
+    attackDamage: 43
+    abilityDamage: 37
+    defense: 34
+    health: 35
+    healthRegeneration: 0
+    energy: 36
+    energyRegeneration: 0
+    attackSpeed: 0
+    criticalHitChance: 32
+    criticalHitDamage: 0
+    cooldownReduction: 38
+    lifeDrain: 39
+    movementSpeed: 0
+  lesson: {fileID: 11400000, guid: 336a614897962a540b11cdecf333f57d, type: 2}
+  levelUpgrades:
+    AttackDamage: 1
+    AbilityDamage: 0
+    Defense: 0
+    Health: 1
+    HealthRegeneration: 0
+    Energy: 0
+    EnergyRegeneration: 0
+    CriticalHitChance: 1
+    CriticalHitDamage: 0
+    CooldownReduction: 0
+    LifeDrain: 0
+    MovementSpeed: 0
