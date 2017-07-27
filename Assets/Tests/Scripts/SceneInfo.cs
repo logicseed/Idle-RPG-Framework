@@ -7,12 +7,17 @@ using System.Text;
 public class SceneInfo : MonoBehaviour
 {
     public Text displayText;
+
+    public bool showSceneTime = true;
+    public bool showExperience = false;
 	
 	void Update ()
     {
         var frameText = new StringBuilder();
         frameText.AppendLine("SCENE INFO");
-        frameText.AppendLine("Time: " + Time.timeSinceLevelLoad);
+
+        if (showSceneTime) frameText.AppendLine("Time: " + Time.timeSinceLevelLoad);
+        if (showExperience) frameText.AppendLine("Experience: " + GameManager.HeroManager.experience);
 
         displayText.text = frameText.ToString();
 	}

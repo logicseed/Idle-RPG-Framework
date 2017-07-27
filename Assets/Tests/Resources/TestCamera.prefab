@@ -163,6 +163,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   displayText: {fileID: 114393079476669140}
+  showSceneTime: 1
+  showExperience: 0
 --- !u!114 &114393079476669140
 MonoBehaviour:
   m_ObjectHideFlags: 1
