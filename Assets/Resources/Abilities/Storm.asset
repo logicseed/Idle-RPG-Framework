@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Name: Storm
   m_EditorClassIdentifier: 
   icon: {fileID: 21300172, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
+  type: 1
   effect: {fileID: 0}
-  range: 0
-  type: 0
+  abilityRange: 0
+  abilityType: 0
   cooldown: 0
   potency: 4.01

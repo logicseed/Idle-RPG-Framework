@@ -28,9 +28,9 @@ public class MovementBehaviourTests : MonoBehaviour
 
             movementBehaviour = new IdleMovementBehaviour();
             movementBehaviour = new SeekMovementBehaviour(movementBehaviour, gameObject, seekTarget, seekRadius);
-            movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, avoidTarget, avoidRadius);
-            movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, avoidTarget2, avoidRadius);
-            movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, avoidTarget3, avoidRadius);
+            movementBehaviour = new FleeMovementBehaviour(movementBehaviour, gameObject, avoidTarget, avoidRadius);
+            movementBehaviour = new FleeMovementBehaviour(movementBehaviour, gameObject, avoidTarget2, avoidRadius);
+            movementBehaviour = new FleeMovementBehaviour(movementBehaviour, gameObject, avoidTarget3, avoidRadius);
         }
         var newPosition = movementBehaviour.Steering().normalized * controller.maxSpeed;
         transform.Translate(newPosition);

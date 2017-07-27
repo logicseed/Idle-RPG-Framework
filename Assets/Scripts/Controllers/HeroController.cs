@@ -22,7 +22,7 @@ public class HeroController : GameCharacterController
     {
         derivedAttributes = new DerivedAttributes(hero);
 
-        CreateSpriteRenderer(hero.avatar);
+        CreateSpriteRenderer(hero.icon);
         CreateAnimator(hero.animator);
         CreateGraphicsController();
         CreateCombatController();
@@ -91,7 +91,7 @@ public class HeroController : GameCharacterController
     {
         get
         {
-            return hero.attack;
+            return hero.attackType;
         }
     }
 }

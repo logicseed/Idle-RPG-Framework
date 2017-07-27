@@ -6,13 +6,13 @@ using UnityEngine;
 ///
 /// </summary>
 [CreateAssetMenu(menuName = "Idle RPG/Ability")]
-public class Ability : ScriptableObject
+public class Ability : ListableEntity
 {
     //public SpriteAttribute icontest;
-    public Sprite icon;
+    
     public Sprite effect;
-    public AbilityRange range;
-    public AbilityType type;
+    public AbilityRange abilityRange;
+    public AbilityType abilityType;
     public float cooldown;
     [Range(0,10)]
     public float potency;

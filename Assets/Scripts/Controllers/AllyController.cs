@@ -14,7 +14,7 @@ public class AllyController : GameCharacterController
         derivedAttributes = new DerivedAttributes(ally);
 
         CreateCombatController();
-        CreateSpriteRenderer(ally.avatar);
+        CreateSpriteRenderer(ally.icon);
         CreateAnimator(ally.animator);
         CreateGraphicsController();
         CreateMovementController(derivedAttributes.movementSpeed);
@@ -53,7 +53,7 @@ public class AllyController : GameCharacterController
     {
         get
         {
-            return ally.attack;
+            return ally.attackType;
         }
     }
 }

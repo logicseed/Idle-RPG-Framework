@@ -4,5 +4,5 @@ using System.Collections;
 [CreateAssetMenu(menuName = "Idle RPG/Enemy")]
 public class Enemy : Character
 {
-    public override CharacterType type { get { return CharacterType.Enemy; } }
+    public override CharacterType characterType { get { return CharacterType.Enemy; } }
 }

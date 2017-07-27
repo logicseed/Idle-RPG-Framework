@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab926e5b8a677184b9c545d6345a1caa, type: 3}
   m_Name: CasterEnemy
   m_EditorClassIdentifier: 
-  avatar: {fileID: 21300000, guid: c3eb4081858e36346bcf463da975d306, type: 3}
+  icon: {fileID: 21300000, guid: c3eb4081858e36346bcf463da975d306, type: 3}
+  type: 0
   animator: {fileID: 22100000, guid: 6236820d35d18bc4383734af23a84423, type: 2}
-  attack: 2
+  attackType: 0
   level: 1
   baseAttributes:
     attackDamage: 9

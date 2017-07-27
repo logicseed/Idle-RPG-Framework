@@ -11,9 +11,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab926e5b8a677184b9c545d6345a1caa, type: 3}
   m_Name: MeleeEnemy
   m_EditorClassIdentifier: 
-  avatar: {fileID: 21300000, guid: 9b2fbda613536814c8e8b3d3874f34c9, type: 3}
+  icon: {fileID: 21300000, guid: 9b2fbda613536814c8e8b3d3874f34c9, type: 3}
+  type: 0
   animator: {fileID: 22100000, guid: 7195edcfbd4f9cf499829718d9ead37e, type: 2}
-  attack: 0
+  attackType: 0
+  level: 1
   baseAttributes:
     attackDamage: 13
     abilityDamage: 14

@@ -20,8 +20,8 @@ public class SceneInfo : MonoBehaviour
 
         if (showSceneTime) frameText.AppendLine("Time: " + Time.timeSinceLevelLoad);
         if (showExperience) frameText.AppendLine("Experience: " + GameManager.HeroManager.experience);
-        if (showUnlockedAbilities) frameText.AppendLine("Unlocked Abilities: " + GameManager.AbilityManager.unlockedAbilities.ToDelimitedString());
-        if (showAssignedAbilities) frameText.AppendLine("Assigned Abilities: " + GameManager.AbilityManager.assignedAbilities.ToDelimitedString());
+        if (showUnlockedAbilities) frameText.AppendLine("Unlocked Abilities: " + GameManager.AbilityManager.Unlocked.ToDelimitedString());
+        if (showAssignedAbilities) frameText.AppendLine("Assigned Abilities: " + GameManager.AbilityManager.Assigned.ToDelimitedString());
 
         displayText.text = frameText.ToString();
 	}

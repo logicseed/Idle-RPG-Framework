@@ -14,7 +14,7 @@ public class EnemyController : GameCharacterController
         derivedAttributes = new DerivedAttributes(enemy);
 
         CreateCombatController();
-        CreateSpriteRenderer(enemy.avatar);
+        CreateSpriteRenderer(enemy.icon);
         CreateAnimator(enemy.animator);
         CreateGraphicsController();
         CreateMovementController(derivedAttributes.movementSpeed);
@@ -46,7 +46,7 @@ public class EnemyController : GameCharacterController
     {
         get
         {
-            return enemy.attack;
+            return enemy.attackType;
         }
     }
 }

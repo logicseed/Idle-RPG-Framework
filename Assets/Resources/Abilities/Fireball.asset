@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Name: Fireball
   m_EditorClassIdentifier: 
   icon: {fileID: 21300004, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
+  type: 1
   effect: {fileID: 0}
-  range: 0
-  type: 0
+  abilityRange: 0
+  abilityType: 0
   cooldown: 0
   potency: 1.88

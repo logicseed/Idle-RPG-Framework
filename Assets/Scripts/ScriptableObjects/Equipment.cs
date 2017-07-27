@@ -6,10 +6,9 @@ using UnityEngine;
 ///
 /// </summary>
 [CreateAssetMenu(menuName = "Idle RPG/Reward/Equipment")]
-public class Equipment : ScriptableObject
+public class Equipment : ListableEntity
 {
-    public EquipmentType type;
-    public EquipmentSlot slot;
-    public Sprite sprite;
+    public EquipmentType equipmentType;
+    public EquipmentSlot equipmentSlot;
     public BaseAttributes attributeModifiers;
 }

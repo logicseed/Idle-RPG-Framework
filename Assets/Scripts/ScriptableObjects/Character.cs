@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public abstract class Character : ScriptableObject
+public abstract class Character : ListableEntity
 {
-    public Sprite avatar;
     public RuntimeAnimatorController animator;
-    public AttackType attack;
+    public AttackType attackType;
 
     public int level = 1;
 
@@ -19,5 +18,5 @@ public abstract class Character : ScriptableObject
 
     public DerivedAttributes derivedAttributes;
 
-    public abstract CharacterType type { get; }
+    public abstract CharacterType characterType { get; }
 }

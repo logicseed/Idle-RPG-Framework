@@ -11,8 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 406c55110cdcb3343b240d78d2aa4287, type: 3}
   m_Name: Chainmail
   m_EditorClassIdentifier: 
-  type: 4
-  slot: 2
+  icon: {fileID: 21300030, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
+  type: 3
+  equipmentType: 0
+  equipmentSlot: 0
   sprite: {fileID: 21300030, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
   attributeModifiers:
     attackDamage: 0

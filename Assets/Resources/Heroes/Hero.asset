@@ -11,9 +11,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dad0edbd955fdcb44b395c96a0fc391e, type: 3}
   m_Name: Hero
   m_EditorClassIdentifier: 
-  avatar: {fileID: 21300000, guid: c4992c249f9a70f4b9ffc8c3877372b0, type: 3}
+  icon: {fileID: 21300000, guid: c4992c249f9a70f4b9ffc8c3877372b0, type: 3}
+  type: 0
   animator: {fileID: 22100000, guid: e3451c9f074e1b34c9b29a702ae67e1a, type: 2}
-  attack: 0
+  attackType: 0
   level: 1
   baseAttributes:
     attackDamage: 96

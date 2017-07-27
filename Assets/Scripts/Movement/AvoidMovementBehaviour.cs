@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using System.Collections;
+using System;
 
 /// <summary>
-/// When an agent has this movement behaviour it will actively desire to move
-/// directly away from the location of the target.
+/// When an agent has this movement behaviour it will actively desire to avoid obstacles and
+/// other characters.
 /// </summary>
-public class AvoidMovementBehaviour : DirectMovementBehaviour
+public class AvoidMovementBehaviour : AbstractMovementDecorator
 {
     /// <summary>
     /// Constructor for AvoidMovementBehaviour instances.
@@ -13,24 +15,77 @@ public class AvoidMovementBehaviour : DirectMovementBehaviour
     /// <param name="agent">The GameObject that desires this movement behaviour.</param>
     /// <param name="target">The target of this movement behaviour.</param>
     /// <param name="radius">The radius at which this behaviour is completed.</param>
-    public AvoidMovementBehaviour(AbstractMovementBehaviour movementBehaviour, GameObject agent, GameObject target, float radius)
-         : base(movementBehaviour, agent, target, radius) { }
+    public AvoidMovementBehaviour(AbstractMovementBehaviour movementBehaviour, GameObject agent, GameObject target, float radius) 
+        : base(movementBehaviour, agent, target, radius) { }
 
-    /// <summary>
-    /// The velocity desired by this movement behaviour.
-    /// </summary>
-    /// <returns>The optimal velocity vector to accomplish this movement behaviour.</returns>
     public override Vector2 CalculateDesiredVelocity()
     {
-        var desiredVelocity = CalculateMaximumVelocity(target.transform.position, agent.transform.position);
+        return Vector2.zero;
+        //var steering = Vector3.zero;
+        //var layerMask = LayerMask.GetMask("Hazard");
 
-        var distance = Vector2.Distance(agent.transform.position, target.transform.position);
-        var radiusFactor = Mathf.Clamp((1.0f - (distance / radius)), 0.0f, 1.0f);
-        desiredVelocity *= radiusFactor;
+        //var maxDistance = 2.0f;
+        //var sphereRadius = 0.5f;
 
-        if (desiredVelocity.sqrMagnitude < 0.0001f) desiredVelocity = Vector2.zero;
+        //// avoid obstacles in front
+        //RaycastHit hit;
 
-        Debug.DrawRay(agent.transform.position, desiredVelocity * 10, Color.red);
-        return desiredVelocity + movementBehaviour.CalculateDesiredVelocity();
+        //var rayDistance = (maxDistance * controller.maxSpeed) * controller.velocity;
+        //    (agent.mover.velocity.magnitude / agent.mover.maxSpeed);
+
+        //if (Physics.SphereCast(agent.transform.position, behaviour.sphereRadius, agent.mover.velocity, out hit, rayDistance, layerMask))
+        //{
+        //    var hitAgent = hit.collider.gameObject.GetComponent<AgentManager>();
+        //    var direction = hit.point - hitAgent.position;
+
+        //    steering = (direction.normalized * agent.mover.maxSpeed);
+
+        //    if (debugRays)
+        //    {
+        //        // target
+        //        Debug.DrawRay(agent.position, hit.transform.position - agent.position, MaterialColor.Grey);
+
+        //        // look ahead
+        //        Debug.DrawRay(agent.position, agent.mover.velocity.normalized * rayDistance, MaterialColor.Standard.AvoidRayDistance);
+
+        //        // steering
+        //        Debug.DrawRay(agent.position + agent.mover.velocity, steering, MaterialColor.Standard.AvoidSteering);
+        //    }
+
+        //}
+
+        //// avoid obstacles around
+        //var hitColliders = Physics.OverlapSphere(agent.position, behaviour.personalSpace, layerMask);
+
+        //foreach (SphereCollider hitCollider in hitColliders)
+        //{
+        //    if (hitCollider.gameObject.transform.position == agent.position) continue;
+
+        //    //var hitAgent = hitCollider.gameObject.GetComponent<AgentManager>();
+        //    //Debug.Log("Agent Position: " + agent.position);
+        //    //Debug.Log("Collider Position: " + hitCollider.transform.position);
+        //    var direction = hitCollider.transform.position - agent.position;
+        //    var distance = Mathf.Abs(direction.magnitude) - (hitCollider.radius + behaviour.personalSpace);
+        //    //Debug.Log("Distance: " + distance);
+        //    direction.Normalize();
+
+        //    var importance = behaviour.personalSpace / distance;
+        //    //Debug.Log("Importance: " + importance);
+
+        //    steering += (direction * agent.mover.maxAccel) * importance;
+        //}
+
+
+
+
+
+        //if (debugRays)
+        //{
+        //    Debug.DrawRay(agent.position, agent.mover.velocity.normalized * rayDistance,
+        //                  MaterialColor.Standard.AvoidRayDistance);
+        //}
+
+        //steering *= behaviour.priority;
+        //return steering + parentBehaviour.Steering(debugRays);
     }
 }

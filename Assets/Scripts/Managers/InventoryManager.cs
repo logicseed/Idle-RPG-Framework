@@ -50,11 +50,11 @@ public class InventoryManager
     public void Equip(string equipment)
     {
         var equipmentObject = equipmentObjects[equipment];
-        var slot = equipmentObject.slot;
+        var slot = equipmentObject.equipmentSlot;
 
         foreach (var assigned in assignedEquipment)
         {
-            if (equipmentObjects[equipment].slot == slot) assignedEquipment.Remove(assigned);
+            if (equipmentObjects[equipment].equipmentSlot == slot) assignedEquipment.Remove(assigned);
         }
     }
 

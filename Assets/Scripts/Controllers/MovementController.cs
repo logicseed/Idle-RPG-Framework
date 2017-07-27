@@ -60,7 +60,7 @@ public class MovementController : MonoBehaviour
     public void GenerateMovementBehaviours()
     {
         movementBehaviour = new IdleMovementBehaviour();
-        GenerateAvoidBehaviours();
+        //GenerateFleeBehaviours();
         GenerateSeekBehaviour();
     }
 
@@ -68,13 +68,13 @@ public class MovementController : MonoBehaviour
     /// Generates movement behaviours to avoid all other characters. Avoid in this sense
     /// means they will not move on top of them.
     /// </summary>
-    protected void GenerateAvoidBehaviours()
+    protected void GenerateFleeBehaviours()
     {
         var charactersToAvoid = GameManager.AllCharactersExcept(character);
 
         foreach (var character in charactersToAvoid)
         {
-            movementBehaviour = new AvoidMovementBehaviour(
+            movementBehaviour = new FleeMovementBehaviour(
                 movementBehaviour, gameObject, character.gameObject, AVOID_DISTANCE);
         }
     }

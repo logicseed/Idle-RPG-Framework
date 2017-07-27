@@ -11,9 +11,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27e5011aa2f255c4cb6aed061e869615, type: 3}
   m_Name: RangedAlly
   m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 7be663f44d4aad54a94f828a8bc6f217, type: 3}
+  type: 2
   avatar: {fileID: 21300000, guid: 7be663f44d4aad54a94f828a8bc6f217, type: 3}
   animator: {fileID: 22100000, guid: 7bbf16f5f8b30f7449954e1e5faa060b, type: 2}
   attack: 1
+  level: 1
   baseAttributes:
     attackDamage: 35
     abilityDamage: 38
@@ -43,3 +46,16 @@ MonoBehaviour:
     lifeDrain: 34
     movementSpeed: 34
   lesson: {fileID: 11400000, guid: 702212b0fc90e064bb2074d187c8ab09, type: 2}
+  levelUpgrades:
+    AttackDamage: 0
+    AbilityDamage: 0
+    Defense: 0
+    Health: 0
+    HealthRegeneration: 0
+    Energy: 0
+    EnergyRegeneration: 0
+    CriticalHitChance: 0
+    CriticalHitDamage: 0
+    CooldownReduction: 0
+    LifeDrain: 0
+    MovementSpeed: 0

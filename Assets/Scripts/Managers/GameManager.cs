@@ -9,6 +9,10 @@ using UnityEngine.UI;
 /// </summary>
 public class GameManager : Singleton<GameManager>
 {
+    [Header("Settings")]
+    public GameSettings gameSettings;
+    public UserSettings userSettings;
+
     [Header("World Entity Managers")]
     public HeroManager heroManager;
     public RosterManager rosterManager;
@@ -23,6 +27,9 @@ public class GameManager : Singleton<GameManager>
     public BossManager bossManager;
     public QueueManager queueManager;
 
+
+    public static GameSettings GameSettings { get { return GameManager.Instance.gameSettings; } }
+    public static UserSettings UserSettings { get { return GameManager.Instance.userSettings; } }
     public static HeroManager HeroManager { get { return GameManager.Instance.heroManager; } }
     public static RosterManager RosterManager { get { return GameManager.Instance.rosterManager; } }
     public static InventoryManager InventoryManager { get { return GameManager.Instance.inventoryManager; } }
@@ -44,18 +51,17 @@ public class GameManager : Singleton<GameManager>
 
     public void InitializeWorldEntityManagers()
     {
-        if (!bypassSaveGame)
-        {
-            SaveGame save = null;
-            if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
+        if (bypassSaveGame) return;
 
-            heroManager = HeroManager.Load(save);
-            rosterManager = RosterManager.Load(save);
-            inventoryManager = InventoryManager.Load(save);
-            abilityManager = AbilityManager.Load(save);
-            zoneManager = ZoneManager.Load(save);
-            stageManager = StageManager.Load(save);
-        }
+        SaveGame save = null;
+        if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
+
+        heroManager = HeroManager.Load(save);
+        rosterManager = RosterManager.Load(save);
+        inventoryManager = InventoryManager.Load(save);
+        abilityManager = new AbilityManager(save);
+        zoneManager = ZoneManager.Load(save);
+        stageManager = StageManager.Load(save);
     }
 
     public void InitializeStageEntityManagers()
@@ -157,5 +163,15 @@ public class GameManager : Singleton<GameManager>
         if (!bypassSaveGame) SaveGame();
     }
 
-    
+
+    public static WorldEntityManager GetManagerByType(ListableEntityType entityType)
+    {
+        switch (entityType)
+        {
+            case ListableEntityType.Ability: return AbilityManager;
+
+            case ListableEntityType.NonListable: default: return null;
+        }
+    }
+
 }
