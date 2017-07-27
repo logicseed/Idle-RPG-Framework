@@ -10,6 +10,8 @@ public class SceneInfo : MonoBehaviour
 
     public bool showSceneTime = true;
     public bool showExperience = false;
+    public bool showUnlockedAbilities = false;
+    public bool showAssignedAbilities = false;
 	
 	void Update ()
     {
@@ -18,6 +20,8 @@ public class SceneInfo : MonoBehaviour
 
         if (showSceneTime) frameText.AppendLine("Time: " + Time.timeSinceLevelLoad);
         if (showExperience) frameText.AppendLine("Experience: " + GameManager.HeroManager.experience);
+        if (showUnlockedAbilities) frameText.AppendLine("Unlocked Abilities: " + GameManager.AbilityManager.unlockedAbilities.ToDelimitedString());
+        if (showAssignedAbilities) frameText.AppendLine("Assigned Abilities: " + GameManager.AbilityManager.assignedAbilities.ToDelimitedString());
 
         displayText.text = frameText.ToString();
 	}
