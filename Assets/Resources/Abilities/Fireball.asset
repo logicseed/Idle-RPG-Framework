@@ -11,7 +11,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfccc09dcb12444da26add10e9881d7, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  icon: {fileID: 0}
+  icon: {fileID: 21300004, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
   effect: {fileID: 0}
   range: 0
   type: 0
