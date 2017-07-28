@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using Debug = ConditionalDebug;
 
 public class EnemyController : GameCharacterController
 {
@@ -21,11 +22,11 @@ public class EnemyController : GameCharacterController
         CreateRigidbody2D();
         CreateCapsuleCollider2D();
 
-
+        
         if (type != CharacterType.Hero)
         {
-            floatingHealthBarReference = Instantiate(
-                (GameObject)Resources.Load("UI/FloatingBar"), transform);
+            floatingHealthBarReference = Instantiate(GameManager.GameSettings.Prefab.UI.FloatingBar, transform);
+            Debug.Log(floatingHealthBarReference);
         }
 
         GameManager.Instance.enemyManager.Register(this);

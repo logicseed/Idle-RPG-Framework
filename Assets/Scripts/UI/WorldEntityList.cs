@@ -49,7 +49,7 @@ public class WorldEntityList : MonoBehaviour
 
         foreach (var entity in entityList)
         {
-            var button = Instantiate(Resources.Load("UI/WorldEntityButton")) as GameObject;
+            var button = Instantiate(GameManager.GameSettings.Prefab.UI.WorldEntityButton) as GameObject;
             button.transform.SetParent(contentPanel, false);
             button.transform.name = entity;
             buttons.Add(button);

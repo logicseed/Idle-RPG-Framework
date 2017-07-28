@@ -144,20 +144,20 @@ public class CombatController : MonoBehaviour
 
     public void SpawnArrow()
     {
-        SpawnProjectile("Arrow");
+        SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Arrow);
     }
 
     public void SpawnFireball()
     {
-        SpawnProjectile("Fireball");
+        SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Fireball);
     }
 
-    public void SpawnProjectile(string prefab)
+    public void SpawnProjectile(GameObject prefab)
     {
         var criticalModifier = CriticalModifier();
         var damage = (int)(character.attributes.attackDamage * criticalModifier);
 
-        var projectileGO = Instantiate(Resources.Load(prefab), transform.position, Quaternion.identity) as GameObject;
+        var projectileGO = Instantiate(prefab, transform.position, Quaternion.identity) as GameObject;
         var projectile = projectileGO.GetComponent<DirectAbilityController>();
         projectile.target = target;
         projectile.damage = damage;
@@ -211,7 +211,7 @@ public class CombatController : MonoBehaviour
     {
         var unblockedDamage = damage - character.attributes.defense;
 
-        var textObject = Instantiate((GameObject)Resources.Load("UI/CombatText"), transform);
+        var textObject = Instantiate(GameManager.GameSettings.Prefab.UI.CombatText, transform);
         var textController = textObject.GetComponent<CombatTextController>();
         if (isCritical)
         {

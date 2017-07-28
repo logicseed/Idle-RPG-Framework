@@ -24,8 +24,7 @@ public class AllyController : GameCharacterController
 
         if (type != CharacterType.Hero)
         {
-            floatingHealthBarReference = Instantiate(
-                (GameObject)Resources.Load("UI/FloatingBar"), transform);
+            floatingHealthBarReference = Instantiate(GameManager.GameSettings.Prefab.UI.FloatingBar, transform);
         }
 
         GameManager.Instance.allyManager.Register(this);

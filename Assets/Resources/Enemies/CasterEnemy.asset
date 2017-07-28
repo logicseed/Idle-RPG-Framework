@@ -19,8 +19,8 @@ MonoBehaviour:
   baseAttributes:
     attackDamage: 9
     abilityDamage: 11
-    defense: 13
-    health: 13
+    defense: 45
+    health: 74
     healthRegeneration: 12
     energy: 11
     energyRegeneration: 12

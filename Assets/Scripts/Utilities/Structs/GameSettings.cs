@@ -32,5 +32,20 @@ public class GameSettings
         public GameObject Hero;
         public GameObject Ally;
         public GameObject Enemy;
+
+        public EffectContainer Effect;
+        [Serializable] public class EffectContainer
+        {
+            public GameObject Fireball;
+            public GameObject Arrow;
+        }
+
+        public UIContainer UI;
+        [Serializable] public class UIContainer
+        {
+            public GameObject CombatText;
+            public GameObject FloatingBar;
+            public GameObject WorldEntityButton;
+        }
     }
 }

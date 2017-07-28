@@ -52,21 +52,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings:
-    MaxUnlockedAbilities: 9999
-    MaxAssignedAbilities: 3
-    AbilitiesPath: Abilities/
-    MaxUnlockedEquipment: 9999
-    MaxAssignedEquipment: 9999
-    EquipmentPath: Equipment/
-    MaxUnlockedAllies: 9999
-    MaxAssignedAllies: 3
-    AlliesPath: Allies/
-    HeroPrefab: {fileID: 1382845795073152, guid: 64e39e8c8a37fb04890ac297817832a8,
-      type: 2}
-    AllyPrefab: {fileID: 1071261792446292, guid: e219a472c19c30e459e20d90f8c987e3,
-      type: 2}
-    EnemyPrefab: {fileID: 1239132045805106, guid: d7669ce8320bd7f498afd54cac41edfe,
-      type: 2}
+    Max:
+      Abilities:
+        Unlocked: 9999
+        Assigned: 3
+      Equipment:
+        Unlocked: 9999
+        Assigned: 9999
+      Allies:
+        Unlocked: 9999
+        Assigned: 3
+    Path:
+      Abilities: Abilities/
+      Equipment: Equipment/
+      Allies: Allies/
+    Prefab:
+      Hero: {fileID: 1382845795073152, guid: 64e39e8c8a37fb04890ac297817832a8, type: 2}
+      Ally: {fileID: 1071261792446292, guid: e219a472c19c30e459e20d90f8c987e3, type: 2}
+      Enemy: {fileID: 1239132045805106, guid: d7669ce8320bd7f498afd54cac41edfe, type: 2}
+      Effect:
+        Fireball: {fileID: 1677568107922774, guid: ce6361a9b9045ab4f92127e8b348a4da,
+          type: 2}
+        Arrow: {fileID: 1202586162592276, guid: 7c9eac417892f374c84f4782e1fab2db,
+          type: 2}
+      UI:
+        CombatText: {fileID: 1595817452820914, guid: e32f0574ef786f243bd4df6ccccf9c62,
+          type: 2}
+        FloatingBar: {fileID: 1964579812323056, guid: bc38e340336e0b842bad2ec0178d6a3f,
+          type: 2}
+        WorldEntityButton: {fileID: 1779098270501832, guid: 9705a4e34a885c242810575f31af1b8c,
+          type: 2}
   heroManager:
     list: []
     experience: 0
