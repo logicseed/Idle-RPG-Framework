@@ -9,18 +9,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 406c55110cdcb3343b240d78d2aa4287, type: 3}
-  m_Name: Shield
+  m_Name: Bow
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300058, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
+  icon: {fileID: 21300024, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
   type: 2
-  equipmentType: 2
-  equipmentSlot: 1
+  equipmentType: 0
+  equipmentSlot: 2
   attributeModifiers:
     attackDamage: 0
     abilityDamage: 0
-    defense: 63
-    health: 43
-    healthRegeneration: 44
+    defense: 0
+    health: 0
+    healthRegeneration: 0
     energy: 0
     energyRegeneration: 0
     attackSpeed: 0

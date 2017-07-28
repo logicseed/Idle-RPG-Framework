@@ -28,46 +28,50 @@ public abstract class WorldEntityManager
 
     public abstract void Load(SaveGame save);
     public abstract void Save(ref SaveGame save);
-    public abstract int MaximumAmount { get; }
+    public abstract int MaxUnlocked { get; }
+    public abstract int MaxAssigned { get; }
     public abstract string ResourcePath { get; }
 
-    public virtual void AddUnlocked(string name)
+    public virtual void AddUnlocked(string name, bool raiseChangeEvent = true)
     {
-        if (!unlocked.Contains(name))
+        if (!Unlocked.Contains(name) && Unlocked.Count < MaxUnlocked)
         {
             Debug.Log("Added to unlocked: " + name);
-            unlocked.Add(name);
-            if (OnUnlockedListChanged != null) OnUnlockedListChanged();
+            Unlocked.Add(name);
+            if (raiseChangeEvent) RaiseChangeEvent(WorldEntityListType.Unlocked);
         }
     }
 
-    public virtual void AddAssigned(string name)
+    public virtual void AddAssigned(string name, bool raiseChangeEvent = true)
     {
-        if (!assigned.Contains(name) && assigned.Count < MaximumAmount)
+        if (!Assigned.Contains(name) && Assigned.Count < MaxAssigned)
         {
             Debug.Log("Added to assigned: " + name);
-            assigned.Add(name);
-            if (OnAssignedListChanged != null) OnAssignedListChanged();
+            Assigned.Add(name);
+            if (raiseChangeEvent) RaiseChangeEvent(WorldEntityListType.Assigned);
         }
     }
 
-    public virtual void RemoveUnlocked(string name)
+    public virtual void RemoveUnlocked(string name, bool raiseChangeEvent = true)
     {
-        if (unlocked.Contains(name))
+        if (Unlocked.Contains(name))
         {
             Debug.Log("Removed from unlocked: " + name);
-            unlocked.Remove(name);
-            if (OnUnlockedListChanged != null) OnUnlockedListChanged();
+
+            Unlocked.Remove(name);
+            if (objects.ContainsKey(name)) objects.Remove(name);
+
+            if (raiseChangeEvent) RaiseChangeEvent(WorldEntityListType.Unlocked);
         }
     }
 
-    public virtual void RemoveAssigned(string name)
+    public virtual void RemoveAssigned(string name, bool raiseChangeEvent = true)
     {
-        if (assigned.Contains(name))
+        if (Assigned.Contains(name))
         {
             Debug.Log("Removed from assigned: " + name);
-            assigned.Remove(name);
-            if (OnAssignedListChanged != null) OnAssignedListChanged();
+            Assigned.Remove(name);
+            if (raiseChangeEvent) RaiseChangeEvent(WorldEntityListType.Assigned);
         }
     }
 
@@ -86,5 +90,17 @@ public abstract class WorldEntityManager
         }
 
         return entityObject;
+    }
+
+    public void RaiseChangeEvent(WorldEntityListType type)
+    {
+        if (type == WorldEntityListType.Unlocked)
+        {
+            if (OnUnlockedListChanged != null) OnUnlockedListChanged();
+        }
+        else
+        {
+            if (OnAssignedListChanged != null) OnAssignedListChanged();
+        }
     }
 }

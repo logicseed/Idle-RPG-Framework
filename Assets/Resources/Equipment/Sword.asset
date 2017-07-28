@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Name: Sword
   m_EditorClassIdentifier: 
   icon: {fileID: 21300022, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
-  type: 3
+  type: 2
   equipmentType: 0
   equipmentSlot: 0
-  sprite: {fileID: 21300022, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
   attributeModifiers:
     attackDamage: 100
     abilityDamage: 0

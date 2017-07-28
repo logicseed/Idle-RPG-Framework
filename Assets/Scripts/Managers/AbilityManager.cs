@@ -9,7 +9,8 @@ using UnityEngine;
 [System.Serializable]
 public class AbilityManager : WorldEntityManager
 {
-    public override int MaximumAmount { get { return GameManager.GameSettings.MaximumAssignedAbilities; } }
+    public override int MaxUnlocked { get { return GameManager.GameSettings.MaxUnlockedAbilities; } }
+    public override int MaxAssigned { get { return GameManager.GameSettings.MaxAssignedAbilities; } }
     public override string ResourcePath { get { return GameManager.GameSettings.AbilitiesPath; } }
 
     public AbilityManager(SaveGame save = null) : base(save) { }
@@ -25,7 +26,7 @@ public class AbilityManager : WorldEntityManager
 
     public override void Save(ref SaveGame save)
     {
-        save.unlockedAbilities = unlocked;
-        save.assignedAbilities = assigned;
+        save.unlockedAbilities = Unlocked;
+        save.assignedAbilities = Assigned;
     }
 }

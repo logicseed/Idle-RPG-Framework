@@ -7,128 +7,83 @@ using UnityEngine;
 ///
 /// </summary>
 [System.Serializable]
-public class InventoryManager
+public class InventoryManager : WorldEntityManager
 {
-    public const string EQUIPMENT_PATH = "Equipment/";
+    public override int MaxUnlocked { get { return GameManager.GameSettings.MaxUnlockedEquipment; } }
+    public override int MaxAssigned { get { return GameManager.GameSettings.MaxAssignedEquipment; } }
+    public override string ResourcePath { get { return GameManager.GameSettings.EquipmentPath; } }
 
-    public List<string> unlockedEquipment;
-    public List<string> assignedEquipment;
+    public InventoryManager(SaveGame save = null) : base(save) { }
 
-    public Dictionary<string, Equipment> equipmentObjects;
-
-    public InventoryManager()
+    public override void Load(SaveGame save)
     {
-        unlockedEquipment = new List<string>();
-        assignedEquipment = new List<string>();
-        equipmentObjects = new Dictionary<string, Equipment>();
-    }
-
-    public void AddToInventory(string equipment)
-    {
-        if (!unlockedEquipment.Contains(equipment))
+        if (save != null)
         {
-            unlockedEquipment.Add(equipment);
-            var equipmentObject = Resources.Load(EQUIPMENT_PATH + equipment) as Equipment;
-            equipmentObjects.Add(equipment, equipmentObject);
+            foreach (var equipment in save.unlockedEquipment) AddUnlocked(equipment);
+            foreach (var equipment in save.assignedEquipment) AddAssigned(equipment);
         }
     }
 
-    public void RemoveFromInventory(string equipment)
+    public override void Save(ref SaveGame save)
     {
-        if (unlockedEquipment.Contains(equipment))
-        {
-            unlockedEquipment.Remove(equipment);
-            equipmentObjects.Remove(equipment);
-            if (assignedEquipment.Contains(equipment)) assignedEquipment.Remove(equipment);
-        }
+        save.unlockedEquipment = Unlocked;
+        save.assignedEquipment = Assigned;
     }
 
-    /// <summary>
-    ///
-    /// </summary>
-    /// <param name="equipment"></param>
-    public void Equip(string equipment)
+    public override void AddAssigned(string name, bool raiseChangeEvent = true)
     {
-        var equipmentObject = equipmentObjects[equipment];
+        var equipmentObject = GetEntityObject(name) as Equipment;
         var slot = equipmentObject.equipmentSlot;
 
-        foreach (var assigned in assignedEquipment)
+        var listToRemove = new List<string>();
+
+        foreach (var equipment in Assigned)
         {
-            if (equipmentObjects[equipment].equipmentSlot == slot) assignedEquipment.Remove(assigned);
+            var checkEquipment = GetEntityObject(equipment) as Equipment;
+            var checkSlot = checkEquipment.equipmentSlot;
+
+            if (slot == EquipmentSlot.TwoHand)
+            {
+                if (checkSlot == EquipmentSlot.LeftHand || 
+                    checkSlot == EquipmentSlot.RightHand)
+                {
+                    listToRemove.Add(equipment);
+                }
+            }
+            else
+            {
+                if (checkSlot == slot ||
+                    (checkSlot == EquipmentSlot.TwoHand &&
+                     (slot == EquipmentSlot.LeftHand ||
+                      slot == EquipmentSlot.RightHand)))
+                {
+                    listToRemove.Add(equipment);
+                }
+            }
+        }
+
+        foreach (var equipment in listToRemove) RemoveAssigned(equipment, false);
+
+        if (!Assigned.Contains(name) && Assigned.Count < MaxAssigned)
+        {
+            Debug.Log("Added to assigned: " + name);
+            Assigned.Add(name);
+            if (raiseChangeEvent) RaiseChangeEvent(WorldEntityListType.Assigned);
         }
     }
 
-    public void Unequip(string equipment)
-    {
-        if (assignedEquipment.Contains(equipment)) assignedEquipment.Remove(equipment);
-    }
 
     public BaseAttributes attributeModifiers
     {
         get
         {
             var attributeModifiers = new BaseAttributes();
-            foreach (var equipment in assignedEquipment)
+            foreach (var equipment in Assigned)
             {
-                attributeModifiers += equipmentObjects[equipment].attributeModifiers;
+                var equipmentObject = GetEntityObject(equipment) as Equipment;
+                attributeModifiers += equipmentObject.attributeModifiers;
             }
             return attributeModifiers;
         }
-    }
-
-    public Equipment GetEquipment(string equipment)
-    {
-        if (unlockedEquipment.Contains(equipment))
-        {
-            if (equipmentObjects.ContainsKey(equipment))
-            {
-                return equipmentObjects[equipment];
-            }
-            else
-            {
-                var equipmentObject = Resources.Load(EQUIPMENT_PATH + equipment) as Equipment;
-                equipmentObjects.Add(equipment, equipmentObject);
-                return equipmentObject;
-            }
-        }
-        return Resources.Load(EQUIPMENT_PATH + equipment) as Equipment;
-    }
-
-    public List<Equipment> GetEquipped()
-    {
-        var equippedEquipment = new List<Equipment>();
-
-        foreach (var equipment in assignedEquipment)
-        {
-            equippedEquipment.Add(equipmentObjects[equipment]);
-        }
-
-        return equippedEquipment;
-    }
-
-    internal void Save(ref SaveGame save)
-    {
-        save.unlockedEquipment = unlockedEquipment;
-        save.assignedEquipment = assignedEquipment;
-    }
-
-    public static InventoryManager Load(SaveGame save)
-    {
-        var inventoryManager = new InventoryManager();
-
-        if (save != null)
-        {
-            foreach (var equipment in save.unlockedEquipment)
-            {
-                inventoryManager.AddToInventory(equipment);
-            }
-
-            foreach (var equipment in save.assignedEquipment)
-            {
-                inventoryManager.Equip(equipment);
-            }
-        }
-
-        return inventoryManager;
     }
 }

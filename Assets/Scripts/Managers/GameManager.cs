@@ -58,7 +58,7 @@ public class GameManager : Singleton<GameManager>
 
         heroManager = HeroManager.Load(save);
         rosterManager = RosterManager.Load(save);
-        inventoryManager = InventoryManager.Load(save);
+        inventoryManager = new InventoryManager(save);
         abilityManager = new AbilityManager(save);
         zoneManager = ZoneManager.Load(save);
         stageManager = StageManager.Load(save);
@@ -169,7 +169,9 @@ public class GameManager : Singleton<GameManager>
         switch (entityType)
         {
             case ListableEntityType.Ability: return AbilityManager;
-
+            case ListableEntityType.Inventory: return InventoryManager;
+            //case ListableEntityType.Roster: return RosterManager;
+            
             case ListableEntityType.NonListable: default: return null;
         }
     }
