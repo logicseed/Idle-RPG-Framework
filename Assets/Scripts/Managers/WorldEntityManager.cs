@@ -20,6 +20,12 @@ public abstract class WorldEntityManager
         Load(save);
     }
 
+    public delegate void UnlockedListChanged();
+    public event UnlockedListChanged OnUnlockedListChanged;
+
+    public delegate void AssignedListChanged();
+    public event AssignedListChanged OnAssignedListChanged;
+
     public abstract void Load(SaveGame save);
     public abstract void Save(ref SaveGame save);
     public abstract int MaximumAmount { get; }
@@ -31,6 +37,7 @@ public abstract class WorldEntityManager
         {
             Debug.Log("Added to unlocked: " + name);
             unlocked.Add(name);
+            if (OnUnlockedListChanged != null) OnUnlockedListChanged();
         }
     }
 
@@ -40,6 +47,7 @@ public abstract class WorldEntityManager
         {
             Debug.Log("Added to assigned: " + name);
             assigned.Add(name);
+            if (OnAssignedListChanged != null) OnAssignedListChanged();
         }
     }
 
@@ -49,6 +57,7 @@ public abstract class WorldEntityManager
         {
             Debug.Log("Removed from unlocked: " + name);
             unlocked.Remove(name);
+            if (OnUnlockedListChanged != null) OnUnlockedListChanged();
         }
     }
 
@@ -58,6 +67,7 @@ public abstract class WorldEntityManager
         {
             Debug.Log("Removed from assigned: " + name);
             assigned.Remove(name);
+            if (OnAssignedListChanged != null) OnAssignedListChanged();
         }
     }
 

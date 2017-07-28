@@ -8,7 +8,6 @@ public class AbilityAssignButton : MonoBehaviour
     public Button buttonComponent;
     private Image imageComponent;
     public string abilityName;
-    private bool clickHandled = false;
 
 	void Awake()
     {

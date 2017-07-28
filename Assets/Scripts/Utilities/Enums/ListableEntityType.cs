@@ -5,6 +5,6 @@ public enum ListableEntityType
 {
     NonListable,
     Ability,
-    Ally,
-    Equipment
+    Inventory,
+    Roster
 }
