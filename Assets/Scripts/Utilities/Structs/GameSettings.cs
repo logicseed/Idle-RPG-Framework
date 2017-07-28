@@ -4,19 +4,33 @@ using UnityEngine;
 [Serializable]
 public class GameSettings
 {
-    public int MaxUnlockedAbilities = 9999;
-    public int MaxAssignedAbilities = 3;
-    public string AbilitiesPath = "Abilities/";
+    public MaximumContainer Max;
+    [Serializable] public class MaximumContainer
+    {
+        public EntityContainer Abilities = new EntityContainer(9999, 3);
+        public EntityContainer Equipment = new EntityContainer(9999, 9999);
+        public EntityContainer Allies = new EntityContainer(9999, 3);
+        [Serializable] public class EntityContainer
+        {
+            public int Unlocked;
+            public int Assigned;
+            public EntityContainer(int unlocked, int assigned) { Unlocked = unlocked; Assigned = assigned; }
+        }
+    }
 
-    public int MaxUnlockedEquipment = 9999;
-    public int MaxAssignedEquipment = 9999;
-    public string EquipmentPath = "Equipment/";
+    public PathContainer Path;
+    [Serializable] public class PathContainer
+    {
+        public string Abilities = "Abilities/";
+        public string Equipment = "Equipment/";
+        public string Allies = "Allies/";
+    }
 
-    public int MaxUnlockedAllies = 9999;
-    public int MaxAssignedAllies = 3;
-    public string AlliesPath = "Allies/";
-
-    public GameObject HeroPrefab;
-    public GameObject AllyPrefab;
-    public GameObject EnemyPrefab;
+    public PrefabContainer Prefab;
+    [Serializable] public class PrefabContainer
+    {
+        public GameObject Hero;
+        public GameObject Ally;
+        public GameObject Enemy;
+    }
 }

@@ -10,9 +10,9 @@ using Debug = ConditionalDebug;
 [System.Serializable]
 public class InventoryManager : WorldEntityManager
 {
-    public override int MaxUnlocked { get { return GameManager.GameSettings.MaxUnlockedEquipment; } }
-    public override int MaxAssigned { get { return GameManager.GameSettings.MaxAssignedEquipment; } }
-    public override string ResourcePath { get { return GameManager.GameSettings.EquipmentPath; } }
+    public override int MaxUnlocked { get { return GameManager.GameSettings.Max.Equipment.Unlocked; } }
+    public override int MaxAssigned { get { return GameManager.GameSettings.Max.Equipment.Assigned; } }
+    public override string ResourcePath { get { return GameManager.GameSettings.Path.Equipment; } }
 
     public InventoryManager(SaveGame save = null) : base(save) { }
 

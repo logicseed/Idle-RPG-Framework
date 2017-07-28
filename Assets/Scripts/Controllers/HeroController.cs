@@ -40,7 +40,7 @@ public class HeroController : GameCharacterController
         for (int i = 0; i < rosterManager.Assigned.Count && i < spawnPoints.Count; i++)
         {
             var allyName = rosterManager.Assigned[i];
-            var ally = Instantiate(GameManager.GameSettings.AllyPrefab, spawnPoints[i].position, Quaternion.identity) as GameObject;
+            var ally = Instantiate(GameManager.GameSettings.Prefab.Ally, spawnPoints[i].position, Quaternion.identity) as GameObject;
             ally.GetComponent<AllyController>().ally = rosterManager.GetEntityObject(allyName) as Ally;
             ally.name = allyName;
         }

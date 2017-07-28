@@ -10,9 +10,9 @@ using Debug = ConditionalDebug;
 [System.Serializable]
 public class RosterManager : WorldEntityManager
 {
-    public override int MaxUnlocked { get { return GameManager.GameSettings.MaxUnlockedAllies; } }
-    public override int MaxAssigned { get { return GameManager.GameSettings.MaxAssignedAllies; } }
-    public override string ResourcePath { get { return GameManager.GameSettings.AlliesPath; } }
+    public override int MaxUnlocked { get { return GameManager.GameSettings.Max.Allies.Unlocked; } }
+    public override int MaxAssigned { get { return GameManager.GameSettings.Max.Allies.Assigned; } }
+    public override string ResourcePath { get { return GameManager.GameSettings.Path.Allies; } }
 
     public Dictionary<string, int> levels;
 
