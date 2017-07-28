@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Debug = ConditionalDebug;
 
 /// <summary>
 ///
@@ -60,6 +61,10 @@ public class RosterManager : WorldEntityManager
         {
             AddUnlocked(name, raiseChangeEvent);
             levels.Add(name, level);
+
+            var entity = GetEntityObject(name) as Ally;
+            GameManager.GetManagerByType(ListableEntityType.Ability).AddUnlocked(entity.lesson.name, false);
+            Debug.Log("Added to abilities: " + entity.lesson.name);
         }
     }
 

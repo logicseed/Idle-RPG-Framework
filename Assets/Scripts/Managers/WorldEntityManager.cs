@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using Debug = ConditionalDebug;
 
 public abstract class WorldEntityManager
 {

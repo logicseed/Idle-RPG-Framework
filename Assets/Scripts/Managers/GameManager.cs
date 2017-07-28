@@ -57,9 +57,9 @@ public class GameManager : Singleton<GameManager>
         if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
 
         heroManager = HeroManager.Load(save);
+        abilityManager = new AbilityManager(save);
         rosterManager = new RosterManager(save);
         inventoryManager = new InventoryManager(save);
-        abilityManager = new AbilityManager(save);
         zoneManager = ZoneManager.Load(save);
         stageManager = StageManager.Load(save);
     }
@@ -141,9 +141,9 @@ public class GameManager : Singleton<GameManager>
         var save = new SaveGame();
 
         heroManager.Save(ref save);
+        abilityManager.Save(ref save);
         rosterManager.Save(ref save);
         inventoryManager.Save(ref save);
-        abilityManager.Save(ref save);
         zoneManager.Save(ref save);
         stageManager.Save(ref save);
         save.isFilled = true;

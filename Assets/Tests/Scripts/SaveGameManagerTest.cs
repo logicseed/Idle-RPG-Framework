@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Debug = ConditionalDebug;
 
 // Tests the save game functionality.
 public class SaveGameManagerTest : MonoBehaviour
