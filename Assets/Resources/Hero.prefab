@@ -147,9 +147,27 @@ MonoBehaviour:
   animatorController: {fileID: 22100000, guid: e3451c9f074e1b34c9b29a702ae67e1a, type: 2}
   animatorReference: {fileID: 0}
   rigidbodyReference: {fileID: 0}
+  baseAttributes:
+    attackDamage: 0
+    abilityDamage: 0
+    defense: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeneration: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    cooldownReduction: 0
+    lifeDrain: 0
+    movementSpeed: 0
   level: 1
   characterState: 0
   hero: {fileID: 11400000, guid: 4191714cc8adf634f840057e2ae4e815, type: 2}
+  spawnPoints:
+  - {fileID: 4618584253417872}
+  - {fileID: 4461986569764152}
+  - {fileID: 4409573623154390}
 --- !u!114 &114206057304775260
 MonoBehaviour:
   m_ObjectHideFlags: 1

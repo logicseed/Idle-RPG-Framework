@@ -22,6 +22,7 @@ public class RosterManager : WorldEntityManager
         unlocked = new List<string>();
         assigned = new List<string>();
         objects = new Dictionary<string, ListableEntity>();
+        Debug.Log(objects == null);
         Load(save);
     }
 
@@ -63,7 +64,8 @@ public class RosterManager : WorldEntityManager
             levels.Add(name, level);
 
             var entity = GetEntityObject(name) as Ally;
-            GameManager.GetManagerByType(ListableEntityType.Ability).AddUnlocked(entity.lesson.name, false);
+            var manager = GameManager.GetManagerByType(ListableEntityType.Ability);
+            if (manager != null) manager.AddUnlocked(entity.lesson.name, false);
             Debug.Log("Added to abilities: " + entity.lesson.name);
         }
     }

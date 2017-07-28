@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 [Serializable]
 public class GameSettings
@@ -14,4 +15,8 @@ public class GameSettings
     public int MaxUnlockedAllies = 9999;
     public int MaxAssignedAllies = 3;
     public string AlliesPath = "Allies/";
+
+    public GameObject HeroPrefab;
+    public GameObject AllyPrefab;
+    public GameObject EnemyPrefab;
 }

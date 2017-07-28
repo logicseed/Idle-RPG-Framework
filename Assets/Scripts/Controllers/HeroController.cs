@@ -2,21 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Debug = ConditionalDebug;
 
 public class HeroController : GameCharacterController
 {
     public override CharacterType type { get { return CharacterType.Hero; } }
 
     public Hero hero;
-
-    private Transform spawn1;
-    private Transform spawn2;
-    private Transform spawn3;
+    public List<Transform> spawnPoints;
 
     public void Awake()
     {
         hero = Resources.Load("Heroes/Hero") as Hero;
-}
+    }
 
     protected void Start()
     {
@@ -30,45 +28,24 @@ public class HeroController : GameCharacterController
         CreateCapsuleCollider2D();
         CreateMovementController(derivedAttributes.movementSpeed);
 
-        GameManager.Instance.heroManager.Register(this);
+        GameManager.HeroManager.Register(this);
 
-        spawn1 = transform.Find("Spawn1");
-        spawn2 = transform.Find("Spawn2");
-        spawn3 = transform.Find("Spawn3");
         SpawnAllies();
     }
 
     private void SpawnAllies()
     {
-        var rosterManager = GameManager.Instance.rosterManager;
+        var rosterManager = GameManager.RosterManager;
 
-        if (rosterManager.Assigned.Count > 0)
+        for (int i = 0; i < rosterManager.Assigned.Count && i < spawnPoints.Count; i++)
         {
-            var allyName = rosterManager.Assigned[0];
-            var ally = Instantiate(Resources.Load("Ally"), spawn1.position, Quaternion.identity) as GameObject;
+            var allyName = rosterManager.Assigned[i];
+            var ally = Instantiate(GameManager.GameSettings.AllyPrefab, spawnPoints[i].position, Quaternion.identity) as GameObject;
             ally.GetComponent<AllyController>().ally = rosterManager.GetEntityObject(allyName) as Ally;
             ally.name = allyName;
         }
 
-        if (rosterManager.Assigned.Count > 1)
-        {
-            var allyName = rosterManager.Assigned[1];
-            var ally = Instantiate(Resources.Load("Ally"), spawn2.position, Quaternion.identity) as GameObject;
-            ally.GetComponent<AllyController>().ally = rosterManager.GetEntityObject(allyName) as Ally;
-            ally.name = allyName;
-        }
-
-        if (rosterManager.Assigned.Count > 2)
-        {
-            var allyName = rosterManager.Assigned[2];
-            var ally = Instantiate(Resources.Load("Ally"), spawn3.position, Quaternion.identity) as GameObject;
-            ally.GetComponent<AllyController>().ally = rosterManager.GetEntityObject(allyName) as Ally;
-            ally.name = allyName;
-        }
-
-        Destroy(spawn1.gameObject);
-        Destroy(spawn2.gameObject);
-        Destroy(spawn3.gameObject);
+        foreach (var spawnPoint in spawnPoints) Destroy(spawnPoint.gameObject);        
     }
 
     protected override void CreateCombatController()
@@ -84,7 +61,7 @@ public class HeroController : GameCharacterController
 
     private void OnDestroy()
     {
-        GameManager.Instance.heroManager.Unregister(this);
+        GameManager.HeroManager.Unregister(this);
     }
 
     public override AttackType attack

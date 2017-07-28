@@ -80,6 +80,8 @@ public abstract class WorldEntityManager
     {
         ListableEntity entityObject;
 
+        if (objects == null) objects = new Dictionary<string, ListableEntity>();
+
         if (objects.ContainsKey(name))
         {
             entityObject = objects[name];

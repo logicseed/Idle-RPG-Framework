@@ -12,10 +12,9 @@ MonoBehaviour:
   m_Name: MeleeAlly
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 2fbd1a5f5bcc88b4a855a72d09a20260, type: 3}
-  type: 2
-  avatar: {fileID: 21300000, guid: 2fbd1a5f5bcc88b4a855a72d09a20260, type: 3}
+  type: 3
   animator: {fileID: 22100000, guid: 3f3de416b61d91c409afe44783cf4344, type: 2}
-  attack: 0
+  attackType: 0
   level: 1
   baseAttributes:
     attackDamage: 37

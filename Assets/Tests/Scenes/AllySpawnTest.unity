@@ -117,6 +117,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
         type: 2}
+      propertyPath: rosterManager.assigned.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
       propertyPath: rosterManager.unlockedAllies.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -181,6 +186,21 @@ Prefab:
         type: 2}
       propertyPath: bypassSaveGame
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
+      propertyPath: rosterManager.assigned.Array.data[0]
+      value: MeleeAlly
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
+      propertyPath: rosterManager.assigned.Array.data[1]
+      value: RangedAlly
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
+      propertyPath: rosterManager.assigned.Array.data[2]
+      value: CasterAlly
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}

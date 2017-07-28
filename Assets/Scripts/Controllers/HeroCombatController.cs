@@ -34,5 +34,7 @@ public class HeroCombatController : CombatController
         currentHealth = character.attributes.health;
         currentEnergy = character.attributes.energy;
         lastAttackTime = Time.time - (1 / character.attributes.attackSpeed);
+
+        // Spawn ability bar
     }
 }
