@@ -42,27 +42,27 @@ public class HeroController : GameCharacterController
     {
         var rosterManager = GameManager.Instance.rosterManager;
 
-        if (rosterManager.assignedAllies.Count > 0)
+        if (rosterManager.Assigned.Count > 0)
         {
-            var allyName = rosterManager.assignedAllies[0];
+            var allyName = rosterManager.Assigned[0];
             var ally = Instantiate(Resources.Load("Ally"), spawn1.position, Quaternion.identity) as GameObject;
-            ally.GetComponent<AllyController>().ally = rosterManager.GetAlly(allyName);
+            ally.GetComponent<AllyController>().ally = rosterManager.GetEntityObject(allyName) as Ally;
             ally.name = allyName;
         }
 
-        if (rosterManager.assignedAllies.Count > 1)
+        if (rosterManager.Assigned.Count > 1)
         {
-            var allyName = rosterManager.assignedAllies[1];
+            var allyName = rosterManager.Assigned[1];
             var ally = Instantiate(Resources.Load("Ally"), spawn2.position, Quaternion.identity) as GameObject;
-            ally.GetComponent<AllyController>().ally = rosterManager.GetAlly(allyName);
+            ally.GetComponent<AllyController>().ally = rosterManager.GetEntityObject(allyName) as Ally;
             ally.name = allyName;
         }
 
-        if (rosterManager.assignedAllies.Count > 2)
+        if (rosterManager.Assigned.Count > 2)
         {
-            var allyName = rosterManager.assignedAllies[2];
+            var allyName = rosterManager.Assigned[2];
             var ally = Instantiate(Resources.Load("Ally"), spawn3.position, Quaternion.identity) as GameObject;
-            ally.GetComponent<AllyController>().ally = rosterManager.GetAlly(allyName);
+            ally.GetComponent<AllyController>().ally = rosterManager.GetEntityObject(allyName) as Ally;
             ally.name = allyName;
         }
 

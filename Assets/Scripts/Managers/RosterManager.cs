@@ -7,101 +7,25 @@ using UnityEngine;
 ///
 /// </summary>
 [System.Serializable]
-public class RosterManager
+public class RosterManager : WorldEntityManager
 {
-    public const int MAX_ACTIVE_ROSTER = 3;
-    public const string ALLY_PATH = "Allies/";
+    public override int MaxUnlocked { get { return GameManager.GameSettings.MaxUnlockedAllies; } }
+    public override int MaxAssigned { get { return GameManager.GameSettings.MaxAssignedAllies; } }
+    public override string ResourcePath { get { return GameManager.GameSettings.AlliesPath; } }
 
-    public List<string> unlockedAllies;
-    public List<string> assignedAllies;
+    public Dictionary<string, int> levels;
 
-    public Dictionary<string, Ally> allyObjects;
-
-    public Dictionary<string, int> allyLevels;
-
-    public RosterManager()
+    public RosterManager(SaveGame save = null)
     {
-        unlockedAllies = new List<string>();
-        assignedAllies = new List<string>();
-        allyObjects = new Dictionary<string, Ally>();
-        allyLevels = new Dictionary<string, int>();
+        levels = new Dictionary<string, int>();
+        unlocked = new List<string>();
+        assigned = new List<string>();
+        objects = new Dictionary<string, ListableEntity>();
+        Load(save);
     }
 
-    public void AddToActive(string ally)
+    public override void Load(SaveGame save)
     {
-        if (!assignedAllies.Contains(ally) && assignedAllies.Count < MAX_ACTIVE_ROSTER)
-        {
-            assignedAllies.Add(ally);
-        }
-    }
-
-    public void RemoveFromActive(string ally)
-    {
-        if (assignedAllies.Contains(ally)) assignedAllies.Remove(ally);
-    }
-
-    public void AddToAllies(string ally, int experience)
-    {
-        if (!unlockedAllies.Contains(ally))
-        {
-            unlockedAllies.Add(ally);
-            var allyObject = Resources.Load(ALLY_PATH + ally) as Ally;
-            allyObjects.Add(ally, allyObject);
-            allyLevels.Add(ally, experience);
-        }
-    }
-
-    public void RemoveFromAllies(string ally)
-    {
-        if (unlockedAllies.Contains(ally))
-        {
-            unlockedAllies.Remove(ally);
-            allyObjects.Remove(ally);
-            allyLevels.Remove(ally);
-        }
-    }
-
-    public Ally GetAlly(string ally)
-    {
-        if (unlockedAllies.Contains(ally))
-        {
-            if (allyObjects.ContainsKey(ally))
-            {
-                return allyObjects[ally];
-            }
-            else
-            {
-                var allyObject = Resources.Load(ALLY_PATH + ally) as Ally;
-                allyObjects.Add(ally, allyObject);
-                return allyObject;
-            }
-        }
-        return Resources.Load(ALLY_PATH + ally) as Ally;
-    }
-
-    public List<Ally> GetActiveRoster()
-    {
-        var allies = new List<Ally>();
-
-        foreach (var ally in assignedAllies)
-        {
-            allies.Add(allyObjects[ally]);
-        }
-
-        return allies;
-    }
-
-    public void Save(ref SaveGame save)
-    {
-        save.assignedAllies = assignedAllies;
-        save.unlockedAllies = unlockedAllies;
-        save.allyLevels = allyLevels;
-    }
-
-    public static RosterManager Load(SaveGame save = null)
-    {
-        var rosterManager = new RosterManager();
-
         if (save != null)
         {
             foreach (var ally in save.unlockedAllies)
@@ -110,15 +34,39 @@ public class RosterManager
                 if (save.allyLevels != null && save.allyLevels.ContainsKey(ally)) allyLevel = save.allyLevels[ally];
                 else allyLevel = 1;
 
-                rosterManager.AddToAllies(ally, allyLevel);
+                AddUnlocked(ally, allyLevel, false);
             }
 
             foreach (var ally in save.assignedAllies)
             {
-                rosterManager.AddToActive(ally);
+                AddAssigned(ally, false);
             }
-        }
 
-        return rosterManager;
+            RaiseChangeEvent(WorldEntityListType.Unlocked);
+            RaiseChangeEvent(WorldEntityListType.Assigned);
+        }
+    }
+
+    public override void Save(ref SaveGame save)
+    {
+        save.unlockedAllies = Unlocked;
+        save.assignedAllies = Assigned;
+        save.allyLevels = levels;
+    }
+
+    public void AddUnlocked(string name, int level, bool raiseChangeEvent = true)
+    {
+        if (!Unlocked.Contains(name))
+        {
+            AddUnlocked(name, raiseChangeEvent);
+            levels.Add(name, level);
+        }
+    }
+
+    public override void RemoveUnlocked(string name, bool raiseChangeEvent = true)
+    {
+        base.RemoveUnlocked(name, raiseChangeEvent);
+
+        if (levels.ContainsKey(name)) levels.Remove(name);
     }
 }

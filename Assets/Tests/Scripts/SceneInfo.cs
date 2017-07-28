@@ -16,8 +16,11 @@ public class SceneInfo : MonoBehaviour
 
     public bool showUnlockedEquipment = false;
     public bool showAssignedEquipment = false;
-	
-	void Update ()
+
+    public bool showUnlockedAllies = false;
+    public bool showAssignedAllies = false;
+
+    void Update ()
     {
         var frameText = new StringBuilder();
         frameText.AppendLine("SCENE INFO");
@@ -30,6 +33,9 @@ public class SceneInfo : MonoBehaviour
 
         if (showUnlockedEquipment) frameText.AppendLine("Unlocked Equipment: " + GameManager.InventoryManager.Unlocked.ToDelimitedString());
         if (showAssignedEquipment) frameText.AppendLine("Assigned Equipment: " + GameManager.InventoryManager.Assigned.ToDelimitedString());
+
+        if (showUnlockedAllies) frameText.AppendLine("Unlocked Allies: " + GameManager.RosterManager.Unlocked.ToDelimitedString());
+        if (showAssignedAllies) frameText.AppendLine("Assigned Allies: " + GameManager.RosterManager.Assigned.ToDelimitedString());
 
         displayText.text = frameText.ToString();
 	}

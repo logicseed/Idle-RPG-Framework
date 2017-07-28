@@ -10,4 +10,8 @@ public class GameSettings
     public int MaxUnlockedEquipment = 9999;
     public int MaxAssignedEquipment = 9999;
     public string EquipmentPath = "Equipment/";
+
+    public int MaxUnlockedAllies = 9999;
+    public int MaxAssignedAllies = 3;
+    public string AlliesPath = "Allies/";
 }

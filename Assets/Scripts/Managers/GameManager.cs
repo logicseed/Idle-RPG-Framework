@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
         if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
 
         heroManager = HeroManager.Load(save);
-        rosterManager = RosterManager.Load(save);
+        rosterManager = new RosterManager(save);
         inventoryManager = new InventoryManager(save);
         abilityManager = new AbilityManager(save);
         zoneManager = ZoneManager.Load(save);
@@ -170,7 +170,7 @@ public class GameManager : Singleton<GameManager>
         {
             case ListableEntityType.Ability: return AbilityManager;
             case ListableEntityType.Inventory: return InventoryManager;
-            //case ListableEntityType.Roster: return RosterManager;
+            case ListableEntityType.Roster: return RosterManager;
             
             case ListableEntityType.NonListable: default: return null;
         }

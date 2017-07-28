@@ -21,8 +21,6 @@ public class SaveGame : ISerializable
     public string lastStage;
     public DateTime lastStageTime;
     public bool isFilled = false;
-
-    // TODO: need to integ
     public int level;
     public Dictionary<string, int> allyLevels;
 
