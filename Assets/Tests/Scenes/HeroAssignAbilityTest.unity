@@ -115,6 +115,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
+      propertyPath: abilityManager.unlocked.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -146,6 +151,26 @@ Prefab:
     - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
+      propertyPath: bypassSaveGame
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
+      propertyPath: abilityManager.unlocked.Array.data[0]
+      value: Cleave
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
+      propertyPath: abilityManager.unlocked.Array.data[1]
+      value: Fireball
+      objectReference: {fileID: 0}
+    - target: {fileID: 114775853311972390, guid: f610c4f4a09d0cb41876b41a8b762e8c,
+        type: 2}
+      propertyPath: abilityManager.unlocked.Array.data[2]
+      value: Storm
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
@@ -573,7 +598,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 132.9, y: -223.6}
+  m_AnchoredPosition: {x: 237.2, y: -289}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1305915347

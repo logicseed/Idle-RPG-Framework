@@ -140,12 +140,12 @@ public class GameManager : Singleton<GameManager>
     {
         var save = new SaveGame();
 
-        heroManager.Save(ref save);
-        abilityManager.Save(ref save);
-        rosterManager.Save(ref save);
-        inventoryManager.Save(ref save);
-        zoneManager.Save(ref save);
-        stageManager.Save(ref save);
+        if (heroManager != null) heroManager.Save(ref save);
+        if (abilityManager != null) abilityManager.Save(ref save);
+        if (rosterManager != null) rosterManager.Save(ref save);
+        if (inventoryManager != null) inventoryManager.Save(ref save);
+        if (zoneManager != null) zoneManager.Save(ref save);
+        if (stageManager != null) stageManager.Save(ref save);
         save.isFilled = true;
 
         SaveGameManager.SaveGame(save);
