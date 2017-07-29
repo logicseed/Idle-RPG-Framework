@@ -7,7 +7,7 @@ public class GameSettings
     public MaximumContainer Max;
     [Serializable] public class MaximumContainer
     {
-        public EntityContainer Abilities = new EntityContainer(9999, 3);
+        public EntityContainer Abilities = new EntityContainer(9999, 4);
         public EntityContainer Equipment = new EntityContainer(9999, 9999);
         public EntityContainer Allies = new EntityContainer(9999, 3);
         [Serializable] public class EntityContainer
@@ -36,8 +36,10 @@ public class GameSettings
         public EffectContainer Effect;
         [Serializable] public class EffectContainer
         {
-            public GameObject Fireball;
             public GameObject Arrow;
+            public GameObject Casterball;
+            public GameObject Storm;
+            public GameObject Fireball;
         }
 
         public UIContainer UI;

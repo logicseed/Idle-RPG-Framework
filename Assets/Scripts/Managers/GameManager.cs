@@ -31,6 +31,7 @@ public class GameManager : Singleton<GameManager>
     public static GameSettings GameSettings { get { return GameManager.Instance.gameSettings; } }
     public static UserSettings UserSettings { get { return GameManager.Instance.userSettings; } }
     public static HeroManager HeroManager { get { return GameManager.Instance.heroManager; } }
+    public static HeroController Hero { get { return GameManager.Instance.heroManager.Hero; } }
     public static RosterManager RosterManager { get { return GameManager.Instance.rosterManager; } }
     public static InventoryManager InventoryManager { get { return GameManager.Instance.inventoryManager; } }
     public static AbilityManager AbilityManager { get { return GameManager.Instance.abilityManager; } }
@@ -51,6 +52,7 @@ public class GameManager : Singleton<GameManager>
 
     public void InitializeWorldEntityManagers()
     {
+        //heroManager = new HeroManager();
         if (bypassSaveGame) return;
 
         SaveGame save = null;
@@ -94,10 +96,10 @@ public class GameManager : Singleton<GameManager>
         {
             var allCharacters = new List<GameCharacterController>();
 
-            EnemyManager.AddAllToList(ref allCharacters);
-            BossManager.AddAllToList(ref allCharacters);
-            AllyManager.AddAllToList(ref allCharacters);
-            HeroManager.AddHeroToList(ref allCharacters);
+            if (EnemyManager != null) EnemyManager.AddAllToList(ref allCharacters);
+            if (BossManager != null) BossManager.AddAllToList(ref allCharacters);
+            if (AllyManager != null) AllyManager.AddAllToList(ref allCharacters);
+            if (HeroManager != null) HeroManager.AddHeroToList(ref allCharacters);
 
             return allCharacters;
         }
@@ -109,8 +111,8 @@ public class GameManager : Singleton<GameManager>
         {
             var allEnemies = new List<GameCharacterController>();
 
-            EnemyManager.AddAllToList(ref allEnemies);
-            BossManager.AddAllToList(ref allEnemies);
+            if (EnemyManager != null) EnemyManager.AddAllToList(ref allEnemies);
+            if (BossManager != null) BossManager.AddAllToList(ref allEnemies);
 
             return allEnemies;
         }
@@ -122,8 +124,8 @@ public class GameManager : Singleton<GameManager>
         {
             var allFriendlies = new List<GameCharacterController>();
 
-            AllyManager.AddAllToList(ref allFriendlies);
-            HeroManager.AddHeroToList(ref allFriendlies);
+            if (AllyManager != null) AllyManager.AddAllToList(ref allFriendlies);
+            if (HeroManager != null) HeroManager.AddHeroToList(ref allFriendlies);
 
             return allFriendlies;
         }
@@ -140,12 +142,12 @@ public class GameManager : Singleton<GameManager>
     {
         var save = new SaveGame();
 
-        if (heroManager != null) heroManager.Save(ref save);
-        if (abilityManager != null) abilityManager.Save(ref save);
-        if (rosterManager != null) rosterManager.Save(ref save);
-        if (inventoryManager != null) inventoryManager.Save(ref save);
-        if (zoneManager != null) zoneManager.Save(ref save);
-        if (stageManager != null) stageManager.Save(ref save);
+        if (HeroManager != null) heroManager.Save(ref save);
+        if (AbilityManager != null) abilityManager.Save(ref save);
+        if (RosterManager != null) rosterManager.Save(ref save);
+        if (InventoryManager != null) inventoryManager.Save(ref save);
+        if (ZoneManager != null) zoneManager.Save(ref save);
+        if (StageManager != null) stageManager.Save(ref save);
         save.isFilled = true;
 
         SaveGameManager.SaveGame(save);
@@ -156,7 +158,7 @@ public class GameManager : Singleton<GameManager>
         SaveGameManager.SaveGame(new SaveGame());
     }
 
-    public HeroController hero { get { return heroManager.hero; } }
+    public HeroController hero { get { return heroManager.Hero; } }
 
     public void OnDestroy()
     {
@@ -176,4 +178,25 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    public static void UpgradeHero()
+    {
+        if (CanUpgradeHero()) GameManager.HeroManager.level++;
+    }
+
+    public static bool CanUpgradeHero()
+    {
+        var requiredExperience = GameManager.HeroManager.level * 10000;
+        return requiredExperience >= GameManager.HeroManager.experience;
+    }
+
+    public static void UpgradeAlly(string allyName)
+    {
+        if (CanUpgradeAlly(allyName)) GameManager.RosterManager.levels[allyName]++;
+    }
+
+    public static bool CanUpgradeAlly(string allyName)
+    {
+        var requiredExperience = GameManager.RosterManager.levels[allyName] * 8000;
+        return requiredExperience >= GameManager.RosterManager.levels[allyName];
+    }
 }

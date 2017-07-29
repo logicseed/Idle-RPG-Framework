@@ -20,6 +20,11 @@ public class SceneInfo : MonoBehaviour
     public bool showUnlockedAllies = false;
     public bool showAssignedAllies = false;
 
+    public bool showDefendCooldown = false;
+    public bool showFireballCooldown = false;
+    public bool showCleaveCooldown = false;
+    public bool showStormCooldown = false;
+
     void Update ()
     {
         var frameText = new StringBuilder();
@@ -36,6 +41,35 @@ public class SceneInfo : MonoBehaviour
 
         if (showUnlockedAllies) frameText.AppendLine("Unlocked Allies: " + GameManager.RosterManager.Unlocked.ToDelimitedString());
         if (showAssignedAllies) frameText.AppendLine("Assigned Allies: " + GameManager.RosterManager.Assigned.ToDelimitedString());
+
+        if (showFireballCooldown)
+        {
+            if (GameManager.Hero.heroCombat.Cooldowns.ContainsKey("Defend"))
+                frameText.AppendLine("Defend Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Defend"]);
+            else
+                frameText.AppendLine("Defend not on cooldown.");
+        }
+        if (showFireballCooldown)
+        {
+            if (GameManager.Hero.heroCombat.Cooldowns.ContainsKey("Fireball"))
+                frameText.AppendLine("Fireball Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Fireball"]);
+            else
+                frameText.AppendLine("Fireball not on cooldown.");
+        }
+        if (showCleaveCooldown)
+        {
+            if (GameManager.Hero.heroCombat.Cooldowns.ContainsKey("Cleave"))
+                frameText.AppendLine("Cleave Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Cleave"]);
+            else
+                frameText.AppendLine("Cleave not on cooldown.");
+        }
+        if (showStormCooldown)
+        {
+            if (GameManager.Hero.heroCombat.Cooldowns.ContainsKey("Storm"))
+                frameText.AppendLine("Storm Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Storm"]);
+            else
+                frameText.AppendLine("Storm not on cooldown.");
+        }
 
         displayText.text = frameText.ToString();
 	}

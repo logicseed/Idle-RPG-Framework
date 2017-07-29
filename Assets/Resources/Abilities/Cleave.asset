@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Name: Cleave
   m_EditorClassIdentifier: 
   icon: {fileID: 21300070, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
-  effect: {fileID: 0}
-  range: 0
   type: 1
+  effect: {fileID: 0}
+  abilityRange: 0
+  abilityType: 1
   cooldown: 2
   potency: 3.67

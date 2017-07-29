@@ -130,7 +130,7 @@ public class CombatController : MonoBehaviour
         character.state = CharacterState.Idle; // Make sure event is fired.
         character.state = CharacterState.Cast;
         var length = character.animatorReference.runtimeAnimatorController.animationClips[1].length;
-        Invoke("SpawnFireball", length);
+        Invoke("SpawnCasterball", length);
     }
 
     public virtual void PerformRangedAttack()
@@ -144,20 +144,21 @@ public class CombatController : MonoBehaviour
 
     public void SpawnArrow()
     {
-        SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Arrow);
-    }
-
-    public void SpawnFireball()
-    {
-        SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Fireball);
-    }
-
-    public void SpawnProjectile(GameObject prefab)
-    {
         var criticalModifier = CriticalModifier();
         var damage = (int)(character.attributes.attackDamage * criticalModifier);
+        SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Arrow, transform.position, damage, target, criticalModifier);
+    }
 
-        var projectileGO = Instantiate(prefab, transform.position, Quaternion.identity) as GameObject;
+    public void SpawnCasterball()
+    {
+        var criticalModifier = CriticalModifier();
+        var damage = (int)(character.attributes.abilityDamage * criticalModifier);
+        SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Casterball, transform.position, damage, target, criticalModifier);
+    }
+
+    public void SpawnProjectile(GameObject prefab, Vector3 location, int damage, GameCharacterController target, float criticalModifier)
+    {
+        var projectileGO = Instantiate(prefab, location, Quaternion.identity) as GameObject;
         var projectile = projectileGO.GetComponent<DirectAbilityController>();
         projectile.target = target;
         projectile.damage = damage;

@@ -51,6 +51,16 @@ public class WorldEntityButton : MonoBehaviour
 
     private void HandleUseClick()
     {
-        throw new NotImplementedException();
+        var entityObject = manager.GetEntityObject(entityName);
+        if (entityObject.type == ListableEntityType.Ability) GameManager.Hero.UseAbility(entityObject as Ability);
+    }
+
+    private void Update()
+    {
+        var entityObject = manager.GetEntityObject(entityName);
+        if (entityObject.type == ListableEntityType.Ability)
+        {
+            buttonComponent.interactable = !GameManager.Hero.heroCombat.Cooldowns.ContainsKey(entityName);
+        }
     }
 }

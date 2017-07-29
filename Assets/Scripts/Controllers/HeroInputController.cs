@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -11,9 +12,12 @@ public class HeroInputController : MonoBehaviour
 {
     private HeroController hero;
 
+    private bool awaitingTarget = false;
+    private Ability waitingAbility;
+
     private void Start()
     {
-        hero = GetComponent<HeroController>();
+        hero = GameManager.Hero;
     }
 
     private void Update()
@@ -25,7 +29,7 @@ public class HeroInputController : MonoBehaviour
             {
                 if (touch.phase == TouchPhase.Ended)
                 {
-                    ProcessTap(touch.position);
+                    if (!EventSystem.current.IsPointerOverGameObject()) ProcessTap(touch.position);
                 }
             }
         }
@@ -33,7 +37,7 @@ public class HeroInputController : MonoBehaviour
         // Process keyboard input
         if (Input.GetMouseButton(0))
         {
-            ProcessTap(Input.mousePosition);
+            if (!EventSystem.current.IsPointerOverGameObject()) ProcessTap(Input.mousePosition);
         }
 
         // This works with the Android back button too
@@ -51,30 +55,24 @@ public class HeroInputController : MonoBehaviour
         // Character tap
         foreach ( var character in GameManager.AllCharacters)
         {
-            if (Vector2.Distance(worldPosition, character.transform.position) < 0.1f) //TODO: No magic numbers
+            if (Vector2.Distance(worldPosition, character.transform.position) < 0.2f) //TODO: No magic numbers
             {
-                try
+                hero.combat.target = character;
+                if (awaitingTarget && waitingAbility != null)
                 {
-                    hero.combat.target = character;
-                    return;
+                    awaitingTarget = false;
+                    hero.UseAbility(waitingAbility);
                 }
-                catch (NullReferenceException)
-                {
-                    hero = GetComponent<HeroController>();
-                    return;
-                }
+                return;
             }
         }
+        ((HeroMovementController)hero.movement).location = worldPosition;
+        hero.combat.target = null;
+    }
 
-        // Location tap
-        try
-        {
-            ((HeroMovementController)hero.movement).location = worldPosition;
-            hero.combat.target = null;
-        }
-        catch (NullReferenceException)
-        {
-            hero = GetComponent<HeroController>();
-        }
+    internal void AwaitTarget(Ability ability)
+    {
+        awaitingTarget = true;
+        waitingAbility = ability;
     }
 }

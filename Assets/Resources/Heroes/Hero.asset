@@ -29,7 +29,7 @@ MonoBehaviour:
     criticalHitDamage: 94
     cooldownReduction: 94
     lifeDrain: 94
-    movementSpeed: 100
+    movementSpeed: 50
   bonusAttributes:
     attackDamage: 89
     abilityDamage: 89
@@ -43,4 +43,4 @@ MonoBehaviour:
     criticalHitDamage: 89
     cooldownReduction: 89
     lifeDrain: 90
-    movementSpeed: 100
+    movementSpeed: 0

@@ -50,7 +50,7 @@ public class QueueController : MonoBehaviour
     private void Start()
     {
         lastSpawnTime = Time.time;
-        GameManager.Instance.queueManager.Register(this);
+        GameManager.QueueManager.Register(this);
     }
 
     private void Update()

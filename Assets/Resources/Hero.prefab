@@ -52,7 +52,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4635603170666572}
   - component: {fileID: 114044807191117068}
-  - component: {fileID: 114206057304775260}
   - component: {fileID: 114595230680605856}
   m_Layer: 0
   m_Name: Hero
@@ -163,22 +162,11 @@ MonoBehaviour:
     movementSpeed: 0
   level: 1
   characterState: 0
-  hero: {fileID: 11400000, guid: 4191714cc8adf634f840057e2ae4e815, type: 2}
+  HeroObject: {fileID: 0}
   spawnPoints:
   - {fileID: 4618584253417872}
   - {fileID: 4461986569764152}
   - {fileID: 4409573623154390}
---- !u!114 &114206057304775260
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1382845795073152}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f6fcf43fab817e408c0bc10d9b7c107, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114442624054156292
 MonoBehaviour:
   m_ObjectHideFlags: 1

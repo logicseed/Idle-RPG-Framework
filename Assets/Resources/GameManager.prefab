@@ -71,9 +71,13 @@ MonoBehaviour:
       Ally: {fileID: 1071261792446292, guid: e219a472c19c30e459e20d90f8c987e3, type: 2}
       Enemy: {fileID: 1239132045805106, guid: d7669ce8320bd7f498afd54cac41edfe, type: 2}
       Effect:
-        Fireball: {fileID: 1677568107922774, guid: ce6361a9b9045ab4f92127e8b348a4da,
-          type: 2}
         Arrow: {fileID: 1202586162592276, guid: 7c9eac417892f374c84f4782e1fab2db,
+          type: 2}
+        Casterball: {fileID: 1492086375752678, guid: e449682e48612874eb370938b25c7c16,
+          type: 2}
+        Storm: {fileID: 1522269451602124, guid: 62d0d45a842e7104eae799a1abc6bc40,
+          type: 2}
+        Fireball: {fileID: 1677568107922774, guid: ce6361a9b9045ab4f92127e8b348a4da,
           type: 2}
       UI:
         CombatText: {fileID: 1595817452820914, guid: e32f0574ef786f243bd4df6ccccf9c62,

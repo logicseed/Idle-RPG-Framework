@@ -17,6 +17,7 @@ public class AbilityManager : WorldEntityManager
 
     public override void Load(SaveGame save)
     {
+        AddAssigned("Defend");
         if (save != null)
         {
             foreach (var ability in save.unlockedAbilities) AddUnlocked(ability);
@@ -27,6 +28,8 @@ public class AbilityManager : WorldEntityManager
     public override void Save(ref SaveGame save)
     {
         save.unlockedAbilities = Unlocked;
-        save.assignedAbilities = Assigned;
+        var assignedWithoutDefend = new List<string>(Assigned);
+        assignedWithoutDefend.Remove("Defend");
+        save.assignedAbilities = assignedWithoutDefend;
     }
 }

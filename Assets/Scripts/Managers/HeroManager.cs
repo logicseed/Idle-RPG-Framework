@@ -5,7 +5,7 @@ using UnityEngine;
 [Serializable]
 public class HeroManager : RegisterList<HeroController>
 {
-    public HeroController hero { get { if (list.Count > 0) return list[0]; else return null; } }
+    public HeroController Hero { get { if (list.Count > 0) return list[0]; else return null; } }
     public int experience = 0;
     public int level = 1;
 
