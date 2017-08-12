@@ -81,7 +81,7 @@ public class HeroCombatController : CombatController
     public void PerformDefendAbility(Ability ability)
     {
         isDefending = true;
-        defenseLength = ability.potency * 10; // TODO: Put in game settings.
+        defenseLength = ability.potency * GameManager.GameSettings.Constants.DefenseLength;
         Debug.Log("Hero is defending.");
     }
 
@@ -134,7 +134,7 @@ public class HeroCombatController : CombatController
 
     public override void ApplyDamage(int damage, bool isCritical = false)
     {
-        if (isDefending) damage /= 2;
+        if (isDefending) damage = (int)(damage * GameManager.GameSettings.Constants.DefensePercent);
         base.ApplyDamage(damage, isCritical);
     }
 }

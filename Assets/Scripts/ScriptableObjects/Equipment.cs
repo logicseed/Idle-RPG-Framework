@@ -5,7 +5,7 @@ using UnityEngine;
 /// <summary>
 ///
 /// </summary>
-[CreateAssetMenu(menuName = "Idle RPG/Reward/Equipment")]
+[CreateAssetMenu(menuName = "Idle RPG/Equipment")]
 public class Equipment : ListableEntity
 {
     public EquipmentType equipmentType;

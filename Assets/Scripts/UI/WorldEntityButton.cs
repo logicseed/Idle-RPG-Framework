@@ -45,6 +45,7 @@ public class WorldEntityButton : MonoBehaviour
 
     private void HandleAssignClick()
     {
+        if (entityName == "Defend") return;
         if (manager.Assigned.Contains(entityName)) manager.RemoveAssigned(entityName);
         else manager.AddAssigned(entityName);
     }
@@ -57,10 +58,13 @@ public class WorldEntityButton : MonoBehaviour
 
     private void Update()
     {
-        var entityObject = manager.GetEntityObject(entityName);
-        if (entityObject.type == ListableEntityType.Ability)
+        if (buttonAction == ButtonAction.Use)
         {
-            buttonComponent.interactable = !GameManager.Hero.heroCombat.Cooldowns.ContainsKey(entityName);
+            var entityObject = manager.GetEntityObject(entityName);
+            if (entityObject.type == ListableEntityType.Ability)
+            {
+                buttonComponent.interactable = !GameManager.Hero.heroCombat.Cooldowns.ContainsKey(entityName);
+            }
         }
     }
 }

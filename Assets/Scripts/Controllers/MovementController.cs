@@ -6,12 +6,12 @@ using UnityEngine;
 /// </summary>
 public class MovementController : MonoBehaviour
 {
-    public const float AVOID_DISTANCE = 0.5f;
-    public const float VELOCITY_FACTOR = 200;
+    //public const float AVOID_DISTANCE = 0.5f;
+    //public const float VELOCITY_FACTOR = 200;
 
     // These will be derived from attributes
     public float maxSpeed;
-    public float maxAccel = 0.1f;
+    //public float maxAccel = 0.1f;
 
     public float SeekTargetDistance
     {
@@ -75,7 +75,7 @@ public class MovementController : MonoBehaviour
         foreach (var character in charactersToAvoid)
         {
             movementBehaviour = new FleeMovementBehaviour(
-                movementBehaviour, gameObject, character.gameObject, AVOID_DISTANCE);
+                movementBehaviour, gameObject, character.gameObject, GameManager.GameSettings.Constants.Range.AvoidDistance);
         }
     }
 
@@ -135,7 +135,7 @@ public class MovementController : MonoBehaviour
     protected void Move()
     {
         // Get desired velocity
-        var desiredVelocity = movementBehaviour.Steering().normalized * maxSpeed * VELOCITY_FACTOR;
+        var desiredVelocity = movementBehaviour.Steering().normalized * maxSpeed * GameManager.GameSettings.Constants.Character.VelocityFactor;
 
         // Update state and direction
         if (desiredVelocity != Vector2.zero)

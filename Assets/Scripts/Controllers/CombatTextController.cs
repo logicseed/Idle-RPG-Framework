@@ -12,16 +12,12 @@ public class CombatTextController : MonoBehaviour
 
     public Text uiText;
 
-    public float displayTime = 2.0f;
-    public float floatDistance = 2.0f;
-    public float horizontalShift = 0.5f;
-
     private void Start()
     {
         startPosition = transform.position;
-
-        var randomShift = Random.Range(-horizontalShift, horizontalShift);
-        endPosition = startPosition + new Vector3(randomShift, floatDistance, 0.5f);
+        
+        var randomShift = Random.Range(-GameManager.GameSettings.Constants.CombatText.HorizontalShift, GameManager.GameSettings.Constants.CombatText.HorizontalShift);
+        endPosition = startPosition + new Vector3(randomShift, GameManager.GameSettings.Constants.CombatText.FloatDistance, 0.5f);
 
         StartCoroutine(Animate(startPosition, endPosition));
     }
@@ -55,9 +51,9 @@ public class CombatTextController : MonoBehaviour
         float timer = 0.0f;
         float percentComplete = 0.0f;
 
-        while (timer <= displayTime)
+        while (timer <= GameManager.GameSettings.Constants.CombatText.DisplayTime)
         {
-            percentComplete = timer / displayTime;
+            percentComplete = timer / GameManager.GameSettings.Constants.CombatText.DisplayTime;
 
             transform.position = Vector3.Lerp(startPosition, endPosition, percentComplete);
 

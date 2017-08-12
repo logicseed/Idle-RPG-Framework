@@ -40,7 +40,7 @@ public class EnemyController : GameCharacterController
 
     private void OnDestroy()
     {
-        GameManager.Instance.enemyManager.Unregister(this);
+        
     }
 
     public override AttackType attack
@@ -49,5 +49,10 @@ public class EnemyController : GameCharacterController
         {
             return enemy.attackType;
         }
+    }
+
+    public override void Unregister()
+    {
+        GameManager.EnemyManager.Unregister(this);
     }
 }

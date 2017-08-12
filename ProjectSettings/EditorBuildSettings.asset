@@ -26,3 +26,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Tests/MovementBehaviourTests.unity
     guid: 6812e8f8a4ce44e4c967a684af7419ac
+  - enabled: 1
+    path: Assets/Scenes/UI_World.unity
+    guid: 95f1cdd322561ba4aa2ee68a31f6b2e2
+  - enabled: 1
+    path: Assets/Scenes/UI_Stage.unity
+    guid: 7894b19343b1e394db74da6cc561fd85
+  - enabled: 1
+    path: Assets/Scenes/Stages/StageA.unity
+    guid: c6fd874536f95a54c80e08da9ddf25de
+  - enabled: 1
+    path: Assets/Scenes/Zones/ZoneA.unity
+    guid: fbf937f442c7c4e4ca8994c62049ac00

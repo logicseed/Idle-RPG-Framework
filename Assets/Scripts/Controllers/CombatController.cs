@@ -9,10 +9,6 @@ using Random = UnityEngine.Random;
 /// </summary>
 public class CombatController : MonoBehaviour
 {
-    public const float ATTACK_RANGE_MELEE = 0.5f;
-    public const float ATTACK_RANGE_CASTER = 2.0f;
-    public const float ATTACK_RANGE_RANGED = 3.0f;
-
     public GameCharacterController target;
     public GameCharacterController character;
     public int currentHealth;
@@ -41,9 +37,9 @@ public class CombatController : MonoBehaviour
     {
         get
         {
-            if (character.attack == AttackType.Ranged) return ATTACK_RANGE_RANGED;
-            else if (character.attack == AttackType.Caster) return ATTACK_RANGE_CASTER;
-            else return ATTACK_RANGE_MELEE;
+            if (character.attack == AttackType.Ranged) return GameManager.GameSettings.Constants.Range.RangedAttack;
+            else if (character.attack == AttackType.Caster) return GameManager.GameSettings.Constants.Range.CasterAttack;
+            else return GameManager.GameSettings.Constants.Range.MeleeAttack;
         }
     }
 
@@ -214,15 +210,22 @@ public class CombatController : MonoBehaviour
 
         var textObject = Instantiate(GameManager.GameSettings.Prefab.UI.CombatText, transform);
         var textController = textObject.GetComponent<CombatTextController>();
+
+        if (unblockedDamage <= 0)
+        {
+            textController.text = GameManager.GameSettings.Constants.CombatText.BlockedText;
+            textController.color = GameManager.GameSettings.Constants.Colors.CombatTextBlocked;
+        }
+
         if (isCritical)
         {
-            textController.text = "CRITICAL " + unblockedDamage;
-            textController.color = Color.red;
+            textController.text = GameManager.GameSettings.Constants.CombatText.CriticalText + " " + unblockedDamage;
+            textController.color = GameManager.GameSettings.Constants.Colors.CombatTextCritical;
         }
         else
         {
-            textController.text = unblockedDamage.ToString();
-            textController.color = Color.yellow;
+            textController.text = GameManager.GameSettings.Constants.CombatText.NormalText + " " + unblockedDamage;
+            textController.color = GameManager.GameSettings.Constants.Colors.CombatTextNormal;
         }
 
         if (unblockedDamage > 0 && !character.isCombatDummy) currentHealth -= unblockedDamage;
@@ -233,7 +236,9 @@ public class CombatController : MonoBehaviour
             if (!character.IsFriendly)
             {
                 ApplyExperience();
+                ApplyReward();
             }
+            character.Unregister();
             Invoke("Despawn", 1.0f);
         }
     }
@@ -245,7 +250,12 @@ public class CombatController : MonoBehaviour
 
     public void ApplyExperience()
     {
-        GameManager.HeroManager.experience += character.level * 1000;
+        GameManager.HeroManager.experience += (int)(character.level * GameManager.GameSettings.Constants.ExperiencePerLevel);
+    }
+
+    public void ApplyReward()
+    {
+        GameManager.StageManager.GetReward();
     }
 
     public bool HasTargetInRange
@@ -276,9 +286,9 @@ public class CombatController : MonoBehaviour
 
     protected float CriticalModifier()
     {
-        if (Random.Range(0.0f, 1.0f) <= character.attributes.critialHitChance)
+        if (Random.Range(0.0f, 1.0f) <= character.attributes.criticalHitChance)
         {
-            return character.attributes.critialHitDamage;
+            return character.attributes.criticalHitDamage;
         }
         return 1.0f;
     }

@@ -25,6 +25,9 @@ public class SceneInfo : MonoBehaviour
     public bool showCleaveCooldown = false;
     public bool showStormCooldown = false;
 
+    public bool showHeroLevel = false;
+    public bool showAllyLevels = false;
+
     void Update ()
     {
         var frameText = new StringBuilder();
@@ -69,6 +72,16 @@ public class SceneInfo : MonoBehaviour
                 frameText.AppendLine("Storm Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Storm"]);
             else
                 frameText.AppendLine("Storm not on cooldown.");
+        }
+
+        if (showHeroLevel) frameText.AppendLine("Hero Level: " + GameManager.HeroManager.level);
+        if (showAllyLevels)
+        {
+            foreach (var allyName in GameManager.RosterManager.Unlocked)
+            {
+                if (!GameManager.RosterManager.levels.ContainsKey(allyName)) GameManager.RosterManager.levels.Add(allyName, 1);
+                frameText.AppendLine(allyName + " Level: " + GameManager.RosterManager.levels[allyName]);
+            }
         }
 
         displayText.text = frameText.ToString();

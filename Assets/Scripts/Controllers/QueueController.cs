@@ -13,6 +13,7 @@ public class QueueController : MonoBehaviour
     private float lastSpawnTime;
     [SerializeField]
     private bool isRepeating;
+    [SerializeField]
     private bool isSpawning = true;
 
     /// <summary>
@@ -67,9 +68,10 @@ public class QueueController : MonoBehaviour
             }
 
             // Should we repeat the queue?
-            if (spawnIndex >= queue.enemies.Count && isRepeating)
+            if (spawnIndex >= queue.enemies.Count)
             {
-                spawnIndex = 0;
+                if (isRepeating) spawnIndex = 0;
+                else isSpawning = false;
             }
         }
     }
@@ -86,7 +88,8 @@ public class QueueController : MonoBehaviour
             var position = transform.position;
             var rotation = Quaternion.identity; // No rotation
             var parent = this.transform;
-            var enemy = Instantiate(Resources.Load("Enemy"), position, rotation, parent) as GameObject;
+            var enemy = Instantiate(GameManager.GameSettings.Prefab.Enemy, position, rotation, parent) as GameObject;
+
             enemy.GetComponent<EnemyController>().enemy = queue.enemies[spawnIndex];
         }
     }

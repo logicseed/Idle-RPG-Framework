@@ -18,4 +18,12 @@ public class QueueManager : RegisterList<QueueController>
             return areSpawning;
         }
     }
+
+    public bool HasQueues
+    {
+        get
+        {
+            return list.Count > 0;
+        }
+    }
 }

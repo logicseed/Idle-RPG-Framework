@@ -55,7 +55,7 @@ public abstract class AbstractMovementDecorator : AbstractMovementBehaviour
         this.agent = agent;
         this.controller = agent.GetComponent<MovementController>();
         this.maxSpeed = controller.maxSpeed;
-        this.maxAccel = controller.maxAccel;
+        this.maxAccel = GameManager.GameSettings.Constants.Character.Acceleration;
         this.target = target;
         this.radius = radius;
     }

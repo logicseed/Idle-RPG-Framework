@@ -11,24 +11,18 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     /// <summary>
     /// Gets the current instance of this Singleton.
     /// </summary>
-    public static T Instance
+    public static T Instance { get { return instance; } }
+
+    protected virtual void Awake()
     {
-        get
+        if (instance == null)
         {
-            if (instance == null)
-            {
-                instance = (T)FindObjectOfType(typeof(T));
-
-                if (instance == null)
-                {
-                    GameObject singleton = new GameObject();
-                    instance = singleton.AddComponent<T>();
-                    singleton.name = typeof(T).ToString() + " [Singleton]";
-
-                    DontDestroyOnLoad(singleton);
-                }
-            }
-            return instance;
+            instance = this as T;
         }
+        else if (instance != this as T)
+        {
+            Destroy(gameObject);
+        }
+        DontDestroyOnLoad(gameObject);
     }
 }

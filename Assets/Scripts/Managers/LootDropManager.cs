@@ -11,7 +11,7 @@ public class LootDropManager : MonoBehaviour
     public int dropAmount;
 
     /// <summary>
-    ///
+    /// 
     /// </summary>
     public void DropLoot()
     {

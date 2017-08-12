@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 /// <summary>
@@ -18,6 +19,7 @@ public class GameManager : Singleton<GameManager>
     public RosterManager rosterManager;
     public InventoryManager inventoryManager;
     public AbilityManager abilityManager;
+    public WorldManager worldManager;
     public ZoneManager zoneManager;
     public StageManager stageManager;
 
@@ -35,6 +37,7 @@ public class GameManager : Singleton<GameManager>
     public static RosterManager RosterManager { get { return GameManager.Instance.rosterManager; } }
     public static InventoryManager InventoryManager { get { return GameManager.Instance.inventoryManager; } }
     public static AbilityManager AbilityManager { get { return GameManager.Instance.abilityManager; } }
+    public static WorldManager WorldManager { get { return GameManager.Instance.worldManager; } }
     public static ZoneManager ZoneManager { get { return GameManager.Instance.zoneManager; } }
     public static StageManager StageManager { get { return GameManager.Instance.stageManager; } }
     public static AllyManager AllyManager { get { return GameManager.Instance.allyManager; } }
@@ -44,10 +47,36 @@ public class GameManager : Singleton<GameManager>
 
     public bool bypassSaveGame;
 
-    private void Awake()
+    public float loadPercent = 0.0f;
+    public bool onStage = false;
+
+    public GameState state = GameState.LoadingWorld;
+    public static GameState State { get { return GameManager.Instance.state; } }
+
+    protected override void Awake()
     {
+        base.Awake();
+
         InitializeWorldEntityManagers();
         InitializeStageEntityManagers();
+        InitializeGameWorldManagers();
+        loadPercent = 0.5f;
+
+        SceneManager.activeSceneChanged += OnSceneChanged;
+    }
+
+    
+
+    private void InitializeWorld()
+    {
+        loadPercent = 1.0f;
+        LoadWorld();
+        state = GameState.ChoosingZone;
+    }
+
+    private void InitializeGameWorldManagers()
+    {
+        
     }
 
     public void InitializeWorldEntityManagers()
@@ -62,8 +91,9 @@ public class GameManager : Singleton<GameManager>
         abilityManager = new AbilityManager(save);
         rosterManager = new RosterManager(save);
         inventoryManager = new InventoryManager(save);
-        zoneManager = ZoneManager.Load(save);
-        stageManager = StageManager.Load(save);
+        worldManager = new WorldManager(save);
+        //zoneManager = ZoneManager.Load(save);
+        //stageManager = StageManager.Load(save);
     }
 
     public void InitializeStageEntityManagers()
@@ -80,15 +110,110 @@ public class GameManager : Singleton<GameManager>
     private void Start()
     {
         DontDestroyOnLoad(gameObject);
+        InitializeWorld();
     }
 
 
     private void Update()
     {
-
+        //if (queueManager.HasQueues && !queueManager.QueuesAreSpawning && !stageManager.hasSpawnedBoss)
+        //{
+        //    stageManager.hasSpawnedBoss = true;
+        //    var boss = stageManager.SpawnBoss();
+        //    if (boss != null)
+        //    {
+        //        StartCoroutine(CheckBoss(boss));
+        //    }
+        //    else
+        //    {
+        //        StageManager.EndStage();
+        //    }
+        //}
+        if (onStage)
+        {
+            if (queueManager.HasQueues && !queueManager.QueuesAreSpawning && enemyManager.GetAll().Count == 0)
+            {
+                onStage = false;
+                StageManager.EndStage();
+            }
+        }
     }
 
+    private IEnumerator CheckBoss(BossController boss)
+    {
+        while (boss.state != CharacterState.Dead)
+        {
+            Debug.Log("Checking Boss");
+            yield return new WaitForSeconds(1.0f);
+        }
+        StageManager.EndStage();
+    }
 
+    public static void LoadStage(SceneField stage)
+    {
+        if (WorldManager.UnlockedStages.Contains(stage))
+        {
+            GameManager.Instance.onStage = true;
+            SceneManager.LoadScene(stage);
+        }
+    }
+
+    public static void LoadZone(string zone)
+    {
+        if (WorldManager.UnlockedZones.Contains(zone))
+        {
+            SceneManager.LoadScene(zone);
+        }
+    }
+
+    public static void LoadWorld()
+    {
+        SceneManager.LoadScene("World");
+    }
+
+    private void OnSceneChanged(Scene previousScene, Scene newScene)
+    {
+        if (newScene.name == "Start") return;
+        if (newScene.name == "World")
+        {
+            LoadWorldUi();
+            return;
+        }
+
+        var sceneType = newScene.path.Split('/')[2];
+
+        if (sceneType == "Zones") LoadZoneUi();
+        else LoadStageUi();
+    }
+
+    private void LoadWorldUi()
+    {
+        // Spawn UiCanvas
+        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
+        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
+        Instantiate(GameSettings.Prefab.UI.AssignmentPanel, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.UpgradePanel, uiCanvas.transform, false);
+        if (GameSettings.ShowResetButton) Instantiate(GameSettings.Prefab.UI.ResetButton, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.ExperienceText, uiCanvas.transform, false);
+    }
+
+    private void LoadZoneUi()
+    {
+        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
+        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
+        Instantiate(GameSettings.Prefab.UI.AssignmentPanel, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.UpgradePanel, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.BackToWorldButton, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.ExperienceText, uiCanvas.transform, false);
+    }
+
+    private void LoadStageUi()
+    {
+        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
+        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
+        Instantiate(GameSettings.Prefab.UI.HeroStageInformation, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.AbilityUsePanel, uiCanvas.transform, false);
+    }
 
     public static List<GameCharacterController> AllCharacters
     {
@@ -142,20 +267,16 @@ public class GameManager : Singleton<GameManager>
     {
         var save = new SaveGame();
 
-        if (HeroManager != null) heroManager.Save(ref save);
-        if (AbilityManager != null) abilityManager.Save(ref save);
-        if (RosterManager != null) rosterManager.Save(ref save);
-        if (InventoryManager != null) inventoryManager.Save(ref save);
-        if (ZoneManager != null) zoneManager.Save(ref save);
-        if (StageManager != null) stageManager.Save(ref save);
+        if (HeroManager != null) HeroManager.Save(ref save);
+        if (AbilityManager != null) AbilityManager.Save(ref save);
+        if (RosterManager != null) RosterManager.Save(ref save);
+        if (InventoryManager != null) InventoryManager.Save(ref save);
+        if (WorldManager != null) WorldManager.Save(ref save);
+        //if (ZoneManager != null) zoneManager.Save(ref save);
+        //if (StageManager != null) stageManager.Save(ref save);
         save.isFilled = true;
 
         SaveGameManager.SaveGame(save);
-    }
-
-    public void ResetGame()
-    {
-        SaveGameManager.SaveGame(new SaveGame());
     }
 
     public HeroController hero { get { return heroManager.Hero; } }
@@ -163,6 +284,7 @@ public class GameManager : Singleton<GameManager>
     public void OnDestroy()
     {
         if (!bypassSaveGame) SaveGame();
+        SceneManager.activeSceneChanged -= OnSceneChanged;
     }
 
 
@@ -180,23 +302,39 @@ public class GameManager : Singleton<GameManager>
 
     public static void UpgradeHero()
     {
-        if (CanUpgradeHero()) GameManager.HeroManager.level++;
+        if (CanUpgradeHero())
+        {
+            GameManager.HeroManager.experience -= UpgradeHeroCost();
+            GameManager.HeroManager.level++;
+        }
     }
 
     public static bool CanUpgradeHero()
     {
-        var requiredExperience = GameManager.HeroManager.level * 10000;
-        return requiredExperience >= GameManager.HeroManager.experience;
+        return UpgradeHeroCost() <= GameManager.HeroManager.experience;
+    }
+
+    public static int UpgradeHeroCost()
+    {
+        return (int)(GameManager.HeroManager.level * GameManager.GameSettings.Constants.UpgradeHeroCost);
     }
 
     public static void UpgradeAlly(string allyName)
     {
-        if (CanUpgradeAlly(allyName)) GameManager.RosterManager.levels[allyName]++;
+        if (CanUpgradeAlly(allyName))
+        {
+            GameManager.HeroManager.experience -= UpgradeAllyCost(allyName);
+            GameManager.RosterManager.levels[allyName]++;
+        }
     }
 
     public static bool CanUpgradeAlly(string allyName)
     {
-        var requiredExperience = GameManager.RosterManager.levels[allyName] * 8000;
-        return requiredExperience >= GameManager.RosterManager.levels[allyName];
+        return UpgradeAllyCost(allyName) <= GameManager.HeroManager.experience;
+    }
+
+    public static int UpgradeAllyCost(string allyName)
+    {
+        return (int)(GameManager.RosterManager.levels[allyName] * GameManager.GameSettings.Constants.UpgradeAllyCost);
     }
 }

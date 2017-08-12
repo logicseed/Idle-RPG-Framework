@@ -22,7 +22,7 @@ public class DirectAbilityController : MonoBehaviour
             return;
         }
 
-        if (transform.position.SqrDistance(target.location) < 0.05f)
+        if (transform.position.SqrDistance(target.location) < GameManager.GameSettings.Constants.Range.DirectAbilityHit)
         {
             target.GetComponent<CombatController>().ApplyDamage(damage, criticalModifier > 1);
             Destroy(gameObject);

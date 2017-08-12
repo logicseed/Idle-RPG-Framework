@@ -8,6 +8,7 @@ public class HeroManager : RegisterList<HeroController>
     public HeroController Hero { get { if (list.Count > 0) return list[0]; else return null; } }
     public int experience = 0;
     public int level = 1;
+    public Hero HeroObject;
 
     public HeroManager() : base() { }
 
@@ -26,6 +27,14 @@ public class HeroManager : RegisterList<HeroController>
             heroManager.experience = save.experience;
             heroManager.level = save.level;
         }
+        else
+        {
+            heroManager.experience = GameManager.GameSettings.CharacterStart.Experience;
+            heroManager.level = GameManager.GameSettings.CharacterStart.Level;
+        }
+
+        heroManager.HeroObject = Resources.Load("Heroes/Hero") as Hero;
+        heroManager.HeroObject.level = heroManager.level;
 
         return heroManager;
     }

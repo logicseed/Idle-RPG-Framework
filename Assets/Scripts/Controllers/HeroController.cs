@@ -196,7 +196,7 @@ public class HeroController : GameCharacterController
 
     private void OnDestroy()
     {
-        GameManager.HeroManager.Unregister(this);
+        
     }
 
     public override AttackType attack
@@ -205,5 +205,10 @@ public class HeroController : GameCharacterController
         {
             return HeroObject.attackType;
         }
+    }
+
+    public override void Unregister()
+    {
+        GameManager.HeroManager.Unregister(this);
     }
 }

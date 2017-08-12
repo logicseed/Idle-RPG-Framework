@@ -1,12 +1,88 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
 public class GameSettings
 {
+    public bool ShowResetButton = false;
+
+    public StartContainer CharacterStart;
+    [Serializable] public class StartContainer
+    {
+        public int Experience = 0;
+        public int Level = 1;
+        public List<string> Zones;
+        public List<string> Stages;
+        public List<string> Inventory;
+        public List<string> Roster;
+        public List<string> Abilities;
+    }
+
+    public ConstantsContainer Constants;
+    [Serializable] public class ConstantsContainer
+    {
+        
+        public float EquipmentDropChance = 0.5f;
+        public float ExperiencePerLevel = 1000.0f;
+        public float DefenseLength = 10;
+        public float DefensePercent = 0.5f;
+        public float UpgradeHeroCost = 10000;
+        public float UpgradeAllyCost = 8000;
+
+        public CharacterContainer Character;
+        [Serializable] public class CharacterContainer
+        {
+            public float RigidbodyGravityScale = 0.0f;
+            public float RigidbodyDrag = 100;
+            public float RigidbodyAngularDrag = 100;
+            public float RigidbodyMass = 100;
+
+            public Vector2 ColliderOffset = new Vector2(0.0f, -0.275f);
+            public Vector2 ColliderSize = new Vector2(0.4f, 0.2f);
+            public CapsuleDirection2D ColliderDirection = CapsuleDirection2D.Horizontal;
+
+            public float VelocityFactor = 200;
+            public float Acceleration = 0.1f;
+        }
+        public RangeContainer Range;
+        [Serializable] public class RangeContainer
+        {
+            public float MeleeAttack = 0.5f;
+            public float CasterAttack = 2.0f;
+            public float RangedAttack = 3.0f;
+            public float DirectAbilityHit = 0.05f;
+            public float Touch = 0.2f;
+            public float SeekLocation = 0.01f;
+            [HideInInspector] public float SeekLocationSqr { get { return SeekLocation * SeekLocation; } }
+            public float AvoidDistance = 0.5f;
+        }
+        public CombatTextContainer CombatText;
+        [Serializable] public class CombatTextContainer
+        {
+            public string BlockedText = "BLOCKED";
+            public string NormalText = "";
+            public string CriticalText = "CRITICAL";
+            public float DisplayTime = 2.0f;
+            public float FloatDistance = 2.0f;
+            public float HorizontalShift = 0.5f;
+        }
+
+        public ColorContainer Colors;
+        [Serializable] public class ColorContainer
+        {
+            public Color CombatTextBlocked = Color.green;
+            public Color CombatTextNormal = Color.yellow;
+            public Color CombatTextCritical = Color.red;
+            public Color FloatingBarForeground = Color.green;
+            public Color FloatingBarBackground = Color.red;
+        }
+    }
+
     public MaximumContainer Max;
     [Serializable] public class MaximumContainer
     {
+        public float RewardTime = 8.0f;
         public EntityContainer Abilities = new EntityContainer(9999, 4);
         public EntityContainer Equipment = new EntityContainer(9999, 9999);
         public EntityContainer Allies = new EntityContainer(9999, 3);
@@ -47,7 +123,21 @@ public class GameSettings
         {
             public GameObject CombatText;
             public GameObject FloatingBar;
+            public GameObject UiCanvas;
             public GameObject WorldEntityButton;
+            public GameObject BackToWorldButton;
+            public GameObject ResetButton;
+            public GameObject AbilitySelection;
+            public GameObject InventorySelection;
+            public GameObject RosterSelection;
+            public GameObject AssignmentPanel;
+            public GameObject UpgradePanel;
+            public GameObject UpgradeHeroPopup;
+            public GameObject UpgradeAlliesPopup;
+            public GameObject UpgradeAllyButton;
+            public GameObject ExperienceText;
+            public GameObject AbilityUsePanel;
+            public GameObject HeroStageInformation;
         }
     }
 }

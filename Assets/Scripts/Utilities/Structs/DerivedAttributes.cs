@@ -78,12 +78,12 @@ public class DerivedAttributes
     /// <summary>
     ///
     /// </summary>
-    public float critialHitChance { get { return criticalHitChanceDerived; } }
+    public float criticalHitChance { get { return criticalHitChanceDerived; } }
 
     /// <summary>
     ///
     /// </summary>
-    public float critialHitDamage { get { return criticalHitDamageDerived; } }
+    public float criticalHitDamage { get { return criticalHitDamageDerived; } }
 
     /// <summary>
     ///

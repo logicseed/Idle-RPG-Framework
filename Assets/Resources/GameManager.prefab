@@ -52,7 +52,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings:
+    ShowResetButton: 1
+    CharacterStart:
+      Experience: 100000
+      Level: 1
+      Zones:
+      - Scenes/Zones/ZoneA
+      Stages:
+      - Scenes/Stages/StageA
+      Inventory:
+      - Sword
+      - Shield
+      - Chainmail
+      Roster:
+      - MeleeAlly
+      - RangedAlly
+      - CasterAlly
+      Abilities:
+      - Fireball
+      - Storm
+      - Cleave
+    Constants:
+      EquipmentDropChance: 0.5
+      ExperiencePerLevel: 1000
+      DefenseLength: 10
+      DefensePercent: 0.5
+      UpgradeHeroCost: 10000
+      UpgradeAllyCost: 8000
+      Character:
+        RigidbodyGravityScale: 0
+        RigidbodyDrag: 100
+        RigidbodyAngularDrag: 100
+        RigidbodyMass: 100
+        ColliderOffset: {x: 0, y: -0.275}
+        ColliderSize: {x: 0.4, y: 0.2}
+        ColliderDirection: 1
+        VelocityFactor: 200
+        Acceleration: 0.1
+      Range:
+        MeleeAttack: 0.5
+        CasterAttack: 2
+        RangedAttack: 3
+        DirectAbilityHit: 0.05
+        Touch: 0.2
+        SeekLocation: 0.01
+        AvoidDistance: 0.5
+      CombatText:
+        BlockedText: BLOCKED
+        NormalText: 
+        CriticalText: CRITICAL
+        DisplayTime: 2
+        FloatDistance: 2
+        HorizontalShift: 0.5
+      Colors:
+        CombatTextBlocked: {r: 0, g: 1, b: 0, a: 1}
+        CombatTextNormal: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+        CombatTextCritical: {r: 1, g: 0, b: 0, a: 1}
+        FloatingBarForeground: {r: 0, g: 1, b: 0, a: 1}
+        FloatingBarBackground: {r: 1, g: 0, b: 0, a: 1}
     Max:
+      RewardTime: 8
       Abilities:
         Unlocked: 9999
         Assigned: 3
@@ -84,12 +143,41 @@ MonoBehaviour:
           type: 2}
         FloatingBar: {fileID: 1964579812323056, guid: bc38e340336e0b842bad2ec0178d6a3f,
           type: 2}
+        UiCanvas: {fileID: 1624268022810878, guid: d03ad0050509e8a4eb58b5508af6e92e,
+          type: 2}
         WorldEntityButton: {fileID: 1779098270501832, guid: 9705a4e34a885c242810575f31af1b8c,
+          type: 2}
+        BackToWorldButton: {fileID: 1169837827153134, guid: 3a0e014a4e9cdeb40af0fcfd488f22b4,
+          type: 2}
+        ResetButton: {fileID: 1307722920169142, guid: 3d029ec1cc493504d8d0f0a17e885de8,
+          type: 2}
+        AbilitySelection: {fileID: 1627934290031368, guid: 6bd3b48291e867340a09782fb9362209,
+          type: 2}
+        InventorySelection: {fileID: 1762379476474538, guid: ff5613de4f328714b95e1c216311e78f,
+          type: 2}
+        RosterSelection: {fileID: 1662936299388258, guid: 18c130669e0b5d645aee243d08dcfce6,
+          type: 2}
+        AssignmentPanel: {fileID: 1145731288885080, guid: 1ff7ed08293f600499ce1e50b4c97e04,
+          type: 2}
+        UpgradePanel: {fileID: 1467911740268166, guid: 8393b42fe2f5a034ebefa7b517c9799c,
+          type: 2}
+        UpgradeHeroPopup: {fileID: 1568672000705382, guid: 495206a5ce97e8c4e8fa44bed66365fa,
+          type: 2}
+        UpgradeAlliesPopup: {fileID: 1947709563445964, guid: 5226a5f6ccb428144b456a97871bac14,
+          type: 2}
+        UpgradeAllyButton: {fileID: 1204506481325362, guid: cabf8cafe21dfef49860b70507097356,
+          type: 2}
+        ExperienceText: {fileID: 1940980552363930, guid: 43809072f7b2d3b459ce9f04467eafc5,
+          type: 2}
+        AbilityUsePanel: {fileID: 1257002223116160, guid: 478cc4b8d360db042995c21d2e50f191,
+          type: 2}
+        HeroStageInformation: {fileID: 1457981774662274, guid: 26f305edbf1d79c4bba802ef10ecca3d,
           type: 2}
   heroManager:
     list: []
     experience: 0
     level: 1
+    HeroObject: {fileID: 0}
   rosterManager:
     unlocked: []
     assigned: []
@@ -99,11 +187,13 @@ MonoBehaviour:
   abilityManager:
     unlocked: []
     assigned: []
-  zoneManager:
+  worldManager:
     unlockedZones: []
-  stageManager:
     lastStage: 
     unlockedStages: []
+  zoneManager:
+    unlockedZones: []
+  stageManager: {fileID: 0}
   allyManager:
     list: []
   enemyManager:
@@ -113,3 +203,5 @@ MonoBehaviour:
   queueManager:
     list: []
   bypassSaveGame: 0
+  loadPercent: 0
+  state: 1

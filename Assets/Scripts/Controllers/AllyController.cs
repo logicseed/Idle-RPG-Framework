@@ -55,4 +55,9 @@ public class AllyController : GameCharacterController
             return ally.attackType;
         }
     }
+
+    public override void Unregister()
+    {
+        GameManager.AllyManager.Unregister(this);
+    }
 }

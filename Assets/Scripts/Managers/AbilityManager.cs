@@ -10,7 +10,7 @@ using UnityEngine;
 public class AbilityManager : WorldEntityManager
 {
     public override int MaxUnlocked { get { return GameManager.GameSettings.Max.Abilities.Unlocked; } }
-    public override int MaxAssigned { get { return GameManager.GameSettings.Max.Abilities.Assigned; } }
+    public override int MaxAssigned { get { return GameManager.GameSettings.Max.Abilities.Assigned + 1; } }
     public override string ResourcePath { get { return GameManager.GameSettings.Path.Abilities; } }
 
     public AbilityManager(SaveGame save = null) : base(save) { }
@@ -22,6 +22,11 @@ public class AbilityManager : WorldEntityManager
         {
             foreach (var ability in save.unlockedAbilities) AddUnlocked(ability);
             foreach (var ability in save.assignedAbilities) AddAssigned(ability);
+        }
+
+        foreach (var ability in GameManager.GameSettings.CharacterStart.Abilities)
+        {
+            if (!unlocked.Contains(ability)) AddUnlocked(ability);
         }
     }
 

@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,5 +18,7 @@ public abstract class LootCollection : ScriptableObject
     ///
     /// </summary>
     /// <returns></returns>
-    public abstract List<Equipment> GetEquipment();
+    public abstract Equipment GetEquipment();
+
+    public abstract bool DropEquipment();
 }

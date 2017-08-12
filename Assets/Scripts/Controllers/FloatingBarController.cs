@@ -12,8 +12,6 @@ public class FloatingBarController : MonoBehaviour
 {
     public RectTransform background;
     public RectTransform foreground;
-    public Color backgroundColor = Color.red;
-    public Color foregroundColor = Color.green;
 
     private GameCharacterController character;
 
@@ -26,8 +24,8 @@ public class FloatingBarController : MonoBehaviour
         // Setup colors
         var backgroundImage = background.gameObject.GetComponent<Image>();
         var foregroundImage = foreground.gameObject.GetComponent<Image>();
-        backgroundImage.color = backgroundColor;
-        foregroundImage.color = foregroundColor;
+        backgroundImage.color = GameManager.GameSettings.Constants.Colors.FloatingBarBackground;
+        foregroundImage.color = GameManager.GameSettings.Constants.Colors.FloatingBarForeground;
     }
 
     // Update is called once per frame

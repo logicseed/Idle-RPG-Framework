@@ -55,7 +55,7 @@ public class HeroInputController : MonoBehaviour
         // Character tap
         foreach ( var character in GameManager.AllCharacters)
         {
-            if (Vector2.Distance(worldPosition, character.transform.position) < 0.2f) //TODO: No magic numbers
+            if (Vector2.Distance(worldPosition, character.transform.position) < GameManager.GameSettings.Constants.Range.Touch)
             {
                 hero.combat.target = character;
                 if (awaitingTarget && waitingAbility != null)

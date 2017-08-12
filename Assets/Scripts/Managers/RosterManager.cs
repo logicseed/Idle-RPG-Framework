@@ -14,7 +14,7 @@ public class RosterManager : WorldEntityManager
     public override int MaxAssigned { get { return GameManager.GameSettings.Max.Allies.Assigned; } }
     public override string ResourcePath { get { return GameManager.GameSettings.Path.Allies; } }
 
-    public Dictionary<string, int> levels;
+    public Dictionary<string, int> levels = new Dictionary<string, int>();
 
     public RosterManager(SaveGame save = null)
     {
@@ -22,7 +22,7 @@ public class RosterManager : WorldEntityManager
         unlocked = new List<string>();
         assigned = new List<string>();
         objects = new Dictionary<string, ListableEntity>();
-        Debug.Log(objects == null);
+
         Load(save);
     }
 
@@ -47,6 +47,15 @@ public class RosterManager : WorldEntityManager
             RaiseChangeEvent(WorldEntityListType.Unlocked);
             RaiseChangeEvent(WorldEntityListType.Assigned);
         }
+
+        foreach (var ally in GameManager.GameSettings.CharacterStart.Roster)
+        {
+            if (!unlocked.Contains(ally))
+            {
+                unlocked.Add(ally);
+                levels.Add(ally, 1);
+            }
+        }
     }
 
     public override void Save(ref SaveGame save)
@@ -60,7 +69,7 @@ public class RosterManager : WorldEntityManager
     {
         if (!Unlocked.Contains(name))
         {
-            AddUnlocked(name, raiseChangeEvent);
+            this.AddUnlocked(name, raiseChangeEvent);
             levels.Add(name, level);
 
             var entity = GetEntityObject(name) as Ally;

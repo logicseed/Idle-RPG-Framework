@@ -1,29 +1,52 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
-[System.Serializable]
-public class StageManager
-{
-    public string lastStage;
-    public List<string> unlockedStages;
+﻿using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 
-    public void Save(ref SaveGame save)
+public class StageManager : MonoBehaviour
+{
+    public List<string> stagesToUnlock;
+    public List<string> zonesToUnlock;
+    public Enemy boss;
+    public Transform bossSpawnLocation;
+    public LootCollection lootCollection;
+    public bool hasSpawnedBoss = false;
+
+    private void Start()
     {
-        save.unlockedStages = unlockedStages;
-        save.lastStage = lastStage;
+        GameManager.Instance.stageManager = this;
     }
 
-    public static StageManager Load(SaveGame save = null)
+    public Equipment GetReward()
     {
-        var stageManager = new StageManager();
+        // set currency reward with lootCollections.GetCurrency();
+        var equipment = lootCollection.GetEquipment();
+        if (equipment != null) GameManager.InventoryManager.AddUnlocked(equipment.name, false);
+        return equipment;
+    }
 
-        if (save != null)
+    public BossController SpawnBoss()
+    {
+        if (boss != null)
         {
-            stageManager.unlockedStages = save.unlockedStages;
-            stageManager.lastStage = save.lastStage;
+            var position = bossSpawnLocation.position;
+            var rotation = Quaternion.identity; // No rotation
+            var boss = Instantiate(GameManager.GameSettings.Prefab.Enemy, position, rotation) as GameObject;
+            boss.name = "Boss";
+            var bossController = boss.GetComponent<BossController>();
+            bossController.enemy = this.boss;
+            return bossController;
         }
+        else return null;
+    }
 
-        return stageManager;
+    public void EndStage()
+    {
+        foreach (var stage in stagesToUnlock) GameManager.WorldManager.UnlockStage(stage);
+
+        foreach (var zone in zonesToUnlock) GameManager.WorldManager.UnlockZone(zone);
+
+        GameManager.WorldManager.SetLastStage("Scenes/Stages/" + SceneManager.GetActiveScene().name);
+
+        GameManager.LoadWorld();
     }
 }

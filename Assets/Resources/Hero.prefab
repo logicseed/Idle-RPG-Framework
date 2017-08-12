@@ -162,11 +162,12 @@ MonoBehaviour:
     movementSpeed: 0
   level: 1
   characterState: 0
-  HeroObject: {fileID: 0}
+  HeroObject: {fileID: 11400000, guid: 4191714cc8adf634f840057e2ae4e815, type: 2}
   spawnPoints:
   - {fileID: 4618584253417872}
   - {fileID: 4461986569764152}
   - {fileID: 4409573623154390}
+  heroCombat: {fileID: 0}
 --- !u!114 &114442624054156292
 MonoBehaviour:
   m_ObjectHideFlags: 1

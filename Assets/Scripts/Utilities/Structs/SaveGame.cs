@@ -21,7 +21,7 @@ public class SaveGame : ISerializable
     public string lastStage;
     public DateTime lastStageTime;
     public bool isFilled = false;
-    public int level;
+    public int level = 1;
     public Dictionary<string, int> allyLevels;
 
     // To add fields to the save game, they must be added above, and then

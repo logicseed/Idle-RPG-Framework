@@ -151,10 +151,11 @@ public class GameCharacterController : MonoBehaviour
         //rigidbodyReference.isKinematic = true;
         //rigidbodyReference.useFullKinematicContacts = true;
 
-        rigidbodyReference.gravityScale = 0.0f;
-        rigidbodyReference.drag = 100;
-        rigidbodyReference.angularDrag = 100;
-        rigidbodyReference.mass = 100;
+        
+        rigidbodyReference.gravityScale = GameManager.GameSettings.Constants.Character.RigidbodyGravityScale;
+        rigidbodyReference.drag = GameManager.GameSettings.Constants.Character.RigidbodyDrag;
+        rigidbodyReference.angularDrag = GameManager.GameSettings.Constants.Character.RigidbodyAngularDrag;
+        rigidbodyReference.mass = GameManager.GameSettings.Constants.Character.RigidbodyMass;
     }
 
     protected virtual void CreateSpriteRenderer(Sprite avatar)
@@ -167,9 +168,9 @@ public class GameCharacterController : MonoBehaviour
     protected virtual void CreateCapsuleCollider2D()
     {
         capsuleCollider2D = gameObject.AddComponent<CapsuleCollider2D>();
-        capsuleCollider2D.offset = new Vector2(0.0f, -0.275f);
-        capsuleCollider2D.size = new Vector2(0.4f, 0.2f);
-        capsuleCollider2D.direction = CapsuleDirection2D.Horizontal;
+        capsuleCollider2D.offset = GameManager.GameSettings.Constants.Character.ColliderOffset;
+        capsuleCollider2D.size = GameManager.GameSettings.Constants.Character.ColliderSize;
+        capsuleCollider2D.direction = GameManager.GameSettings.Constants.Character.ColliderDirection;
     }
 
     public virtual AttackType attack
@@ -187,4 +188,6 @@ public class GameCharacterController : MonoBehaviour
             return type == CharacterType.Ally || type == CharacterType.Hero;
         }
     }
+
+    public virtual void Unregister() { }
 }

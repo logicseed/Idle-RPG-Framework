@@ -14,6 +14,8 @@ public class StageController : SelectableController
     public Scene stageScene;
     public Vector2 locationInZone;
 
+    //public LootCollection 
+
     /// <summary>
     ///
     /// </summary>

@@ -23,6 +23,12 @@ public class InventoryManager : WorldEntityManager
             foreach (var equipment in save.unlockedEquipment) AddUnlocked(equipment);
             foreach (var equipment in save.assignedEquipment) AddAssigned(equipment);
         }
+
+        foreach (var equipment in GameManager.GameSettings.CharacterStart.Inventory)
+        {
+            if (!unlocked.Contains(equipment)) AddUnlocked(equipment);
+        }
+        
     }
 
     public override void Save(ref SaveGame save)

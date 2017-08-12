@@ -6,9 +6,6 @@ using UnityEngine;
 
 public class HeroMovementController : MovementController
 {
-    public const float SEEK_LOCATION_DISTANCE = 0.01f;
-    public const float SEEK_LOCATION_DISTANCE_SQR = SEEK_LOCATION_DISTANCE * SEEK_LOCATION_DISTANCE;
-
     public bool seekLocation;
     public Vector2 locationTarget;
 
@@ -47,7 +44,7 @@ public class HeroMovementController : MovementController
         if (seekLocation)
         {
             // Check if hero has reached location.
-            if (transform.position.SqrDistance(locationTarget) < SEEK_LOCATION_DISTANCE)
+            if (transform.position.SqrDistance(locationTarget) < GameManager.GameSettings.Constants.Range.SeekLocationSqr)
             {
                 seekLocation = false;
                 character.state = CharacterState.Idle;
@@ -56,7 +53,7 @@ public class HeroMovementController : MovementController
             else // Otherwise attempt to walk to location.
             {
                 movementBehaviour = new WalkMovementBehaviour(
-                    movementBehaviour, gameObject, locationTarget, SEEK_LOCATION_DISTANCE);
+                    movementBehaviour, gameObject, locationTarget, GameManager.GameSettings.Constants.Range.SeekLocation);
                 character.state = CharacterState.Walk;
             }
         }
