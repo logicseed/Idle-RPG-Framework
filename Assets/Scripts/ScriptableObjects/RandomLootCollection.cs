@@ -10,7 +10,9 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu(menuName = "Idle RPG/Loot Collection - Random")]
 public class RandomLootCollection : LootCollection
 {
+    [HideInInspector]
     public int lowCurrencyAmount;
+    [HideInInspector]
     public int highCurrencyAmount;
     public List<Equipment> equipment;
 

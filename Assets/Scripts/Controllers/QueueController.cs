@@ -11,9 +11,9 @@ public class QueueController : MonoBehaviour
 
     private int spawnIndex;
     private float lastSpawnTime;
-    [SerializeField]
+    //[SerializeField]
     private bool isRepeating;
-    [SerializeField]
+    //[SerializeField]
     private bool isSpawning = true;
 
     /// <summary>

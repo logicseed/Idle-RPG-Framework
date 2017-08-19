@@ -9,7 +9,8 @@ public class StageManager : MonoBehaviour
     public Enemy boss;
     public Transform bossSpawnLocation;
     public LootCollection lootCollection;
-    public bool hasSpawnedBoss = false;
+    [HideInInspector] public bool hasSpawnedBoss = false;
+    public Ally allyReward;
 
     private void Start()
     {
@@ -44,6 +45,8 @@ public class StageManager : MonoBehaviour
         foreach (var stage in stagesToUnlock) GameManager.WorldManager.UnlockStage(stage);
 
         foreach (var zone in zonesToUnlock) GameManager.WorldManager.UnlockZone(zone);
+
+        if (allyReward != null) GameManager.RosterManager.AddUnlocked(allyReward.name);
 
         GameManager.WorldManager.SetLastStage("Scenes/Stages/" + SceneManager.GetActiveScene().name);
 

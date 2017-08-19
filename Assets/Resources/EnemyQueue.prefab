@@ -69,6 +69,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 425b4e124c8bc8943b54ab71df772e5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  queue: {fileID: 11400000, guid: 8c68b6cb0c9182f4682884e1e2ad4881, type: 2}
-  timeBetweenSpawns: 5
-  isRepeating: 0
+  queue: {fileID: 0}
+  timeBetweenSpawns: 0

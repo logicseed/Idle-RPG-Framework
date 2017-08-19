@@ -46,15 +46,15 @@ MonoBehaviour:
     movementSpeed: 0
   lesson: {fileID: 11400000, guid: 1d3186b7d235c664b9750c17594f0ae5, type: 2}
   levelUpgrades:
-    AttackDamage: 0
+    AttackDamage: 1
     AbilityDamage: 0
-    Defense: 0
-    Health: 0
+    Defense: 1
+    Health: 1
     HealthRegeneration: 0
     Energy: 0
     EnergyRegeneration: 0
-    CriticalHitChance: 0
-    CriticalHitDamage: 0
+    CriticalHitChance: 1
+    CriticalHitDamage: 1
     CooldownReduction: 0
     LifeDrain: 0
     MovementSpeed: 0

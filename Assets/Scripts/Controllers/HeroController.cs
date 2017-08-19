@@ -14,6 +14,7 @@ public class HeroController : GameCharacterController
     private HeroInputController inputControllerReference;
     public HeroInputController InputController { get { return inputControllerReference; } }
 
+    [HideInInspector]
     public HeroCombatController heroCombat;
 
     public void Awake()

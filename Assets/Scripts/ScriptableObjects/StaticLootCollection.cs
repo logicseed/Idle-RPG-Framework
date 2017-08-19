@@ -10,16 +10,18 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu(menuName = "Idle RPG/Loot Collection - Static")]
 public class StaticLootCollection : LootCollection
 {
+    [HideInInspector]
     public int currencyAmount;
     public List<Equipment> equipment;
     public bool loopEquipment = false;
-    private int equipmentIterator = 0;
+    private int equipmentIterator = -1;
 
     public override bool DropEquipment()
     {
+        Debug.Log("Checking drop equipment.");
         if (equipment.Count == 0) return false;
         if (loopEquipment == false && equipmentIterator >= equipment.Count) return false;
-
+        Debug.Log("Checking drop chance.");
         return Random.Range(0.0f, 1.0f) >= 0.5f;
     }
 
@@ -40,9 +42,10 @@ public class StaticLootCollection : LootCollection
     {
         if (DropEquipment())
         {
+            Debug.Log("Getting equipment.");
             equipmentIterator++;
             if (loopEquipment && equipmentIterator >= equipment.Count) equipmentIterator = 0;
-            else return null;
+            if (equipmentIterator >= equipment.Count) return null;
             return equipment[equipmentIterator];
         }
         else return null;

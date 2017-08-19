@@ -9,11 +9,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 986e626de29d3c24da75eea9090cd296, type: 3}
-  m_Name: Level1_Ranged
+  m_Name: STagceCQueue
   m_EditorClassIdentifier: 
   enemies:
+  - {fileID: 11400000, guid: 067bc3f73e74a8541a91c1b267777db2, type: 2}
+  - {fileID: 11400000, guid: 067bc3f73e74a8541a91c1b267777db2, type: 2}
   - {fileID: 11400000, guid: ff2b7cc777cbaa84db61e60d98ab037c, type: 2}
-  - {fileID: 11400000, guid: 413a03ad53353dc4082c094b33f44409, type: 2}
-  - {fileID: 11400000, guid: ff2b7cc777cbaa84db61e60d98ab037c, type: 2}
-  - {fileID: 11400000, guid: 413a03ad53353dc4082c094b33f44409, type: 2}
-  - {fileID: 11400000, guid: 413a03ad53353dc4082c094b33f44409, type: 2}

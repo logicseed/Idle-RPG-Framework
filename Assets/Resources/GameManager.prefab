@@ -22,7 +22,7 @@ GameObject:
   - component: {fileID: 114775853311972390}
   m_Layer: 0
   m_Name: GameManager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -60,6 +60,7 @@ MonoBehaviour:
       - Scenes/Zones/ZoneA
       Stages:
       - Scenes/Stages/StageA
+      - Scenes/Stages/StageC
       Inventory:
       - Sword
       - Shield
@@ -126,7 +127,7 @@ MonoBehaviour:
       Equipment: Equipment/
       Allies: Allies/
     Prefab:
-      Hero: {fileID: 1382845795073152, guid: 64e39e8c8a37fb04890ac297817832a8, type: 2}
+      Hero: {fileID: 1990536307461588, guid: bd3bec8cbfdbead43bce31c18b76bc0b, type: 2}
       Ally: {fileID: 1071261792446292, guid: e219a472c19c30e459e20d90f8c987e3, type: 2}
       Enemy: {fileID: 1239132045805106, guid: d7669ce8320bd7f498afd54cac41edfe, type: 2}
       Effect:
@@ -204,4 +205,5 @@ MonoBehaviour:
     list: []
   bypassSaveGame: 0
   loadPercent: 0
+  onStage: 0
   state: 1

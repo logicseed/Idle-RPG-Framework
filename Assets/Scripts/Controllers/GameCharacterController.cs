@@ -10,11 +10,14 @@ public class GameCharacterController : MonoBehaviour
 {
     public bool isCombatDummy = false;
 
+    
     public RuntimeAnimatorController animatorController;
+    [HideInInspector]
     public Animator animatorReference;
     protected CombatController combatControllerReference;
     protected GraphicsController graphicsControllerReference;
     protected MovementController movementControllerReference;
+    [HideInInspector]
     public Rigidbody2D rigidbodyReference;
     protected LootDropManager lootDropManagerReference;
 
@@ -23,12 +26,15 @@ public class GameCharacterController : MonoBehaviour
     protected SpriteRenderer spriteRenderer;
     protected CapsuleCollider2D capsuleCollider2D;
 
+    [HideInInspector]
     public BaseAttributes baseAttributes;
     //public BaseAttributes bonusAttributes;
     protected DerivedAttributes derivedAttributes;
+    [HideInInspector]
     public DerivedAttributes attributes { get { return derivedAttributes; } }
 
     //public CharacterType type = CharacterType.None;
+    [HideInInspector]
     public int level = 1;
 
     public delegate void CharacterDirectionChanged();
@@ -70,6 +76,7 @@ public class GameCharacterController : MonoBehaviour
     /// <summary>
     /// The current state of the character.
     /// </summary>
+    [HideInInspector]
     public CharacterState characterState = CharacterState.Idle; //TODO: protected after debug
 
     /// <summary>

@@ -10,28 +10,28 @@ using UnityEngine.UI;
 /// </summary>
 public class GameManager : Singleton<GameManager>
 {
-    [Header("Settings")]
+    //[Header("Settings")]
     public GameSettings gameSettings;
-    public UserSettings userSettings;
+    //public UserSettings userSettings;
 
-    [Header("World Entity Managers")]
-    public HeroManager heroManager;
-    public RosterManager rosterManager;
-    public InventoryManager inventoryManager;
-    public AbilityManager abilityManager;
-    public WorldManager worldManager;
-    public ZoneManager zoneManager;
-    public StageManager stageManager;
+    //[Header("World Entity Managers")]
+    [HideInInspector] public HeroManager heroManager;
+    [HideInInspector] public RosterManager rosterManager;
+    [HideInInspector] public InventoryManager inventoryManager;
+    [HideInInspector] public AbilityManager abilityManager;
+    [HideInInspector] public WorldManager worldManager;
+    [HideInInspector] public ZoneManager zoneManager;
+    [HideInInspector] public StageManager stageManager;
 
-    [Header("Stage Entity Managers")]
-    public AllyManager allyManager;
-    public EnemyManager enemyManager;
-    public BossManager bossManager;
-    public QueueManager queueManager;
+    //[Header("Stage Entity Managers")]
+    [HideInInspector] public AllyManager allyManager;
+    [HideInInspector] public EnemyManager enemyManager;
+    [HideInInspector] public BossManager bossManager;
+    [HideInInspector] public QueueManager queueManager;
 
 
     public static GameSettings GameSettings { get { return GameManager.Instance.gameSettings; } }
-    public static UserSettings UserSettings { get { return GameManager.Instance.userSettings; } }
+    //public static UserSettings UserSettings { get { return GameManager.Instance.userSettings; } }
     public static HeroManager HeroManager { get { return GameManager.Instance.heroManager; } }
     public static HeroController Hero { get { return GameManager.Instance.heroManager.Hero; } }
     public static RosterManager RosterManager { get { return GameManager.Instance.rosterManager; } }
@@ -45,12 +45,12 @@ public class GameManager : Singleton<GameManager>
     public static BossManager BossManager { get { return GameManager.Instance.bossManager; } }
     public static QueueManager QueueManager { get { return GameManager.Instance.queueManager; } }
 
-    public bool bypassSaveGame;
+    [HideInInspector] public bool bypassSaveGame;
 
-    public float loadPercent = 0.0f;
-    public bool onStage = false;
+    [HideInInspector] public float loadPercent = 0.0f;
+    [HideInInspector] public bool onStage = false;
 
-    public GameState state = GameState.LoadingWorld;
+    [HideInInspector] public GameState state = GameState.LoadingWorld;
     public static GameState State { get { return GameManager.Instance.state; } }
 
     protected override void Awake()

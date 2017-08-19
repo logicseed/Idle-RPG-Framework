@@ -71,21 +71,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isCombatDummy: 0
   animatorController: {fileID: 0}
+  animatorReference: {fileID: 0}
+  rigidbodyReference: {fileID: 0}
   baseAttributes:
-    attackDamage: 0
-    abilityDamage: 0
-    defense: 0
-    health: 0
-    healthRegeneration: 0
-    energy: 0
-    energyRegeneration: 0
-    attackSpeed: 0
-    criticalHitChance: 0
-    criticalHitDamage: 0
-    cooldownReduction: 0
-    lifeDrain: 0
-    movementSpeed: 0
-  bonusAttributes:
     attackDamage: 0
     abilityDamage: 0
     defense: 0
@@ -101,4 +89,4 @@ MonoBehaviour:
     movementSpeed: 0
   level: 1
   characterState: 0
-  enemy: {fileID: 11400000, guid: ff2b7cc777cbaa84db61e60d98ab037c, type: 2}
+  enemy: {fileID: 0}

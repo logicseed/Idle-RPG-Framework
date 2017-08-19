@@ -5,4 +5,5 @@ public class BossController : EnemyController
 {
     public override CharacterType type { get { return CharacterType.Enemy; } }
 
+
 }
