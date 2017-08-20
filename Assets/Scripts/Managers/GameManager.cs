@@ -154,6 +154,7 @@ public class GameManager : Singleton<GameManager>
         if (WorldManager.UnlockedStages.Contains(stage))
         {
             GameManager.Instance.onStage = true;
+            GameManager.Instance.InitializeStageEntityManagers();
             SceneManager.LoadScene(stage);
         }
     }

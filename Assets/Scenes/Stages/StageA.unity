@@ -246,6 +246,12 @@ Prefab:
       propertyPath: zonesToUnlock.Array.data[0]
       value: ZoneB
       objectReference: {fileID: 0}
+    - target: {fileID: 114740766870718280, guid: 263d73048925fb9468602279ec6c20fc,
+        type: 2}
+      propertyPath: boss
+      value: 
+      objectReference: {fileID: 11400000, guid: 987f212c7f517df4e800ce4fefc75983,
+        type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 263d73048925fb9468602279ec6c20fc, type: 2}
   m_IsPrefabParent: 0
@@ -303,6 +309,11 @@ Prefab:
       propertyPath: timeBetweenSpawns
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 114748699211807930, guid: 081e24dba53d3da43be860d891c60b0d,
+        type: 2}
+      propertyPath: isSpawning
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 081e24dba53d3da43be860d891c60b0d, type: 2}
   m_IsPrefabParent: 0
@@ -354,6 +365,22 @@ Prefab:
       propertyPath: m_Name
       value: EnemyQueueB
       objectReference: {fileID: 0}
+    - target: {fileID: 114748699211807930, guid: 081e24dba53d3da43be860d891c60b0d,
+        type: 2}
+      propertyPath: queue
+      value: 
+      objectReference: {fileID: 11400000, guid: 8c68b6cb0c9182f4682884e1e2ad4881,
+        type: 2}
+    - target: {fileID: 114748699211807930, guid: 081e24dba53d3da43be860d891c60b0d,
+        type: 2}
+      propertyPath: timeBetweenSpawns
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114748699211807930, guid: 081e24dba53d3da43be860d891c60b0d,
+        type: 2}
+      propertyPath: isSpawning
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 081e24dba53d3da43be860d891c60b0d, type: 2}
   m_IsPrefabParent: 0
@@ -366,11 +393,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4979654516286214, guid: bd3bec8cbfdbead43bce31c18b76bc0b, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -2.04
       objectReference: {fileID: 0}
     - target: {fileID: 4979654516286214, guid: bd3bec8cbfdbead43bce31c18b76bc0b, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -0.42
       objectReference: {fileID: 0}
     - target: {fileID: 4979654516286214, guid: bd3bec8cbfdbead43bce31c18b76bc0b, type: 2}
       propertyPath: m_LocalPosition.z
@@ -412,11 +439,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4016606476916310, guid: a6688595468cd81478678eafb426c31e, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -0.41
       objectReference: {fileID: 0}
     - target: {fileID: 4016606476916310, guid: a6688595468cd81478678eafb426c31e, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -2.28
       objectReference: {fileID: 0}
     - target: {fileID: 4016606476916310, guid: a6688595468cd81478678eafb426c31e, type: 2}
       propertyPath: m_LocalPosition.z
@@ -524,11 +551,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4097497772019128, guid: babe48b26bc4ed44881a2cdf438c527a, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.97
+      value: 0.11
       objectReference: {fileID: 0}
     - target: {fileID: 4097497772019128, guid: babe48b26bc4ed44881a2cdf438c527a, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -2.09
+      value: 2.23
       objectReference: {fileID: 0}
     - target: {fileID: 4097497772019128, guid: babe48b26bc4ed44881a2cdf438c527a, type: 2}
       propertyPath: m_LocalPosition.z
