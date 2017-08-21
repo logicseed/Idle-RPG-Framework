@@ -71,9 +71,9 @@ public class GameManager : Singleton<GameManager>
     /// <summary>
     /// Initializes the world.
     /// </summary>
-    protected void InitializeWorld()
+    public static void InitializeWorld()
     {
-        if (WorldManager.LastZone != String.Empty)
+        if (WorldManager.LastZone != null && WorldManager.LastZone != String.Empty)
         {
             LoadZone(WorldManager.LastZone);
             return;

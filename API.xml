@@ -19,6 +19,11 @@
             Creates the derived attributes for the ally.
             </summary>
         </member>
+        <member name="P:AllyController.Level">
+            <summary>
+            Level of the ally.
+            </summary>
+        </member>
         <member name="M:AllyController.Register">
             <summary>
             Registers this Ally with the AllyManager.
@@ -272,6 +277,11 @@
             Creates derived attributes for the enemy.
             </summary>
         </member>
+        <member name="P:EnemyController.Level">
+            <summary>
+            Level of the enemy.
+            </summary>
+        </member>
         <member name="M:EnemyController.Register">
             <summary>
             Registers the enemy with the enemy manager.
@@ -290,11 +300,6 @@
         <member name="P:EnemyController.EnemyObject">
             <summary>
             Returns the scriptable object of the enemy.
-            </summary>
-        </member>
-        <member name="P:EnemyController.Level">
-            <summary>
-            Returns the level of the enemy.
             </summary>
         </member>
         <member name="M:EnemyController.Unregister">
@@ -481,6 +486,11 @@
             Unregisters the character from its respective manager.
             </summary>
         </member>
+        <member name="P:GameCharacterController.IsDead">
+            <summary>
+            Whether or not the character is dead.
+            </summary>
+        </member>
         <member name="T:GraphicsController">
             <summary>
             Responsible for updating character graphics.
@@ -611,6 +621,11 @@
             Updates the state of the hero's defend ability.
             </summary>
         </member>
+        <member name="M:HeroCombatController.UpdateTarget">
+            <summary>
+            Finds an appropriate target for the character if one exists on the stage.
+            </summary>
+        </member>
         <member name="T:HeroController">
             <summary>
             Controls the Hero GameObject.
@@ -634,6 +649,11 @@
         <member name="M:HeroController.CreateDerivedAttributes">
             <summary>
             Creates the derived attributes for the hero.
+            </summary>
+        </member>
+        <member name="P:HeroController.Level">
+            <summary>
+            Level of the hero.
             </summary>
         </member>
         <member name="M:HeroController.CreateHeroInputController">
@@ -706,6 +726,11 @@
             Reference to the HeroInputController.
             </summary>
         </member>
+        <member name="P:HeroController.HeroMovementController">
+            <summary>
+            Reference to the HeroMovementController.
+            </summary>
+        </member>
         <member name="P:HeroController.HeroObject">
             <summary>
             The ScritableObject of the hero.
@@ -743,6 +768,12 @@
             Process a tap at a screen position.
             </summary>
             <param name="position">The screen position of the tap.</param>
+        </member>
+        <member name="M:HeroInputController.AwaitTarget(Ability)">
+            <summary>
+            Awaits a target for targetable abilities when hero doesn't have a target.
+            </summary>
+            <param name="ability">The ability to use once a target is found.</param>
         </member>
         <member name="M:HeroMovementController.GenerateSeekBehaviour">
             <summary>
@@ -982,6 +1013,11 @@
             Updates the game manager every frame.
             </summary>
         </member>
+        <member name="M:GameManager.GenerateIdleRewards">
+            <summary>
+            Generate idle rewards per frame.
+            </summary>
+        </member>
         <member name="P:GameManager.AbilityManager">
             <summary>
             Returns the ability manager.
@@ -1133,6 +1169,17 @@
             Saves the game.
             </summary>
         </member>
+        <member name="M:GameManager.OnApplicationPause(System.Boolean)">
+            <summary>
+            Called when application is paused.
+            </summary>
+            <param name="pause"></param>
+        </member>
+        <member name="M:GameManager.OnApplicationQuit">
+            <summary>
+            Called when application is quit.
+            </summary>
+        </member>
         <member name="T:HeroManager">
             <summary>
             Manages the hero on the stage, and provides easy access to common hero functionality.
@@ -1232,6 +1279,11 @@
             </summary>
             <param name="save">The save game data.</param>
         </member>
+        <member name="P:InventoryManager.AttackType">
+            <summary>
+            Returns the attack type based on assigned equipment.
+            </summary>
+        </member>
         <member name="T:QueueManager">
             <summary>
             Manages all the queues on a stage.
@@ -1250,6 +1302,11 @@
         <member name="P:QueueManager.QueuesAreSpawning">
             <summary>
             Returns whether or not any of the queues are still spawning enemies.
+            </summary>
+        </member>
+        <member name="P:QueueManager.QueuesAreComplete">
+            <summary>
+            Whether or not the queues and the enemies they have spawned are completed.
             </summary>
         </member>
         <member name="T:RosterManager">
@@ -1309,6 +1366,11 @@
             Fills a save game with data from the roster manager.
             </summary>
             <param name="save">The save game data.</param>
+        </member>
+        <member name="P:RosterManager.TotalAssignedLevels">
+            <summary>
+            Returns the total levels of all assigned allies.
+            </summary>
         </member>
         <member name="T:StageManager">
             <summary>
@@ -1463,6 +1525,22 @@
             Returns the last stage the hero was on.
             </summary>
         </member>
+        <member name="P:WorldManager.LastZone">
+            <summary>
+            Returns the last zone the hero was on.
+            </summary>
+        </member>
+        <member name="P:WorldManager.LastIdleFactor">
+            <summary>
+            Returns the idle factor of the highest stage.
+            </summary>
+        </member>
+        <member name="M:WorldManager.SetIdleFactor(System.Single)">
+            <summary>
+            Sets the idle factor to a new value if it is larger.
+            </summary>
+            <param name="idleRewardsFactor">New potential idle factor.</param>
+        </member>
         <member name="P:WorldManager.UnlockedStages">
             <summary>
             Returns the list of unlocked stages.
@@ -1484,6 +1562,12 @@
             Sets the last stage the hero was on.
             </summary>
             <param name="stage">The name of the stage.</param>
+        </member>
+        <member name="M:WorldManager.SetLastZone(System.String)">
+            <summary>
+            Sets the last zone the hero was on.
+            </summary>
+            <param name="zone">The name of the zone.</param>
         </member>
         <member name="M:WorldManager.UnlockStage(System.String)">
             <summary>
@@ -1715,71 +1799,528 @@
             <returns>The optimal velocity vector to accomplish this movement behaviour.</returns>
         </member>
         <member name="T:Ability">
-             <summary>
-            
-             </summary>
+            <summary>
+            Represents an ability.
+            </summary>
         </member>
-        <member name="M:Ability.ApplyEffect(UnityEngine.GameObject)">
-             <summary>
-            
-             </summary>
-             <param name="target"></param>
+        <member name="P:Ability.AbilityRange">
+            <summary>
+            Range type of the ability.
+            </summary>
+        </member>
+        <member name="P:Ability.AbilityType">
+            <summary>
+            Type of the ability.
+            </summary>
+        </member>
+        <member name="P:Ability.Cooldown">
+            <summary>
+            Cooldown of the ability in seconds.
+            </summary>
+        </member>
+        <member name="P:Ability.Effect">
+            <summary>
+            Visual effect for the ability.
+            </summary>
+        </member>
+        <member name="P:Ability.ListableType">
+            <summary>
+            Type of lists this ability belongs to.
+            </summary>
+        </member>
+        <member name="P:Ability.Potency">
+            <summary>
+            Potency of the ability.
+            </summary>
+        </member>
+        <member name="T:Ally">
+            <summary>
+            Represents an ally.
+            </summary>
+        </member>
+        <member name="P:Ally.CharacterType">
+            <summary>
+            The character type of the ally.
+            </summary>
+        </member>
+        <member name="P:Ally.Lesson">
+            <summary>
+            The lesson taught by the ally; i.e. the ability gained when unlocking ally.
+            </summary>
+        </member>
+        <member name="P:Ally.LevelUpgrades">
+            <summary>
+            The attributes that are upgraded when leveling up the ally.
+            </summary>
+        </member>
+        <member name="P:Ally.ListableType">
+            <summary>
+            Type of lists this ally belongs to.
+            </summary>
+        </member>
+        <member name="T:Character">
+            <summary>
+            Represents a character.
+            </summary>
+        </member>
+        <member name="P:Character.Animator">
+            <summary>
+            The animator controller for the character.
+            </summary>
+        </member>
+        <member name="P:Character.AttackType">
+            <summary>
+            Attack type of the character.
+            </summary>
+        </member>
+        <member name="P:Character.BaseAttributes">
+            <summary>
+            Base attributes of the character.
+            </summary>
+        </member>
+        <member name="P:Character.BonusAttributes">
+            <summary>
+            Bonus attributes of the character.
+            </summary>
+        </member>
+        <member name="P:Character.CharacterType">
+            <summary>
+            Type of the character.
+            </summary>
+        </member>
+        <member name="P:Character.Level">
+            <summary>
+            The level of the character.
+            </summary>
+        </member>
+        <member name="T:Enemy">
+            <summary>
+            Represents an enemy.
+            </summary>
+        </member>
+        <member name="P:Enemy.CharacterType">
+            <summary>
+            Character type of the enemy.
+            </summary>
         </member>
         <member name="T:Equipment">
-             <summary>
-            
-             </summary>
+            <summary>
+            Represents a piece of equipment.
+            </summary>
+        </member>
+        <member name="P:Equipment.AttackType">
+            <summary>
+            Attack type of this equipment if it is a weapon.
+            </summary>
+        </member>
+        <member name="P:Equipment.AttributeModifiers">
+            <summary>
+            Modifications to attributes when equipment is assigned.
+            </summary>
+        </member>
+        <member name="P:Equipment.EquipmentSlot">
+            <summary>
+            Slot equipment is assigned to.
+            </summary>
+        </member>
+        <member name="P:Equipment.EquipmentType">
+            <summary>
+            Type of equipment.
+            </summary>
+        </member>
+        <member name="P:Equipment.ListableType">
+            <summary>
+            Type of lists this equipment belongs to.
+            </summary>
+        </member>
+        <member name="T:Hero">
+            <summary>
+            Represents a hero.
+            </summary>
+        </member>
+        <member name="P:Hero.CharacterType">
+            <summary>
+            Character type of the hero.
+            </summary>
+        </member>
+        <member name="T:ListableEntity">
+            <summary>
+            Represents an entity that will be displayed in lists.
+            </summary>
+        </member>
+        <member name="P:ListableEntity.Icon">
+            <summary>
+            Icon for the entity when displayed in lists.
+            </summary>
+        </member>
+        <member name="P:ListableEntity.ListableType">
+            <summary>
+            Type of lists this entity belongs to.
+            </summary>
         </member>
         <member name="T:LootCollection">
-             <summary>
-            
-             </summary>
+            <summary>
+            Represents a collection of loot.
+            </summary>
         </member>
-        <member name="M:LootCollection.GetCurrency">
-             <summary>
-            
-             </summary>
-             <returns></returns>
+        <member name="P:LootCollection.DropEquipment">
+            <summary>
+            Whether or not a piece of equipment dropped.
+            </summary>
+            <returns>True if equipment dropped; false otherwise.</returns>
         </member>
-        <member name="M:LootCollection.GetEquipment">
-             <summary>
-            
-             </summary>
-             <returns></returns>
+        <member name="M:LootCollection.GetNextEquipment">
+            <summary>
+            Gets the next piece of equipment from the loot collection.
+            </summary>
+            <returns>An equipment object.</returns>
+        </member>
+        <member name="T:Queue">
+            <summary>
+            Represents a queue of enemies.
+            </summary>
+        </member>
+        <member name="P:Queue.Enemies">
+            <summary>
+            List of enemies in the queue.
+            </summary>
         </member>
         <member name="T:RandomLootCollection">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="M:RandomLootCollection.GetCurrency">
             <summary>
-            
+            Represents a random collection of loot.
             </summary>
-            <returns></returns>
         </member>
-        <member name="M:RandomLootCollection.GetEquipment">
-             <summary>
-            
-             </summary>
-             <returns></returns>
+        <member name="P:RandomLootCollection.DropEquipment">
+            <summary>
+            Whether or not equipment dropped.
+            </summary>
+        </member>
+        <member name="M:RandomLootCollection.GetNextEquipment">
+            <summary>
+            Get the next piece of equipment that drops.
+            </summary>
+            <returns>Equipment object that dropped.</returns>
         </member>
         <member name="T:StaticLootCollection">
-             <summary>
-            
-             </summary>
+            <summary>
+            Represents a static collection of equipment loot.
+            </summary>
         </member>
-        <member name="M:StaticLootCollection.GetCurrency">
-             <summary>
-            
-             </summary>
-             <returns></returns>
+        <member name="P:StaticLootCollection.DropEquipment">
+            <summary>
+            Whether or not a piece of equipment dropped.
+            </summary>
         </member>
-        <member name="M:StaticLootCollection.GetEquipment">
-             <summary>
-            
-             </summary>
-             <returns></returns>
+        <member name="M:StaticLootCollection.GetNextEquipment">
+            <summary>
+            Gets the next piece of equipment to drop.
+            </summary>
+            <returns>An equipment object.</returns>
+        </member>
+        <member name="T:BackToWorldButton">
+            <summary>
+            Processes clocks on the back to world button.
+            </summary>
+        </member>
+        <member name="M:BackToWorldButton.Start">
+            <summary>
+            Sets up the back to world button.
+            </summary>
+        </member>
+        <member name="M:BackToWorldButton.LoadWorld">
+            <summary>
+            Loads the world scene when the button is clicked.
+            </summary>
+        </member>
+        <member name="T:CreatePopupButton">
+            <summary>
+            Creates a popup window when button is clicked. Used for listable entity popups; roster, inventory, etc.
+            </summary>
+        </member>
+        <member name="M:CreatePopupButton.Start">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:CreatePopupButton.SpawnPopup">
+            <summary>
+            Spawns the popup window when the button is clicked.
+            </summary>
+        </member>
+        <member name="T:CreateUpgradeAlliesPopupButton">
+            <summary>
+            Creates the upgrade ally popup when the button is clicked.
+            </summary>
+        </member>
+        <member name="M:CreateUpgradeAlliesPopupButton.Start">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:CreateUpgradeAlliesPopupButton.SpawnPopup">
+            <summary>
+            Spawns the upgrade ally popup when the button is clicked.
+            </summary>
+        </member>
+        <member name="T:CreateUpgradeHeroPopupButton">
+            <summary>
+            Creates the upgrade hero popup when the button is clicked.
+            </summary>
+        </member>
+        <member name="M:CreateUpgradeHeroPopupButton.Start">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:CreateUpgradeHeroPopupButton.SpawnPopup">
+            <summary>
+            Spawns the upgrade hero popup when the button is clicked.
+            </summary>
+        </member>
+        <member name="T:ExperienceText">
+            <summary>
+            Keeps a text object updated with the current experience.
+            </summary>
+        </member>
+        <member name="M:ExperienceText.OnGUI">
+            <summary>
+            Refreshes every GUI refresh.
+            </summary>
+        </member>
+        <member name="M:ExperienceText.Start">
+            <summary>
+            Sets up the text.
+            </summary>
+        </member>
+        <member name="T:HeroHealthBar">
+            <summary>
+            Controls the hero health bar.
+            </summary>
+        </member>
+        <member name="M:HeroHealthBar.OnGUI">
+            <summary>
+            Refreshes the health bar every GUI refresh.
+            </summary>
+        </member>
+        <member name="T:HeroEnergyBar">
+            <summary>
+            Controls the hero energy bar.
+            </summary>
+        </member>
+        <member name="M:HeroEnergyBar.OnGUI">
+            <summary>
+            Refreshes energy bar every GUI refresh.
+            </summary>
+        </member>
+        <member name="T:HeroStagePortrait">
+            <summary>
+            Controls the hero portrait.
+            </summary>
+        </member>
+        <member name="M:HeroStagePortrait.Start">
+            <summary>
+            Sets up the portrait.
+            </summary>
+        </member>
+        <member name="T:UpgradeAllyPopup">
+            <summary>
+            Controls the popup list of ally upgrade buttons.
+            </summary>
+        </member>
+        <member name="M:UpgradeAllyPopup.Start">
+            <summary>
+            Sets up the popup.
+            </summary>
+        </member>
+        <member name="M:UpgradeAllyPopup.RefreshButtons">
+            <summary>
+            Refreshes all of the upgrade ally buttons.
+            </summary>
+        </member>
+        <member name="T:UpgradeAllyButton">
+            <summary>
+            Controls the button that upgrades an ally.
+            </summary>
+        </member>
+        <member name="M:UpgradeAllyButton.Awake">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:UpgradeAllyButton.UpgradeAlly">
+            <summary>
+            Upgrades the ally when the button is clicked.
+            </summary>
+        </member>
+        <member name="M:UpgradeAllyButton.Initialize(System.String,UpgradeAllyPopup)">
+            <summary>
+            Initializes the values of the button with an ally.
+            </summary>
+            <param name="allyName">The name of the ally.</param>
+            <param name="list">The popup list of allies.</param>
+        </member>
+        <member name="M:UpgradeAllyButton.RefreshButton">
+            <summary>
+            Refreshes the button based on ally data.
+            </summary>
+        </member>
+        <member name="T:PopupBackButton">
+            <summary>
+            Controls a button to go back from a popup window.
+            </summary>
+        </member>
+        <member name="M:PopupBackButton.Start">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:PopupBackButton.ClosePopup">
+            <summary>
+            Closes the popup when the button is clicked.
+            </summary>
+        </member>
+        <member name="T:ResetButton">
+            <summary>
+            Controls the button that resets the game.
+            </summary>
+        </member>
+        <member name="M:ResetButton.Start">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:ResetButton.ResetGame">
+            <summary>
+            Resets the game when the button is clicked.
+            </summary>
+        </member>
+        <member name="T:StageButton">
+            <summary>
+            Controls a button that takes the player to a stage.
+            </summary>
+        </member>
+        <member name="M:StageButton.Start">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:StageButton.LoadStage">
+            <summary>
+            Loads the stage when the button is clicked.
+            </summary>
+        </member>
+        <member name="M:StageButton.CenterIfLastStage">
+            <summary>
+            Centers the scroll view on this stage if it was the last stage visited.
+            </summary>
+        </member>
+        <member name="T:UpgradeHeroPopup">
+            <summary>
+            Controls the upgrade hero popup.
+            </summary>
+        </member>
+        <member name="M:UpgradeHeroPopup.Start">
+            <summary>
+            Sets up the popup.
+            </summary>
+        </member>
+        <member name="M:UpgradeHeroPopup.UpgradeHero">
+            <summary>
+            Upgrades the hero when the button is clicked.
+            </summary>
+        </member>
+        <member name="M:UpgradeHeroPopup.RefreshHeroData">
+            <summary>
+            Refreshes the hero data displayed on the popup.
+            </summary>
+        </member>
+        <member name="T:WorldEntityButton">
+            <summary>
+            Controls a world entity button.
+            </summary>
+        </member>
+        <member name="M:WorldEntityButton.Awake">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:WorldEntityButton.HandleAssignClick">
+            <summary>
+            Assigns the world entity when the button is clicked.
+            </summary>
+        </member>
+        <member name="M:WorldEntityButton.HandleClick">
+            <summary>
+            Handles the button click based on the specified action.
+            </summary>
+        </member>
+        <member name="M:WorldEntityButton.HandleUseClick">
+            <summary>
+            Uses the world entity when the button is clicked.
+            </summary>
+        </member>
+        <member name="M:WorldEntityButton.Update">
+            <summary>
+            Updates the button based on world state.
+            </summary>
+        </member>
+        <member name="M:WorldEntityButton.Initialize(System.String,ButtonAction,WorldEntityManager)">
+            <summary>
+            Initializes the button with data from the world entity.
+            </summary>
+            <param name="entityName">The name of the entity.</param>
+            <param name="buttonAction">The action taken when the button is clicked.</param>
+            <param name="manager">The world entity manager for this type of entity.</param>
+        </member>
+        <member name="T:WorldEntityList">
+            <summary>
+            Controls a list of world entities.
+            </summary>
+        </member>
+        <member name="M:WorldEntityList.AddButtons">
+            <summary>
+            Adds button based on the content of the list.
+            </summary>
+        </member>
+        <member name="M:WorldEntityList.OnDestroy">
+            <summary>
+            Unsubscribes from refresh events when destroyed.
+            </summary>
+        </member>
+        <member name="M:WorldEntityList.RefreshDisplay">
+            <summary>
+            Refreshes the list.
+            </summary>
+        </member>
+        <member name="M:WorldEntityList.RemoveButtons">
+            <summary>
+            Removes all existing buttons.
+            </summary>
+        </member>
+        <member name="M:WorldEntityList.Start">
+            <summary>
+            Sets up the list.
+            </summary>
+        </member>
+        <member name="T:ZoneButton">
+            <summary>
+            Controls a button that loads a zone.
+            </summary>
+        </member>
+        <member name="M:ZoneButton.Start">
+            <summary>
+            Sets up the button.
+            </summary>
+        </member>
+        <member name="M:ZoneButton.LoadZone">
+            <summary>
+            Loads the zone scene when the button is clicked.
+            </summary>
+        </member>
+        <member name="M:ZoneButton.CenterIfLastZone">
+            <summary>
+            Centers the scroll view on this butotn if it was the last zone visited.
+            </summary>
         </member>
         <member name="T:ConditionalDebug">
             <summary>
@@ -2245,9 +2786,109 @@
             Format arguments.
             </param>
         </member>
-        <member name="T:CharacterAttribute">
+        <member name="T:CustomGizmo">
             <summary>
-            Represents the attribute of a character.
+            Allows the easy display of editor gizmos.
+            </summary>
+        </member>
+        <member name="T:CustomGizmo.Properties">
+            <summary>
+            Properties of the gizmo.
+            </summary>
+        </member>
+        <member name="M:CustomGizmo.OnDrawGizmos">
+            <summary>
+            Refreshes on gizmo refresh.
+            </summary>
+        </member>
+        <member name="T:CustomGizmo.GizmoShape">
+            <summary>
+            Shape of the gizmo.
+            </summary>
+        </member>
+        <member name="T:AbilityRange">
+            <summary>
+            The range of an ability.
+            </summary>
+        </member>
+        <member name="F:AbilityRange.Melee">
+            <summary>
+            Affects a target within melee range.
+            </summary>
+        </member>
+        <member name="F:AbilityRange.Ranged">
+            <summary>
+            Affects a target at a distance.
+            </summary>
+        </member>
+        <member name="F:AbilityRange.Self">
+            <summary>
+            Affects the self.
+            </summary>
+        </member>
+        <member name="T:AbilityType">
+            <summary>
+            Type of ability.
+            </summary>
+        </member>
+        <member name="F:AbilityType.Direct">
+            <summary>
+            Damages a single target.
+            </summary>
+        </member>
+        <member name="F:AbilityType.Area">
+            <summary>
+            Damages an area around a target.
+            </summary>
+        </member>
+        <member name="F:AbilityType.Heal">
+            <summary>
+            Heals a target's damage.
+            </summary>
+        </member>
+        <member name="F:AbilityType.Shield">
+            <summary>
+            Shields a target from damage.
+            </summary>
+        </member>
+        <member name="T:AttackType">
+            <summary>
+            Basic attack type.
+            </summary>
+        </member>
+        <member name="F:AttackType.Melee">
+            <summary>
+            Damages a close target.
+            </summary>
+        </member>
+        <member name="F:AttackType.Ranged">
+            <summary>
+            Shoots an arrow at a target.
+            </summary>
+        </member>
+        <member name="F:AttackType.Caster">
+            <summary>
+            Shoots a caster ball at a target.
+            </summary>
+        </member>
+        <member name="T:ButtonAction">
+            <summary>
+            Action taken when entity button is clicked.
+            </summary>
+        </member>
+        <member name="F:ButtonAction.None">
+            <summary>
+            No action taken.
+            </summary>
+        </member>
+        <member name="F:ButtonAction.Assign">
+            <summary>
+            Assigns or unassigns the entity.
+            </summary>
+        </member>
+        <member name="F:ButtonAction.Use">
+            <summary>
+            Uses the entity.
             </summary>
         </member>
         <member name="T:CharacterState">
@@ -2255,9 +2896,69 @@
             Represents the current state of a character.
             </summary>
         </member>
+        <member name="F:CharacterState.Idle">
+            <summary>
+            Character is idle.
+            </summary>
+        </member>
+        <member name="F:CharacterState.Walk">
+            <summary>
+            Character is walking.
+            </summary>
+        </member>
+        <member name="F:CharacterState.Melee">
+            <summary>
+            Character is performing melee basic attacks.
+            </summary>
+        </member>
+        <member name="F:CharacterState.Ranged">
+            <summary>
+            Character is performing ranged basic attacks.
+            </summary>
+        </member>
+        <member name="F:CharacterState.Defend">
+            <summary>
+            Character is defending.
+            </summary>
+        </member>
+        <member name="F:CharacterState.Cast">
+            <summary>
+            Character is performing caster basic attacks.
+            </summary>
+        </member>
+        <member name="F:CharacterState.Dead">
+            <summary>
+            Character is dead.
+            </summary>
+        </member>
         <member name="T:CharacterType">
             <summary>
             Represents the type of a character.
+            </summary>
+        </member>
+        <member name="F:CharacterType.None">
+            <summary>
+            Not a valid character type.
+            </summary>
+        </member>
+        <member name="F:CharacterType.Ally">
+            <summary>
+            An ally of the hero.
+            </summary>
+        </member>
+        <member name="F:CharacterType.Enemy">
+            <summary>
+            An enemy of the hero.
+            </summary>
+        </member>
+        <member name="F:CharacterType.Boss">
+            <summary>
+            A boss enemy of the hero.
+            </summary>
+        </member>
+        <member name="F:CharacterType.Hero">
+            <summary>
+            The hero.
             </summary>
         </member>
         <member name="T:EquipmentSlot">
@@ -2265,9 +2966,44 @@
             Represents the slots in which equipment can be placed.
             </summary>
         </member>
+        <member name="F:EquipmentSlot.RightHand">
+            <summary>
+            Equipped in right hand.
+            </summary>
+        </member>
+        <member name="F:EquipmentSlot.LeftHand">
+            <summary>
+            Equipped in left hand.
+            </summary>
+        </member>
+        <member name="F:EquipmentSlot.TwoHand">
+            <summary>
+            Equipped using both hands.
+            </summary>
+        </member>
+        <member name="F:EquipmentSlot.Body">
+            <summary>
+            Equipped on the body.
+            </summary>
+        </member>
         <member name="T:EquipmentType">
             <summary>
             Represents the type of a piece of equipment.
+            </summary>
+        </member>
+        <member name="F:EquipmentType.Weapon">
+            <summary>
+            Used the attack.
+            </summary>
+        </member>
+        <member name="F:EquipmentType.Armor">
+            <summary>
+            Used to resist damage.
+            </summary>
+        </member>
+        <member name="F:EquipmentType.Shield">
+            <summary>
+            Used to defend.
             </summary>
         </member>
         <member name="T:HazardType">
@@ -2275,41 +3011,170 @@
             Represents the type of hazard.
             </summary>
         </member>
+        <member name="F:HazardType.Force">
+            <summary>
+            Applies a force to the character.
+            </summary>
+        </member>
+        <member name="F:HazardType.Damage">
+            <summary>
+            Applies damage to the character.
+            </summary>
+        </member>
+        <member name="F:HazardType.Stun">
+            <summary>
+            Stuns the character.
+            </summary>
+        </member>
+        <member name="T:ListableEntityType">
+            <summary>
+            Type of world entity lists.
+            </summary>
+        </member>
+        <member name="F:ListableEntityType.NonListable">
+            <summary>
+            World entity does not get listed.
+            </summary>
+        </member>
+        <member name="F:ListableEntityType.Ability">
+            <summary>
+            List of abilities.
+            </summary>
+        </member>
+        <member name="F:ListableEntityType.Inventory">
+            <summary>
+            List of equipment.
+            </summary>
+        </member>
+        <member name="F:ListableEntityType.Roster">
+            <summary>
+            List of allies.
+            </summary>
+        </member>
         <member name="T:MoveDirection">
             <summary>
             Represents the last direction moved.
             </summary>
         </member>
-        <member name="T:GameObjectExtensions">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="M:GameObjectExtensions.GetRequiredComponent``1(UnityEngine.GameObject)">
-             <summary>
-            
-             </summary>
-             <typeparam name="T"></typeparam>
-             <param name="gameObject"></param>
-             <returns></returns>
-        </member>
-        <member name="M:GameObjectExtensions.CloserGameObject(UnityEngine.GameObject,UnityEngine.GameObject,UnityEngine.GameObject)">
+        <member name="F:MoveDirection.Left">
             <summary>
-            Determines which GameObject is closer to the calling GameObject.
+            Moved to the left.
             </summary>
-            <param name="source">The calling GameObject.</param>
-            <param name="gameObjectA">First GameObject to compare.</param>
-            <param name="gameObjectB">Second GameObject to compare.</param>
-            <returns>Reference to the closest GameObject; or gameObjectA if they are equidistant.</returns>
         </member>
-        <member name="T:TransformExtensions">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="T:SceneTimer">
+        <member name="F:MoveDirection.Right">
             <summary>
-            Loads a scene after a specified amount of time.
+            Moved to the right.
+            </summary>
+        </member>
+        <member name="T:ListExtensions">
+            <summary>
+            Methods that extent the built-in List collection.
+            </summary>
+        </member>
+        <member name="M:ListExtensions.ToDelimitedString(System.Collections.Generic.List{System.String},System.String)">
+            <summary>
+            Generates a string of the list delimited by a string.
+            </summary>
+            <param name="list">The list to display.</param>
+            <param name="delimiter">The string delimiter.</param>
+            <returns>A string of the list delimited by a string.</returns>
+        </member>
+        <member name="T:Vector3Extensions">
+            <summary>
+            Extends the Unity Vector3 type.
+            </summary>
+        </member>
+        <member name="M:Vector3Extensions.SqrDistance(UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            Gets the squared distance between two vectors.
+            </summary>
+            <param name="source">The source vector.</param>
+            <param name="destination">The destination vector.</param>
+            <returns>A float representing the squared distance between the vectors.</returns>
+        </member>
+        <member name="T:HelpBoxAttribute">
+            <summary>
+            The attribute applied to fields to display a help box.
+            </summary>
+        </member>
+        <member name="T:HelpBoxMessageType">
+            <summary>
+            Type of help box message; affect displayed icon.
+            </summary>
+        </member>
+        <member name="T:RegisterList`1">
+            <summary>
+            Represents a list that objects can register to and unregister from.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="M:RegisterList`1.GetAll">
+            <summary>
+            Get all the registers items.
+            </summary>
+            <returns>List of registered items.</returns>
+        </member>
+        <member name="M:RegisterList`1.RemoveAll(System.Boolean)">
+            <summary>
+            Removes all of the regitered items.
+            </summary>
+            <param name="destroy">Whether or not to destroy the items.</param>
+        </member>
+        <member name="M:RegisterList`1.Register(`0)">
+            <summary>
+            Registers an item with the list.
+            </summary>
+            <param name="item">The item to register.</param>
+        </member>
+        <member name="M:RegisterList`1.Unregister(`0)">
+            <summary>
+            Unregisters an item from the list.
+            </summary>
+            <param name="item">The item to unregister.</param>
+        </member>
+        <member name="M:RegisterList`1.AddAllToList(System.Collections.Generic.List{`0}@)">
+            <summary>
+            Adds all registered items to the provided list.
+            </summary>
+            <param name="addToList">List to add registered items to.</param>
+        </member>
+        <member name="P:RegisterList`1.HasRegisteredEntities">
+            <summary>
+            Whether or not the manager has any registered entities.
+            </summary>
+        </member>
+        <member name="T:SaveGameManager">
+            <summary>
+            Manages the save games.
+            </summary>
+        </member>
+        <member name="M:SaveGameManager.SaveGame(SaveGame)">
+            <summary>
+            Saves the provided save game data.
+            </summary>
+            <param name="saveGame">The save game data.</param>
+            <returns>Whether or not the save was successful.</returns>
+        </member>
+        <member name="M:SaveGameManager.LoadGame">
+            <summary>
+            Loads save game data from disk.
+            </summary>
+            <returns>The save game data.</returns>
+        </member>
+        <member name="M:SaveGameManager.DeleteSaveGame">
+            <summary>
+            Deletes any existing save game data.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="P:SaveGameManager.SavePath">
+            <summary>
+            Path of the save game data.
+            </summary>
+        </member>
+        <member name="P:SaveGameManager.SaveGameExists">
+            <summary>
+            Whetehr or not a save game exists.
             </summary>
         </member>
         <member name="T:Singleton`1">
@@ -2328,6 +3193,71 @@
             Contains unscaled attributes for a character.
             </summary>
         </member>
+        <member name="P:BaseAttributes.AttackDamage">
+            <summary>
+            Damage done with basic attack.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.AbilityDamage">
+            <summary>
+            Damage done with caster basic attack.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.Defense">
+            <summary>
+            Damage resisted from basic attacks.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.Health">
+            <summary>
+            Health points until death.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.HealthRegeneration">
+            <summary>
+            Health points regenerated per second.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.Energy">
+            <summary>
+            Energy points used for abilities.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.EnergyRegeneration">
+            <summary>
+            Energy points regnerated per second.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.AttackSpeed">
+            <summary>
+            Attacks per second.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.CriticalHitChance">
+            <summary>
+            Chance for a critical strike.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.CriticalHitDamage">
+            <summary>
+            Extra damage on critical hits.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.CooldownReduction">
+            <summary>
+            Reduction is ability cooldowns.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.LifeDrain">
+            <summary>
+            Health points regained based on damage.
+            </summary>
+        </member>
+        <member name="P:BaseAttributes.MovementSpeed">
+            <summary>
+            Units moved per second.
+            </summary>
+        </member>
         <member name="M:BaseAttributes.op_Addition(BaseAttributes,BaseAttributes)">
             <summary>
             Adds two BaseAttributes together and returns a new one.
@@ -2336,81 +3266,182 @@
             <param name="attributesB">BaseAttributes to add from.</param>
             <returns>BaseAttributes containing the sum of attributesA and attributesB.</returns>
         </member>
-        <member name="P:DerivedAttributes.attackDamage">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.abilityDamage">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.defense">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.health">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.healthRegeneration">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.energy">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.energyRegeneration">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.attackSpeed">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.criticalHitChance">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.criticalHitDamage">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.cooldownReduction">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.lifeDrain">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="P:DerivedAttributes.movementSpeed">
-             <summary>
-            
-             </summary>
-        </member>
-        <member name="M:DerivedAttributes.#ctor(Character)">
+        <member name="T:DerivedAttributes">
             <summary>
-            Constructor to create derived attributes from
+            The derived attributes of a character from base attributes, levels, equipment, etc.
             </summary>
-            <param name="character"></param>
         </member>
-        <member name="T:RandomLoot">
-             <summary>
-            
-             </summary>
+        <member name="P:DerivedAttributes.AttackDamage">
+            <summary>
+            Damage of basic attacks.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.AbilityDamage">
+            <summary>
+            Damage of abilities.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.Defense">
+            <summary>
+            Resistance to damage.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.Health">
+            <summary>
+            Health points before death.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.HealthRegeneration">
+            <summary>
+            Health points regained per second.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.Energy">
+            <summary>
+            Energy points spend on abilities.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.EnergyRegeneration">
+            <summary>
+            Energy points regained per second.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.AttackSpeed">
+            <summary>
+            Attacks per second.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.CriticalHitChance">
+            <summary>
+            Chance for a critical hit.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.CriticalHitDamage">
+            <summary>
+            Damage bonus upon critical hit.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.CooldownReduction">
+            <summary>
+            Percentage of cooldowns reduced.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.LifeDrain">
+            <summary>
+            Life regained per damage done.
+            </summary>
+        </member>
+        <member name="P:DerivedAttributes.MovementSpeed">
+            <summary>
+            Units moved per second.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.#ctor(Character,System.Int32)">
+            <summary>
+            Constructor to create derived attributes from a character.
+            </summary>
+            <param name="character">Character object for base attributes.</param>
+            <param name="level">Level of the character.</param>
+        </member>
+        <member name="M:DerivedAttributes.CalculateDerivedAttributes">
+            <summary>
+            Calculate all derived attributes.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveAttributeFloat(System.Int32,System.Single,System.Int32,System.Boolean)">
+            <summary>
+            Derives a floating point attribute.
+            </summary>
+            <param name="baseAttribute">Base attribute value.</param>
+            <param name="fullValue">Full value of the attribute.</param>
+            <param name="bonusAttribute">Bonus attribute values.</param>
+            <param name="upgradable">Whether or not the attribute is upgraded by level.</param>
+            <returns>The derived attribute.</returns>
+        </member>
+        <member name="M:DerivedAttributes.DeriveAttributeInt(System.Int32,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Derives an integer attribute.
+            </summary>
+            <param name="baseAttribute">Base attribute value.</param>
+            <param name="fullValue">Full value of the attribute.</param>
+            <param name="bonusAttribute">Bonus attribute values.</param>
+            <param name="upgradable">Whether or not the attribute is upgraded by level.</param>
+            <returns>The derived attribute.</returns>
+        </member>
+        <member name="M:DerivedAttributes.DeriveAttackDamage">
+            <summary>
+            Derives the attack damage attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveAbilityDamage">
+            <summary>
+            Derives the ability damage attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveDefense">
+            <summary>
+            Derives the defense attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveHealth">
+            <summary>
+            Derives the health attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveHealthRegeneration">
+            <summary>
+            Derives the health regeneration attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveEnergy">
+            <summary>
+            Derives the energy attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveEnergyRegeneration">
+            <summary>
+            Derives the energy regeneration attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveAttackSpeed">
+            <summary>
+            Derives the attack speed attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveCriticalHitChance">
+            <summary>
+            Derives the critical hit change attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveCriticalHitDamage">
+            <summary>
+            Derives the critical hit damage attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveCooldownReduction">
+            <summary>
+            Derives the cooldown reduction attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveLifeDrain">
+            <summary>
+            Derives the lide drain attribute.
+            </summary>
+        </member>
+        <member name="M:DerivedAttributes.DeriveMovementSpeed">
+            <summary>
+            Derives the movement speed attribute.
+            </summary>
+        </member>
+        <member name="T:GameSettings">
+            <summary>
+            Provides an inspector interface for constant game values.
+            </summary>
+        </member>
+        <member name="T:LevelUpgrades">
+            <summary>
+            Represents which attributes will be leveled up when an ally is upgraded.
+            </summary>
         </member>
         <member name="T:SaveGame">
             <summary>
@@ -2425,6 +3456,11 @@
         <member name="M:SaveGame.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)">
             <summary>
             Prepares fields for serialization.
+            </summary>
+        </member>
+        <member name="T:SceneField">
+            <summary>
+            Allows dragging a scene into an inspector field.
             </summary>
         </member>
     </members>

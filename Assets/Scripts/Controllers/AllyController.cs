@@ -30,10 +30,15 @@ public class AllyController : GameCharacterController
     /// <summary>
     /// Creates the derived attributes for the ally.
     /// </summary>
-    protected override void CreateDerivedAttributes()
+    public override void CreateDerivedAttributes()
     {
-        derivedAttributes = new DerivedAttributes(AllyObject);
+        derivedAttributes = new DerivedAttributes(AllyObject, Level);
     }
+
+    /// <summary>
+    /// Level of the ally.
+    /// </summary>
+    public override int Level { get { return GameManager.RosterManager.AllyLevels[AllyObject.name]; } }
 
     /// <summary>
     /// Registers this Ally with the AllyManager.

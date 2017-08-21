@@ -88,16 +88,19 @@ public class DerivedAttributes
     public float MovementSpeed { get { return movementSpeedDerived; } }
 
     private Character character;
+    private int level;
     private BaseAttributes bonusAttributes;
     private LevelUpgrades levelUpgrades;
 
     /// <summary>
     /// Constructor to create derived attributes from a character.
     /// </summary>
-    /// <param name="character"></param>
-    public DerivedAttributes(Character character)
+    /// <param name="character">Character object for base attributes.</param>
+    /// <param name="level">Level of the character.</param>
+    public DerivedAttributes(Character character, int level)
     {
         this.character = character;
+        this.level = level;
 
         if (character.CharacterType == CharacterType.Hero)
         {
@@ -155,7 +158,7 @@ public class DerivedAttributes
         derivedAttribute += bonusAttribute;
         derivedAttribute /= 100f;
         derivedAttribute *= fullValue;
-        if (upgradable) derivedAttribute *= character.Level;
+        if (upgradable) derivedAttribute *= level;
         return derivedAttribute;
     }
 

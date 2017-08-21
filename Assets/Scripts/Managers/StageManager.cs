@@ -51,7 +51,7 @@ public class StageManager : MonoBehaviour
 
         GameManager.WorldManager.SetIdleFactor(idleRewardsFactor);
 
-        GameManager.LoadWorld();
+        GameManager.InitializeWorld();
     }
 
     /// <summary>

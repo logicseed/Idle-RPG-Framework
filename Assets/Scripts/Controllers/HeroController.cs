@@ -55,10 +55,15 @@ public class HeroController : GameCharacterController
     /// <summary>
     /// Creates the derived attributes for the hero.
     /// </summary>
-    protected override void CreateDerivedAttributes()
+    public override void CreateDerivedAttributes()
     {
-        derivedAttributes = new DerivedAttributes(heroObject);
+        derivedAttributes = new DerivedAttributes(HeroObject, Level);
     }
+
+    /// <summary>
+    /// Level of the hero.
+    /// </summary>
+    public override int Level { get { return GameManager.HeroManager.Level; } }
 
     /// <summary>
     /// Creates the hero input controller.

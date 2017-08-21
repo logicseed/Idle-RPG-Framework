@@ -44,7 +44,8 @@ public class UpgradeHeroPopup : MonoBehaviour
     {
         spriteImage.sprite = GameManager.HeroManager.HeroObject.Icon;
 
-        var attributes = new DerivedAttributes(GameManager.HeroManager.HeroObject);
+        var attributes = new DerivedAttributes(GameManager.HeroManager.HeroObject, GameManager.HeroManager.Level);
+
         // Attribute text
         var text = new StringBuilder();
         text.Append("Level: ");

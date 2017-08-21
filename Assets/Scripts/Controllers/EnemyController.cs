@@ -29,10 +29,15 @@ public class EnemyController : GameCharacterController
     /// <summary>
     /// Creates derived attributes for the enemy.
     /// </summary>
-    protected override void CreateDerivedAttributes()
+    public override void CreateDerivedAttributes()
     {
-        derivedAttributes = new DerivedAttributes(EnemyObject);
+        derivedAttributes = new DerivedAttributes(EnemyObject, Level);
     }
+
+    /// <summary>
+    /// Level of the enemy.
+    /// </summary>
+    public override int Level { get { return EnemyObject.Level; } }
 
     /// <summary>
     /// Registers the enemy with the enemy manager.
@@ -80,11 +85,6 @@ public class EnemyController : GameCharacterController
     /// </summary>
     //public Enemy EnemyObject { get { return enemyObject; } set { enemyObject = value; } }
     public Enemy EnemyObject { get { return characterObjectReference as Enemy; } set { characterObjectReference = value; } }
-
-    /// <summary>
-    /// Returns the level of the enemy.
-    /// </summary>
-    public override int Level { get { return EnemyObject.Level; } }
 
     /// <summary>
     /// Unregisters the enemy with the enemy manager.

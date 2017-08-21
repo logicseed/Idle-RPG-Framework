@@ -56,7 +56,7 @@ public class GameCharacterController : MonoBehaviour
     /// <summary>
     /// Creates derived attributes based on the character.
     /// </summary>
-    protected virtual void CreateDerivedAttributes() { }
+    public virtual void CreateDerivedAttributes() { }
 
     /// <summary>
     /// Creates the floating health bar for the character.

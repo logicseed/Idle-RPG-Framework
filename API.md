@@ -2,7 +2,12 @@
 # Contents [#](#contents 'Go To Here')
 
 - [Ability](#T-Ability 'Ability')
-  - [ApplyEffect(target)](#M-Ability-ApplyEffect-UnityEngine-GameObject- 'Ability.ApplyEffect(UnityEngine.GameObject)')
+  - [AbilityRange](#P-Ability-AbilityRange 'Ability.AbilityRange')
+  - [AbilityType](#P-Ability-AbilityType 'Ability.AbilityType')
+  - [Cooldown](#P-Ability-Cooldown 'Ability.Cooldown')
+  - [Effect](#P-Ability-Effect 'Ability.Effect')
+  - [ListableType](#P-Ability-ListableType 'Ability.ListableType')
+  - [Potency](#P-Ability-Potency 'Ability.Potency')
 - [AbilityManager](#T-AbilityManager 'AbilityManager')
   - [#ctor(save)](#M-AbilityManager-#ctor-SaveGame- 'AbilityManager.#ctor(SaveGame)')
   - [MaxAssigned](#P-AbilityManager-MaxAssigned 'AbilityManager.MaxAssigned')
@@ -10,6 +15,15 @@
   - [ResourcePath](#P-AbilityManager-ResourcePath 'AbilityManager.ResourcePath')
   - [Load(save)](#M-AbilityManager-Load-SaveGame- 'AbilityManager.Load(SaveGame)')
   - [Save(save)](#M-AbilityManager-Save-SaveGame@- 'AbilityManager.Save(SaveGame@)')
+- [AbilityRange](#T-AbilityRange 'AbilityRange')
+  - [Melee](#F-AbilityRange-Melee 'AbilityRange.Melee')
+  - [Ranged](#F-AbilityRange-Ranged 'AbilityRange.Ranged')
+  - [Self](#F-AbilityRange-Self 'AbilityRange.Self')
+- [AbilityType](#T-AbilityType 'AbilityType')
+  - [Area](#F-AbilityType-Area 'AbilityType.Area')
+  - [Direct](#F-AbilityType-Direct 'AbilityType.Direct')
+  - [Heal](#F-AbilityType-Heal 'AbilityType.Heal')
+  - [Shield](#F-AbilityType-Shield 'AbilityType.Shield')
 - [AbstractMovementBehaviour](#T-AbstractMovementBehaviour 'AbstractMovementBehaviour')
   - [CalculateDesiredVelocity()](#M-AbstractMovementBehaviour-CalculateDesiredVelocity 'AbstractMovementBehaviour.CalculateDesiredVelocity')
   - [Steering()](#M-AbstractMovementBehaviour-Steering 'AbstractMovementBehaviour.Steering')
@@ -23,27 +37,75 @@
   - [radius](#F-AbstractMovementDecorator-radius 'AbstractMovementDecorator.radius')
   - [target](#F-AbstractMovementDecorator-target 'AbstractMovementDecorator.target')
   - [Steering()](#M-AbstractMovementDecorator-Steering 'AbstractMovementDecorator.Steering')
+- [Ally](#T-Ally 'Ally')
+  - [CharacterType](#P-Ally-CharacterType 'Ally.CharacterType')
+  - [Lesson](#P-Ally-Lesson 'Ally.Lesson')
+  - [LevelUpgrades](#P-Ally-LevelUpgrades 'Ally.LevelUpgrades')
+  - [ListableType](#P-Ally-ListableType 'Ally.ListableType')
 - [AllyController](#T-AllyController 'AllyController')
   - [AllyObject](#P-AllyController-AllyObject 'AllyController.AllyObject')
   - [AttackType](#P-AllyController-AttackType 'AllyController.AttackType')
   - [CharacterType](#P-AllyController-CharacterType 'AllyController.CharacterType')
+  - [Level](#P-AllyController-Level 'AllyController.Level')
   - [CreateDerivedAttributes()](#M-AllyController-CreateDerivedAttributes 'AllyController.CreateDerivedAttributes')
   - [Register()](#M-AllyController-Register 'AllyController.Register')
   - [Start()](#M-AllyController-Start 'AllyController.Start')
   - [Unregister()](#M-AllyController-Unregister 'AllyController.Unregister')
 - [AllyManager](#T-AllyManager 'AllyManager')
 - [AssignedListChanged](#T-WorldEntityManager-AssignedListChanged 'WorldEntityManager.AssignedListChanged')
+- [AttackType](#T-AttackType 'AttackType')
+  - [Caster](#F-AttackType-Caster 'AttackType.Caster')
+  - [Melee](#F-AttackType-Melee 'AttackType.Melee')
+  - [Ranged](#F-AttackType-Ranged 'AttackType.Ranged')
 - [AvoidMovementBehaviour](#T-AvoidMovementBehaviour 'AvoidMovementBehaviour')
   - [#ctor(movementBehaviour,agent,target,radius)](#M-AvoidMovementBehaviour-#ctor-AbstractMovementBehaviour,UnityEngine-GameObject,UnityEngine-GameObject,System-Single- 'AvoidMovementBehaviour.#ctor(AbstractMovementBehaviour,UnityEngine.GameObject,UnityEngine.GameObject,System.Single)')
+- [BackToWorldButton](#T-BackToWorldButton 'BackToWorldButton')
+  - [LoadWorld()](#M-BackToWorldButton-LoadWorld 'BackToWorldButton.LoadWorld')
+  - [Start()](#M-BackToWorldButton-Start 'BackToWorldButton.Start')
 - [BaseAttributes](#T-BaseAttributes 'BaseAttributes')
+  - [AbilityDamage](#P-BaseAttributes-AbilityDamage 'BaseAttributes.AbilityDamage')
+  - [AttackDamage](#P-BaseAttributes-AttackDamage 'BaseAttributes.AttackDamage')
+  - [AttackSpeed](#P-BaseAttributes-AttackSpeed 'BaseAttributes.AttackSpeed')
+  - [CooldownReduction](#P-BaseAttributes-CooldownReduction 'BaseAttributes.CooldownReduction')
+  - [CriticalHitChance](#P-BaseAttributes-CriticalHitChance 'BaseAttributes.CriticalHitChance')
+  - [CriticalHitDamage](#P-BaseAttributes-CriticalHitDamage 'BaseAttributes.CriticalHitDamage')
+  - [Defense](#P-BaseAttributes-Defense 'BaseAttributes.Defense')
+  - [Energy](#P-BaseAttributes-Energy 'BaseAttributes.Energy')
+  - [EnergyRegeneration](#P-BaseAttributes-EnergyRegeneration 'BaseAttributes.EnergyRegeneration')
+  - [Health](#P-BaseAttributes-Health 'BaseAttributes.Health')
+  - [HealthRegeneration](#P-BaseAttributes-HealthRegeneration 'BaseAttributes.HealthRegeneration')
+  - [LifeDrain](#P-BaseAttributes-LifeDrain 'BaseAttributes.LifeDrain')
+  - [MovementSpeed](#P-BaseAttributes-MovementSpeed 'BaseAttributes.MovementSpeed')
   - [op_Addition(attributesA,attributesB)](#M-BaseAttributes-op_Addition-BaseAttributes,BaseAttributes- 'BaseAttributes.op_Addition(BaseAttributes,BaseAttributes)')
 - [BossManager](#T-BossManager 'BossManager')
-- [CharacterAttribute](#T-CharacterAttribute 'CharacterAttribute')
+- [ButtonAction](#T-ButtonAction 'ButtonAction')
+  - [Assign](#F-ButtonAction-Assign 'ButtonAction.Assign')
+  - [None](#F-ButtonAction-None 'ButtonAction.None')
+  - [Use](#F-ButtonAction-Use 'ButtonAction.Use')
+- [Character](#T-Character 'Character')
+  - [Animator](#P-Character-Animator 'Character.Animator')
+  - [AttackType](#P-Character-AttackType 'Character.AttackType')
+  - [BaseAttributes](#P-Character-BaseAttributes 'Character.BaseAttributes')
+  - [BonusAttributes](#P-Character-BonusAttributes 'Character.BonusAttributes')
+  - [CharacterType](#P-Character-CharacterType 'Character.CharacterType')
+  - [Level](#P-Character-Level 'Character.Level')
 - [CharacterDirectionChanged](#T-GameCharacterController-CharacterDirectionChanged 'GameCharacterController.CharacterDirectionChanged')
 - [CharacterManager](#T-CharacterManager 'CharacterManager')
 - [CharacterState](#T-CharacterState 'CharacterState')
+  - [Cast](#F-CharacterState-Cast 'CharacterState.Cast')
+  - [Dead](#F-CharacterState-Dead 'CharacterState.Dead')
+  - [Defend](#F-CharacterState-Defend 'CharacterState.Defend')
+  - [Idle](#F-CharacterState-Idle 'CharacterState.Idle')
+  - [Melee](#F-CharacterState-Melee 'CharacterState.Melee')
+  - [Ranged](#F-CharacterState-Ranged 'CharacterState.Ranged')
+  - [Walk](#F-CharacterState-Walk 'CharacterState.Walk')
 - [CharacterStateChanged](#T-GameCharacterController-CharacterStateChanged 'GameCharacterController.CharacterStateChanged')
 - [CharacterType](#T-CharacterType 'CharacterType')
+  - [Ally](#F-CharacterType-Ally 'CharacterType.Ally')
+  - [Boss](#F-CharacterType-Boss 'CharacterType.Boss')
+  - [Enemy](#F-CharacterType-Enemy 'CharacterType.Enemy')
+  - [Hero](#F-CharacterType-Hero 'CharacterType.Hero')
+  - [None](#F-CharacterType-None 'CharacterType.None')
 - [CombatController](#T-CombatController 'CombatController')
   - [CanAttack](#P-CombatController-CanAttack 'CombatController.CanAttack')
   - [CharacterController](#P-CombatController-CharacterController 'CombatController.CharacterController')
@@ -107,21 +169,48 @@
   - [LogWarning(message,context)](#M-ConditionalDebug-LogWarning-System-Object,UnityEngine-Object- 'ConditionalDebug.LogWarning(System.Object,UnityEngine.Object)')
   - [LogWarningFormat(format,args)](#M-ConditionalDebug-LogWarningFormat-System-String,System-Object[]- 'ConditionalDebug.LogWarningFormat(System.String,System.Object[])')
   - [LogWarningFormat(context,format,args)](#M-ConditionalDebug-LogWarningFormat-UnityEngine-Object,System-String,System-Object[]- 'ConditionalDebug.LogWarningFormat(UnityEngine.Object,System.String,System.Object[])')
-- [DerivedAttributes](#T--DerivedAttributes '.DerivedAttributes')
-  - [#ctor(character)](#M-DerivedAttributes-#ctor-Character- 'DerivedAttributes.#ctor(Character)')
-  - [abilityDamage](#P-DerivedAttributes-abilityDamage 'DerivedAttributes.abilityDamage')
-  - [attackDamage](#P-DerivedAttributes-attackDamage 'DerivedAttributes.attackDamage')
-  - [attackSpeed](#P-DerivedAttributes-attackSpeed 'DerivedAttributes.attackSpeed')
-  - [cooldownReduction](#P-DerivedAttributes-cooldownReduction 'DerivedAttributes.cooldownReduction')
-  - [criticalHitChance](#P-DerivedAttributes-criticalHitChance 'DerivedAttributes.criticalHitChance')
-  - [criticalHitDamage](#P-DerivedAttributes-criticalHitDamage 'DerivedAttributes.criticalHitDamage')
-  - [defense](#P-DerivedAttributes-defense 'DerivedAttributes.defense')
-  - [energy](#P-DerivedAttributes-energy 'DerivedAttributes.energy')
-  - [energyRegeneration](#P-DerivedAttributes-energyRegeneration 'DerivedAttributes.energyRegeneration')
-  - [health](#P-DerivedAttributes-health 'DerivedAttributes.health')
-  - [healthRegeneration](#P-DerivedAttributes-healthRegeneration 'DerivedAttributes.healthRegeneration')
-  - [lifeDrain](#P-DerivedAttributes-lifeDrain 'DerivedAttributes.lifeDrain')
-  - [movementSpeed](#P-DerivedAttributes-movementSpeed 'DerivedAttributes.movementSpeed')
+- [CreatePopupButton](#T-CreatePopupButton 'CreatePopupButton')
+  - [SpawnPopup()](#M-CreatePopupButton-SpawnPopup 'CreatePopupButton.SpawnPopup')
+  - [Start()](#M-CreatePopupButton-Start 'CreatePopupButton.Start')
+- [CreateUpgradeAlliesPopupButton](#T-CreateUpgradeAlliesPopupButton 'CreateUpgradeAlliesPopupButton')
+  - [SpawnPopup()](#M-CreateUpgradeAlliesPopupButton-SpawnPopup 'CreateUpgradeAlliesPopupButton.SpawnPopup')
+  - [Start()](#M-CreateUpgradeAlliesPopupButton-Start 'CreateUpgradeAlliesPopupButton.Start')
+- [CreateUpgradeHeroPopupButton](#T-CreateUpgradeHeroPopupButton 'CreateUpgradeHeroPopupButton')
+  - [SpawnPopup()](#M-CreateUpgradeHeroPopupButton-SpawnPopup 'CreateUpgradeHeroPopupButton.SpawnPopup')
+  - [Start()](#M-CreateUpgradeHeroPopupButton-Start 'CreateUpgradeHeroPopupButton.Start')
+- [CustomGizmo](#T-CustomGizmo 'CustomGizmo')
+  - [OnDrawGizmos()](#M-CustomGizmo-OnDrawGizmos 'CustomGizmo.OnDrawGizmos')
+- [DerivedAttributes](#T-DerivedAttributes 'DerivedAttributes')
+  - [#ctor(character,level)](#M-DerivedAttributes-#ctor-Character,System-Int32- 'DerivedAttributes.#ctor(Character,System.Int32)')
+  - [AbilityDamage](#P-DerivedAttributes-AbilityDamage 'DerivedAttributes.AbilityDamage')
+  - [AttackDamage](#P-DerivedAttributes-AttackDamage 'DerivedAttributes.AttackDamage')
+  - [AttackSpeed](#P-DerivedAttributes-AttackSpeed 'DerivedAttributes.AttackSpeed')
+  - [CooldownReduction](#P-DerivedAttributes-CooldownReduction 'DerivedAttributes.CooldownReduction')
+  - [CriticalHitChance](#P-DerivedAttributes-CriticalHitChance 'DerivedAttributes.CriticalHitChance')
+  - [CriticalHitDamage](#P-DerivedAttributes-CriticalHitDamage 'DerivedAttributes.CriticalHitDamage')
+  - [Defense](#P-DerivedAttributes-Defense 'DerivedAttributes.Defense')
+  - [Energy](#P-DerivedAttributes-Energy 'DerivedAttributes.Energy')
+  - [EnergyRegeneration](#P-DerivedAttributes-EnergyRegeneration 'DerivedAttributes.EnergyRegeneration')
+  - [Health](#P-DerivedAttributes-Health 'DerivedAttributes.Health')
+  - [HealthRegeneration](#P-DerivedAttributes-HealthRegeneration 'DerivedAttributes.HealthRegeneration')
+  - [LifeDrain](#P-DerivedAttributes-LifeDrain 'DerivedAttributes.LifeDrain')
+  - [MovementSpeed](#P-DerivedAttributes-MovementSpeed 'DerivedAttributes.MovementSpeed')
+  - [CalculateDerivedAttributes()](#M-DerivedAttributes-CalculateDerivedAttributes 'DerivedAttributes.CalculateDerivedAttributes')
+  - [DeriveAbilityDamage()](#M-DerivedAttributes-DeriveAbilityDamage 'DerivedAttributes.DeriveAbilityDamage')
+  - [DeriveAttackDamage()](#M-DerivedAttributes-DeriveAttackDamage 'DerivedAttributes.DeriveAttackDamage')
+  - [DeriveAttackSpeed()](#M-DerivedAttributes-DeriveAttackSpeed 'DerivedAttributes.DeriveAttackSpeed')
+  - [DeriveAttributeFloat(baseAttribute,fullValue,bonusAttribute,upgradable)](#M-DerivedAttributes-DeriveAttributeFloat-System-Int32,System-Single,System-Int32,System-Boolean- 'DerivedAttributes.DeriveAttributeFloat(System.Int32,System.Single,System.Int32,System.Boolean)')
+  - [DeriveAttributeInt(baseAttribute,fullValue,bonusAttribute,upgradable)](#M-DerivedAttributes-DeriveAttributeInt-System-Int32,System-Int32,System-Int32,System-Boolean- 'DerivedAttributes.DeriveAttributeInt(System.Int32,System.Int32,System.Int32,System.Boolean)')
+  - [DeriveCooldownReduction()](#M-DerivedAttributes-DeriveCooldownReduction 'DerivedAttributes.DeriveCooldownReduction')
+  - [DeriveCriticalHitChance()](#M-DerivedAttributes-DeriveCriticalHitChance 'DerivedAttributes.DeriveCriticalHitChance')
+  - [DeriveCriticalHitDamage()](#M-DerivedAttributes-DeriveCriticalHitDamage 'DerivedAttributes.DeriveCriticalHitDamage')
+  - [DeriveDefense()](#M-DerivedAttributes-DeriveDefense 'DerivedAttributes.DeriveDefense')
+  - [DeriveEnergy()](#M-DerivedAttributes-DeriveEnergy 'DerivedAttributes.DeriveEnergy')
+  - [DeriveEnergyRegeneration()](#M-DerivedAttributes-DeriveEnergyRegeneration 'DerivedAttributes.DeriveEnergyRegeneration')
+  - [DeriveHealth()](#M-DerivedAttributes-DeriveHealth 'DerivedAttributes.DeriveHealth')
+  - [DeriveHealthRegeneration()](#M-DerivedAttributes-DeriveHealthRegeneration 'DerivedAttributes.DeriveHealthRegeneration')
+  - [DeriveLifeDrain()](#M-DerivedAttributes-DeriveLifeDrain 'DerivedAttributes.DeriveLifeDrain')
+  - [DeriveMovementSpeed()](#M-DerivedAttributes-DeriveMovementSpeed 'DerivedAttributes.DeriveMovementSpeed')
 - [DirectAbilityController](#T-DirectAbilityController 'DirectAbilityController')
   - [Caster](#P-DirectAbilityController-Caster 'DirectAbilityController.Caster')
   - [CriticalModifier](#P-DirectAbilityController-CriticalModifier 'DirectAbilityController.CriticalModifier')
@@ -131,6 +220,8 @@
 - [DirectMovementBehaviour](#T-DirectMovementBehaviour 'DirectMovementBehaviour')
   - [#ctor(movementBehaviour,agent,target,radius)](#M-DirectMovementBehaviour-#ctor-AbstractMovementBehaviour,UnityEngine-GameObject,UnityEngine-GameObject,System-Single- 'DirectMovementBehaviour.#ctor(AbstractMovementBehaviour,UnityEngine.GameObject,UnityEngine.GameObject,System.Single)')
   - [CalculateMaximumVelocity(fromPosition,toPosition)](#M-DirectMovementBehaviour-CalculateMaximumVelocity-UnityEngine-Vector2,UnityEngine-Vector2- 'DirectMovementBehaviour.CalculateMaximumVelocity(UnityEngine.Vector2,UnityEngine.Vector2)')
+- [Enemy](#T-Enemy 'Enemy')
+  - [CharacterType](#P-Enemy-CharacterType 'Enemy.CharacterType')
 - [EnemyController](#T-EnemyController 'EnemyController')
   - [AttackType](#P-EnemyController-AttackType 'EnemyController.AttackType')
   - [CharacterType](#P-EnemyController-CharacterType 'EnemyController.CharacterType')
@@ -142,8 +233,23 @@
   - [Unregister()](#M-EnemyController-Unregister 'EnemyController.Unregister')
 - [EnemyManager](#T-EnemyManager 'EnemyManager')
 - [Equipment](#T-Equipment 'Equipment')
+  - [AttackType](#P-Equipment-AttackType 'Equipment.AttackType')
+  - [AttributeModifiers](#P-Equipment-AttributeModifiers 'Equipment.AttributeModifiers')
+  - [EquipmentSlot](#P-Equipment-EquipmentSlot 'Equipment.EquipmentSlot')
+  - [EquipmentType](#P-Equipment-EquipmentType 'Equipment.EquipmentType')
+  - [ListableType](#P-Equipment-ListableType 'Equipment.ListableType')
 - [EquipmentSlot](#T-EquipmentSlot 'EquipmentSlot')
+  - [Body](#F-EquipmentSlot-Body 'EquipmentSlot.Body')
+  - [LeftHand](#F-EquipmentSlot-LeftHand 'EquipmentSlot.LeftHand')
+  - [RightHand](#F-EquipmentSlot-RightHand 'EquipmentSlot.RightHand')
+  - [TwoHand](#F-EquipmentSlot-TwoHand 'EquipmentSlot.TwoHand')
 - [EquipmentType](#T-EquipmentType 'EquipmentType')
+  - [Armor](#F-EquipmentType-Armor 'EquipmentType.Armor')
+  - [Shield](#F-EquipmentType-Shield 'EquipmentType.Shield')
+  - [Weapon](#F-EquipmentType-Weapon 'EquipmentType.Weapon')
+- [ExperienceText](#T-ExperienceText 'ExperienceText')
+  - [OnGUI()](#M-ExperienceText-OnGUI 'ExperienceText.OnGUI')
+  - [Start()](#M-ExperienceText-Start 'ExperienceText.Start')
 - [FleeMovementBehaviour](#T-FleeMovementBehaviour 'FleeMovementBehaviour')
   - [#ctor(movementBehaviour,agent,target,radius)](#M-FleeMovementBehaviour-#ctor-AbstractMovementBehaviour,UnityEngine-GameObject,UnityEngine-GameObject,System-Single- 'FleeMovementBehaviour.#ctor(AbstractMovementBehaviour,UnityEngine.GameObject,UnityEngine.GameObject,System.Single)')
   - [CalculateDesiredVelocity()](#M-FleeMovementBehaviour-CalculateDesiredVelocity 'FleeMovementBehaviour.CalculateDesiredVelocity')
@@ -159,6 +265,7 @@
   - [CharacterState](#P-GameCharacterController-CharacterState 'GameCharacterController.CharacterState')
   - [CharacterType](#P-GameCharacterController-CharacterType 'GameCharacterController.CharacterType')
   - [CombatController](#P-GameCharacterController-CombatController 'GameCharacterController.CombatController')
+  - [IsDead](#P-GameCharacterController-IsDead 'GameCharacterController.IsDead')
   - [IsFriendly](#P-GameCharacterController-IsFriendly 'GameCharacterController.IsFriendly')
   - [LastDirection](#P-GameCharacterController-LastDirection 'GameCharacterController.LastDirection')
   - [Level](#P-GameCharacterController-Level 'GameCharacterController.Level')
@@ -199,6 +306,7 @@
   - [Awake()](#M-GameManager-Awake 'GameManager.Awake')
   - [CanUpgradeAlly(allyName)](#M-GameManager-CanUpgradeAlly-System-String- 'GameManager.CanUpgradeAlly(System.String)')
   - [CheckBoss(boss)](#M-GameManager-CheckBoss-BossController- 'GameManager.CheckBoss(BossController)')
+  - [GenerateIdleRewards()](#M-GameManager-GenerateIdleRewards 'GameManager.GenerateIdleRewards')
   - [GetManagerByType(entityType)](#M-GameManager-GetManagerByType-ListableEntityType- 'GameManager.GetManagerByType(ListableEntityType)')
   - [InitializeGameWorldManagers()](#M-GameManager-InitializeGameWorldManagers 'GameManager.InitializeGameWorldManagers')
   - [InitializeStageEntityManagers()](#M-GameManager-InitializeStageEntityManagers 'GameManager.InitializeStageEntityManagers')
@@ -210,6 +318,8 @@
   - [LoadWorldUi()](#M-GameManager-LoadWorldUi 'GameManager.LoadWorldUi')
   - [LoadZone(zone)](#M-GameManager-LoadZone-System-String- 'GameManager.LoadZone(System.String)')
   - [LoadZoneUi()](#M-GameManager-LoadZoneUi 'GameManager.LoadZoneUi')
+  - [OnApplicationPause(pause)](#M-GameManager-OnApplicationPause-System-Boolean- 'GameManager.OnApplicationPause(System.Boolean)')
+  - [OnApplicationQuit()](#M-GameManager-OnApplicationQuit 'GameManager.OnApplicationQuit')
   - [OnDestroy()](#M-GameManager-OnDestroy 'GameManager.OnDestroy')
   - [OnSceneChanged(previousScene,newScene)](#M-GameManager-OnSceneChanged-UnityEngine-SceneManagement-Scene,UnityEngine-SceneManagement-Scene- 'GameManager.OnSceneChanged(UnityEngine.SceneManagement.Scene,UnityEngine.SceneManagement.Scene)')
   - [SaveGame()](#M-GameManager-SaveGame 'GameManager.SaveGame')
@@ -218,9 +328,8 @@
   - [UpgradeAlly(allyName)](#M-GameManager-UpgradeAlly-System-String- 'GameManager.UpgradeAlly(System.String)')
   - [UpgradeAllyCost(allyName)](#M-GameManager-UpgradeAllyCost-System-String- 'GameManager.UpgradeAllyCost(System.String)')
   - [UpgradeHero()](#M-GameManager-UpgradeHero 'GameManager.UpgradeHero')
-- [GameObjectExtensions](#T-GameObjectExtensions 'GameObjectExtensions')
-  - [CloserGameObject(source,gameObjectA,gameObjectB)](#M-GameObjectExtensions-CloserGameObject-UnityEngine-GameObject,UnityEngine-GameObject,UnityEngine-GameObject- 'GameObjectExtensions.CloserGameObject(UnityEngine.GameObject,UnityEngine.GameObject,UnityEngine.GameObject)')
-  - [GetRequiredComponent\`\`1(gameObject)](#M-GameObjectExtensions-GetRequiredComponent``1-UnityEngine-GameObject- 'GameObjectExtensions.GetRequiredComponent``1(UnityEngine.GameObject)')
+- [GameSettings](#T-GameSettings 'GameSettings')
+- [GizmoShape](#T-CustomGizmo-GizmoShape 'CustomGizmo.GizmoShape')
 - [GraphicsController](#T-GraphicsController 'GraphicsController')
   - [CharacterStateChanged()](#M-GraphicsController-CharacterStateChanged 'GraphicsController.CharacterStateChanged')
   - [GetCharacterComponent()](#M-GraphicsController-GetCharacterComponent 'GraphicsController.GetCharacterComponent')
@@ -232,6 +341,13 @@
   - [ApplyEffect()](#M-HazardController-ApplyEffect-GameCharacterController- 'HazardController.ApplyEffect(GameCharacterController)')
   - [OnTriggerEnter2D()](#M-HazardController-OnTriggerEnter2D-UnityEngine-Collider2D- 'HazardController.OnTriggerEnter2D(UnityEngine.Collider2D)')
 - [HazardType](#T-HazardType 'HazardType')
+  - [Damage](#F-HazardType-Damage 'HazardType.Damage')
+  - [Force](#F-HazardType-Force 'HazardType.Force')
+  - [Stun](#F-HazardType-Stun 'HazardType.Stun')
+- [HelpBoxAttribute](#T-HelpBoxAttribute 'HelpBoxAttribute')
+- [HelpBoxMessageType](#T-HelpBoxMessageType 'HelpBoxMessageType')
+- [Hero](#T-Hero 'Hero')
+  - [CharacterType](#P-Hero-CharacterType 'Hero.CharacterType')
 - [HeroCombatController](#T-HeroCombatController 'HeroCombatController')
   - [AbilityCooldowns](#P-HeroCombatController-AbilityCooldowns 'HeroCombatController.AbilityCooldowns')
   - [ApplyDamage(damage,isCritical)](#M-HeroCombatController-ApplyDamage-System-Int32,System-Boolean- 'HeroCombatController.ApplyDamage(System.Int32,System.Boolean)')
@@ -245,13 +361,16 @@
   - [Update()](#M-HeroCombatController-Update 'HeroCombatController.Update')
   - [UpdateCooldowns()](#M-HeroCombatController-UpdateCooldowns 'HeroCombatController.UpdateCooldowns')
   - [UpdateDefend()](#M-HeroCombatController-UpdateDefend 'HeroCombatController.UpdateDefend')
+  - [UpdateTarget()](#M-HeroCombatController-UpdateTarget 'HeroCombatController.UpdateTarget')
 - [HeroController](#T-HeroController 'HeroController')
   - [AttackType](#P-HeroController-AttackType 'HeroController.AttackType')
   - [CharacterObject](#P-HeroController-CharacterObject 'HeroController.CharacterObject')
   - [CharacterType](#P-HeroController-CharacterType 'HeroController.CharacterType')
   - [HeroCombatController](#P-HeroController-HeroCombatController 'HeroController.HeroCombatController')
   - [HeroInputController](#P-HeroController-HeroInputController 'HeroController.HeroInputController')
+  - [HeroMovementController](#P-HeroController-HeroMovementController 'HeroController.HeroMovementController')
   - [HeroObject](#P-HeroController-HeroObject 'HeroController.HeroObject')
+  - [Level](#P-HeroController-Level 'HeroController.Level')
   - [CreateCombatController()](#M-HeroController-CreateCombatController 'HeroController.CreateCombatController')
   - [CreateDerivedAttributes()](#M-HeroController-CreateDerivedAttributes 'HeroController.CreateDerivedAttributes')
   - [CreateHeroInputController()](#M-HeroController-CreateHeroInputController 'HeroController.CreateHeroInputController')
@@ -265,7 +384,12 @@
   - [Start()](#M-HeroController-Start 'HeroController.Start')
   - [Unregister()](#M-HeroController-Unregister 'HeroController.Unregister')
   - [UseAbility(ability)](#M-HeroController-UseAbility-Ability- 'HeroController.UseAbility(Ability)')
+- [HeroEnergyBar](#T-HeroEnergyBar 'HeroEnergyBar')
+  - [OnGUI()](#M-HeroEnergyBar-OnGUI 'HeroEnergyBar.OnGUI')
+- [HeroHealthBar](#T-HeroHealthBar 'HeroHealthBar')
+  - [OnGUI()](#M-HeroHealthBar-OnGUI 'HeroHealthBar.OnGUI')
 - [HeroInputController](#T-HeroInputController 'HeroInputController')
+  - [AwaitTarget(ability)](#M-HeroInputController-AwaitTarget-Ability- 'HeroInputController.AwaitTarget(Ability)')
   - [ProcessTap(position)](#M-HeroInputController-ProcessTap-UnityEngine-Vector2- 'HeroInputController.ProcessTap(UnityEngine.Vector2)')
   - [Start()](#M-HeroInputController-Start 'HeroInputController.Start')
   - [Update()](#M-HeroInputController-Update 'HeroInputController.Update')
@@ -282,11 +406,14 @@
   - [Location](#P-HeroMovementController-Location 'HeroMovementController.Location')
   - [GenerateSeekBehaviour()](#M-HeroMovementController-GenerateSeekBehaviour 'HeroMovementController.GenerateSeekBehaviour')
   - [Start()](#M-HeroMovementController-Start 'HeroMovementController.Start')
+- [HeroStagePortrait](#T-HeroStagePortrait 'HeroStagePortrait')
+  - [Start()](#M-HeroStagePortrait-Start 'HeroStagePortrait.Start')
 - [IdleMovementBehaviour](#T-IdleMovementBehaviour 'IdleMovementBehaviour')
   - [CalculateDesiredVelocity()](#M-IdleMovementBehaviour-CalculateDesiredVelocity 'IdleMovementBehaviour.CalculateDesiredVelocity')
   - [Steering()](#M-IdleMovementBehaviour-Steering 'IdleMovementBehaviour.Steering')
 - [InventoryManager](#T-InventoryManager 'InventoryManager')
   - [#ctor(save)](#M-InventoryManager-#ctor-SaveGame- 'InventoryManager.#ctor(SaveGame)')
+  - [AttackType](#P-InventoryManager-AttackType 'InventoryManager.AttackType')
   - [AttributeModifiers](#P-InventoryManager-AttributeModifiers 'InventoryManager.AttributeModifiers')
   - [MaxAssigned](#P-InventoryManager-MaxAssigned 'InventoryManager.MaxAssigned')
   - [MaxUnlocked](#P-InventoryManager-MaxUnlocked 'InventoryManager.MaxUnlocked')
@@ -294,10 +421,23 @@
   - [AddAssigned(name,raiseChangeEvent)](#M-InventoryManager-AddAssigned-System-String,System-Boolean- 'InventoryManager.AddAssigned(System.String,System.Boolean)')
   - [Load(save)](#M-InventoryManager-Load-SaveGame- 'InventoryManager.Load(SaveGame)')
   - [Save(save)](#M-InventoryManager-Save-SaveGame@- 'InventoryManager.Save(SaveGame@)')
+- [LevelUpgrades](#T-LevelUpgrades 'LevelUpgrades')
+- [ListableEntity](#T-ListableEntity 'ListableEntity')
+  - [Icon](#P-ListableEntity-Icon 'ListableEntity.Icon')
+  - [ListableType](#P-ListableEntity-ListableType 'ListableEntity.ListableType')
+- [ListableEntityType](#T-ListableEntityType 'ListableEntityType')
+  - [Ability](#F-ListableEntityType-Ability 'ListableEntityType.Ability')
+  - [Inventory](#F-ListableEntityType-Inventory 'ListableEntityType.Inventory')
+  - [NonListable](#F-ListableEntityType-NonListable 'ListableEntityType.NonListable')
+  - [Roster](#F-ListableEntityType-Roster 'ListableEntityType.Roster')
+- [ListExtensions](#T-ListExtensions 'ListExtensions')
+  - [ToDelimitedString(list,delimiter)](#M-ListExtensions-ToDelimitedString-System-Collections-Generic-List{System-String},System-String- 'ListExtensions.ToDelimitedString(System.Collections.Generic.List{System.String},System.String)')
 - [LootCollection](#T-LootCollection 'LootCollection')
-  - [GetCurrency()](#M-LootCollection-GetCurrency 'LootCollection.GetCurrency')
-  - [GetEquipment()](#M-LootCollection-GetEquipment 'LootCollection.GetEquipment')
+  - [DropEquipment](#P-LootCollection-DropEquipment 'LootCollection.DropEquipment')
+  - [GetNextEquipment()](#M-LootCollection-GetNextEquipment 'LootCollection.GetNextEquipment')
 - [MoveDirection](#T-MoveDirection 'MoveDirection')
+  - [Left](#F-MoveDirection-Left 'MoveDirection.Left')
+  - [Right](#F-MoveDirection-Right 'MoveDirection.Right')
 - [MovementController](#T-MovementController 'MovementController')
   - [CurrentVelocity](#P-MovementController-CurrentVelocity 'MovementController.CurrentVelocity')
   - [MaxSpeed](#P-MovementController-MaxSpeed 'MovementController.MaxSpeed')
@@ -310,6 +450,12 @@
   - [GenerateSeekBehaviour()](#M-MovementController-GenerateSeekBehaviour 'MovementController.GenerateSeekBehaviour')
   - [Move()](#M-MovementController-Move 'MovementController.Move')
   - [Start()](#M-MovementController-Start 'MovementController.Start')
+- [PopupBackButton](#T-PopupBackButton 'PopupBackButton')
+  - [ClosePopup()](#M-PopupBackButton-ClosePopup 'PopupBackButton.ClosePopup')
+  - [Start()](#M-PopupBackButton-Start 'PopupBackButton.Start')
+- [Properties](#T-CustomGizmo-Properties 'CustomGizmo.Properties')
+- [Queue](#T-Queue 'Queue')
+  - [Enemies](#P-Queue-Enemies 'Queue.Enemies')
 - [QueueController](#T-QueueController 'QueueController')
   - [IsRepeating](#P-QueueController-IsRepeating 'QueueController.IsRepeating')
   - [IsSpawning](#P-QueueController-IsSpawning 'QueueController.IsSpawning')
@@ -319,17 +465,28 @@
 - [QueueManager](#T-QueueManager 'QueueManager')
   - [#ctor()](#M-QueueManager-#ctor 'QueueManager.#ctor')
   - [HasQueues](#P-QueueManager-HasQueues 'QueueManager.HasQueues')
+  - [QueuesAreComplete](#P-QueueManager-QueuesAreComplete 'QueueManager.QueuesAreComplete')
   - [QueuesAreSpawning](#P-QueueManager-QueuesAreSpawning 'QueueManager.QueuesAreSpawning')
-- [RandomLoot](#T-RandomLoot 'RandomLoot')
 - [RandomLootCollection](#T-RandomLootCollection 'RandomLootCollection')
-  - [GetCurrency()](#M-RandomLootCollection-GetCurrency 'RandomLootCollection.GetCurrency')
-  - [GetEquipment()](#M-RandomLootCollection-GetEquipment 'RandomLootCollection.GetEquipment')
+  - [DropEquipment](#P-RandomLootCollection-DropEquipment 'RandomLootCollection.DropEquipment')
+  - [GetNextEquipment()](#M-RandomLootCollection-GetNextEquipment 'RandomLootCollection.GetNextEquipment')
+- [RegisterList\`1](#T-RegisterList`1 'RegisterList`1')
+  - [HasRegisteredEntities](#P-RegisterList`1-HasRegisteredEntities 'RegisterList`1.HasRegisteredEntities')
+  - [AddAllToList(addToList)](#M-RegisterList`1-AddAllToList-System-Collections-Generic-List{`0}@- 'RegisterList`1.AddAllToList(System.Collections.Generic.List{`0}@)')
+  - [GetAll()](#M-RegisterList`1-GetAll 'RegisterList`1.GetAll')
+  - [Register(item)](#M-RegisterList`1-Register-`0- 'RegisterList`1.Register(`0)')
+  - [RemoveAll(destroy)](#M-RegisterList`1-RemoveAll-System-Boolean- 'RegisterList`1.RemoveAll(System.Boolean)')
+  - [Unregister(item)](#M-RegisterList`1-Unregister-`0- 'RegisterList`1.Unregister(`0)')
+- [ResetButton](#T-ResetButton 'ResetButton')
+  - [ResetGame()](#M-ResetButton-ResetGame 'ResetButton.ResetGame')
+  - [Start()](#M-ResetButton-Start 'ResetButton.Start')
 - [RosterManager](#T-RosterManager 'RosterManager')
   - [#ctor(save)](#M-RosterManager-#ctor-SaveGame- 'RosterManager.#ctor(SaveGame)')
   - [AllyLevels](#P-RosterManager-AllyLevels 'RosterManager.AllyLevels')
   - [MaxAssigned](#P-RosterManager-MaxAssigned 'RosterManager.MaxAssigned')
   - [MaxUnlocked](#P-RosterManager-MaxUnlocked 'RosterManager.MaxUnlocked')
   - [ResourcePath](#P-RosterManager-ResourcePath 'RosterManager.ResourcePath')
+  - [TotalAssignedLevels](#P-RosterManager-TotalAssignedLevels 'RosterManager.TotalAssignedLevels')
   - [AddUnlocked(name,level,raiseChangeEvent)](#M-RosterManager-AddUnlocked-System-String,System-Int32,System-Boolean- 'RosterManager.AddUnlocked(System.String,System.Int32,System.Boolean)')
   - [Load(save)](#M-RosterManager-Load-SaveGame- 'RosterManager.Load(SaveGame)')
   - [RemoveUnlocked(name,raiseChangeEvent)](#M-RosterManager-RemoveUnlocked-System-String,System-Boolean- 'RosterManager.RemoveUnlocked(System.String,System.Boolean)')
@@ -337,22 +494,45 @@
 - [SaveGame](#T-SaveGame 'SaveGame')
   - [#ctor()](#M-SaveGame-#ctor-System-Runtime-Serialization-SerializationInfo,System-Runtime-Serialization-StreamingContext- 'SaveGame.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)')
   - [GetObjectData()](#M-SaveGame-GetObjectData-System-Runtime-Serialization-SerializationInfo,System-Runtime-Serialization-StreamingContext- 'SaveGame.GetObjectData(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)')
-- [SceneTimer](#T-SceneTimer 'SceneTimer')
+- [SaveGameManager](#T-SaveGameManager 'SaveGameManager')
+  - [SaveGameExists](#P-SaveGameManager-SaveGameExists 'SaveGameManager.SaveGameExists')
+  - [SavePath](#P-SaveGameManager-SavePath 'SaveGameManager.SavePath')
+  - [DeleteSaveGame()](#M-SaveGameManager-DeleteSaveGame 'SaveGameManager.DeleteSaveGame')
+  - [LoadGame()](#M-SaveGameManager-LoadGame 'SaveGameManager.LoadGame')
+  - [SaveGame(saveGame)](#M-SaveGameManager-SaveGame-SaveGame- 'SaveGameManager.SaveGame(SaveGame)')
+- [SceneField](#T-SceneField 'SceneField')
 - [SeekMovementBehaviour](#T-SeekMovementBehaviour 'SeekMovementBehaviour')
   - [#ctor(movementBehaviour,agent,target,radius)](#M-SeekMovementBehaviour-#ctor-AbstractMovementBehaviour,UnityEngine-GameObject,UnityEngine-GameObject,System-Single- 'SeekMovementBehaviour.#ctor(AbstractMovementBehaviour,UnityEngine.GameObject,UnityEngine.GameObject,System.Single)')
   - [CalculateDesiredVelocity()](#M-SeekMovementBehaviour-CalculateDesiredVelocity 'SeekMovementBehaviour.CalculateDesiredVelocity')
 - [Singleton\`1](#T-Singleton`1 'Singleton`1')
   - [Instance](#P-Singleton`1-Instance 'Singleton`1.Instance')
+- [StageButton](#T-StageButton 'StageButton')
+  - [CenterIfLastStage()](#M-StageButton-CenterIfLastStage 'StageButton.CenterIfLastStage')
+  - [LoadStage()](#M-StageButton-LoadStage 'StageButton.LoadStage')
+  - [Start()](#M-StageButton-Start 'StageButton.Start')
 - [StageManager](#T-StageManager 'StageManager')
   - [EndStage()](#M-StageManager-EndStage 'StageManager.EndStage')
   - [GetReward()](#M-StageManager-GetReward 'StageManager.GetReward')
   - [SpawnBoss()](#M-StageManager-SpawnBoss 'StageManager.SpawnBoss')
   - [Start()](#M-StageManager-Start 'StageManager.Start')
 - [StaticLootCollection](#T-StaticLootCollection 'StaticLootCollection')
-  - [GetCurrency()](#M-StaticLootCollection-GetCurrency 'StaticLootCollection.GetCurrency')
-  - [GetEquipment()](#M-StaticLootCollection-GetEquipment 'StaticLootCollection.GetEquipment')
-- [TransformExtensions](#T-TransformExtensions 'TransformExtensions')
+  - [DropEquipment](#P-StaticLootCollection-DropEquipment 'StaticLootCollection.DropEquipment')
+  - [GetNextEquipment()](#M-StaticLootCollection-GetNextEquipment 'StaticLootCollection.GetNextEquipment')
 - [UnlockedListChanged](#T-WorldEntityManager-UnlockedListChanged 'WorldEntityManager.UnlockedListChanged')
+- [UpgradeAllyButton](#T-UpgradeAllyButton 'UpgradeAllyButton')
+  - [Awake()](#M-UpgradeAllyButton-Awake 'UpgradeAllyButton.Awake')
+  - [Initialize(allyName,list)](#M-UpgradeAllyButton-Initialize-System-String,UpgradeAllyPopup- 'UpgradeAllyButton.Initialize(System.String,UpgradeAllyPopup)')
+  - [RefreshButton()](#M-UpgradeAllyButton-RefreshButton 'UpgradeAllyButton.RefreshButton')
+  - [UpgradeAlly()](#M-UpgradeAllyButton-UpgradeAlly 'UpgradeAllyButton.UpgradeAlly')
+- [UpgradeAllyPopup](#T-UpgradeAllyPopup 'UpgradeAllyPopup')
+  - [RefreshButtons()](#M-UpgradeAllyPopup-RefreshButtons 'UpgradeAllyPopup.RefreshButtons')
+  - [Start()](#M-UpgradeAllyPopup-Start 'UpgradeAllyPopup.Start')
+- [UpgradeHeroPopup](#T-UpgradeHeroPopup 'UpgradeHeroPopup')
+  - [RefreshHeroData()](#M-UpgradeHeroPopup-RefreshHeroData 'UpgradeHeroPopup.RefreshHeroData')
+  - [Start()](#M-UpgradeHeroPopup-Start 'UpgradeHeroPopup.Start')
+  - [UpgradeHero()](#M-UpgradeHeroPopup-UpgradeHero 'UpgradeHeroPopup.UpgradeHero')
+- [Vector3Extensions](#T-Vector3Extensions 'Vector3Extensions')
+  - [SqrDistance(source,destination)](#M-Vector3Extensions-SqrDistance-UnityEngine-Vector3,UnityEngine-Vector3- 'Vector3Extensions.SqrDistance(UnityEngine.Vector3,UnityEngine.Vector3)')
 - [WalkMovementBehaviour](#T-WalkMovementBehaviour 'WalkMovementBehaviour')
   - [#ctor(movementBehaviour,agent,location)](#M-WalkMovementBehaviour-#ctor-AbstractMovementBehaviour,UnityEngine-GameObject,UnityEngine-Vector2,System-Single- 'WalkMovementBehaviour.#ctor(AbstractMovementBehaviour,UnityEngine.GameObject,UnityEngine.Vector2,System.Single)')
   - [location](#F-WalkMovementBehaviour-location 'WalkMovementBehaviour.location')
@@ -360,6 +540,19 @@
 - [WanderMovementBehaviour](#T-WanderMovementBehaviour 'WanderMovementBehaviour')
   - [#ctor(movementBehaviour,agent,location,radius)](#M-WanderMovementBehaviour-#ctor-AbstractMovementBehaviour,UnityEngine-GameObject,UnityEngine-Vector2,System-Single- 'WanderMovementBehaviour.#ctor(AbstractMovementBehaviour,UnityEngine.GameObject,UnityEngine.Vector2,System.Single)')
   - [CalculateDesiredVelocity()](#M-WanderMovementBehaviour-CalculateDesiredVelocity 'WanderMovementBehaviour.CalculateDesiredVelocity')
+- [WorldEntityButton](#T-WorldEntityButton 'WorldEntityButton')
+  - [Awake()](#M-WorldEntityButton-Awake 'WorldEntityButton.Awake')
+  - [HandleAssignClick()](#M-WorldEntityButton-HandleAssignClick 'WorldEntityButton.HandleAssignClick')
+  - [HandleClick()](#M-WorldEntityButton-HandleClick 'WorldEntityButton.HandleClick')
+  - [HandleUseClick()](#M-WorldEntityButton-HandleUseClick 'WorldEntityButton.HandleUseClick')
+  - [Initialize(entityName,buttonAction,manager)](#M-WorldEntityButton-Initialize-System-String,ButtonAction,WorldEntityManager- 'WorldEntityButton.Initialize(System.String,ButtonAction,WorldEntityManager)')
+  - [Update()](#M-WorldEntityButton-Update 'WorldEntityButton.Update')
+- [WorldEntityList](#T-WorldEntityList 'WorldEntityList')
+  - [AddButtons()](#M-WorldEntityList-AddButtons 'WorldEntityList.AddButtons')
+  - [OnDestroy()](#M-WorldEntityList-OnDestroy 'WorldEntityList.OnDestroy')
+  - [RefreshDisplay()](#M-WorldEntityList-RefreshDisplay 'WorldEntityList.RefreshDisplay')
+  - [RemoveButtons()](#M-WorldEntityList-RemoveButtons 'WorldEntityList.RemoveButtons')
+  - [Start()](#M-WorldEntityList-Start 'WorldEntityList.Start')
 - [WorldEntityManager](#T-WorldEntityManager 'WorldEntityManager')
   - [#ctor(save)](#M-WorldEntityManager-#ctor-SaveGame- 'WorldEntityManager.#ctor(SaveGame)')
   - [Assigned](#P-WorldEntityManager-Assigned 'WorldEntityManager.Assigned')
@@ -377,13 +570,21 @@
   - [Save(save)](#M-WorldEntityManager-Save-SaveGame@- 'WorldEntityManager.Save(SaveGame@)')
 - [WorldManager](#T-WorldManager 'WorldManager')
   - [#ctor(save)](#M-WorldManager-#ctor-SaveGame- 'WorldManager.#ctor(SaveGame)')
+  - [LastIdleFactor](#P-WorldManager-LastIdleFactor 'WorldManager.LastIdleFactor')
   - [LastStage](#P-WorldManager-LastStage 'WorldManager.LastStage')
+  - [LastZone](#P-WorldManager-LastZone 'WorldManager.LastZone')
   - [UnlockedStages](#P-WorldManager-UnlockedStages 'WorldManager.UnlockedStages')
   - [UnlockedZones](#P-WorldManager-UnlockedZones 'WorldManager.UnlockedZones')
   - [Save(save)](#M-WorldManager-Save-SaveGame@- 'WorldManager.Save(SaveGame@)')
+  - [SetIdleFactor(idleRewardsFactor)](#M-WorldManager-SetIdleFactor-System-Single- 'WorldManager.SetIdleFactor(System.Single)')
   - [SetLastStage(stage)](#M-WorldManager-SetLastStage-System-String- 'WorldManager.SetLastStage(System.String)')
+  - [SetLastZone(zone)](#M-WorldManager-SetLastZone-System-String- 'WorldManager.SetLastZone(System.String)')
   - [UnlockStage(stage)](#M-WorldManager-UnlockStage-System-String- 'WorldManager.UnlockStage(System.String)')
   - [UnlockZone(zone)](#M-WorldManager-UnlockZone-System-String- 'WorldManager.UnlockZone(System.String)')
+- [ZoneButton](#T-ZoneButton 'ZoneButton')
+  - [CenterIfLastZone()](#M-ZoneButton-CenterIfLastZone 'ZoneButton.CenterIfLastZone')
+  - [LoadZone()](#M-ZoneButton-LoadZone 'ZoneButton.LoadZone')
+  - [Start()](#M-ZoneButton-Start 'ZoneButton.Start')
 
 <a name='assembly'></a>
 # Assembly-CSharp [#](#assembly 'Go To Here') [=](#contents 'Back To Contents')
@@ -397,20 +598,49 @@
 
 ##### Summary
 
+Represents an ability.
 
-
-<a name='M-Ability-ApplyEffect-UnityEngine-GameObject-'></a>
-### ApplyEffect(target) `method` [#](#M-Ability-ApplyEffect-UnityEngine-GameObject- 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-Ability-AbilityRange'></a>
+### AbilityRange `property` [#](#P-Ability-AbilityRange 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Range type of the ability.
 
+<a name='P-Ability-AbilityType'></a>
+### AbilityType `property` [#](#P-Ability-AbilityType 'Go To Here') [=](#contents 'Back To Contents')
 
-##### Parameters
+##### Summary
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| target | [UnityEngine.GameObject](#T-UnityEngine-GameObject 'UnityEngine.GameObject') |  |
+Type of the ability.
+
+<a name='P-Ability-Cooldown'></a>
+### Cooldown `property` [#](#P-Ability-Cooldown 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Cooldown of the ability in seconds.
+
+<a name='P-Ability-Effect'></a>
+### Effect `property` [#](#P-Ability-Effect 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Visual effect for the ability.
+
+<a name='P-Ability-ListableType'></a>
+### ListableType `property` [#](#P-Ability-ListableType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Type of lists this ability belongs to.
+
+<a name='P-Ability-Potency'></a>
+### Potency `property` [#](#P-Ability-Potency 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Potency of the ability.
 
 <a name='T-AbilityManager'></a>
 ## AbilityManager [#](#T-AbilityManager 'Go To Here') [=](#contents 'Back To Contents')
@@ -482,6 +712,77 @@ Fills a save game with ability data.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | save | [SaveGame@](#T-SaveGame@ 'SaveGame@') | The save game data. |
+
+<a name='T-AbilityRange'></a>
+## AbilityRange [#](#T-AbilityRange 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+The range of an ability.
+
+<a name='F-AbilityRange-Melee'></a>
+### Melee `constants` [#](#F-AbilityRange-Melee 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Affects a target within melee range.
+
+<a name='F-AbilityRange-Ranged'></a>
+### Ranged `constants` [#](#F-AbilityRange-Ranged 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Affects a target at a distance.
+
+<a name='F-AbilityRange-Self'></a>
+### Self `constants` [#](#F-AbilityRange-Self 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Affects the self.
+
+<a name='T-AbilityType'></a>
+## AbilityType [#](#T-AbilityType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Type of ability.
+
+<a name='F-AbilityType-Area'></a>
+### Area `constants` [#](#F-AbilityType-Area 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Damages an area around a target.
+
+<a name='F-AbilityType-Direct'></a>
+### Direct `constants` [#](#F-AbilityType-Direct 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Damages a single target.
+
+<a name='F-AbilityType-Heal'></a>
+### Heal `constants` [#](#F-AbilityType-Heal 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Heals a target's damage.
+
+<a name='F-AbilityType-Shield'></a>
+### Shield `constants` [#](#F-AbilityType-Shield 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Shields a target from damage.
 
 <a name='T-AbstractMovementBehaviour'></a>
 ## AbstractMovementBehaviour [#](#T-AbstractMovementBehaviour 'Go To Here') [=](#contents 'Back To Contents')
@@ -614,6 +915,45 @@ The optimal steering vector to accomplish this movement behaviour.
 
 This method has no parameters.
 
+<a name='T-Ally'></a>
+## Ally [#](#T-Ally 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Represents an ally.
+
+<a name='P-Ally-CharacterType'></a>
+### CharacterType `property` [#](#P-Ally-CharacterType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+The character type of the ally.
+
+<a name='P-Ally-Lesson'></a>
+### Lesson `property` [#](#P-Ally-Lesson 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+The lesson taught by the ally; i.e. the ability gained when unlocking ally.
+
+<a name='P-Ally-LevelUpgrades'></a>
+### LevelUpgrades `property` [#](#P-Ally-LevelUpgrades 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+The attributes that are upgraded when leveling up the ally.
+
+<a name='P-Ally-ListableType'></a>
+### ListableType `property` [#](#P-Ally-ListableType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Type of lists this ally belongs to.
+
 <a name='T-AllyController'></a>
 ## AllyController [#](#T-AllyController 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -645,6 +985,13 @@ Gets the AttackType of the Ally.
 ##### Summary
 
 Returns the CharacterType of the Ally.
+
+<a name='P-AllyController-Level'></a>
+### Level `property` [#](#P-AllyController-Level 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Level of the ally.
 
 <a name='M-AllyController-CreateDerivedAttributes'></a>
 ### CreateDerivedAttributes() `method` [#](#M-AllyController-CreateDerivedAttributes 'Go To Here') [=](#contents 'Back To Contents')
@@ -712,6 +1059,38 @@ WorldEntityManager
 
 Assigned list change delegate signature.
 
+<a name='T-AttackType'></a>
+## AttackType [#](#T-AttackType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Basic attack type.
+
+<a name='F-AttackType-Caster'></a>
+### Caster `constants` [#](#F-AttackType-Caster 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Shoots a caster ball at a target.
+
+<a name='F-AttackType-Melee'></a>
+### Melee `constants` [#](#F-AttackType-Melee 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Damages a close target.
+
+<a name='F-AttackType-Ranged'></a>
+### Ranged `constants` [#](#F-AttackType-Ranged 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Shoots an arrow at a target.
+
 <a name='T-AvoidMovementBehaviour'></a>
 ## AvoidMovementBehaviour [#](#T-AvoidMovementBehaviour 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -739,6 +1118,39 @@ Constructor for AvoidMovementBehaviour instances.
 | target | [UnityEngine.GameObject](#T-UnityEngine-GameObject 'UnityEngine.GameObject') | The target of this movement behaviour. |
 | radius | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') | The radius at which this behaviour is completed. |
 
+<a name='T-BackToWorldButton'></a>
+## BackToWorldButton [#](#T-BackToWorldButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Processes clocks on the back to world button.
+
+<a name='M-BackToWorldButton-LoadWorld'></a>
+### LoadWorld() `method` [#](#M-BackToWorldButton-LoadWorld 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Loads the world scene when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-BackToWorldButton-Start'></a>
+### Start() `method` [#](#M-BackToWorldButton-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the back to world button.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-BaseAttributes'></a>
 ## BaseAttributes [#](#T-BaseAttributes 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -749,6 +1161,97 @@ Constructor for AvoidMovementBehaviour instances.
 ##### Summary
 
 Contains unscaled attributes for a character.
+
+<a name='P-BaseAttributes-AbilityDamage'></a>
+### AbilityDamage `property` [#](#P-BaseAttributes-AbilityDamage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Damage done with caster basic attack.
+
+<a name='P-BaseAttributes-AttackDamage'></a>
+### AttackDamage `property` [#](#P-BaseAttributes-AttackDamage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Damage done with basic attack.
+
+<a name='P-BaseAttributes-AttackSpeed'></a>
+### AttackSpeed `property` [#](#P-BaseAttributes-AttackSpeed 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Attacks per second.
+
+<a name='P-BaseAttributes-CooldownReduction'></a>
+### CooldownReduction `property` [#](#P-BaseAttributes-CooldownReduction 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Reduction is ability cooldowns.
+
+<a name='P-BaseAttributes-CriticalHitChance'></a>
+### CriticalHitChance `property` [#](#P-BaseAttributes-CriticalHitChance 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Chance for a critical strike.
+
+<a name='P-BaseAttributes-CriticalHitDamage'></a>
+### CriticalHitDamage `property` [#](#P-BaseAttributes-CriticalHitDamage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Extra damage on critical hits.
+
+<a name='P-BaseAttributes-Defense'></a>
+### Defense `property` [#](#P-BaseAttributes-Defense 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Damage resisted from basic attacks.
+
+<a name='P-BaseAttributes-Energy'></a>
+### Energy `property` [#](#P-BaseAttributes-Energy 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Energy points used for abilities.
+
+<a name='P-BaseAttributes-EnergyRegeneration'></a>
+### EnergyRegeneration `property` [#](#P-BaseAttributes-EnergyRegeneration 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Energy points regnerated per second.
+
+<a name='P-BaseAttributes-Health'></a>
+### Health `property` [#](#P-BaseAttributes-Health 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Health points until death.
+
+<a name='P-BaseAttributes-HealthRegeneration'></a>
+### HealthRegeneration `property` [#](#P-BaseAttributes-HealthRegeneration 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Health points regenerated per second.
+
+<a name='P-BaseAttributes-LifeDrain'></a>
+### LifeDrain `property` [#](#P-BaseAttributes-LifeDrain 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Health points regained based on damage.
+
+<a name='P-BaseAttributes-MovementSpeed'></a>
+### MovementSpeed `property` [#](#P-BaseAttributes-MovementSpeed 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Units moved per second.
 
 <a name='M-BaseAttributes-op_Addition-BaseAttributes,BaseAttributes-'></a>
 ### op_Addition(attributesA,attributesB) `method` [#](#M-BaseAttributes-op_Addition-BaseAttributes,BaseAttributes- 'Go To Here') [=](#contents 'Back To Contents')
@@ -779,8 +1282,8 @@ BaseAttributes containing the sum of attributesA and attributesB.
 
 Manages the bosses on a stage.
 
-<a name='T-CharacterAttribute'></a>
-## CharacterAttribute [#](#T-CharacterAttribute 'Go To Here') [=](#contents 'Back To Contents')
+<a name='T-ButtonAction'></a>
+## ButtonAction [#](#T-ButtonAction 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Namespace
 
@@ -788,7 +1291,81 @@ Manages the bosses on a stage.
 
 ##### Summary
 
-Represents the attribute of a character.
+Action taken when entity button is clicked.
+
+<a name='F-ButtonAction-Assign'></a>
+### Assign `constants` [#](#F-ButtonAction-Assign 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Assigns or unassigns the entity.
+
+<a name='F-ButtonAction-None'></a>
+### None `constants` [#](#F-ButtonAction-None 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+No action taken.
+
+<a name='F-ButtonAction-Use'></a>
+### Use `constants` [#](#F-ButtonAction-Use 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Uses the entity.
+
+<a name='T-Character'></a>
+## Character [#](#T-Character 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Represents a character.
+
+<a name='P-Character-Animator'></a>
+### Animator `property` [#](#P-Character-Animator 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+The animator controller for the character.
+
+<a name='P-Character-AttackType'></a>
+### AttackType `property` [#](#P-Character-AttackType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Attack type of the character.
+
+<a name='P-Character-BaseAttributes'></a>
+### BaseAttributes `property` [#](#P-Character-BaseAttributes 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Base attributes of the character.
+
+<a name='P-Character-BonusAttributes'></a>
+### BonusAttributes `property` [#](#P-Character-BonusAttributes 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Bonus attributes of the character.
+
+<a name='P-Character-CharacterType'></a>
+### CharacterType `property` [#](#P-Character-CharacterType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Type of the character.
+
+<a name='P-Character-Level'></a>
+### Level `property` [#](#P-Character-Level 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+The level of the character.
 
 <a name='T-GameCharacterController-CharacterDirectionChanged'></a>
 ## CharacterDirectionChanged [#](#T-GameCharacterController-CharacterDirectionChanged 'Go To Here') [=](#contents 'Back To Contents')
@@ -823,6 +1400,55 @@ Manages the characters on a stage.
 
 Represents the current state of a character.
 
+<a name='F-CharacterState-Cast'></a>
+### Cast `constants` [#](#F-CharacterState-Cast 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character is performing caster basic attacks.
+
+<a name='F-CharacterState-Dead'></a>
+### Dead `constants` [#](#F-CharacterState-Dead 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character is dead.
+
+<a name='F-CharacterState-Defend'></a>
+### Defend `constants` [#](#F-CharacterState-Defend 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character is defending.
+
+<a name='F-CharacterState-Idle'></a>
+### Idle `constants` [#](#F-CharacterState-Idle 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character is idle.
+
+<a name='F-CharacterState-Melee'></a>
+### Melee `constants` [#](#F-CharacterState-Melee 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character is performing melee basic attacks.
+
+<a name='F-CharacterState-Ranged'></a>
+### Ranged `constants` [#](#F-CharacterState-Ranged 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character is performing ranged basic attacks.
+
+<a name='F-CharacterState-Walk'></a>
+### Walk `constants` [#](#F-CharacterState-Walk 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character is walking.
+
 <a name='T-GameCharacterController-CharacterStateChanged'></a>
 ## CharacterStateChanged [#](#T-GameCharacterController-CharacterStateChanged 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -844,6 +1470,41 @@ Character state change delegate signature.
 ##### Summary
 
 Represents the type of a character.
+
+<a name='F-CharacterType-Ally'></a>
+### Ally `constants` [#](#F-CharacterType-Ally 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+An ally of the hero.
+
+<a name='F-CharacterType-Boss'></a>
+### Boss `constants` [#](#F-CharacterType-Boss 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+A boss enemy of the hero.
+
+<a name='F-CharacterType-Enemy'></a>
+### Enemy `constants` [#](#F-CharacterType-Enemy 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+An enemy of the hero.
+
+<a name='F-CharacterType-Hero'></a>
+### Hero `constants` [#](#F-CharacterType-Hero 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+The hero.
+
+<a name='F-CharacterType-None'></a>
+### None `constants` [#](#F-CharacterType-None 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Not a valid character type.
 
 <a name='T-CombatController'></a>
 ## CombatController [#](#T-CombatController 'Go To Here') [=](#contents 'Back To Contents')
@@ -1706,116 +2367,436 @@ Logs a formatted warning message to the Unity Console.
 
 For formatting details, see the MSDN documentation on Composite Formatting. Rich text markup can be used to add emphasis. See the manual page about rich text for details of the different markup tags available.
 
-<a name='T--DerivedAttributes'></a>
-## DerivedAttributes [#](#T--DerivedAttributes 'Go To Here') [=](#contents 'Back To Contents')
+<a name='T-CreatePopupButton'></a>
+## CreatePopupButton [#](#T-CreatePopupButton 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Namespace
 
 
 
-<a name='M-DerivedAttributes-#ctor-Character-'></a>
-### #ctor(character) `constructor` [#](#M-DerivedAttributes-#ctor-Character- 'Go To Here') [=](#contents 'Back To Contents')
+##### Summary
+
+Creates a popup window when button is clicked. Used for listable entity popups; roster, inventory, etc.
+
+<a name='M-CreatePopupButton-SpawnPopup'></a>
+### SpawnPopup() `method` [#](#M-CreatePopupButton-SpawnPopup 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
-Constructor to create derived attributes from
+Spawns the popup window when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-CreatePopupButton-Start'></a>
+### Start() `method` [#](#M-CreatePopupButton-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-CreateUpgradeAlliesPopupButton'></a>
+## CreateUpgradeAlliesPopupButton [#](#T-CreateUpgradeAlliesPopupButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Creates the upgrade ally popup when the button is clicked.
+
+<a name='M-CreateUpgradeAlliesPopupButton-SpawnPopup'></a>
+### SpawnPopup() `method` [#](#M-CreateUpgradeAlliesPopupButton-SpawnPopup 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Spawns the upgrade ally popup when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-CreateUpgradeAlliesPopupButton-Start'></a>
+### Start() `method` [#](#M-CreateUpgradeAlliesPopupButton-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-CreateUpgradeHeroPopupButton'></a>
+## CreateUpgradeHeroPopupButton [#](#T-CreateUpgradeHeroPopupButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Creates the upgrade hero popup when the button is clicked.
+
+<a name='M-CreateUpgradeHeroPopupButton-SpawnPopup'></a>
+### SpawnPopup() `method` [#](#M-CreateUpgradeHeroPopupButton-SpawnPopup 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Spawns the upgrade hero popup when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-CreateUpgradeHeroPopupButton-Start'></a>
+### Start() `method` [#](#M-CreateUpgradeHeroPopupButton-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-CustomGizmo'></a>
+## CustomGizmo [#](#T-CustomGizmo 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Allows the easy display of editor gizmos.
+
+<a name='M-CustomGizmo-OnDrawGizmos'></a>
+### OnDrawGizmos() `method` [#](#M-CustomGizmo-OnDrawGizmos 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes on gizmo refresh.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-DerivedAttributes'></a>
+## DerivedAttributes [#](#T-DerivedAttributes 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+The derived attributes of a character from base attributes, levels, equipment, etc.
+
+<a name='M-DerivedAttributes-#ctor-Character,System-Int32-'></a>
+### #ctor(character,level) `constructor` [#](#M-DerivedAttributes-#ctor-Character,System-Int32- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Constructor to create derived attributes from a character.
 
 ##### Parameters
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
-| character | [Character](#T-Character 'Character') |  |
+| character | [Character](#T-Character 'Character') | Character object for base attributes. |
+| level | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Level of the character. |
 
-<a name='P-DerivedAttributes-abilityDamage'></a>
-### abilityDamage `property` [#](#P-DerivedAttributes-abilityDamage 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-
-
-<a name='P-DerivedAttributes-attackDamage'></a>
-### attackDamage `property` [#](#P-DerivedAttributes-attackDamage 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-DerivedAttributes-AbilityDamage'></a>
+### AbilityDamage `property` [#](#P-DerivedAttributes-AbilityDamage 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Damage of abilities.
 
-
-<a name='P-DerivedAttributes-attackSpeed'></a>
-### attackSpeed `property` [#](#P-DerivedAttributes-attackSpeed 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-
-
-<a name='P-DerivedAttributes-cooldownReduction'></a>
-### cooldownReduction `property` [#](#P-DerivedAttributes-cooldownReduction 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-DerivedAttributes-AttackDamage'></a>
+### AttackDamage `property` [#](#P-DerivedAttributes-AttackDamage 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Damage of basic attacks.
 
-
-<a name='P-DerivedAttributes-criticalHitChance'></a>
-### criticalHitChance `property` [#](#P-DerivedAttributes-criticalHitChance 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-
-
-<a name='P-DerivedAttributes-criticalHitDamage'></a>
-### criticalHitDamage `property` [#](#P-DerivedAttributes-criticalHitDamage 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-DerivedAttributes-AttackSpeed'></a>
+### AttackSpeed `property` [#](#P-DerivedAttributes-AttackSpeed 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Attacks per second.
 
-
-<a name='P-DerivedAttributes-defense'></a>
-### defense `property` [#](#P-DerivedAttributes-defense 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-
-
-<a name='P-DerivedAttributes-energy'></a>
-### energy `property` [#](#P-DerivedAttributes-energy 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-DerivedAttributes-CooldownReduction'></a>
+### CooldownReduction `property` [#](#P-DerivedAttributes-CooldownReduction 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Percentage of cooldowns reduced.
 
-
-<a name='P-DerivedAttributes-energyRegeneration'></a>
-### energyRegeneration `property` [#](#P-DerivedAttributes-energyRegeneration 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-
-
-<a name='P-DerivedAttributes-health'></a>
-### health `property` [#](#P-DerivedAttributes-health 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-DerivedAttributes-CriticalHitChance'></a>
+### CriticalHitChance `property` [#](#P-DerivedAttributes-CriticalHitChance 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Chance for a critical hit.
 
-
-<a name='P-DerivedAttributes-healthRegeneration'></a>
-### healthRegeneration `property` [#](#P-DerivedAttributes-healthRegeneration 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-
-
-<a name='P-DerivedAttributes-lifeDrain'></a>
-### lifeDrain `property` [#](#P-DerivedAttributes-lifeDrain 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-DerivedAttributes-CriticalHitDamage'></a>
+### CriticalHitDamage `property` [#](#P-DerivedAttributes-CriticalHitDamage 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Damage bonus upon critical hit.
 
-
-<a name='P-DerivedAttributes-movementSpeed'></a>
-### movementSpeed `property` [#](#P-DerivedAttributes-movementSpeed 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-DerivedAttributes-Defense'></a>
+### Defense `property` [#](#P-DerivedAttributes-Defense 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Resistance to damage.
 
+<a name='P-DerivedAttributes-Energy'></a>
+### Energy `property` [#](#P-DerivedAttributes-Energy 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Energy points spend on abilities.
+
+<a name='P-DerivedAttributes-EnergyRegeneration'></a>
+### EnergyRegeneration `property` [#](#P-DerivedAttributes-EnergyRegeneration 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Energy points regained per second.
+
+<a name='P-DerivedAttributes-Health'></a>
+### Health `property` [#](#P-DerivedAttributes-Health 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Health points before death.
+
+<a name='P-DerivedAttributes-HealthRegeneration'></a>
+### HealthRegeneration `property` [#](#P-DerivedAttributes-HealthRegeneration 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Health points regained per second.
+
+<a name='P-DerivedAttributes-LifeDrain'></a>
+### LifeDrain `property` [#](#P-DerivedAttributes-LifeDrain 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Life regained per damage done.
+
+<a name='P-DerivedAttributes-MovementSpeed'></a>
+### MovementSpeed `property` [#](#P-DerivedAttributes-MovementSpeed 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Units moved per second.
+
+<a name='M-DerivedAttributes-CalculateDerivedAttributes'></a>
+### CalculateDerivedAttributes() `method` [#](#M-DerivedAttributes-CalculateDerivedAttributes 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Calculate all derived attributes.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveAbilityDamage'></a>
+### DeriveAbilityDamage() `method` [#](#M-DerivedAttributes-DeriveAbilityDamage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the ability damage attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveAttackDamage'></a>
+### DeriveAttackDamage() `method` [#](#M-DerivedAttributes-DeriveAttackDamage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the attack damage attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveAttackSpeed'></a>
+### DeriveAttackSpeed() `method` [#](#M-DerivedAttributes-DeriveAttackSpeed 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the attack speed attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveAttributeFloat-System-Int32,System-Single,System-Int32,System-Boolean-'></a>
+### DeriveAttributeFloat(baseAttribute,fullValue,bonusAttribute,upgradable) `method` [#](#M-DerivedAttributes-DeriveAttributeFloat-System-Int32,System-Single,System-Int32,System-Boolean- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives a floating point attribute.
+
+##### Returns
+
+The derived attribute.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| baseAttribute | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Base attribute value. |
+| fullValue | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') | Full value of the attribute. |
+| bonusAttribute | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Bonus attribute values. |
+| upgradable | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Whether or not the attribute is upgraded by level. |
+
+<a name='M-DerivedAttributes-DeriveAttributeInt-System-Int32,System-Int32,System-Int32,System-Boolean-'></a>
+### DeriveAttributeInt(baseAttribute,fullValue,bonusAttribute,upgradable) `method` [#](#M-DerivedAttributes-DeriveAttributeInt-System-Int32,System-Int32,System-Int32,System-Boolean- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives an integer attribute.
+
+##### Returns
+
+The derived attribute.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| baseAttribute | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Base attribute value. |
+| fullValue | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Full value of the attribute. |
+| bonusAttribute | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Bonus attribute values. |
+| upgradable | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Whether or not the attribute is upgraded by level. |
+
+<a name='M-DerivedAttributes-DeriveCooldownReduction'></a>
+### DeriveCooldownReduction() `method` [#](#M-DerivedAttributes-DeriveCooldownReduction 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the cooldown reduction attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveCriticalHitChance'></a>
+### DeriveCriticalHitChance() `method` [#](#M-DerivedAttributes-DeriveCriticalHitChance 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the critical hit change attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveCriticalHitDamage'></a>
+### DeriveCriticalHitDamage() `method` [#](#M-DerivedAttributes-DeriveCriticalHitDamage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the critical hit damage attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveDefense'></a>
+### DeriveDefense() `method` [#](#M-DerivedAttributes-DeriveDefense 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the defense attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveEnergy'></a>
+### DeriveEnergy() `method` [#](#M-DerivedAttributes-DeriveEnergy 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the energy attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveEnergyRegeneration'></a>
+### DeriveEnergyRegeneration() `method` [#](#M-DerivedAttributes-DeriveEnergyRegeneration 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the energy regeneration attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveHealth'></a>
+### DeriveHealth() `method` [#](#M-DerivedAttributes-DeriveHealth 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the health attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveHealthRegeneration'></a>
+### DeriveHealthRegeneration() `method` [#](#M-DerivedAttributes-DeriveHealthRegeneration 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the health regeneration attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveLifeDrain'></a>
+### DeriveLifeDrain() `method` [#](#M-DerivedAttributes-DeriveLifeDrain 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the lide drain attribute.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-DerivedAttributes-DeriveMovementSpeed'></a>
+### DeriveMovementSpeed() `method` [#](#M-DerivedAttributes-DeriveMovementSpeed 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Derives the movement speed attribute.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-DirectAbilityController'></a>
 ## DirectAbilityController [#](#T-DirectAbilityController 'Go To Here') [=](#contents 'Back To Contents')
@@ -1912,6 +2893,24 @@ Maximum velocity to go from start position to end position.
 | fromPosition | [UnityEngine.Vector2](#T-UnityEngine-Vector2 'UnityEngine.Vector2') | The start position. |
 | toPosition | [UnityEngine.Vector2](#T-UnityEngine-Vector2 'UnityEngine.Vector2') | The end position. |
 
+<a name='T-Enemy'></a>
+## Enemy [#](#T-Enemy 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Represents an enemy.
+
+<a name='P-Enemy-CharacterType'></a>
+### CharacterType `property` [#](#P-Enemy-CharacterType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character type of the enemy.
+
 <a name='T-EnemyController'></a>
 ## EnemyController [#](#T-EnemyController 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -1949,7 +2948,7 @@ Returns the scriptable object of the enemy.
 
 ##### Summary
 
-Returns the level of the enemy.
+Level of the enemy.
 
 <a name='M-EnemyController-CreateDerivedAttributes'></a>
 ### CreateDerivedAttributes() `method` [#](#M-EnemyController-CreateDerivedAttributes 'Go To Here') [=](#contents 'Back To Contents')
@@ -2015,7 +3014,42 @@ Manages the enemies on a stage.
 
 ##### Summary
 
+Represents a piece of equipment.
 
+<a name='P-Equipment-AttackType'></a>
+### AttackType `property` [#](#P-Equipment-AttackType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Attack type of this equipment if it is a weapon.
+
+<a name='P-Equipment-AttributeModifiers'></a>
+### AttributeModifiers `property` [#](#P-Equipment-AttributeModifiers 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Modifications to attributes when equipment is assigned.
+
+<a name='P-Equipment-EquipmentSlot'></a>
+### EquipmentSlot `property` [#](#P-Equipment-EquipmentSlot 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Slot equipment is assigned to.
+
+<a name='P-Equipment-EquipmentType'></a>
+### EquipmentType `property` [#](#P-Equipment-EquipmentType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Type of equipment.
+
+<a name='P-Equipment-ListableType'></a>
+### ListableType `property` [#](#P-Equipment-ListableType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Type of lists this equipment belongs to.
 
 <a name='T-EquipmentSlot'></a>
 ## EquipmentSlot [#](#T-EquipmentSlot 'Go To Here') [=](#contents 'Back To Contents')
@@ -2028,6 +3062,34 @@ Manages the enemies on a stage.
 
 Represents the slots in which equipment can be placed.
 
+<a name='F-EquipmentSlot-Body'></a>
+### Body `constants` [#](#F-EquipmentSlot-Body 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Equipped on the body.
+
+<a name='F-EquipmentSlot-LeftHand'></a>
+### LeftHand `constants` [#](#F-EquipmentSlot-LeftHand 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Equipped in left hand.
+
+<a name='F-EquipmentSlot-RightHand'></a>
+### RightHand `constants` [#](#F-EquipmentSlot-RightHand 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Equipped in right hand.
+
+<a name='F-EquipmentSlot-TwoHand'></a>
+### TwoHand `constants` [#](#F-EquipmentSlot-TwoHand 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Equipped using both hands.
+
 <a name='T-EquipmentType'></a>
 ## EquipmentType [#](#T-EquipmentType 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -2038,6 +3100,60 @@ Represents the slots in which equipment can be placed.
 ##### Summary
 
 Represents the type of a piece of equipment.
+
+<a name='F-EquipmentType-Armor'></a>
+### Armor `constants` [#](#F-EquipmentType-Armor 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Used to resist damage.
+
+<a name='F-EquipmentType-Shield'></a>
+### Shield `constants` [#](#F-EquipmentType-Shield 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Used to defend.
+
+<a name='F-EquipmentType-Weapon'></a>
+### Weapon `constants` [#](#F-EquipmentType-Weapon 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Used the attack.
+
+<a name='T-ExperienceText'></a>
+## ExperienceText [#](#T-ExperienceText 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Keeps a text object updated with the current experience.
+
+<a name='M-ExperienceText-OnGUI'></a>
+### OnGUI() `method` [#](#M-ExperienceText-OnGUI 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes every GUI refresh.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-ExperienceText-Start'></a>
+### Start() `method` [#](#M-ExperienceText-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the text.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-FleeMovementBehaviour'></a>
 ## FleeMovementBehaviour [#](#T-FleeMovementBehaviour 'Go To Here') [=](#contents 'Back To Contents')
@@ -2184,6 +3300,13 @@ Returns the CharacterType of the character.
 ##### Summary
 
 Returns a reference to the character's combat controller.
+
+<a name='P-GameCharacterController-IsDead'></a>
+### IsDead `property` [#](#P-GameCharacterController-IsDead 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Whether or not the character is dead.
 
 <a name='P-GameCharacterController-IsFriendly'></a>
 ### IsFriendly `property` [#](#P-GameCharacterController-IsFriendly 'Go To Here') [=](#contents 'Back To Contents')
@@ -2547,6 +3670,17 @@ Keeps track of a spawned boss and ends the stage after its death.
 | ---- | ---- | ----------- |
 | boss | [BossController](#T-BossController 'BossController') | The boss to keep track of. |
 
+<a name='M-GameManager-GenerateIdleRewards'></a>
+### GenerateIdleRewards() `method` [#](#M-GameManager-GenerateIdleRewards 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Generate idle rewards per frame.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='M-GameManager-GetManagerByType-ListableEntityType-'></a>
 ### GetManagerByType(entityType) `method` [#](#M-GameManager-GetManagerByType-ListableEntityType- 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -2678,6 +3812,30 @@ Loads the user interface for a zone scene.
 
 This method has no parameters.
 
+<a name='M-GameManager-OnApplicationPause-System-Boolean-'></a>
+### OnApplicationPause(pause) `method` [#](#M-GameManager-OnApplicationPause-System-Boolean- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Called when application is paused.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| pause | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') |  |
+
+<a name='M-GameManager-OnApplicationQuit'></a>
+### OnApplicationQuit() `method` [#](#M-GameManager-OnApplicationQuit 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Called when application is quit.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='M-GameManager-OnDestroy'></a>
 ### OnDestroy() `method` [#](#M-GameManager-OnDestroy 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -2777,8 +3935,8 @@ Upgrades the hero.
 
 This method has no parameters.
 
-<a name='T-GameObjectExtensions'></a>
-## GameObjectExtensions [#](#T-GameObjectExtensions 'Go To Here') [=](#contents 'Back To Contents')
+<a name='T-GameSettings'></a>
+## GameSettings [#](#T-GameSettings 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Namespace
 
@@ -2786,49 +3944,18 @@ This method has no parameters.
 
 ##### Summary
 
+Provides an inspector interface for constant game values.
 
+<a name='T-CustomGizmo-GizmoShape'></a>
+## GizmoShape [#](#T-CustomGizmo-GizmoShape 'Go To Here') [=](#contents 'Back To Contents')
 
-<a name='M-GameObjectExtensions-CloserGameObject-UnityEngine-GameObject,UnityEngine-GameObject,UnityEngine-GameObject-'></a>
-### CloserGameObject(source,gameObjectA,gameObjectB) `method` [#](#M-GameObjectExtensions-CloserGameObject-UnityEngine-GameObject,UnityEngine-GameObject,UnityEngine-GameObject- 'Go To Here') [=](#contents 'Back To Contents')
+##### Namespace
 
-##### Summary
-
-Determines which GameObject is closer to the calling GameObject.
-
-##### Returns
-
-Reference to the closest GameObject; or gameObjectA if they are equidistant.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| source | [UnityEngine.GameObject](#T-UnityEngine-GameObject 'UnityEngine.GameObject') | The calling GameObject. |
-| gameObjectA | [UnityEngine.GameObject](#T-UnityEngine-GameObject 'UnityEngine.GameObject') | First GameObject to compare. |
-| gameObjectB | [UnityEngine.GameObject](#T-UnityEngine-GameObject 'UnityEngine.GameObject') | Second GameObject to compare. |
-
-<a name='M-GameObjectExtensions-GetRequiredComponent``1-UnityEngine-GameObject-'></a>
-### GetRequiredComponent\`\`1(gameObject) `method` [#](#M-GameObjectExtensions-GetRequiredComponent``1-UnityEngine-GameObject- 'Go To Here') [=](#contents 'Back To Contents')
+CustomGizmo
 
 ##### Summary
 
-
-
-##### Returns
-
-
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| gameObject | [UnityEngine.GameObject](#T-UnityEngine-GameObject 'UnityEngine.GameObject') |  |
-
-##### Generic Types
-
-| Name | Description |
-| ---- | ----------- |
-| T |  |
+Shape of the gizmo.
 
 <a name='T-GraphicsController'></a>
 ## GraphicsController [#](#T-GraphicsController 'Go To Here') [=](#contents 'Back To Contents')
@@ -2954,6 +4081,67 @@ This method has no parameters.
 ##### Summary
 
 Represents the type of hazard.
+
+<a name='F-HazardType-Damage'></a>
+### Damage `constants` [#](#F-HazardType-Damage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Applies damage to the character.
+
+<a name='F-HazardType-Force'></a>
+### Force `constants` [#](#F-HazardType-Force 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Applies a force to the character.
+
+<a name='F-HazardType-Stun'></a>
+### Stun `constants` [#](#F-HazardType-Stun 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Stuns the character.
+
+<a name='T-HelpBoxAttribute'></a>
+## HelpBoxAttribute [#](#T-HelpBoxAttribute 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+The attribute applied to fields to display a help box.
+
+<a name='T-HelpBoxMessageType'></a>
+## HelpBoxMessageType [#](#T-HelpBoxMessageType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Type of help box message; affect displayed icon.
+
+<a name='T-Hero'></a>
+## Hero [#](#T-Hero 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Represents a hero.
+
+<a name='P-Hero-CharacterType'></a>
+### CharacterType `property` [#](#P-Hero-CharacterType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Character type of the hero.
 
 <a name='T-HeroCombatController'></a>
 ## HeroCombatController [#](#T-HeroCombatController 'Go To Here') [=](#contents 'Back To Contents')
@@ -3111,6 +4299,17 @@ Updates the state of the hero's defend ability.
 
 This method has no parameters.
 
+<a name='M-HeroCombatController-UpdateTarget'></a>
+### UpdateTarget() `method` [#](#M-HeroCombatController-UpdateTarget 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Finds an appropriate target for the character if one exists on the stage.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-HeroController'></a>
 ## HeroController [#](#T-HeroController 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -3157,12 +4356,26 @@ Returns the HeroCombatController for the hero.
 
 Reference to the HeroInputController.
 
+<a name='P-HeroController-HeroMovementController'></a>
+### HeroMovementController `property` [#](#P-HeroController-HeroMovementController 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Reference to the HeroMovementController.
+
 <a name='P-HeroController-HeroObject'></a>
 ### HeroObject `property` [#](#P-HeroController-HeroObject 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
 The ScritableObject of the hero.
+
+<a name='P-HeroController-Level'></a>
+### Level `property` [#](#P-HeroController-Level 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Level of the hero.
 
 <a name='M-HeroController-CreateCombatController'></a>
 ### CreateCombatController() `method` [#](#M-HeroController-CreateCombatController 'Go To Here') [=](#contents 'Back To Contents')
@@ -3324,6 +4537,50 @@ Attempts to use an ability. Does nothing if the ability is on cooldown. Awaits a
 | ---- | ---- | ----------- |
 | ability | [Ability](#T-Ability 'Ability') | The ability to perform. |
 
+<a name='T-HeroEnergyBar'></a>
+## HeroEnergyBar [#](#T-HeroEnergyBar 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls the hero energy bar.
+
+<a name='M-HeroEnergyBar-OnGUI'></a>
+### OnGUI() `method` [#](#M-HeroEnergyBar-OnGUI 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes energy bar every GUI refresh.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-HeroHealthBar'></a>
+## HeroHealthBar [#](#T-HeroHealthBar 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls the hero health bar.
+
+<a name='M-HeroHealthBar-OnGUI'></a>
+### OnGUI() `method` [#](#M-HeroHealthBar-OnGUI 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes the health bar every GUI refresh.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-HeroInputController'></a>
 ## HeroInputController [#](#T-HeroInputController 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -3334,6 +4591,19 @@ Attempts to use an ability. Does nothing if the ability is on cooldown. Awaits a
 ##### Summary
 
 Controls the hero input.
+
+<a name='M-HeroInputController-AwaitTarget-Ability-'></a>
+### AwaitTarget(ability) `method` [#](#M-HeroInputController-AwaitTarget-Ability- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Awaits a target for targetable abilities when hero doesn't have a target.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| ability | [Ability](#T-Ability 'Ability') | The ability to use once a target is found. |
 
 <a name='M-HeroInputController-ProcessTap-UnityEngine-Vector2-'></a>
 ### ProcessTap(position) `method` [#](#M-HeroInputController-ProcessTap-UnityEngine-Vector2- 'Go To Here') [=](#contents 'Back To Contents')
@@ -3499,6 +4769,28 @@ Sets up the hero movement controller.
 
 This method has no parameters.
 
+<a name='T-HeroStagePortrait'></a>
+## HeroStagePortrait [#](#T-HeroStagePortrait 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls the hero portrait.
+
+<a name='M-HeroStagePortrait-Start'></a>
+### Start() `method` [#](#M-HeroStagePortrait-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the portrait.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-IdleMovementBehaviour'></a>
 ## IdleMovementBehaviour [#](#T-IdleMovementBehaviour 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -3563,6 +4855,13 @@ Constructs the inventory manager from a saved game.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | save | [SaveGame](#T-SaveGame 'SaveGame') | The save game data. |
+
+<a name='P-InventoryManager-AttackType'></a>
+### AttackType `property` [#](#P-InventoryManager-AttackType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Returns the attack type based on assigned equipment.
 
 <a name='P-InventoryManager-AttributeModifiers'></a>
 ### AttributeModifiers `property` [#](#P-InventoryManager-AttributeModifiers 'Go To Here') [=](#contents 'Back To Contents')
@@ -3632,6 +4931,110 @@ Fills a save game with inventory data.
 | ---- | ---- | ----------- |
 | save | [SaveGame@](#T-SaveGame@ 'SaveGame@') | The save game data. |
 
+<a name='T-LevelUpgrades'></a>
+## LevelUpgrades [#](#T-LevelUpgrades 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Represents which attributes will be leveled up when an ally is upgraded.
+
+<a name='T-ListableEntity'></a>
+## ListableEntity [#](#T-ListableEntity 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Represents an entity that will be displayed in lists.
+
+<a name='P-ListableEntity-Icon'></a>
+### Icon `property` [#](#P-ListableEntity-Icon 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Icon for the entity when displayed in lists.
+
+<a name='P-ListableEntity-ListableType'></a>
+### ListableType `property` [#](#P-ListableEntity-ListableType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Type of lists this entity belongs to.
+
+<a name='T-ListableEntityType'></a>
+## ListableEntityType [#](#T-ListableEntityType 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Type of world entity lists.
+
+<a name='F-ListableEntityType-Ability'></a>
+### Ability `constants` [#](#F-ListableEntityType-Ability 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+List of abilities.
+
+<a name='F-ListableEntityType-Inventory'></a>
+### Inventory `constants` [#](#F-ListableEntityType-Inventory 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+List of equipment.
+
+<a name='F-ListableEntityType-NonListable'></a>
+### NonListable `constants` [#](#F-ListableEntityType-NonListable 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+World entity does not get listed.
+
+<a name='F-ListableEntityType-Roster'></a>
+### Roster `constants` [#](#F-ListableEntityType-Roster 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+List of allies.
+
+<a name='T-ListExtensions'></a>
+## ListExtensions [#](#T-ListExtensions 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Methods that extent the built-in List collection.
+
+<a name='M-ListExtensions-ToDelimitedString-System-Collections-Generic-List{System-String},System-String-'></a>
+### ToDelimitedString(list,delimiter) `method` [#](#M-ListExtensions-ToDelimitedString-System-Collections-Generic-List{System-String},System-String- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Generates a string of the list delimited by a string.
+
+##### Returns
+
+A string of the list delimited by a string.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| list | [System.Collections.Generic.List{System.String}](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{System.String}') | The list to display. |
+| delimiter | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The string delimiter. |
+
 <a name='T-LootCollection'></a>
 ## LootCollection [#](#T-LootCollection 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -3641,33 +5044,29 @@ Fills a save game with inventory data.
 
 ##### Summary
 
+Represents a collection of loot.
 
-
-<a name='M-LootCollection-GetCurrency'></a>
-### GetCurrency() `method` [#](#M-LootCollection-GetCurrency 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-
-
-##### Returns
-
-
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='M-LootCollection-GetEquipment'></a>
-### GetEquipment() `method` [#](#M-LootCollection-GetEquipment 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-LootCollection-DropEquipment'></a>
+### DropEquipment `property` [#](#P-LootCollection-DropEquipment 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
-
+Whether or not a piece of equipment dropped.
 
 ##### Returns
 
+True if equipment dropped; false otherwise.
 
+<a name='M-LootCollection-GetNextEquipment'></a>
+### GetNextEquipment() `method` [#](#M-LootCollection-GetNextEquipment 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Gets the next piece of equipment from the loot collection.
+
+##### Returns
+
+An equipment object.
 
 ##### Parameters
 
@@ -3683,6 +5082,20 @@ This method has no parameters.
 ##### Summary
 
 Represents the last direction moved.
+
+<a name='F-MoveDirection-Left'></a>
+### Left `constants` [#](#F-MoveDirection-Left 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Moved to the left.
+
+<a name='F-MoveDirection-Right'></a>
+### Right `constants` [#](#F-MoveDirection-Right 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Moved to the right.
 
 <a name='T-MovementController'></a>
 ## MovementController [#](#T-MovementController 'Go To Here') [=](#contents 'Back To Contents')
@@ -3803,6 +5216,68 @@ Sets up the character's movement.
 
 This method has no parameters.
 
+<a name='T-PopupBackButton'></a>
+## PopupBackButton [#](#T-PopupBackButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls a button to go back from a popup window.
+
+<a name='M-PopupBackButton-ClosePopup'></a>
+### ClosePopup() `method` [#](#M-PopupBackButton-ClosePopup 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Closes the popup when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-PopupBackButton-Start'></a>
+### Start() `method` [#](#M-PopupBackButton-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-CustomGizmo-Properties'></a>
+## Properties [#](#T-CustomGizmo-Properties 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+CustomGizmo
+
+##### Summary
+
+Properties of the gizmo.
+
+<a name='T-Queue'></a>
+## Queue [#](#T-Queue 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Represents a queue of enemies.
+
+<a name='P-Queue-Enemies'></a>
+### Enemies `property` [#](#P-Queue-Enemies 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+List of enemies in the queue.
+
 <a name='T-QueueController'></a>
 ## QueueController [#](#T-QueueController 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -3890,23 +5365,19 @@ This constructor has no parameters.
 
 Returns whether or not there are queues on the stage.
 
+<a name='P-QueueManager-QueuesAreComplete'></a>
+### QueuesAreComplete `property` [#](#P-QueueManager-QueuesAreComplete 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Whether or not the queues and the enemies they have spawned are completed.
+
 <a name='P-QueueManager-QueuesAreSpawning'></a>
 ### QueuesAreSpawning `property` [#](#P-QueueManager-QueuesAreSpawning 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
 Returns whether or not any of the queues are still spawning enemies.
-
-<a name='T-RandomLoot'></a>
-## RandomLoot [#](#T-RandomLoot 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Namespace
-
-
-
-##### Summary
-
-
 
 <a name='T-RandomLootCollection'></a>
 ## RandomLootCollection [#](#T-RandomLootCollection 'Go To Here') [=](#contents 'Back To Contents')
@@ -3917,33 +5388,149 @@ Returns whether or not any of the queues are still spawning enemies.
 
 ##### Summary
 
+Represents a random collection of loot.
 
-
-<a name='M-RandomLootCollection-GetCurrency'></a>
-### GetCurrency() `method` [#](#M-RandomLootCollection-GetCurrency 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-RandomLootCollection-DropEquipment'></a>
+### DropEquipment `property` [#](#P-RandomLootCollection-DropEquipment 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Whether or not equipment dropped.
 
+<a name='M-RandomLootCollection-GetNextEquipment'></a>
+### GetNextEquipment() `method` [#](#M-RandomLootCollection-GetNextEquipment 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Get the next piece of equipment that drops.
 
 ##### Returns
 
-
+Equipment object that dropped.
 
 ##### Parameters
 
 This method has no parameters.
 
-<a name='M-RandomLootCollection-GetEquipment'></a>
-### GetEquipment() `method` [#](#M-RandomLootCollection-GetEquipment 'Go To Here') [=](#contents 'Back To Contents')
+<a name='T-RegisterList`1'></a>
+## RegisterList\`1 [#](#T-RegisterList`1 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
 
 ##### Summary
 
+Represents a list that objects can register to and unregister from.
 
+##### Generic Types
+
+| Name | Description |
+| ---- | ----------- |
+| T |  |
+
+<a name='P-RegisterList`1-HasRegisteredEntities'></a>
+### HasRegisteredEntities `property` [#](#P-RegisterList`1-HasRegisteredEntities 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Whether or not the manager has any registered entities.
+
+<a name='M-RegisterList`1-AddAllToList-System-Collections-Generic-List{`0}@-'></a>
+### AddAllToList(addToList) `method` [#](#M-RegisterList`1-AddAllToList-System-Collections-Generic-List{`0}@- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Adds all registered items to the provided list.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| addToList | [System.Collections.Generic.List{\`0}@](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Collections.Generic.List 'System.Collections.Generic.List{`0}@') | List to add registered items to. |
+
+<a name='M-RegisterList`1-GetAll'></a>
+### GetAll() `method` [#](#M-RegisterList`1-GetAll 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Get all the registers items.
 
 ##### Returns
 
+List of registered items.
 
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-RegisterList`1-Register-`0-'></a>
+### Register(item) `method` [#](#M-RegisterList`1-Register-`0- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Registers an item with the list.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| item | [\`0](#T-`0 '`0') | The item to register. |
+
+<a name='M-RegisterList`1-RemoveAll-System-Boolean-'></a>
+### RemoveAll(destroy) `method` [#](#M-RegisterList`1-RemoveAll-System-Boolean- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Removes all of the regitered items.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| destroy | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Whether or not to destroy the items. |
+
+<a name='M-RegisterList`1-Unregister-`0-'></a>
+### Unregister(item) `method` [#](#M-RegisterList`1-Unregister-`0- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Unregisters an item from the list.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| item | [\`0](#T-`0 '`0') | The item to unregister. |
+
+<a name='T-ResetButton'></a>
+## ResetButton [#](#T-ResetButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls the button that resets the game.
+
+<a name='M-ResetButton-ResetGame'></a>
+### ResetGame() `method` [#](#M-ResetButton-ResetGame 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Resets the game when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-ResetButton-Start'></a>
+### Start() `method` [#](#M-ResetButton-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
 
 ##### Parameters
 
@@ -4000,6 +5587,13 @@ Returns the maximum amount of unlocked allies.
 ##### Summary
 
 Returns the resource path for ally objects.
+
+<a name='P-RosterManager-TotalAssignedLevels'></a>
+### TotalAssignedLevels `property` [#](#P-RosterManager-TotalAssignedLevels 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Returns the total levels of all assigned allies.
 
 <a name='M-RosterManager-AddUnlocked-System-String,System-Int32,System-Boolean-'></a>
 ### AddUnlocked(name,level,raiseChangeEvent) `method` [#](#M-RosterManager-AddUnlocked-System-String,System-Int32,System-Boolean- 'Go To Here') [=](#contents 'Back To Contents')
@@ -4089,8 +5683,8 @@ Prepares fields for serialization.
 
 This method has no parameters.
 
-<a name='T-SceneTimer'></a>
-## SceneTimer [#](#T-SceneTimer 'Go To Here') [=](#contents 'Back To Contents')
+<a name='T-SaveGameManager'></a>
+## SaveGameManager [#](#T-SaveGameManager 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Namespace
 
@@ -4098,7 +5692,79 @@ This method has no parameters.
 
 ##### Summary
 
-Loads a scene after a specified amount of time.
+Manages the save games.
+
+<a name='P-SaveGameManager-SaveGameExists'></a>
+### SaveGameExists `property` [#](#P-SaveGameManager-SaveGameExists 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Whetehr or not a save game exists.
+
+<a name='P-SaveGameManager-SavePath'></a>
+### SavePath `property` [#](#P-SaveGameManager-SavePath 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Path of the save game data.
+
+<a name='M-SaveGameManager-DeleteSaveGame'></a>
+### DeleteSaveGame() `method` [#](#M-SaveGameManager-DeleteSaveGame 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Deletes any existing save game data.
+
+##### Returns
+
+
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-SaveGameManager-LoadGame'></a>
+### LoadGame() `method` [#](#M-SaveGameManager-LoadGame 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Loads save game data from disk.
+
+##### Returns
+
+The save game data.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-SaveGameManager-SaveGame-SaveGame-'></a>
+### SaveGame(saveGame) `method` [#](#M-SaveGameManager-SaveGame-SaveGame- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Saves the provided save game data.
+
+##### Returns
+
+Whether or not the save was successful.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| saveGame | [SaveGame](#T-SaveGame 'SaveGame') | The save game data. |
+
+<a name='T-SceneField'></a>
+## SceneField [#](#T-SceneField 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Allows dragging a scene into an inspector field.
 
 <a name='T-SeekMovementBehaviour'></a>
 ## SeekMovementBehaviour [#](#T-SeekMovementBehaviour 'Go To Here') [=](#contents 'Back To Contents')
@@ -4165,6 +5831,50 @@ A Unity Singleton pattern GameObject
 ##### Summary
 
 Gets the current instance of this Singleton.
+
+<a name='T-StageButton'></a>
+## StageButton [#](#T-StageButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls a button that takes the player to a stage.
+
+<a name='M-StageButton-CenterIfLastStage'></a>
+### CenterIfLastStage() `method` [#](#M-StageButton-CenterIfLastStage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Centers the scroll view on this stage if it was the last stage visited.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-StageButton-LoadStage'></a>
+### LoadStage() `method` [#](#M-StageButton-LoadStage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Loads the stage when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-StageButton-Start'></a>
+### Start() `method` [#](#M-StageButton-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
+
+##### Parameters
+
+This method has no parameters.
 
 <a name='T-StageManager'></a>
 ## StageManager [#](#T-StageManager 'Go To Here') [=](#contents 'Back To Contents')
@@ -4238,48 +5948,29 @@ This method has no parameters.
 
 ##### Summary
 
+Represents a static collection of equipment loot.
 
-
-<a name='M-StaticLootCollection-GetCurrency'></a>
-### GetCurrency() `method` [#](#M-StaticLootCollection-GetCurrency 'Go To Here') [=](#contents 'Back To Contents')
+<a name='P-StaticLootCollection-DropEquipment'></a>
+### DropEquipment `property` [#](#P-StaticLootCollection-DropEquipment 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
+Whether or not a piece of equipment dropped.
 
+<a name='M-StaticLootCollection-GetNextEquipment'></a>
+### GetNextEquipment() `method` [#](#M-StaticLootCollection-GetNextEquipment 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Gets the next piece of equipment to drop.
 
 ##### Returns
 
-
+An equipment object.
 
 ##### Parameters
 
 This method has no parameters.
-
-<a name='M-StaticLootCollection-GetEquipment'></a>
-### GetEquipment() `method` [#](#M-StaticLootCollection-GetEquipment 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-
-
-##### Returns
-
-
-
-##### Parameters
-
-This method has no parameters.
-
-<a name='T-TransformExtensions'></a>
-## TransformExtensions [#](#T-TransformExtensions 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Namespace
-
-
-
-##### Summary
-
-
 
 <a name='T-WorldEntityManager-UnlockedListChanged'></a>
 ## UnlockedListChanged [#](#T-WorldEntityManager-UnlockedListChanged 'Go To Here') [=](#contents 'Back To Contents')
@@ -4291,6 +5982,170 @@ WorldEntityManager
 ##### Summary
 
 Unlocked list change delegate signature.
+
+<a name='T-UpgradeAllyButton'></a>
+## UpgradeAllyButton [#](#T-UpgradeAllyButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls the button that upgrades an ally.
+
+<a name='M-UpgradeAllyButton-Awake'></a>
+### Awake() `method` [#](#M-UpgradeAllyButton-Awake 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-UpgradeAllyButton-Initialize-System-String,UpgradeAllyPopup-'></a>
+### Initialize(allyName,list) `method` [#](#M-UpgradeAllyButton-Initialize-System-String,UpgradeAllyPopup- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Initializes the values of the button with an ally.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| allyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the ally. |
+| list | [UpgradeAllyPopup](#T-UpgradeAllyPopup 'UpgradeAllyPopup') | The popup list of allies. |
+
+<a name='M-UpgradeAllyButton-RefreshButton'></a>
+### RefreshButton() `method` [#](#M-UpgradeAllyButton-RefreshButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes the button based on ally data.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-UpgradeAllyButton-UpgradeAlly'></a>
+### UpgradeAlly() `method` [#](#M-UpgradeAllyButton-UpgradeAlly 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Upgrades the ally when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-UpgradeAllyPopup'></a>
+## UpgradeAllyPopup [#](#T-UpgradeAllyPopup 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls the popup list of ally upgrade buttons.
+
+<a name='M-UpgradeAllyPopup-RefreshButtons'></a>
+### RefreshButtons() `method` [#](#M-UpgradeAllyPopup-RefreshButtons 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes all of the upgrade ally buttons.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-UpgradeAllyPopup-Start'></a>
+### Start() `method` [#](#M-UpgradeAllyPopup-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the popup.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-UpgradeHeroPopup'></a>
+## UpgradeHeroPopup [#](#T-UpgradeHeroPopup 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls the upgrade hero popup.
+
+<a name='M-UpgradeHeroPopup-RefreshHeroData'></a>
+### RefreshHeroData() `method` [#](#M-UpgradeHeroPopup-RefreshHeroData 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes the hero data displayed on the popup.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-UpgradeHeroPopup-Start'></a>
+### Start() `method` [#](#M-UpgradeHeroPopup-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the popup.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-UpgradeHeroPopup-UpgradeHero'></a>
+### UpgradeHero() `method` [#](#M-UpgradeHeroPopup-UpgradeHero 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Upgrades the hero when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-Vector3Extensions'></a>
+## Vector3Extensions [#](#T-Vector3Extensions 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Extends the Unity Vector3 type.
+
+<a name='M-Vector3Extensions-SqrDistance-UnityEngine-Vector3,UnityEngine-Vector3-'></a>
+### SqrDistance(source,destination) `method` [#](#M-Vector3Extensions-SqrDistance-UnityEngine-Vector3,UnityEngine-Vector3- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Gets the squared distance between two vectors.
+
+##### Returns
+
+A float representing the squared distance between the vectors.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| source | [UnityEngine.Vector3](#T-UnityEngine-Vector3 'UnityEngine.Vector3') | The source vector. |
+| destination | [UnityEngine.Vector3](#T-UnityEngine-Vector3 'UnityEngine.Vector3') | The destination vector. |
 
 <a name='T-WalkMovementBehaviour'></a>
 ## WalkMovementBehaviour [#](#T-WalkMovementBehaviour 'Go To Here') [=](#contents 'Back To Contents')
@@ -4377,6 +6232,153 @@ The velocity desired by this movement behaviour.
 ##### Returns
 
 The optimal velocity vector to accomplish this movement behaviour.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-WorldEntityButton'></a>
+## WorldEntityButton [#](#T-WorldEntityButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls a world entity button.
+
+<a name='M-WorldEntityButton-Awake'></a>
+### Awake() `method` [#](#M-WorldEntityButton-Awake 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WorldEntityButton-HandleAssignClick'></a>
+### HandleAssignClick() `method` [#](#M-WorldEntityButton-HandleAssignClick 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Assigns the world entity when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WorldEntityButton-HandleClick'></a>
+### HandleClick() `method` [#](#M-WorldEntityButton-HandleClick 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Handles the button click based on the specified action.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WorldEntityButton-HandleUseClick'></a>
+### HandleUseClick() `method` [#](#M-WorldEntityButton-HandleUseClick 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Uses the world entity when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WorldEntityButton-Initialize-System-String,ButtonAction,WorldEntityManager-'></a>
+### Initialize(entityName,buttonAction,manager) `method` [#](#M-WorldEntityButton-Initialize-System-String,ButtonAction,WorldEntityManager- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Initializes the button with data from the world entity.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| entityName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the entity. |
+| buttonAction | [ButtonAction](#T-ButtonAction 'ButtonAction') | The action taken when the button is clicked. |
+| manager | [WorldEntityManager](#T-WorldEntityManager 'WorldEntityManager') | The world entity manager for this type of entity. |
+
+<a name='M-WorldEntityButton-Update'></a>
+### Update() `method` [#](#M-WorldEntityButton-Update 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Updates the button based on world state.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='T-WorldEntityList'></a>
+## WorldEntityList [#](#T-WorldEntityList 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls a list of world entities.
+
+<a name='M-WorldEntityList-AddButtons'></a>
+### AddButtons() `method` [#](#M-WorldEntityList-AddButtons 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Adds button based on the content of the list.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WorldEntityList-OnDestroy'></a>
+### OnDestroy() `method` [#](#M-WorldEntityList-OnDestroy 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Unsubscribes from refresh events when destroyed.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WorldEntityList-RefreshDisplay'></a>
+### RefreshDisplay() `method` [#](#M-WorldEntityList-RefreshDisplay 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes the list.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WorldEntityList-RemoveButtons'></a>
+### RemoveButtons() `method` [#](#M-WorldEntityList-RemoveButtons 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Removes all existing buttons.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-WorldEntityList-Start'></a>
+### Start() `method` [#](#M-WorldEntityList-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the list.
 
 ##### Parameters
 
@@ -4577,12 +6579,26 @@ Constructs the world manager from save game data.
 | ---- | ---- | ----------- |
 | save | [SaveGame](#T-SaveGame 'SaveGame') | The save game data. |
 
+<a name='P-WorldManager-LastIdleFactor'></a>
+### LastIdleFactor `property` [#](#P-WorldManager-LastIdleFactor 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Returns the idle factor of the highest stage.
+
 <a name='P-WorldManager-LastStage'></a>
 ### LastStage `property` [#](#P-WorldManager-LastStage 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
 Returns the last stage the hero was on.
+
+<a name='P-WorldManager-LastZone'></a>
+### LastZone `property` [#](#P-WorldManager-LastZone 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Returns the last zone the hero was on.
 
 <a name='P-WorldManager-UnlockedStages'></a>
 ### UnlockedStages `property` [#](#P-WorldManager-UnlockedStages 'Go To Here') [=](#contents 'Back To Contents')
@@ -4611,6 +6627,19 @@ Fills a save game with world manager data.
 | ---- | ---- | ----------- |
 | save | [SaveGame@](#T-SaveGame@ 'SaveGame@') | The save game data. |
 
+<a name='M-WorldManager-SetIdleFactor-System-Single-'></a>
+### SetIdleFactor(idleRewardsFactor) `method` [#](#M-WorldManager-SetIdleFactor-System-Single- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets the idle factor to a new value if it is larger.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| idleRewardsFactor | [System.Single](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Single 'System.Single') | New potential idle factor. |
+
 <a name='M-WorldManager-SetLastStage-System-String-'></a>
 ### SetLastStage(stage) `method` [#](#M-WorldManager-SetLastStage-System-String- 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -4623,6 +6652,19 @@ Sets the last stage the hero was on.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | stage | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the stage. |
+
+<a name='M-WorldManager-SetLastZone-System-String-'></a>
+### SetLastZone(zone) `method` [#](#M-WorldManager-SetLastZone-System-String- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets the last zone the hero was on.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| zone | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the zone. |
 
 <a name='M-WorldManager-UnlockStage-System-String-'></a>
 ### UnlockStage(stage) `method` [#](#M-WorldManager-UnlockStage-System-String- 'Go To Here') [=](#contents 'Back To Contents')
@@ -4649,3 +6691,47 @@ Unlocks a zone.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | zone | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the zone to unlock. |
+
+<a name='T-ZoneButton'></a>
+## ZoneButton [#](#T-ZoneButton 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls a button that loads a zone.
+
+<a name='M-ZoneButton-CenterIfLastZone'></a>
+### CenterIfLastZone() `method` [#](#M-ZoneButton-CenterIfLastZone 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Centers the scroll view on this butotn if it was the last zone visited.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-ZoneButton-LoadZone'></a>
+### LoadZone() `method` [#](#M-ZoneButton-LoadZone 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Loads the zone scene when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-ZoneButton-Start'></a>
+### Start() `method` [#](#M-ZoneButton-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the button.
+
+##### Parameters
+
+This method has no parameters.
