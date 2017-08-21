@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -22,6 +23,9 @@ public class GameManager : Singleton<GameManager>
     protected RosterManager rosterManager;
     protected StageManager stageManager;
     protected WorldManager worldManager;
+
+    protected DateTime lastRewardTime;
+    protected float partialRewards;
 
     /// <summary>
     /// Performs initialization prior to next frame.
@@ -59,6 +63,9 @@ public class GameManager : Singleton<GameManager>
         if (SaveGameManager.SaveGameExists) save = SaveGameManager.LoadGame();
 
         worldManager = new WorldManager(save);
+
+        if (save != null) lastRewardTime = save.LastRewardTime;
+        else lastRewardTime = DateTime.Now;
     }
 
     /// <summary>
@@ -170,8 +177,44 @@ public class GameManager : Singleton<GameManager>
             if (QueueManager.QueuesAreComplete || HeroManager.Hero.IsDead)
             {
                 onStage = false;
+                lastRewardTime = DateTime.Now;
                 StageManager.EndStage();
             }
+        }
+
+        if (!onStage)
+        {
+            GenerateIdleRewards();
+        }
+    }
+
+    /// <summary>
+    /// Generate idle rewards per frame.
+    /// </summary>
+    protected void GenerateIdleRewards()
+    {
+        var rewardSeconds = (DateTime.Now - lastRewardTime).TotalSeconds;
+        lastRewardTime = DateTime.Now;
+
+        var maxRewardSeconds = GameManager.GameSettings.Max.RewardTime * 3600;
+        if (rewardSeconds > maxRewardSeconds) rewardSeconds = maxRewardSeconds;
+
+        var newExperience = 0.0f;
+
+        newExperience += RosterManager.TotalAssignedLevels + HeroManager.Level;
+        newExperience *= WorldManager.LastIdleFactor;
+        newExperience *= (float)rewardSeconds;
+
+        newExperience += partialRewards;
+        partialRewards = 0.0f;
+        if (newExperience > 1.0f)
+        {
+            HeroManager.Experience += (int)newExperience;
+            partialRewards = newExperience - (int)newExperience;
+        }
+        else
+        {
+            partialRewards = newExperience;
         }
     }
 
@@ -437,8 +480,20 @@ public class GameManager : Singleton<GameManager>
         if (RosterManager != null) RosterManager.Save(ref save);
         if (InventoryManager != null) InventoryManager.Save(ref save);
         if (WorldManager != null) WorldManager.Save(ref save);
+        save.LastRewardTime = lastRewardTime;
         save.IsFilled = true;
 
         SaveGameManager.SaveGame(save);
     }
+
+    /// <summary>
+    /// Called when application is paused.
+    /// </summary>
+    /// <param name="pause"></param>
+    public void OnApplicationPause(bool pause) { SaveGame(); }
+
+    /// <summary>
+    /// Called when application is quit.
+    /// </summary>
+    public void OnApplicationQuit() { SaveGame(); }
 }

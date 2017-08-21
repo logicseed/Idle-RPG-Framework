@@ -14,6 +14,7 @@ MonoBehaviour:
   icon: {fileID: 21300024, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
   equipmentType: 0
   equipmentSlot: 2
+  attackType: 1
   attributeModifiers:
     attackDamage: 0
     abilityDamage: 0

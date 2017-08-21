@@ -19,7 +19,8 @@ public class SaveGame : ISerializable
     public List<string> UnlockedAbilities;
     public List<string> AssignedAbilities;
     public string LastStage;
-    public DateTime LastStageTime;
+    public float LastIdleFactor;
+    public DateTime LastRewardTime = DateTime.MinValue;
     public bool IsFilled = false;
     public int Level = 1;
     public Dictionary<string, int> AllyLevels;
@@ -61,8 +62,9 @@ public class SaveGame : ISerializable
         if (AssignedAbilities == null) AssignedAbilities = new List<string>();
 
         LastStage = info.GetString("lastStage");
+        LastIdleFactor = (float)info.GetValue("lastIdleFactor", typeof(float));
 
-        LastStageTime = (DateTime)info.GetValue("lastStageTime", typeof(DateTime));
+        LastRewardTime = (DateTime)info.GetValue("lastRewardTime", typeof(DateTime));
 
         Level = info.GetInt32("level");
 
@@ -85,7 +87,8 @@ public class SaveGame : ISerializable
         info.AddValue("unlockedAbilities", UnlockedAbilities);
         info.AddValue("assignedAbilities", AssignedAbilities);
         info.AddValue("lastStage", LastStage);
-        info.AddValue("lastStageTime", LastStageTime);
+        info.AddValue("lastIdleFactor", LastIdleFactor);
+        info.AddValue("lastRewardTime", LastRewardTime);
         info.AddValue("level", Level);
         info.AddValue("allyLevels", AllyLevels);
     }

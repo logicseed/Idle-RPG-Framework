@@ -20,6 +20,9 @@ public class StageManager : MonoBehaviour
     protected Ally allyReward;
 
     [SerializeField]
+    protected float idleRewardsFactor = 1.0f;
+
+    [SerializeField]
     protected Enemy boss;
 
     [SerializeField]
@@ -47,6 +50,7 @@ public class StageManager : MonoBehaviour
         if (allyReward != null) GameManager.RosterManager.AddUnlocked(allyReward.name);
 
         GameManager.WorldManager.SetLastStage("Scenes/Stages/" + SceneManager.GetActiveScene().name);
+        GameManager.WorldManager.SetIdleFactor(idleRewardsFactor);
 
         GameManager.LoadWorld();
     }

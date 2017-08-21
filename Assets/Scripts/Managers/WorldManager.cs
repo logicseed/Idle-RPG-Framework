@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Debug = ConditionalDebug;
 
@@ -10,6 +11,9 @@ public class WorldManager
 {
     [SerializeField]
     protected string lastStage;
+
+    [SerializeField]
+    protected float lastIdleFactor = 1.0f;
 
     [SerializeField]
     protected List<string> unlockedStages;
@@ -30,6 +34,7 @@ public class WorldManager
             unlockedZones = save.UnlockedZones;
             unlockedStages = save.UnlockedStages;
             lastStage = save.LastStage;
+            lastIdleFactor = save.LastIdleFactor;
         }
 
         foreach (var zone in GameManager.GameSettings.CharacterStart.Zones)
@@ -46,6 +51,20 @@ public class WorldManager
     /// Returns the last stage the hero was on.
     /// </summary>
     public string LastStage { get { return lastStage; } }
+
+    /// <summary>
+    /// Returns the idle factor of the highest stage.
+    /// </summary>
+    public float LastIdleFactor { get { return lastIdleFactor; } }
+
+    /// <summary>
+    /// Sets the idle factor to a new value if it is larger.
+    /// </summary>
+    /// <param name="idleRewardsFactor">New potential idle factor.</param>
+    public void SetIdleFactor(float idleRewardsFactor)
+    {
+        lastIdleFactor = Math.Max(idleRewardsFactor, lastIdleFactor);
+    }
 
     /// <summary>
     /// Returns the list of unlocked stages.
@@ -66,6 +85,7 @@ public class WorldManager
         save.LastStage = lastStage;
         save.UnlockedZones = unlockedZones;
         save.UnlockedStages = unlockedStages;
+        save.LastIdleFactor = lastIdleFactor;
     }
 
     /// <summary>

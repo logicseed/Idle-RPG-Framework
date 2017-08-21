@@ -13,15 +13,6 @@ public class RosterManager : WorldEntityManager
     /// </summary>
     /// <param name="save">The save game data.</param>
     public RosterManager(SaveGame save = null) : base(save) { }
-    //public RosterManager(SaveGame save = null)
-    //{
-    //    allyLevels = new Dictionary<string, int>();
-    //    unlocked = new List<string>();
-    //    assigned = new List<string>();
-    //    objects = new Dictionary<string, ListableEntity>();
-
-    //    Load(save);
-    //}
 
     /// <summary>
     /// Returns a collection of ally levels; key is ally name, value is level.
@@ -128,5 +119,23 @@ public class RosterManager : WorldEntityManager
         save.UnlockedAllies = Unlocked;
         save.AssignedAllies = Assigned;
         save.AllyLevels = allyLevels;
+    }
+
+    /// <summary>
+    /// Returns the total levels of all assigned allies.
+    /// </summary>
+    public int TotalAssignedLevels
+    {
+        get
+        {
+            var total = 0;
+
+            foreach (var ally in assigned)
+            {
+                total += allyLevels[ally];
+            }
+
+            return total;
+        }
     }
 }
