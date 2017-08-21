@@ -73,6 +73,11 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     protected void InitializeWorld()
     {
+        if (WorldManager.LastZone != String.Empty)
+        {
+            LoadZone(WorldManager.LastZone);
+            return;
+        }
         LoadWorld();
     }
 
@@ -396,6 +401,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (WorldManager.UnlockedStages.Contains(stage))
         {
+            Debug.Log("Loading stage: " + stage);
+            WorldManager.SetLastStage(stage);
             GameManager.Instance.onStage = true;
             GameManager.Instance.InitializeStageEntityManagers();
             SceneManager.LoadScene(stage);
@@ -418,6 +425,8 @@ public class GameManager : Singleton<GameManager>
     {
         if (WorldManager.UnlockedZones.Contains(zone))
         {
+            Debug.Log("Loading zone: " + zone);
+            WorldManager.SetLastZone(zone);
             SceneManager.LoadScene(zone);
         }
     }

@@ -49,7 +49,6 @@ public class StageManager : MonoBehaviour
 
         if (allyReward != null) GameManager.RosterManager.AddUnlocked(allyReward.name);
 
-        GameManager.WorldManager.SetLastStage("Scenes/Stages/" + SceneManager.GetActiveScene().name);
         GameManager.WorldManager.SetIdleFactor(idleRewardsFactor);
 
         GameManager.LoadWorld();

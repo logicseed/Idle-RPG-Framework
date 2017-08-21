@@ -13,6 +13,9 @@ public class WorldManager
     protected string lastStage;
 
     [SerializeField]
+    protected string lastZone;
+
+    [SerializeField]
     protected float lastIdleFactor = 1.0f;
 
     [SerializeField]
@@ -34,6 +37,7 @@ public class WorldManager
             unlockedZones = save.UnlockedZones;
             unlockedStages = save.UnlockedStages;
             lastStage = save.LastStage;
+            lastZone = save.LastZone;
             lastIdleFactor = save.LastIdleFactor;
         }
 
@@ -51,6 +55,11 @@ public class WorldManager
     /// Returns the last stage the hero was on.
     /// </summary>
     public string LastStage { get { return lastStage; } }
+
+    /// <summary>
+    /// Returns the last zone the hero was on.
+    /// </summary>
+    public string LastZone { get { return lastZone; } }
 
     /// <summary>
     /// Returns the idle factor of the highest stage.
@@ -83,6 +92,7 @@ public class WorldManager
     public void Save(ref SaveGame save)
     {
         save.LastStage = lastStage;
+        save.LastZone = lastZone;
         save.UnlockedZones = unlockedZones;
         save.UnlockedStages = unlockedStages;
         save.LastIdleFactor = lastIdleFactor;
@@ -94,8 +104,18 @@ public class WorldManager
     /// <param name="stage">The name of the stage.</param>
     public void SetLastStage(string stage)
     {
-        lastStage = "Scenes/Stages/" + stage;
+        lastStage = stage;
         Debug.Log("Last stage set: " + stage);
+    }
+
+    /// <summary>
+    /// Sets the last zone the hero was on.
+    /// </summary>
+    /// <param name="zone">The name of the zone.</param>
+    public void SetLastZone(string zone)
+    {
+        lastZone = zone;
+        Debug.Log("Last zone set: " + zone);
     }
 
     /// <summary>

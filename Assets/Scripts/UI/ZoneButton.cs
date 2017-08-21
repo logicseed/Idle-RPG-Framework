@@ -29,6 +29,8 @@ public class ZoneButton : MonoBehaviour
             buttonComponent.interactable = false;
             image.color = Color.gray;
         }
+
+        CenterIfLastZone();
     }
 
     /// <summary>
@@ -37,5 +39,20 @@ public class ZoneButton : MonoBehaviour
     public void LoadZone()
     {
         GameManager.LoadZone(zone);
+    }
+
+    /// <summary>
+    /// Centers the scroll view on this butotn if it was the last zone visited.
+    /// </summary>
+    protected void CenterIfLastZone()
+    {
+        if (GameManager.WorldManager.LastZone != zone.SceneName) return;
+
+        var scrollRect = GetComponentInParent<ScrollRect>();
+        var buttonRect = GetComponent<RectTransform>();
+
+        scrollRect.content.anchoredPosition -= buttonRect.anchoredPosition;
+        scrollRect.horizontalNormalizedPosition = Mathf.Clamp(scrollRect.horizontalNormalizedPosition, 0f, 1f);
+        scrollRect.verticalNormalizedPosition = Mathf.Clamp(scrollRect.verticalNormalizedPosition, 0f, 1f);
     }
 }

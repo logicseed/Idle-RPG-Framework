@@ -19,6 +19,7 @@ public class SaveGame : ISerializable
     public List<string> UnlockedAbilities;
     public List<string> AssignedAbilities;
     public string LastStage;
+    public string LastZone;
     public float LastIdleFactor;
     public DateTime LastRewardTime = DateTime.MinValue;
     public bool IsFilled = false;
@@ -62,6 +63,7 @@ public class SaveGame : ISerializable
         if (AssignedAbilities == null) AssignedAbilities = new List<string>();
 
         LastStage = info.GetString("lastStage");
+        LastZone = info.GetString("lastZone");
         LastIdleFactor = (float)info.GetValue("lastIdleFactor", typeof(float));
 
         LastRewardTime = (DateTime)info.GetValue("lastRewardTime", typeof(DateTime));
@@ -87,6 +89,7 @@ public class SaveGame : ISerializable
         info.AddValue("unlockedAbilities", UnlockedAbilities);
         info.AddValue("assignedAbilities", AssignedAbilities);
         info.AddValue("lastStage", LastStage);
+        info.AddValue("lastZone", LastZone);
         info.AddValue("lastIdleFactor", LastIdleFactor);
         info.AddValue("lastRewardTime", LastRewardTime);
         info.AddValue("level", Level);

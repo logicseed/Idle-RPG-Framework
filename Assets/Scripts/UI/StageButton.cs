@@ -29,6 +29,8 @@ public class StageButton : MonoBehaviour
             buttonComponent.interactable = false;
             image.color = Color.gray;
         }
+
+        CenterIfLastStage();
     }
 
     /// <summary>
@@ -37,5 +39,20 @@ public class StageButton : MonoBehaviour
     public void LoadStage()
     {
         GameManager.LoadStage(stage);
+    }
+
+    /// <summary>
+    /// Centers the scroll view on this stage if it was the last stage visited.
+    /// </summary>
+    protected void CenterIfLastStage()
+    {
+        if (GameManager.WorldManager.LastStage != stage.SceneName) return;
+
+        var scrollRect = GetComponentInParent<ScrollRect>();
+        var buttonRect = GetComponent<RectTransform>();
+
+        scrollRect.content.anchoredPosition -= buttonRect.anchoredPosition;
+        scrollRect.horizontalNormalizedPosition = Mathf.Clamp(scrollRect.horizontalNormalizedPosition, 0f, 1f);
+        scrollRect.verticalNormalizedPosition = Mathf.Clamp(scrollRect.verticalNormalizedPosition, 0f, 1f);
     }
 }
