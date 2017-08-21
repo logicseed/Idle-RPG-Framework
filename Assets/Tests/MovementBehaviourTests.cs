@@ -32,7 +32,7 @@ public class MovementBehaviourTests : MonoBehaviour
             movementBehaviour = new FleeMovementBehaviour(movementBehaviour, gameObject, avoidTarget2, avoidRadius);
             movementBehaviour = new FleeMovementBehaviour(movementBehaviour, gameObject, avoidTarget3, avoidRadius);
         }
-        var newPosition = movementBehaviour.Steering().normalized * controller.maxSpeed;
+        var newPosition = movementBehaviour.Steering().normalized * controller.MaxSpeed;
         transform.Translate(newPosition);
     }
 }

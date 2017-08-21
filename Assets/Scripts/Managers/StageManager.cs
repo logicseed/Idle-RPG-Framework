@@ -2,44 +2,42 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/// <summary>
+/// Manages the functionality of a stage.
+/// </summary>
 public class StageManager : MonoBehaviour
 {
-    public List<string> stagesToUnlock;
-    public List<string> zonesToUnlock;
-    public Enemy boss;
-    public Transform bossSpawnLocation;
-    public LootCollection lootCollection;
-    [HideInInspector] public bool hasSpawnedBoss = false;
-    public Ally allyReward;
+    [SerializeField]
+    protected List<string> stagesToUnlock;
 
-    private void Start()
+    [SerializeField]
+    protected List<string> zonesToUnlock;
+
+    [SerializeField]
+    protected LootCollection lootCollection;
+
+    [SerializeField]
+    protected Ally allyReward;
+
+    [SerializeField]
+    protected Enemy boss;
+
+    [SerializeField]
+    protected Transform bossSpawnLocation;
+
+    protected bool hasSpawnedBoss = false;
+
+    /// <summary>
+    /// Constructs the stage manager.
+    /// </summary>
+    protected void Start()
     {
-        GameManager.Instance.stageManager = this;
+        GameManager.StageManager = this;
     }
 
-    public Equipment GetReward()
-    {
-        // set currency reward with lootCollections.GetCurrency();
-        var equipment = lootCollection.GetEquipment();
-        if (equipment != null) GameManager.InventoryManager.AddUnlocked(equipment.name, false);
-        return equipment;
-    }
-
-    public BossController SpawnBoss()
-    {
-        if (boss != null)
-        {
-            var position = bossSpawnLocation.position;
-            var rotation = Quaternion.identity; // No rotation
-            var boss = Instantiate(GameManager.GameSettings.Prefab.Enemy, position, rotation) as GameObject;
-            boss.name = "Boss";
-            var bossController = boss.GetComponent<BossController>();
-            bossController.enemy = this.boss;
-            return bossController;
-        }
-        else return null;
-    }
-
+    /// <summary>
+    /// Ends the stage.
+    /// </summary>
     public void EndStage()
     {
         foreach (var stage in stagesToUnlock) GameManager.WorldManager.UnlockStage(stage);
@@ -51,5 +49,35 @@ public class StageManager : MonoBehaviour
         GameManager.WorldManager.SetLastStage("Scenes/Stages/" + SceneManager.GetActiveScene().name);
 
         GameManager.LoadWorld();
+    }
+
+    /// <summary>
+    /// Tries to get the next reward from the stage's loot collection.
+    /// </summary>
+    /// <returns>A piece of equipment if one dropped; null otherwise.</returns>
+    public Equipment GetReward()
+    {
+        var equipment = lootCollection.GetEquipment();
+        if (equipment != null) GameManager.InventoryManager.AddUnlocked(equipment.name, false);
+        return equipment;
+    }
+
+    /// <summary>
+    /// Spawns the boss for the stage.
+    /// </summary>
+    /// <returns>The controller for the boss.</returns>
+    public BossController SpawnBoss()
+    {
+        if (boss != null)
+        {
+            var position = bossSpawnLocation.position;
+            var rotation = Quaternion.identity; // No rotation
+            var boss = Instantiate(GameManager.GameSettings.Prefab.Enemy, position, rotation) as GameObject;
+            boss.name = "Boss";
+            var bossController = boss.GetComponent<BossController>();
+            bossController.EnemyObject = this.boss;
+            return bossController;
+        }
+        else return null;
     }
 }

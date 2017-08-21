@@ -1,85 +1,302 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using System;
+using Debug = ConditionalDebug;
 using Random = UnityEngine.Random;
 
 /// <summary>
-///
+/// Controls the combat for a character.
 /// </summary>
 public class CombatController : MonoBehaviour
 {
-    public GameCharacterController target;
-    public GameCharacterController character;
-    public int currentHealth;
-    public int currentEnergy;
+    protected GameCharacterController characterControllerReference;
+
+    protected int currentEnergy;
+
+    protected int currentHealth;
+
+    protected bool isStunned = false;
+
     protected float lastAttackTime;
 
+    protected float stunDuration;
+
+    protected GameCharacterController targetControllerReference;
+
+    /// <summary>
+    /// Sets up the combat controller.
+    /// </summary>
     protected virtual void Start()
     {
-        character = GetComponent<GameCharacterController>();
-        currentHealth = character.attributes.health;
-        currentEnergy = character.attributes.energy;
-        lastAttackTime = Time.time - (1/character.attributes.attackSpeed);
+        characterControllerReference = GetComponent<GameCharacterController>();
+        if (characterControllerReference == null)
+        {
+            Debug.LogError(gameObject.name + ": Combat controller could not find a reference to the character controller.");
+            return;
+        }
+
+        currentHealth = CharacterController.Attributes.health;
+        currentEnergy = CharacterController.Attributes.energy;
+        lastAttackTime = Time.time - (1 / CharacterController.Attributes.attackSpeed);
     }
 
+    /// <summary>
+    /// Updates the combat controller every frame.
+    /// </summary>
     protected virtual void Update()
     {
-        if (character.state == CharacterState.Dead) return;
-        if (!character.isCombatDummy)
-        {
-            UpdateTarget();
-            PerformCombatRound();
-        }
+        if (IsStunned) UpdateStun();
+
+        if (CharacterController.CharacterState == CharacterState.Dead) return;
+        if (CharacterController.isCombatDummy) return;
+
+        UpdateTarget();
+        PerformCombatRound();
     }
 
-    public float DesiredRange
+    /// <summary>
+    /// Removes stun from character after duration.
+    /// </summary>
+    protected void UpdateStun()
+    {
+        if (isStunned) stunDuration -= Time.time;
+        if (stunDuration <= 0.0f) isStunned = false;
+    }
+
+    /// <summary>
+    /// Returns whether or not the character can attack.
+    /// </summary>
+    public bool CanAttack
     {
         get
         {
-            if (character.attack == AttackType.Ranged) return GameManager.GameSettings.Constants.Range.RangedAttack;
-            else if (character.attack == AttackType.Caster) return GameManager.GameSettings.Constants.Range.CasterAttack;
+            return TargetController != null // Need a target
+                && CharacterController.CharacterState != CharacterState.Dead // Can't be dead
+                && CharacterController.CharacterState != CharacterState.Walk // Can't be walking
+                && CharacterController.CharacterState != CharacterState.Defend // Can't be defending
+                && TargetController.CharacterState != CharacterState.Dead // Target must be alive
+                && HasHostileTarget // Target must be hostile
+                && HasTargetInRange // Target must be in range
+                && IsTimeToAttack; // Enough time since last attack
+        }
+    }
+
+    /// <summary>
+    /// The character this combat controller belongs to.
+    /// </summary>
+    public GameCharacterController CharacterController { get { return characterControllerReference; } set { characterControllerReference = value; } }
+
+    /// <summary>
+    /// Returns the character's current energy.
+    /// </summary>
+    public int CurrentEnergy { get { return currentEnergy; } }
+
+    /// <summary>
+    /// Returns the character's current health.
+    /// </summary>
+    public int CurrentHealth { get { return currentHealth; } }
+
+    /// <summary>
+    /// Returns the desired combat range based on attack type.
+    /// </summary>
+    public float DesiredCombatRange
+    {
+        get
+        {
+            if (CharacterController.AttackType == AttackType.Ranged) return GameManager.GameSettings.Constants.Range.RangedAttack;
+            else if (CharacterController.AttackType == AttackType.Caster) return GameManager.GameSettings.Constants.Range.CasterAttack;
             else return GameManager.GameSettings.Constants.Range.MeleeAttack;
         }
     }
 
-    internal void ApplyStun(float potency)
-    {
-        throw new NotImplementedException();
-    }
-
     /// <summary>
-    /// Finds an appropriate target for the character if one exists on the stage.
+    /// Returns whether or not the target is hostile.
     /// </summary>
-    public virtual void UpdateTarget()
+    public bool HasHostileTarget
     {
-        if (target == null ||
-            target.GetComponent<GameCharacterController>().state == CharacterState.Dead)
+        get
         {
-            switch (character.type)
-            {
-                case CharacterType.Ally:
-                    GetClosestHostile(GameManager.AllEnemies);
-                    break;
+            if (CharacterController.CharacterType == CharacterType.Ally || CharacterController.CharacterType == CharacterType.Hero)
+                return TargetController.CharacterType == CharacterType.Enemy || TargetController.CharacterType == CharacterType.Boss;
 
-                case CharacterType.Boss:
-                case CharacterType.Enemy:
-                    GetClosestHostile(GameManager.AllFriendlies);
-                    break;
-                default:
-                    break;
-            }
+            if (CharacterController.CharacterType == CharacterType.Enemy || CharacterController.CharacterType == CharacterType.Boss)
+                return TargetController.CharacterType == CharacterType.Ally || TargetController.CharacterType == CharacterType.Hero;
+
+            return false;
         }
     }
 
-    protected void GetClosestHostile(List<GameCharacterController> hostiles)
+    /// <summary>
+    /// Whether or not the target is within the desired combat range.
+    /// </summary>
+    public bool HasTargetInRange
+    {
+        get
+        {
+            var squaredDistance = CharacterController.Location.SqrDistance(TargetController.Location);
+
+            var combatRangeSquared = DesiredCombatRange * DesiredCombatRange;
+
+            // Add a little variance
+            combatRangeSquared = combatRangeSquared * 1.1f; // 10% error
+
+            return squaredDistance <= combatRangeSquared;
+        }
+    }
+
+    /// <summary>
+    /// Returns whether or not the character is stunned.
+    /// </summary>
+    public bool IsStunned { get { return isStunned; } }
+
+    /// <summary>
+    /// Whether or not the character's attack speed allows them to attack.
+    /// </summary>
+    public bool IsTimeToAttack
+    {
+        get
+        {
+            // Since attack speed is in (attacks/sec) finding the reciprical
+            // will give us (secs/attack)
+            var attackTime = 1 / CharacterController.Attributes.attackSpeed;
+
+            return Time.time - lastAttackTime >= attackTime;
+        }
+    }
+
+    public GameCharacterController TargetController { get { return targetControllerReference; } set { targetControllerReference = value; } }
+
+    /// <summary>
+    /// Applies damage to the character.
+    /// </summary>
+    /// <param name="damage">Amount of damage to apply.</param>
+    /// <param name="isCritical">Whether or not damage has critical damage included.</param>
+    public virtual void ApplyDamage(int damage, bool isCritical = false)
+    {
+        // How much damage made it through defense; negative values won't heal.
+        var unblockedDamage = damage - CharacterController.Attributes.defense;
+
+        // Create floating combat text.
+        var textObject = Instantiate(GameManager.GameSettings.Prefab.UI.CombatText, transform);
+        var textController = textObject.GetComponent<CombatTextController>();
+
+        // No unblocked damage
+        if (unblockedDamage <= 0)
+        {
+            textController.Text = GameManager.GameSettings.Constants.CombatText.BlockedText;
+            textController.Color = GameManager.GameSettings.Constants.Colors.CombatTextBlocked;
+            return;
+        }
+
+        // Some damage made it through
+        if (isCritical)
+        {
+            textController.Text = GameManager.GameSettings.Constants.CombatText.CriticalText + " " + unblockedDamage;
+            textController.Color = GameManager.GameSettings.Constants.Colors.CombatTextCritical;
+        }
+        else
+        {
+            textController.Text = GameManager.GameSettings.Constants.CombatText.NormalText + " " + unblockedDamage;
+            textController.Color = GameManager.GameSettings.Constants.Colors.CombatTextNormal;
+        }
+
+        // Combat dummies don't take damage
+        if (!CharacterController.isCombatDummy) currentHealth -= unblockedDamage;
+
+        // Handle character death
+        if (CurrentHealth < 1)
+        {
+            CharacterController.CharacterState = CharacterState.Dead;
+
+            // Get experience and rewards if an enemy
+            if (!CharacterController.IsFriendly)
+            {
+                ApplyExperience();
+                ApplyReward();
+            }
+
+            CharacterController.Unregister();
+
+            // Despawn body after some amount of time
+            Invoke("Despawn", GameManager.GameSettings.Constants.CombatTime.DespawnBodyDelay);
+        }
+    }
+
+    /// <summary>
+    /// Apply experience to the hero for this character's death.
+    /// </summary>
+    public void ApplyExperience()
+    {
+        GameManager.HeroManager.Experience += (int)(CharacterController.Level * GameManager.GameSettings.Constants.ExperiencePerLevel);
+    }
+
+    /// <summary>
+    /// Apply rewards to the hero for this character's death.
+    /// </summary>
+    public void ApplyReward()
+    {
+        // Rewards are stage dependent
+        GameManager.StageManager.GetReward();
+    }
+
+    /// <summary>
+    /// Applies a stun to the character.
+    /// </summary>
+    /// <param name="duration">Duration of stun in seconds.</param>
+    public void ApplyStun(float duration)
+    {
+        isStunned = true;
+        if (duration > stunDuration) stunDuration = duration; // Shorter stun won't overwrite longer stun
+    }
+
+    /// <summary>
+    /// Determines the critical modifier of an attack. The default value is 1.0 or 100% normal
+    /// damage, which is equivalent to no critical hit.
+    /// </summary>
+    /// <returns></returns>
+    public float CriticalModifier()
+    {
+        if (Random.Range(0.0f, 1.0f) <= CharacterController.Attributes.criticalHitChance)
+        {
+            return CharacterController.Attributes.criticalHitDamage;
+        }
+        return 1.0f;
+    }
+
+    /// <summary>
+    /// Despawns the character. Used to invoke after a delay.
+    /// </summary>
+    public void Despawn()
+    {
+        Destroy(gameObject);
+    }
+
+    /// <summary>
+    /// Changes character animation to face the direction of the target.
+    /// </summary>
+    public void FaceTarget()
+    {
+        if (TargetController.Location.x > CharacterController.Location.x)
+        {
+            CharacterController.LastDirection = MoveDirection.Right;
+        }
+        else if (TargetController.Location.x < CharacterController.Location.x)
+        {
+            CharacterController.LastDirection = MoveDirection.Left;
+        }
+    }
+
+    /// <summary>
+    /// Returns the closest hostile from a list of characters.
+    /// </summary>
+    /// <param name="hostiles">List of hostile characters.</param>
+    public void GetClosestHostile(List<GameCharacterController> hostiles)
     {
         GameCharacterController closestHostile = null;
         var closestSquaredDistance = Mathf.Infinity;
 
         foreach (var hostile in hostiles)
         {
-            var directionToHostile = hostile.transform.position - transform.position;
+            var directionToHostile = hostile.Location - CharacterController.Location;
             var squaredDistance = directionToHostile.sqrMagnitude;
 
             if (squaredDistance < closestSquaredDistance)
@@ -89,9 +306,24 @@ public class CombatController : MonoBehaviour
             }
         }
 
-        target = closestHostile;
+        TargetController = closestHostile;
     }
 
+    /// <summary>
+    /// Performs a caster attack on the current target.
+    /// </summary>
+    public virtual void PerformCasterAttack()
+    {
+        // Update state
+        CharacterController.CharacterState = CharacterState.Idle; // Make sure event is fired.
+        CharacterController.CharacterState = CharacterState.Cast;
+
+        Invoke("SpawnCasterball", GameManager.GameSettings.Constants.CombatTime.SpawnCasterBallDelay);
+    }
+
+    /// <summary>
+    /// Performs a combat round.
+    /// </summary>
     public virtual void PerformCombatRound()
     {
         // Make sure we can attack
@@ -100,196 +332,109 @@ public class CombatController : MonoBehaviour
         FaceTarget();
 
         // Character passes all attack checks, and it can attack
-        if (character.attack == AttackType.Caster) PerformCasterAttack();
-        else if (character.attack == AttackType.Ranged) PerformRangedAttack();
+        if (CharacterController.AttackType == AttackType.Caster) PerformCasterAttack();
+        else if (CharacterController.AttackType == AttackType.Ranged) PerformRangedAttack();
         else PerformMeleeAttack();
 
         lastAttackTime = Time.time;
     }
 
+    /// <summary>
+    /// Performs a melee attack on the current target.
+    /// </summary>
     public virtual void PerformMeleeAttack()
     {
         // Update state
-        character.state = CharacterState.Idle; // Make sure event is fired.
-        character.state = CharacterState.Melee; //TODO: Add ranged
+        CharacterController.CharacterState = CharacterState.Idle; // Make sure event is fired.
+        CharacterController.CharacterState = CharacterState.Melee; //TODO: Add ranged
 
         var criticalModifier = CriticalModifier();
-        var damage = (int)(character.attributes.attackDamage * criticalModifier);
+        var damage = (int)(CharacterController.Attributes.attackDamage * criticalModifier);
 
         // Apply damage
-        target.GetComponent<CombatController>().ApplyDamage(damage, criticalModifier > 1);
+        TargetController.CombatController.ApplyDamage(damage, criticalModifier > 1);
     }
 
-    public virtual void PerformCasterAttack()
-    {
-        // Update state
-        character.state = CharacterState.Idle; // Make sure event is fired.
-        character.state = CharacterState.Cast;
-        var length = character.animatorReference.runtimeAnimatorController.animationClips[1].length;
-        Invoke("SpawnCasterball", length);
-    }
-
+    /// <summary>
+    /// Performs a ranged attack on the current target.
+    /// </summary>
     public virtual void PerformRangedAttack()
     {
         // Update state
-        character.state = CharacterState.Idle; // Make sure event is fired.
-        character.state = CharacterState.Ranged;
-        var length = character.animatorReference.runtimeAnimatorController.animationClips[10].length / 2;
-        Invoke("SpawnArrow", length);
+        CharacterController.CharacterState = CharacterState.Idle; // Make sure event is fired.
+        CharacterController.CharacterState = CharacterState.Ranged;
+
+        Invoke("SpawnArrow", GameManager.GameSettings.Constants.CombatTime.SpawnArrowDelay);
     }
 
+    /// <summary>
+    /// Spawns an arrow projectile that targets the current target.
+    /// </summary>
     public void SpawnArrow()
     {
+        var prefab = GameManager.GameSettings.Prefab.Effect.Arrow;
+        var location = CharacterController.Location;
+        var target = TargetController;
         var criticalModifier = CriticalModifier();
-        var damage = (int)(character.attributes.attackDamage * criticalModifier);
-        SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Arrow, transform.position, damage, target, criticalModifier);
+        var damage = (int)(CharacterController.Attributes.attackDamage * criticalModifier);
+
+        SpawnProjectile(prefab, location, damage, target, criticalModifier);
     }
 
+    /// <summary>
+    /// Spawns a caster ball projectile that targets the currrent target.
+    /// </summary>
     public void SpawnCasterball()
     {
+        var prefab = GameManager.GameSettings.Prefab.Effect.Casterball;
+        var location = CharacterController.Location;
+        var target = TargetController;
         var criticalModifier = CriticalModifier();
-        var damage = (int)(character.attributes.abilityDamage * criticalModifier);
-        SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Casterball, transform.position, damage, target, criticalModifier);
+        var damage = (int)(CharacterController.Attributes.abilityDamage * criticalModifier);
+
+        SpawnProjectile(prefab, location, damage, target, criticalModifier);
     }
 
+    /// <summary>
+    /// Spawns a projectile that travels to and strikes the target.
+    /// </summary>
+    /// <param name="prefab">The projectile to spawn.</param>
+    /// <param name="location">The location to spawn the projectile.</param>
+    /// <param name="damage">The damage the projectile will do upon contact.</param>
+    /// <param name="target">The target of the projectile.</param>
+    /// <param name="criticalModifier">The critical modifier of the projectile's damage.</param>
     public void SpawnProjectile(GameObject prefab, Vector3 location, int damage, GameCharacterController target, float criticalModifier)
     {
-        var projectileGO = Instantiate(prefab, location, Quaternion.identity) as GameObject;
-        var projectile = projectileGO.GetComponent<DirectAbilityController>();
-        projectile.target = target;
-        projectile.damage = damage;
-        projectile.criticalModifier = criticalModifier;
+        var projectile = Instantiate(prefab, location, Quaternion.identity) as GameObject;
+
+        var projectileController = projectile.GetComponent<DirectAbilityController>();
+        projectileController.Target = target;
+        projectileController.Damage = damage;
+        projectileController.CriticalModifier = criticalModifier;
     }
 
-    private bool CanAttack
+    /// <summary>
+    /// Finds an appropriate target for the character if one exists on the stage.
+    /// </summary>
+    public virtual void UpdateTarget()
     {
-        get
+        if (TargetController == null || TargetController.CharacterState == CharacterState.Dead)
         {
-            return target != null
-                && character.state != CharacterState.Dead
-                && character.state != CharacterState.Walk
-                && character.state != CharacterState.Defend
-                && target.state != CharacterState.Dead
-                && HasHostileTarget 
-                && HasTargetInRange 
-                && IsTimeToAttack;
-        }
-    }
-
-    public bool HasHostileTarget
-    {
-        get
-        {
-            var targetType = target.GetComponent<GameCharacterController>().type;
-
-            if (character.type == CharacterType.Ally || character.type == CharacterType.Hero)
-                return targetType == CharacterType.Enemy || targetType == CharacterType.Boss;
-
-            if (character.type == CharacterType.Enemy || character.type == CharacterType.Boss)
-                return targetType == CharacterType.Ally || targetType == CharacterType.Hero;
-
-            return false;
-        }
-    }
-
-    private void FaceTarget()
-    {
-        if (target.transform.position.x > transform.position.x)
-        {
-            character.direction = MoveDirection.Right;
-        }
-        else if (target.transform.position.x < transform.position.x)
-        {
-            character.direction = MoveDirection.Left;
-        }
-    }
-
-    public virtual void ApplyDamage(int damage, bool isCritical = false)
-    {
-        var unblockedDamage = damage - character.attributes.defense;
-
-        var textObject = Instantiate(GameManager.GameSettings.Prefab.UI.CombatText, transform);
-        var textController = textObject.GetComponent<CombatTextController>();
-
-        if (unblockedDamage <= 0)
-        {
-            textController.text = GameManager.GameSettings.Constants.CombatText.BlockedText;
-            textController.color = GameManager.GameSettings.Constants.Colors.CombatTextBlocked;
-        }
-
-        if (isCritical)
-        {
-            textController.text = GameManager.GameSettings.Constants.CombatText.CriticalText + " " + unblockedDamage;
-            textController.color = GameManager.GameSettings.Constants.Colors.CombatTextCritical;
-        }
-        else
-        {
-            textController.text = GameManager.GameSettings.Constants.CombatText.NormalText + " " + unblockedDamage;
-            textController.color = GameManager.GameSettings.Constants.Colors.CombatTextNormal;
-        }
-
-        if (unblockedDamage > 0 && !character.isCombatDummy) currentHealth -= unblockedDamage;
-
-        if (currentHealth < 1)
-        {
-            character.state = CharacterState.Dead;
-            if (!character.IsFriendly)
+            switch (CharacterController.CharacterType)
             {
-                ApplyExperience();
-                ApplyReward();
+                case CharacterType.Ally:
+                case CharacterType.Hero:
+                    GetClosestHostile(GameManager.AllEnemies);
+                    break;
+
+                case CharacterType.Boss:
+                case CharacterType.Enemy:
+                    GetClosestHostile(GameManager.AllFriendlies);
+                    break;
+
+                default:
+                    break;
             }
-            character.Unregister();
-            Invoke("Despawn", 1.0f);
         }
-    }
-
-    public void Despawn()
-    {
-        Destroy(gameObject);
-    }
-
-    public void ApplyExperience()
-    {
-        GameManager.HeroManager.experience += (int)(character.level * GameManager.GameSettings.Constants.ExperiencePerLevel);
-    }
-
-    public void ApplyReward()
-    {
-        GameManager.StageManager.GetReward();
-    }
-
-    public bool HasTargetInRange
-    {
-        get
-        {
-            var distanceSqr = transform.position.SqrDistance(target.transform.position);
-
-            // Add a little variance
-            var attackRangeSqr = DesiredRange * DesiredRange +
-                (DesiredRange * DesiredRange * 0.1); // 10% error
-
-            return distanceSqr <= attackRangeSqr;
-        }
-    }
-
-    public bool IsTimeToAttack
-    {
-        get
-        {
-            // Since attack speed is in (attacks/sec) finding the reciprical
-            // will give us (secs/attack)
-            var attackTime = 1 / character.attributes.attackSpeed;
-
-            return Time.time - lastAttackTime >= attackTime;
-        }
-    }
-
-    protected float CriticalModifier()
-    {
-        if (Random.Range(0.0f, 1.0f) <= character.attributes.criticalHitChance)
-        {
-            return character.attributes.criticalHitDamage;
-        }
-        return 1.0f;
     }
 }

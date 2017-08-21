@@ -1,60 +1,37 @@
-﻿using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 /// <summary>
 /// Manages the behaviour of an enemy queue during gameplay.
 /// </summary>
 public class QueueController : MonoBehaviour
 {
-    public Queue queue;
-    public float timeBetweenSpawns;
-
-    private int spawnIndex;
-    private float lastSpawnTime;
-    //[SerializeField]
     private bool isRepeating;
-    //[SerializeField]
+
     private bool isSpawning = true;
 
-    /// <summary>
-    /// Whether this queue is repeating the spawn list.
-    /// </summary>
-    public bool repeating
-    {
-        get
-        {
-            return isRepeating;
-        }
-        set
-        {
-            isRepeating = value;
-        }
-    }
+    private float lastSpawnTime;
+
+    private int spawnIndex;
+
+    [SerializeField]
+    protected Queue queue;
+
+    [SerializeField]
+    protected float timeBetweenSpawns;
 
     /// <summary>
-    /// Whether this queue is actively spawning characters.
+    /// Sets up the queue controller.
     /// </summary>
-    public bool spawning
+    protected void Start()
     {
-        get
-        {
-            return isSpawning;
-        }
-        set
-        {
-            // Spawn next enemy immediately.
-            lastSpawnTime = Time.time - timeBetweenSpawns;
-            isSpawning = value;
-        }
-    }
-
-    private void Start()
-    {
-        lastSpawnTime = Time.time;
+        lastSpawnTime = Time.time - timeBetweenSpawns;
         GameManager.QueueManager.Register(this);
     }
 
-    private void Update()
+    /// <summary>
+    /// Updates the queue controller every frame.
+    /// </summary>
+    protected void Update()
     {
         if (isSpawning)
         {
@@ -77,6 +54,28 @@ public class QueueController : MonoBehaviour
     }
 
     /// <summary>
+    /// Whether this queue is repeating the spawn list.
+    /// </summary>
+    public bool IsRepeating { get { return isRepeating; } set { isRepeating = value; } }
+
+    /// <summary>
+    /// Whether this queue is actively spawning characters.
+    /// </summary>
+    public bool IsSpawning
+    {
+        get
+        {
+            return isSpawning;
+        }
+        set
+        {
+            // Spawn next enemy immediately.
+            lastSpawnTime = Time.time - timeBetweenSpawns;
+            isSpawning = value;
+        }
+    }
+
+    /// <summary>
     /// Spawns the character at spawnIndex from the queue.
     /// </summary>
     public void SpawnNext()
@@ -90,7 +89,7 @@ public class QueueController : MonoBehaviour
             var parent = this.transform;
             var enemy = Instantiate(GameManager.GameSettings.Prefab.Enemy, position, rotation, parent) as GameObject;
 
-            enemy.GetComponent<EnemyController>().enemy = queue.enemies[spawnIndex];
+            enemy.GetComponent<EnemyController>().EnemyObject = queue.enemies[spawnIndex];
         }
     }
 }

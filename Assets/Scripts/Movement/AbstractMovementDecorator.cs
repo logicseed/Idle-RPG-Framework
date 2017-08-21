@@ -54,7 +54,7 @@ public abstract class AbstractMovementDecorator : AbstractMovementBehaviour
         this.movementBehaviour = movementBehaviour;
         this.agent = agent;
         this.controller = agent.GetComponent<MovementController>();
-        this.maxSpeed = controller.maxSpeed;
+        this.maxSpeed = controller.MaxSpeed;
         this.maxAccel = GameManager.GameSettings.Constants.Character.Acceleration;
         this.target = target;
         this.radius = radius;
@@ -67,8 +67,8 @@ public abstract class AbstractMovementDecorator : AbstractMovementBehaviour
     public override Vector2 Steering()
     {
         var desiredVelocity = CalculateDesiredVelocity().normalized * maxSpeed;
-        var desiredAcceleration = (desiredVelocity - controller.velocity).normalized * maxAccel;
-        var desiredSteering = controller.velocity + desiredAcceleration;
+        var desiredAcceleration = (desiredVelocity - controller.CurrentVelocity).normalized * maxAccel;
+        var desiredSteering = controller.CurrentVelocity + desiredAcceleration;
 
         return desiredSteering;
     }

@@ -1,66 +1,146 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
+using Debug = ConditionalDebug;
 
 /// <summary>
 /// Provides easy access to references to the various components of a character.
 /// </summary>
 public class GameCharacterController : MonoBehaviour
 {
-    public bool isCombatDummy = false;
-
-    
-    public RuntimeAnimatorController animatorController;
-    [HideInInspector]
-    public Animator animatorReference;
+    protected Animator animatorReference;
+    protected CapsuleCollider2D capsuleCollider2DReference;
+    protected Character characterObjectReference;
+    protected CharacterState characterState = CharacterState.Idle;
     protected CombatController combatControllerReference;
-    protected GraphicsController graphicsControllerReference;
-    protected MovementController movementControllerReference;
-    [HideInInspector]
-    public Rigidbody2D rigidbodyReference;
-    protected LootDropManager lootDropManagerReference;
-
-    protected GameObject floatingHealthBarReference;
-
-    protected SpriteRenderer spriteRenderer;
-    protected CapsuleCollider2D capsuleCollider2D;
-
-    [HideInInspector]
-    public BaseAttributes baseAttributes;
-    //public BaseAttributes bonusAttributes;
     protected DerivedAttributes derivedAttributes;
-    [HideInInspector]
-    public DerivedAttributes attributes { get { return derivedAttributes; } }
+    protected GameObject floatingHealthBarReference;
+    protected GraphicsController graphicsControllerReference;
+    protected MoveDirection lastDirection = MoveDirection.Right;
+    protected MovementController movementControllerReference;
+    protected Rigidbody2D rigidbodyReference;
+    protected SpriteRenderer spriteRendererReference;
 
-    //public CharacterType type = CharacterType.None;
-    [HideInInspector]
-    public int level = 1;
+    /// <summary>
+    /// Returns the Character ScriptableObject.
+    /// </summary>
+    protected virtual Character CharacterObject { get { return characterObjectReference; } }
 
-    public delegate void CharacterDirectionChanged();
-    public event CharacterDirectionChanged OnDirectionChanged;
-
-    private MoveDirection lastDirection = MoveDirection.Right;
-    public MoveDirection direction
+    /// <summary>
+    /// Creates the animator controller for the character.
+    /// </summary>
+    protected virtual void CreateAnimator()
     {
-        get { return lastDirection; }
-        set
+        animatorReference = gameObject.AddComponent<Animator>();
+        animatorReference.runtimeAnimatorController = CharacterObject.animator;
+        animatorReference.Play("IdleRight");
+    }
+
+    /// <summary>
+    /// Creates the capsule collider for the character.
+    /// </summary>
+    protected virtual void CreateCapsuleCollider2D()
+    {
+        capsuleCollider2DReference = gameObject.AddComponent<CapsuleCollider2D>();
+        capsuleCollider2DReference.offset = GameManager.GameSettings.Constants.Character.ColliderOffset;
+        capsuleCollider2DReference.size = GameManager.GameSettings.Constants.Character.ColliderSize;
+        capsuleCollider2DReference.direction = GameManager.GameSettings.Constants.Character.ColliderDirection;
+    }
+
+    /// <summary>
+    /// Creates the combat controller for the character.
+    /// </summary>
+    protected virtual void CreateCombatController()
+    {
+        combatControllerReference = gameObject.AddComponent<CombatController>();
+    }
+
+    /// <summary>
+    /// Creates derived attributes based on the character.
+    /// </summary>
+    protected virtual void CreateDerivedAttributes() { }
+
+    /// <summary>
+    /// Creates the floating health bar for the character.
+    /// </summary>
+    protected void CreateFloatingHealthBar()
+    {
+        if (CharacterType != CharacterType.Hero)
         {
-            if (lastDirection != value)
-            {
-                lastDirection = value;
-                if (OnDirectionChanged != null) OnDirectionChanged();
-            }
+            floatingHealthBarReference = Instantiate(GameManager.GameSettings.Prefab.UI.FloatingBar, transform);
         }
     }
 
-    public virtual CharacterType type { get { return CharacterType.None; } }
-    public Vector3 location { get { return gameObject.transform.position; } }
+    /// <summary>
+    /// Creates the graphics controller for the character.
+    /// </summary>
+    protected virtual void CreateGraphicsController()
+    {
+        graphicsControllerReference = gameObject.AddComponent<GraphicsController>();
+    }
+
+    /// <summary>
+    /// Creates the movement controller for the character.
+    /// </summary>
+    protected virtual void CreateMovementController()
+    {
+        movementControllerReference = gameObject.AddComponent<MovementController>();
+        movementControllerReference.MaxSpeed = Attributes.movementSpeed;
+    }
+
+    /// <summary>
+    /// Creates the 2D rigid body for the character.
+    /// </summary>
+    protected virtual void CreateRigidbody2D()
+    {
+        rigidbodyReference = gameObject.AddComponent<Rigidbody2D>();
+
+        rigidbodyReference.gravityScale = GameManager.GameSettings.Constants.Character.RigidbodyGravityScale;
+        rigidbodyReference.drag = GameManager.GameSettings.Constants.Character.RigidbodyDrag;
+        rigidbodyReference.angularDrag = GameManager.GameSettings.Constants.Character.RigidbodyAngularDrag;
+        rigidbodyReference.mass = GameManager.GameSettings.Constants.Character.RigidbodyMass;
+    }
+
+    /// <summary>
+    /// Creates the sprite renderer for the character.
+    /// </summary>
+    protected virtual void CreateSpriteRenderer()
+    {
+        spriteRendererReference = gameObject.AddComponent<SpriteRenderer>();
+        spriteRendererReference.sortingLayerName = "Character";
+        spriteRendererReference.sprite = CharacterObject.icon;
+    }
+
+    /// <summary>
+    /// Called when the game object is destroyed.
+    /// </summary>
+    protected virtual void OnDestroy()
+    {
+        Unregister();
+    }
+
+    /// <summary>
+    /// Registers the character with its respective manager.
+    /// </summary>
+    protected virtual void Register() { }
+
+    /// <summary>
+    /// Whether or not the character is a combat dummy.
+    /// </summary>
+    public bool isCombatDummy = false;
+
+    /// <summary>
+    /// Character direction change delegate signature.
+    /// </summary>
+    public delegate void CharacterDirectionChanged();
 
     /// <summary>
     /// Character state change delegate signature.
     /// </summary>
     public delegate void CharacterStateChanged();
+
+    /// <summary>
+    /// Event handler for a character's direction changing.
+    /// </summary>
+    public event CharacterDirectionChanged OnDirectionChanged;
 
     /// <summary>
     /// Event handler for a character's state changing.
@@ -74,24 +154,47 @@ public class GameCharacterController : MonoBehaviour
     public event CharacterStateChanged OnStateChanged;
 
     /// <summary>
-    /// The current state of the character.
+    /// Returns the Animator for the character.
     /// </summary>
-    [HideInInspector]
-    public CharacterState characterState = CharacterState.Idle; //TODO: protected after debug
+    public Animator Animator { get { return animatorReference; } }
+
+    /// <summary>
+    /// Returns the AttackType of the character.
+    /// </summary>
+    public virtual AttackType AttackType { get { return AttackType.Melee; } }
+
+    /// <summary>
+    /// Returns the derived attributes of the character.
+    /// </summary>
+    public DerivedAttributes Attributes
+    {
+        get
+        {
+            if (derivedAttributes == null)
+            {
+                Debug.LogError(gameObject.name + ": Attempted to access derived attributes on null Ally.");
+                // Try to recover
+                CreateDerivedAttributes();
+            }
+            return derivedAttributes;
+        }
+    }
 
     /// <summary>
     /// Get or set the current state of the character.
     /// </summary>
     /// <remarks>Raises the state change event if the state changed.</remarks>
-    public CharacterState state
+    public CharacterState CharacterState
     {
         get { return characterState; }
         set
         {
-            if (characterState != value)
+            if (characterState != value) // Check for actual change
             {
                 characterState = value;
                 if (OnStateChanged != null) OnStateChanged();
+
+                // TODO: This belongs somewhere else
                 // If dead we don't want it counted as a character anymore
                 if (characterState == CharacterState.Dead)
                 {
@@ -103,98 +206,80 @@ public class GameCharacterController : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns the CharacterType of the character.
+    /// </summary>
+    public virtual CharacterType CharacterType { get { return CharacterType.None; } }
+
+    /// <summary>
     /// Returns a reference to the character's combat controller.
     /// </summary>
-    public CombatController combat
+    public CombatController CombatController
     {
         get
         {
-            if (combatControllerReference == null)
-                combatControllerReference = GetComponent<CombatController>();
+            if (combatControllerReference == null) CreateCombatController();
 
             return combatControllerReference;
         }
     }
 
     /// <summary>
-    /// Returns a reference to the character's movement controller.
+    /// Returns whether or not the character is considered friendly to the hero.
     /// </summary>
-    public MovementController movement
-    {
-        get
-        {
-            return movementControllerReference;
-        }
-    }
-
-    protected virtual void CreateAnimator(RuntimeAnimatorController animatorController)
-    {
-        animatorReference = gameObject.AddComponent<Animator>();
-        animatorReference.runtimeAnimatorController = animatorController;
-        animatorReference.Play("IdleRight");
-        //animatorReference.StartPlayback();
-    }
-
-    protected virtual void CreateCombatController()
-    {
-        combatControllerReference = gameObject.AddComponent<CombatController>();
-    }
-
-    protected virtual void CreateGraphicsController()
-    {
-        graphicsControllerReference = gameObject.AddComponent<GraphicsController>();
-    }
-
-    protected virtual void CreateMovementController(float maxSpeed)
-    {
-        movementControllerReference = gameObject.AddComponent<MovementController>();
-        movementControllerReference.maxSpeed = maxSpeed;
-    }
-
-    protected virtual void CreateRigidbody2D()
-    {
-        rigidbodyReference = gameObject.AddComponent<Rigidbody2D>();
-        //rigidbodyReference.bodyType = RigidbodyType2D.Kinematic;
-        //rigidbodyReference.isKinematic = true;
-        //rigidbodyReference.useFullKinematicContacts = true;
-
-        
-        rigidbodyReference.gravityScale = GameManager.GameSettings.Constants.Character.RigidbodyGravityScale;
-        rigidbodyReference.drag = GameManager.GameSettings.Constants.Character.RigidbodyDrag;
-        rigidbodyReference.angularDrag = GameManager.GameSettings.Constants.Character.RigidbodyAngularDrag;
-        rigidbodyReference.mass = GameManager.GameSettings.Constants.Character.RigidbodyMass;
-    }
-
-    protected virtual void CreateSpriteRenderer(Sprite avatar)
-    {
-        spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-        spriteRenderer.sortingLayerName = "Character";
-        spriteRenderer.sprite = avatar;
-    }
-
-    protected virtual void CreateCapsuleCollider2D()
-    {
-        capsuleCollider2D = gameObject.AddComponent<CapsuleCollider2D>();
-        capsuleCollider2D.offset = GameManager.GameSettings.Constants.Character.ColliderOffset;
-        capsuleCollider2D.size = GameManager.GameSettings.Constants.Character.ColliderSize;
-        capsuleCollider2D.direction = GameManager.GameSettings.Constants.Character.ColliderDirection;
-    }
-
-    public virtual AttackType attack
-    {
-        get
-        {
-            return AttackType.Melee;
-        }
-    }
-
     public bool IsFriendly
     {
         get
         {
-            return type == CharacterType.Ally || type == CharacterType.Hero;
+            return CharacterType == CharacterType.Ally || CharacterType == CharacterType.Hero;
         }
     }
 
+    /// <summary>
+    /// Returns the last direction the character was facing.
+    /// </summary>
+    public MoveDirection LastDirection
+    {
+        get { return lastDirection; }
+        set
+        {
+            if (lastDirection != value)
+            {
+                lastDirection = value;
+                if (OnDirectionChanged != null) OnDirectionChanged();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Returns the level of the character.
+    /// </summary>
+    public virtual int Level { get { return 1; } }
+
+    /// <summary>
+    /// Returns the location of the character.
+    /// </summary>
+    public Vector3 Location { get { return gameObject.transform.position; } }
+
+    /// <summary>
+    /// Returns a reference to the character's movement controller.
+    /// </summary>
+    public MovementController MovementController
+    {
+        get
+        {
+            if (combatControllerReference == null) CreateMovementController();
+
+            return movementControllerReference;
+        }
+    }
+
+    /// <summary>
+    /// Returns a reference to the character's rigidbody.
+    /// </summary>
+    public Rigidbody2D Rigidbody { get { return rigidbodyReference; } }
+
+    /// <summary>
+    /// Unregisters the character from its respective manager.
+    /// </summary>
     public virtual void Unregister() { }
 }

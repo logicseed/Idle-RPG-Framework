@@ -2,66 +2,24 @@
 using UnityEngine;
 
 /// <summary>
-///
+/// Controls the movement of the character.
 /// </summary>
 public class MovementController : MonoBehaviour
 {
-    //public const float AVOID_DISTANCE = 0.5f;
-    //public const float VELOCITY_FACTOR = 200;
-
-    // These will be derived from attributes
-    public float maxSpeed;
-    //public float maxAccel = 0.1f;
-
-    public float SeekTargetDistance
-    {
-        get
-        {
-            return character.combat.DesiredRange;
-        }
-    }
-
-    public float SeekTargetDistanceSquared
-    {
-        get
-        {
-            return character.combat.DesiredRange * character.combat.DesiredRange;
-        }
-    }
-
-
     protected GameCharacterController character;
+    protected Vector2 currentVelocity;
+    protected float maxSpeed;
     protected AbstractMovementBehaviour movementBehaviour;
 
-    protected Vector2 currentVelocity;
-    public Vector2 velocity { get { return currentVelocity; } }
-
-    protected virtual void Start()
-    {
-        character = GetComponent<GameCharacterController>();
-    }
-
-    internal void ApplyForce(float potency, Vector3 position)
-    {
-        throw new NotImplementedException();
-    }
-
+    /// <summary>
+    /// Updates the character's movement every physics tick.
+    /// </summary>
     protected virtual void FixedUpdate()
     {
-        if (character.state == CharacterState.Dead) return;
+        if (character.CharacterState == CharacterState.Dead) return;
+
         GenerateMovementBehaviours();
         Move();
-    }
-
-    /// <summary>
-    /// Decorates the base idle movement behaviour with other movement behaviours
-    /// appropriate to the character and situation.
-    /// </summary>
-    public void GenerateMovementBehaviours()
-    {
-        movementBehaviour = new IdleMovementBehaviour();
-        //GenerateFleeBehaviours();
-        GenerateSeekBehaviour();
     }
 
     /// <summary>
@@ -86,35 +44,35 @@ public class MovementController : MonoBehaviour
     {
         try
         {
-            if (character.combat.target != null)
+            if (character.CombatController.TargetController != null)
             {
-                var squareDistance = transform.position.SqrDistance(character.combat.target.transform.position);
+                var squareDistance = transform.position.SqrDistance(character.CombatController.TargetController.transform.position);
 
                 if (squareDistance > SeekTargetDistanceSquared)
                 {
-                    var location = character.combat.target.transform.position;
+                    var location = character.CombatController.TargetController.transform.position;
                     movementBehaviour = new WalkMovementBehaviour(
                         movementBehaviour, gameObject, location, SeekTargetDistance);
-                    character.state = CharacterState.Walk;
+                    character.CharacterState = CharacterState.Walk;
                 }
                 else
                 {
-                    if (character.state == CharacterState.Walk) character.state = CharacterState.Idle;
+                    if (character.CharacterState == CharacterState.Walk) character.CharacterState = CharacterState.Idle;
                 }
             }
-            else if (character.combat.target == null)
+            else if (character.CombatController.TargetController == null)
             {
                 // Have allies walk back to hero when they don't have a target.
-                if (character.type == CharacterType.Ally) //TODO: Make this more generic.
+                if (character.CharacterType == CharacterType.Ally) //TODO: Make this more generic.
                 {
-                    var squareDistance = transform.position.SqrDistance(GameManager.Instance.hero.transform.position);
+                    var squareDistance = transform.position.SqrDistance(GameManager.Hero.Location);
 
                     if (squareDistance > SeekTargetDistanceSquared)
                     {
-                        var location = GameManager.Instance.hero.transform.position;
+                        var location = GameManager.Hero.Location;
                         movementBehaviour = new WalkMovementBehaviour(
                             movementBehaviour, gameObject, location, SeekTargetDistance);
-                        character.state = CharacterState.Walk;
+                        character.CharacterState = CharacterState.Walk;
                     }
                 }
                 else
@@ -135,7 +93,7 @@ public class MovementController : MonoBehaviour
     protected void Move()
     {
         // Get desired velocity
-        var desiredVelocity = movementBehaviour.Steering().normalized * maxSpeed * GameManager.GameSettings.Constants.Character.VelocityFactor;
+        var desiredVelocity = movementBehaviour.Steering().normalized * MaxSpeed * GameManager.GameSettings.Constants.Character.VelocityFactor;
 
         // Update state and direction
         if (desiredVelocity != Vector2.zero)
@@ -143,7 +101,7 @@ public class MovementController : MonoBehaviour
             try
             {
                 // Maintain proper character state
-                character.state = CharacterState.Walk;
+                character.CharacterState = CharacterState.Walk;
             }
             catch (NullReferenceException)
             {
@@ -157,11 +115,11 @@ public class MovementController : MonoBehaviour
                 {
                     if (desiredVelocity.x < 0)
                     {
-                        character.direction = MoveDirection.Left;
+                        character.LastDirection = MoveDirection.Left;
                     }
                     else
                     {
-                        character.direction = MoveDirection.Right;
+                        character.LastDirection = MoveDirection.Right;
                     }
                 }
             }
@@ -172,11 +130,68 @@ public class MovementController : MonoBehaviour
         }
 
         // Finally move to new position
-        //character.rigidbodyReference.AddForce(desiredVelocity);
-        character.rigidbodyReference.velocity = desiredVelocity;
-        //transform.Translate(newPosition);
+        character.Rigidbody.velocity = desiredVelocity;
         transform.rotation = Quaternion.identity;
     }
 
+    /// <summary>
+    /// Sets up the character's movement.
+    /// </summary>
+    protected virtual void Start()
+    {
+        character = GetComponent<GameCharacterController>();
+    }
 
+    /// <summary>
+    /// The current velocity of the character.
+    /// </summary>
+    public Vector2 CurrentVelocity { get { return currentVelocity; } }
+
+    /// <summary>
+    /// Gets or sets the maximum speed of the character.
+    /// </summary>
+    public float MaxSpeed { get { return maxSpeed; } set { maxSpeed = value; } }
+
+    /// <summary>
+    /// How close the character wants to get to their target.
+    /// </summary>
+    public float SeekTargetDistance
+    {
+        get
+        {
+            return character.CombatController.DesiredCombatRange;
+        }
+    }
+
+    /// <summary>
+    /// The seek target distance squared for more efficient vector calculations.
+    /// </summary>
+    public float SeekTargetDistanceSquared
+    {
+        get
+        {
+            return character.CombatController.DesiredCombatRange * character.CombatController.DesiredCombatRange;
+        }
+    }
+
+    /// <summary>
+    /// Applies an external force to the character.
+    /// </summary>
+    /// <param name="potency">The potency of the force to apply.</param>
+    /// <param name="position">The position to apply force from.</param>
+    public void ApplyForce(float potency, Vector3 position)
+    {
+        throw new NotImplementedException(); // TODO: Finish this
+    }
+
+    /// <summary>
+    /// Decorates the base idle movement behaviour with other movement behaviours
+    /// appropriate to the character and situation.
+    /// </summary>
+    public void GenerateMovementBehaviours()
+    {
+        movementBehaviour = new IdleMovementBehaviour();
+        GenerateFleeBehaviours();
+        GenerateSeekBehaviour();
+    }
 }

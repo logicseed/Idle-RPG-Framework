@@ -1,5 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/// <summary>
+/// Manages the characters on a stage.
+/// </summary>
 [System.Serializable]
 public class CharacterManager : RegisterList<GameCharacterController>
 {

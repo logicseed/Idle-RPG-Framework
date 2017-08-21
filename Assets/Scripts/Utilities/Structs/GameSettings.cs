@@ -77,6 +77,14 @@ public class GameSettings
             public Color FloatingBarForeground = Color.green;
             public Color FloatingBarBackground = Color.red;
         }
+
+        public CombatTimeContainer CombatTime;
+        [Serializable] public class CombatTimeContainer
+        {
+            public float SpawnCasterBallDelay = 0.25f;
+            public float SpawnArrowDelay = 0.5f;
+            public float DespawnBodyDelay = 1.0f;
+        }
     }
 
     public MaximumContainer Max;

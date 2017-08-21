@@ -1,58 +1,31 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 /// <summary>
-///
+/// Manages the game.
 /// </summary>
 public class GameManager : Singleton<GameManager>
 {
-    //[Header("Settings")]
-    public GameSettings gameSettings;
-    //public UserSettings userSettings;
+    [SerializeField]
+    protected GameSettings gameSettings;
+    protected bool onStage = false;
 
-    //[Header("World Entity Managers")]
-    [HideInInspector] public HeroManager heroManager;
-    [HideInInspector] public RosterManager rosterManager;
-    [HideInInspector] public InventoryManager inventoryManager;
-    [HideInInspector] public AbilityManager abilityManager;
-    [HideInInspector] public WorldManager worldManager;
-    [HideInInspector] public ZoneManager zoneManager;
-    [HideInInspector] public StageManager stageManager;
+    protected AbilityManager abilityManager;
+    protected AllyManager allyManager;
+    protected BossManager bossManager;
+    protected EnemyManager enemyManager;
+    protected HeroManager heroManager;
+    protected InventoryManager inventoryManager;
+    protected QueueManager queueManager;
+    protected RosterManager rosterManager;
+    protected StageManager stageManager;
+    protected WorldManager worldManager;
 
-    //[Header("Stage Entity Managers")]
-    [HideInInspector] public AllyManager allyManager;
-    [HideInInspector] public EnemyManager enemyManager;
-    [HideInInspector] public BossManager bossManager;
-    [HideInInspector] public QueueManager queueManager;
-
-
-    public static GameSettings GameSettings { get { return GameManager.Instance.gameSettings; } }
-    //public static UserSettings UserSettings { get { return GameManager.Instance.userSettings; } }
-    public static HeroManager HeroManager { get { return GameManager.Instance.heroManager; } }
-    public static HeroController Hero { get { return GameManager.Instance.heroManager.Hero; } }
-    public static RosterManager RosterManager { get { return GameManager.Instance.rosterManager; } }
-    public static InventoryManager InventoryManager { get { return GameManager.Instance.inventoryManager; } }
-    public static AbilityManager AbilityManager { get { return GameManager.Instance.abilityManager; } }
-    public static WorldManager WorldManager { get { return GameManager.Instance.worldManager; } }
-    public static ZoneManager ZoneManager { get { return GameManager.Instance.zoneManager; } }
-    public static StageManager StageManager { get { return GameManager.Instance.stageManager; } }
-    public static AllyManager AllyManager { get { return GameManager.Instance.allyManager; } }
-    public static EnemyManager EnemyManager { get { return GameManager.Instance.enemyManager; } }
-    public static BossManager BossManager { get { return GameManager.Instance.bossManager; } }
-    public static QueueManager QueueManager { get { return GameManager.Instance.queueManager; } }
-
-    [HideInInspector] public bool bypassSaveGame;
-
-    [HideInInspector] public float loadPercent = 0.0f;
-    [HideInInspector] public bool onStage = false;
-
-    [HideInInspector] public GameState state = GameState.LoadingWorld;
-    public static GameState State { get { return GameManager.Instance.state; } }
-
+    /// <summary>
+    /// Performs initialization prior to next frame.
+    /// </summary>
     protected override void Awake()
     {
         base.Awake();
@@ -60,30 +33,47 @@ public class GameManager : Singleton<GameManager>
         InitializeWorldEntityManagers();
         InitializeStageEntityManagers();
         InitializeGameWorldManagers();
-        loadPercent = 0.5f;
 
         SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
-    
-
-    private void InitializeWorld()
+    /// <summary>
+    /// Keeps track of a spawned boss and ends the stage after its death.
+    /// </summary>
+    /// <param name="boss">The boss to keep track of.</param>
+    protected IEnumerator CheckBoss(BossController boss)
     {
-        loadPercent = 1.0f;
+        while (boss != null && boss.CharacterState != CharacterState.Dead)
+        {
+            yield return new WaitForSeconds(1.0f);
+        }
+        StageManager.EndStage();
+    }
+
+    /// <summary>
+    /// Initialize game world managers.
+    /// </summary>
+    protected void InitializeGameWorldManagers()
+    {
+        SaveGame save = null;
+        if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
+
+        worldManager = new WorldManager(save);
+    }
+
+    /// <summary>
+    /// Initializes the world.
+    /// </summary>
+    protected void InitializeWorld()
+    {
         LoadWorld();
-        state = GameState.ChoosingZone;
     }
 
-    private void InitializeGameWorldManagers()
+    /// <summary>
+    /// Initialize world entity managers.
+    /// </summary>
+    protected void InitializeWorldEntityManagers()
     {
-        
-    }
-
-    public void InitializeWorldEntityManagers()
-    {
-        //heroManager = new HeroManager();
-        if (bypassSaveGame) return;
-
         SaveGame save = null;
         if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
 
@@ -91,88 +81,61 @@ public class GameManager : Singleton<GameManager>
         abilityManager = new AbilityManager(save);
         rosterManager = new RosterManager(save);
         inventoryManager = new InventoryManager(save);
-        worldManager = new WorldManager(save);
-        //zoneManager = ZoneManager.Load(save);
-        //stageManager = StageManager.Load(save);
     }
 
-    public void InitializeStageEntityManagers()
+    /// <summary>
+    /// Loads the user interface for a stage scene.
+    /// </summary>
+    protected void LoadStageUi()
     {
-        allyManager = new AllyManager();
-        enemyManager = new EnemyManager();
-        bossManager = new BossManager();
-        queueManager = new QueueManager();
+        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
+        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
+        Instantiate(GameSettings.Prefab.UI.HeroStageInformation, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.AbilityUsePanel, uiCanvas.transform, false);
     }
-    
 
-
-
-    private void Start()
+    /// <summary>
+    /// Loads the user interface for the world scene.
+    /// </summary>
+    protected void LoadWorldUi()
     {
-        DontDestroyOnLoad(gameObject);
-        InitializeWorld();
+        // Spawn UiCanvas
+        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
+        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
+        Instantiate(GameSettings.Prefab.UI.AssignmentPanel, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.UpgradePanel, uiCanvas.transform, false);
+        if (GameSettings.ShowResetButton) Instantiate(GameSettings.Prefab.UI.ResetButton, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.ExperienceText, uiCanvas.transform, false);
     }
 
-
-    private void Update()
+    /// <summary>
+    /// Loads the user interface for a zone scene.
+    /// </summary>
+    protected void LoadZoneUi()
     {
-        //if (queueManager.HasQueues && !queueManager.QueuesAreSpawning && !stageManager.hasSpawnedBoss)
-        //{
-        //    stageManager.hasSpawnedBoss = true;
-        //    var boss = stageManager.SpawnBoss();
-        //    if (boss != null)
-        //    {
-        //        StartCoroutine(CheckBoss(boss));
-        //    }
-        //    else
-        //    {
-        //        StageManager.EndStage();
-        //    }
-        //}
-        if (onStage)
-        {
-            if (queueManager.HasQueues && !queueManager.QueuesAreSpawning && enemyManager.GetAll().Count == 0)
-            {
-                onStage = false;
-                StageManager.EndStage();
-            }
-        }
+        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
+        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
+        Instantiate(GameSettings.Prefab.UI.AssignmentPanel, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.UpgradePanel, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.BackToWorldButton, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.ExperienceText, uiCanvas.transform, false);
     }
 
-    private IEnumerator CheckBoss(BossController boss)
+    /// <summary>
+    /// Called when the game manager is destroyed.
+    /// </summary>
+    protected void OnDestroy()
     {
-        while (boss.state != CharacterState.Dead)
-        {
-            Debug.Log("Checking Boss");
-            yield return new WaitForSeconds(1.0f);
-        }
-        StageManager.EndStage();
+        SaveGame();
+        SceneManager.activeSceneChanged -= OnSceneChanged;
     }
 
-    public static void LoadStage(SceneField stage)
-    {
-        if (WorldManager.UnlockedStages.Contains(stage))
-        {
-            GameManager.Instance.onStage = true;
-            GameManager.Instance.InitializeStageEntityManagers();
-            SceneManager.LoadScene(stage);
-        }
-    }
-
-    public static void LoadZone(string zone)
-    {
-        if (WorldManager.UnlockedZones.Contains(zone))
-        {
-            SceneManager.LoadScene(zone);
-        }
-    }
-
-    public static void LoadWorld()
-    {
-        SceneManager.LoadScene("World");
-    }
-
-    private void OnSceneChanged(Scene previousScene, Scene newScene)
+    /// <summary>
+    /// Called when the scene changes.
+    /// </summary>
+    /// <param name="previousScene">The previous scene.</param>
+    /// <param name="newScene">The new scene.</param>
+    protected void OnSceneChanged(Scene previousScene, Scene newScene)
     {
         if (newScene.name == "Start") return;
         if (newScene.name == "World")
@@ -187,35 +150,38 @@ public class GameManager : Singleton<GameManager>
         else LoadStageUi();
     }
 
-    private void LoadWorldUi()
+    /// <summary>
+    /// Sets up the game manager.
+    /// </summary>
+    protected void Start()
     {
-        // Spawn UiCanvas
-        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
-        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
-        Instantiate(GameSettings.Prefab.UI.AssignmentPanel, uiCanvas.transform, false);
-        Instantiate(GameSettings.Prefab.UI.UpgradePanel, uiCanvas.transform, false);
-        if (GameSettings.ShowResetButton) Instantiate(GameSettings.Prefab.UI.ResetButton, uiCanvas.transform, false);
-        Instantiate(GameSettings.Prefab.UI.ExperienceText, uiCanvas.transform, false);
+        DontDestroyOnLoad(gameObject);
+        InitializeWorld();
     }
 
-    private void LoadZoneUi()
+    /// <summary>
+    /// Updates the game manager every frame.
+    /// </summary>
+    protected void Update()
     {
-        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
-        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
-        Instantiate(GameSettings.Prefab.UI.AssignmentPanel, uiCanvas.transform, false);
-        Instantiate(GameSettings.Prefab.UI.UpgradePanel, uiCanvas.transform, false);
-        Instantiate(GameSettings.Prefab.UI.BackToWorldButton, uiCanvas.transform, false);
-        Instantiate(GameSettings.Prefab.UI.ExperienceText, uiCanvas.transform, false);
+        if (onStage)
+        {
+            if (queueManager.HasQueues && !queueManager.QueuesAreSpawning && enemyManager.GetAll().Count == 0)
+            {
+                onStage = false;
+                StageManager.EndStage();
+            }
+        }
     }
 
-    private void LoadStageUi()
-    {
-        var uiCanvas = Instantiate(GameSettings.Prefab.UI.UiCanvas);
-        uiCanvas.name = GameSettings.Prefab.UI.UiCanvas.name;
-        Instantiate(GameSettings.Prefab.UI.HeroStageInformation, uiCanvas.transform, false);
-        Instantiate(GameSettings.Prefab.UI.AbilityUsePanel, uiCanvas.transform, false);
-    }
+    /// <summary>
+    /// Returns the ability manager.
+    /// </summary>
+    public static AbilityManager AbilityManager { get { return GameManager.Instance.abilityManager; } }
 
+    /// <summary>
+    /// Returns a list of all characters on the stage.
+    /// </summary>
     public static List<GameCharacterController> AllCharacters
     {
         get
@@ -231,6 +197,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    /// <summary>
+    /// Returns a list of all enemies on the stage.
+    /// </summary>
     public static List<GameCharacterController> AllEnemies
     {
         get
@@ -244,6 +213,9 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    /// <summary>
+    /// Returns a list of all friendlies on the stage.
+    /// </summary>
     public static List<GameCharacterController> AllFriendlies
     {
         get
@@ -257,6 +229,87 @@ public class GameManager : Singleton<GameManager>
         }
     }
 
+    /// <summary>
+    /// Returns the stage ally manager.
+    /// </summary>
+    public static AllyManager AllyManager { get { return GameManager.Instance.allyManager; } }
+
+    /// <summary>
+    /// Returns the stage boss manager.
+    /// </summary>
+    public static BossManager BossManager { get { return GameManager.Instance.bossManager; } }
+
+    /// <summary>
+    /// Whether or not the hero can be upgraded.
+    /// </summary>
+    public static bool CanUpgradeHero
+    {
+        get
+        {
+            return UpgradeHeroCost <= GameManager.HeroManager.Experience;
+        }
+    }
+
+    /// <summary>
+    /// Returns the stage enemy manager.
+    /// </summary>
+    public static EnemyManager EnemyManager { get { return GameManager.Instance.enemyManager; } }
+
+    /// <summary>
+    /// Returns the game settings.
+    /// </summary>
+    public static GameSettings GameSettings { get { return GameManager.Instance.gameSettings; } }
+
+    /// <summary>
+    /// Returns the hero controller.
+    /// </summary>
+    public static HeroController Hero { get { return GameManager.Instance.heroManager.Hero; } }
+
+    /// <summary>
+    /// Returns the hero manager.
+    /// </summary>
+    public static HeroManager HeroManager { get { return GameManager.Instance.heroManager; } }
+    /// <summary>
+    /// Returns the inventory manager.
+    /// </summary>
+    public static InventoryManager InventoryManager { get { return GameManager.Instance.inventoryManager; } }
+
+    /// <summary>
+    /// Returns the stage queue manager.
+    /// </summary>
+    public static QueueManager QueueManager { get { return GameManager.Instance.queueManager; } }
+
+    /// <summary>
+    /// Returns the roster manager.
+    /// </summary>
+    public static RosterManager RosterManager { get { return GameManager.Instance.rosterManager; } }
+
+    /// <summary>
+    /// Returns the current stage manager.
+    /// </summary>
+    public static StageManager StageManager { get { return GameManager.Instance.stageManager; } set { GameManager.Instance.stageManager = value; } }
+
+    /// <summary>
+    /// The cost of the next hero upgrade.
+    /// </summary>
+    public static int UpgradeHeroCost
+    {
+        get
+        {
+            return (int)(GameManager.HeroManager.Level * GameManager.GameSettings.Constants.UpgradeHeroCost);
+        }
+    }
+
+    /// <summary>
+    /// Returns the world manager.
+    /// </summary>
+    public static WorldManager WorldManager { get { return GameManager.Instance.worldManager; } }
+
+    /// <summary>
+    /// Returns a list of all characters on the stage except the specified character.
+    /// </summary>
+    /// <param name="self">The character on the stage that isn't included in the list.</param>
+    /// <returns>A list of characters on the stage.</returns>
     public static List<GameCharacterController> AllCharactersExcept(GameCharacterController self)
     {
         var allExceptSelf = AllCharacters;
@@ -264,6 +317,116 @@ public class GameManager : Singleton<GameManager>
         return allExceptSelf;
     }
 
+    /// <summary>
+    /// Whether or not the specified ally can be upgraded.
+    /// </summary>
+    /// <param name="allyName">The name of the ally to upgrade.</param>
+    /// <returns>Whether or not the ally can be upgraded.</returns>
+    public static bool CanUpgradeAlly(string allyName)
+    {
+        return UpgradeAllyCost(allyName) <= GameManager.HeroManager.Experience;
+    }
+
+    /// <summary>
+    /// Gets a world entity manager corresponding to the specified type.
+    /// </summary>
+    /// <param name="entityType">The type of entity to get the manager of.</param>
+    /// <returns>The world entity manager for the specified type.</returns>
+    public static WorldEntityManager GetManagerByType(ListableEntityType entityType)
+    {
+        switch (entityType)
+        {
+            case ListableEntityType.Ability: return AbilityManager;
+            case ListableEntityType.Inventory: return InventoryManager;
+            case ListableEntityType.Roster: return RosterManager;
+
+            case ListableEntityType.NonListable: default: return null;
+        }
+    }
+
+    /// <summary>
+    /// Loads a stage.
+    /// </summary>
+    /// <param name="stage">The sage to load.</param>
+    public static void LoadStage(SceneField stage)
+    {
+        if (WorldManager.UnlockedStages.Contains(stage))
+        {
+            GameManager.Instance.onStage = true;
+            GameManager.Instance.InitializeStageEntityManagers();
+            SceneManager.LoadScene(stage);
+        }
+    }
+
+    /// <summary>
+    /// Loads the world scene.
+    /// </summary>
+    public static void LoadWorld()
+    {
+        SceneManager.LoadScene("World");
+    }
+
+    /// <summary>
+    /// Loads a zone.
+    /// </summary>
+    /// <param name="zone">The name of the zone to load.</param>
+    public static void LoadZone(string zone)
+    {
+        if (WorldManager.UnlockedZones.Contains(zone))
+        {
+            SceneManager.LoadScene(zone);
+        }
+    }
+
+    /// <summary>
+    /// Upgrades the specified ally.
+    /// </summary>
+    /// <param name="allyName">The name of the ally to upgrade.</param>
+    public static void UpgradeAlly(string allyName)
+    {
+        if (CanUpgradeAlly(allyName))
+        {
+            GameManager.HeroManager.Experience -= UpgradeAllyCost(allyName);
+            GameManager.RosterManager.AllyLevels[allyName]++;
+        }
+    }
+
+    /// <summary>
+    /// Gets the cost of the next upgrade for the specified ally.
+    /// </summary>
+    /// <param name="allyName">THe name of the ally to upgrade.</param>
+    /// <returns>The experience cost of the next upgrade for the ally.</returns>
+    public static int UpgradeAllyCost(string allyName)
+    {
+        return (int)(GameManager.RosterManager.AllyLevels[allyName] * GameManager.GameSettings.Constants.UpgradeAllyCost);
+    }
+
+    /// <summary>
+    /// Upgrades the hero.
+    /// </summary>
+    public static void UpgradeHero()
+    {
+        if (CanUpgradeHero)
+        {
+            GameManager.HeroManager.Experience -= UpgradeHeroCost;
+            GameManager.HeroManager.Level++;
+        }
+    }
+
+    /// <summary>
+    /// Initializes the stage entity managers.
+    /// </summary>
+    public void InitializeStageEntityManagers()
+    {
+        allyManager = new AllyManager();
+        enemyManager = new EnemyManager();
+        bossManager = new BossManager();
+        queueManager = new QueueManager();
+    }
+
+    /// <summary>
+    /// Saves the game.
+    /// </summary>
     public void SaveGame()
     {
         var save = new SaveGame();
@@ -273,69 +436,8 @@ public class GameManager : Singleton<GameManager>
         if (RosterManager != null) RosterManager.Save(ref save);
         if (InventoryManager != null) InventoryManager.Save(ref save);
         if (WorldManager != null) WorldManager.Save(ref save);
-        //if (ZoneManager != null) zoneManager.Save(ref save);
-        //if (StageManager != null) stageManager.Save(ref save);
         save.isFilled = true;
 
         SaveGameManager.SaveGame(save);
-    }
-
-    public HeroController hero { get { return heroManager.Hero; } }
-
-    public void OnDestroy()
-    {
-        if (!bypassSaveGame) SaveGame();
-        SceneManager.activeSceneChanged -= OnSceneChanged;
-    }
-
-
-    public static WorldEntityManager GetManagerByType(ListableEntityType entityType)
-    {
-        switch (entityType)
-        {
-            case ListableEntityType.Ability: return AbilityManager;
-            case ListableEntityType.Inventory: return InventoryManager;
-            case ListableEntityType.Roster: return RosterManager;
-            
-            case ListableEntityType.NonListable: default: return null;
-        }
-    }
-
-    public static void UpgradeHero()
-    {
-        if (CanUpgradeHero())
-        {
-            GameManager.HeroManager.experience -= UpgradeHeroCost();
-            GameManager.HeroManager.level++;
-        }
-    }
-
-    public static bool CanUpgradeHero()
-    {
-        return UpgradeHeroCost() <= GameManager.HeroManager.experience;
-    }
-
-    public static int UpgradeHeroCost()
-    {
-        return (int)(GameManager.HeroManager.level * GameManager.GameSettings.Constants.UpgradeHeroCost);
-    }
-
-    public static void UpgradeAlly(string allyName)
-    {
-        if (CanUpgradeAlly(allyName))
-        {
-            GameManager.HeroManager.experience -= UpgradeAllyCost(allyName);
-            GameManager.RosterManager.levels[allyName]++;
-        }
-    }
-
-    public static bool CanUpgradeAlly(string allyName)
-    {
-        return UpgradeAllyCost(allyName) <= GameManager.HeroManager.experience;
-    }
-
-    public static int UpgradeAllyCost(string allyName)
-    {
-        return (int)(GameManager.RosterManager.levels[allyName] * GameManager.GameSettings.Constants.UpgradeAllyCost);
     }
 }

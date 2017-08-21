@@ -17,7 +17,6 @@ using System.Diagnostics;
 /// </example>
 public class ConditionalDebug
 {
-
     private const String DEBUG_CONDITIONAL = "UNITY_EDITOR";
 
     /// <summary>

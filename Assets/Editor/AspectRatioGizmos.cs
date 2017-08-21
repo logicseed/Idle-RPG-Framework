@@ -1,5 +1,5 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 /// <summary>
 /// Editor gizmos representing the common aspect ratios.
@@ -35,7 +35,7 @@ public class AspectRatioGizmos
         // Position - Assumes camera pointed in positive z-dir
         var position_x = camera.transform.position.x;
         var position_y = camera.transform.position.y;
-        var position_z = camera.transform.position.z 
+        var position_z = camera.transform.position.z
                          + (0.5F * (camera.farClipPlane - camera.nearClipPlane));
 
         // Base scale
@@ -44,23 +44,23 @@ public class AspectRatioGizmos
         var scale_z = camera.farClipPlane - camera.nearClipPlane;
 
         Gizmos.color = COLOR_16_9;
-        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z), 
+        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z),
                             new Vector3(scale_x * ASPECT_16_9, scale_y, scale_z));
 
         Gizmos.color = COLOR_17_10;
-        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z), 
+        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z),
                             new Vector3(scale_x * ASPECT_17_10, scale_y, scale_z));
 
         Gizmos.color = COLOR_16_10;
-        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z), 
+        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z),
                             new Vector3(scale_x * ASPECT_16_10, scale_y, scale_z));
 
         Gizmos.color = COLOR_3_2;
-        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z), 
+        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z),
                             new Vector3(scale_x * ASPECT_3_2, scale_y, scale_z));
 
         Gizmos.color = COLOR_4_3;
-        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z), 
+        Gizmos.DrawWireCube(new Vector3(position_x, position_y, position_z),
                             new Vector3(scale_x * ASPECT_4_3, scale_y, scale_z));
     }
 }

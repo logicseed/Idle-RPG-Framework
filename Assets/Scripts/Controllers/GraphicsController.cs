@@ -6,11 +6,14 @@ using UnityEngine;
 /// </summary>
 public class GraphicsController : MonoBehaviour
 {
-    private GameCharacterController character;
-    private SpriteRenderer spriteRenderer;
-    private Animator animator;
+    protected Animator animator;
+    protected GameCharacterController character;
+    protected SpriteRenderer spriteRenderer;
 
-    private void Start()
+    /// <summary>
+    /// Sets up the character graphics.
+    /// </summary>
+    protected void Start()
     {
         GetCharacterComponent();
 
@@ -18,18 +21,10 @@ public class GraphicsController : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
-    private void GetCharacterComponent()
-    {
-        character = GetComponent<GameCharacterController>();
-
-        if (character != null)
-        {
-            character.OnStateChanged += CharacterStateChanged;
-            character.OnDirectionChanged += CharacterStateChanged;
-        }
-    }
-
-    private void Update()
+    /// <summary>
+    /// Updates the character every frame.
+    /// </summary>
+    protected void Update()
     {
         UpdateSortingOrder();
     }
@@ -52,20 +47,34 @@ public class GraphicsController : MonoBehaviour
     }
 
     /// <summary>
+    /// Gets the character and subscribes to stage change events.
+    /// </summary>
+    public void GetCharacterComponent()
+    {
+        character = GetComponent<GameCharacterController>();
+
+        if (character != null)
+        {
+            character.OnStateChanged += CharacterStateChanged;
+            character.OnDirectionChanged += CharacterStateChanged;
+        }
+    }
+
+    /// <summary>
     /// Combines a character's state and direction to become an animation state.
     /// </summary>
     /// <returns>A string in the form of (state)(direction) (e.g. "WalkLeft").</returns>
-    private string GetStateAnimationString()
+    public string GetStateAnimationString()
     {
         try
         {
-            if (character.state == CharacterState.Dead)
+            if (character.CharacterState == CharacterState.Dead)
             {
-                return character.state.ToString();
+                return character.CharacterState.ToString();
             }
             else
             {
-                return character.state.ToString() + character.direction.ToString();
+                return character.CharacterState.ToString() + character.LastDirection.ToString();
             }
         }
         catch (NullReferenceException)
@@ -79,58 +88,16 @@ public class GraphicsController : MonoBehaviour
     /// Updates the rendering order of the game object based on vertical position.
     /// Objects higher on the screen are rendered behind objects that are lower.
     /// </summary>
-    private void UpdateSortingOrder()
+    public void UpdateSortingOrder()
     {
         try
         {
-            spriteRenderer.sortingOrder = (int) (transform.position.y * -100);
-            if (character.state == CharacterState.Dead) spriteRenderer.sortingOrder -= 2000;
+            spriteRenderer.sortingOrder = (int)(transform.position.y * -100);
+            if (character.CharacterState == CharacterState.Dead) spriteRenderer.sortingOrder -= 2000;
         }
         catch (NullReferenceException)
         {
             spriteRenderer = GetComponent<SpriteRenderer>();
         }
     }
-
-    ///// <summary>
-    /////
-    ///// </summary>
-    //private void UpdateAnimationState()
-    //{
-    //    //Update the movement animation
-    //    MovementAnimationState();
-    //}
-
-    ///// <summary>
-    ///// Keeps track of the movement animation states and updates them accordingly
-    ///// </summary>
-    //private void MovementAnimationState()
-    //{
-    //    // Get the last move direction
-    //    try
-    //    {
-    //        var lastMoveDirection = movementController.LastMoveDirection;
-
-    //        // Update animtion based on direction
-    //        if(lastMoveDirection == MoveDirection.None)
-    //        {
-    //            //If prev animation played is left
-    //            if(animator.GetInteger("state") == 2)
-    //                animator.SetInteger("state", 0);
-
-    //            //If prev animation played is right
-    //            if (animator.GetInteger("state") == 3)
-    //                animator.SetInteger("state", 1);
-    //        }
-    //        else if(lastMoveDirection == MoveDirection.Left)
-    //            animator.SetInteger("state", 2);
-    //        else if (lastMoveDirection == MoveDirection.Right)
-    //            animator.SetInteger("state", 3);
-    //    }
-    //    catch (NullReferenceException)
-    //    {
-    //        movementController = GetComponent<MovementController>();
-    //    }
-    //}
-
 }

@@ -1,63 +1,99 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
+﻿using System;
+using Debug = ConditionalDebug;
 
+/// <summary>
+/// Controls the Ally GameObject.
+/// </summary>
 public class AllyController : GameCharacterController
 {
-    public override CharacterType type { get { return CharacterType.Ally; } }
-
-    public Ally ally;
-
-    // Use this for initialization
-    void Start()
+    /// <summary>
+    /// Sets up the ally controller.
+    /// </summary>
+    private void Start()
     {
-        derivedAttributes = new DerivedAttributes(ally);
+        if (characterObjectReference == null) Debug.LogError(gameObject.name + ": AllyController was not provided an AllyObject.");
 
+        // Create all the pieces of the ally.
+        CreateDerivedAttributes();
         CreateCombatController();
-        CreateSpriteRenderer(ally.icon);
-        CreateAnimator(ally.animator);
+        CreateSpriteRenderer();
+        CreateAnimator();
         CreateGraphicsController();
-        CreateMovementController(derivedAttributes.movementSpeed);
+        CreateMovementController();
         CreateRigidbody2D();
         CreateCapsuleCollider2D();
+        CreateFloatingHealthBar();
 
-
-        if (type != CharacterType.Hero)
-        {
-            floatingHealthBarReference = Instantiate(GameManager.GameSettings.Prefab.UI.FloatingBar, transform);
-        }
-
-        GameManager.Instance.allyManager.Register(this);
+        Register();
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Creates the derived attributes for the ally.
+    /// </summary>
+    protected override void CreateDerivedAttributes()
     {
-
+        derivedAttributes = new DerivedAttributes(AllyObject);
     }
 
-    private void OnDestroy()
+    /// <summary>
+    /// Registers this Ally with the AllyManager.
+    /// </summary>
+    protected override void Register()
     {
         try
         {
-            GameManager.Instance.allyManager.Unregister(this);
+            GameManager.AllyManager.Register(this);
         }
-        catch (NullReferenceException)
+        catch (NullReferenceException e)
         {
-            // GameManager destroyed first, must be test environment, ignore exception.
+            Debug.LogWarning(gameObject.name + ": Ally attempted to register with an AllyManager that doesn't exist.");
+            Debug.LogException(e);
         }
     }
 
-    public override AttackType attack
+    /// <summary>
+    /// Returns the ScriptableObject that represents the Ally.
+    /// </summary>
+    public Ally AllyObject { get { return characterObjectReference as Ally; } set { characterObjectReference = value; } }
+
+    /// <summary>
+    /// Gets the AttackType of the Ally.
+    /// </summary>
+    public override AttackType AttackType
     {
         get
         {
-            return ally.attackType;
+            try
+            {
+                return AllyObject.attackType;
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.LogError(gameObject.name + ": Tried to access AttackType of AllyController that lacks an Ally object.");
+                Debug.LogException(e);
+                return AttackType.Melee;
+            }
         }
     }
 
+    /// <summary>
+    /// Returns the CharacterType of the Ally.
+    /// </summary>
+    public override CharacterType CharacterType { get { return CharacterType.Ally; } }
+
+    /// <summary>
+    /// Unregisters this Ally from the AllyManager.
+    /// </summary>
     public override void Unregister()
     {
-        GameManager.AllyManager.Unregister(this);
+        try
+        {
+            GameManager.AllyManager.Unregister(this);
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.LogWarning(gameObject.name + ": GameManager destroyed before Ally could unregister; this should only happen in the editor.");
+            Debug.LogException(e);
+        }
     }
 }

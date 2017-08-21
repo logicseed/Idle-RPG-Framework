@@ -38,7 +38,7 @@ public class UpgradeAllyButton : MonoBehaviour
 
         var text = new StringBuilder();
         text.Append("Level: ");
-        text.AppendLine(GameManager.RosterManager.levels[allyName].ToString());
+        text.AppendLine(GameManager.RosterManager.AllyLevels[allyName].ToString());
         text.AppendLine();
         text.AppendLine("Upgrade");
         text.Append(GameManager.UpgradeAllyCost(allyName).ToString());

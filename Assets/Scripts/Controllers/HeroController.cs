@@ -1,100 +1,102 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Debug = ConditionalDebug;
 
+/// <summary>
+/// Controls the Hero GameObject.
+/// </summary>
 public class HeroController : GameCharacterController
 {
-    public override CharacterType type { get { return CharacterType.Hero; } }
+    private HeroInputController heroInputControllerReference;
 
-    public Hero HeroObject;
-    public List<Transform> spawnPoints;
+    [SerializeField]
+    private Hero heroObject;
 
-    private HeroInputController inputControllerReference;
-    public HeroInputController InputController { get { return inputControllerReference; } }
+    [SerializeField]
+    private List<Transform> spawnPoints;
 
-    [HideInInspector]
-    public HeroCombatController heroCombat;
-
-    public void Awake()
+    /// <summary>
+    /// Sets up the hero controller.
+    /// </summary>
+    private void Start()
     {
-        HeroObject = Resources.Load("Heroes/Hero") as Hero;
-    }
+        if (heroObject == null) Debug.LogError(gameObject.name + ": HeroController was not provided a HeroObject.");
 
-    protected void Start()
-    {
-        derivedAttributes = new DerivedAttributes(HeroObject);
-
-        CreateSpriteRenderer(HeroObject.icon);
-        CreateAnimator(HeroObject.animator);
+        CreateDerivedAttributes();
+        CreateSpriteRenderer();
+        CreateAnimator();
         CreateGraphicsController();
         CreateCombatController();
         CreateRigidbody2D();
         CreateCapsuleCollider2D();
-        CreateMovementController(derivedAttributes.movementSpeed);
+        CreateMovementController();
+
         CreateHeroInputController();
 
-        GameManager.HeroManager.Register(this);
+        Register();
 
         SpawnAllies();
     }
 
-    private void SpawnAllies()
+    /// <summary>
+    /// Returns the ScriptableObject for the character.
+    /// </summary>
+    protected override Character CharacterObject { get { return heroObject; } }
+
+    /// <summary>
+    /// Creates the hero's combat controller.
+    /// </summary>
+    protected override void CreateCombatController()
     {
-        var rosterManager = GameManager.RosterManager;
-
-        for (int i = 0; i < rosterManager.Assigned.Count && i < spawnPoints.Count; i++)
-        {
-            var allyName = rosterManager.Assigned[i];
-            var ally = Instantiate(GameManager.GameSettings.Prefab.Ally, spawnPoints[i].position, Quaternion.identity) as GameObject;
-            ally.GetComponent<AllyController>().ally = rosterManager.GetEntityObject(allyName) as Ally;
-            ally.name = allyName;
-        }
-
-        foreach (var spawnPoint in spawnPoints) Destroy(spawnPoint.gameObject);        
+        combatControllerReference = gameObject.AddComponent<HeroCombatController>();
     }
 
-    public void UseAbility(Ability ability)
+    /// <summary>
+    /// Creates the derived attributes for the hero.
+    /// </summary>
+    protected override void CreateDerivedAttributes()
     {
-        if (heroCombat.Cooldowns.ContainsKey(ability.name))
-        {
-            Debug.Log("Ability is on cooldown: " + ability.name);
-            return;
-        }
-
-        if (ability.abilityRange == AbilityRange.Self) PerformAbility(ability, this);
-
-        if (ability.abilityRange == AbilityRange.Melee || ability.abilityRange == AbilityRange.Ranged)
-        {
-            if (combat.target == null)
-            {
-                Debug.Log("Awaiting target for " + ability.name);
-                InputController.AwaitTarget(ability);
-            }
-            else
-            {
-                PerformAbility(ability, combat.target);
-            }
-        }
-        
+        derivedAttributes = new DerivedAttributes(heroObject);
     }
 
-    private void PerformAbility(Ability ability, GameCharacterController target)
+    /// <summary>
+    /// Creates the hero input controller.
+    /// </summary>
+    protected virtual void CreateHeroInputController()
     {
-        heroCombat.Cooldowns.Add(ability.name, ability.cooldown);
+        heroInputControllerReference = gameObject.AddComponent<HeroInputController>();
+    }
+
+    protected override void CreateMovementController()
+    {
+        movementControllerReference = gameObject.AddComponent<HeroMovementController>();
+        movementControllerReference.MaxSpeed = Attributes.movementSpeed;
+    }
+
+    /// <summary>
+    /// Performs an ability on a target.
+    /// </summary>
+    /// <param name="ability">The ability to perform.</param>
+    /// <param name="target">The target of the ability.</param>
+    protected void PerformAbility(Ability ability, GameCharacterController target)
+    {
+        HeroCombatController.AbilityCooldowns.Add(ability.name, ability.cooldown);
 
         switch (ability.abilityType)
         {
             case AbilityType.Area:
                 PerformAreaAbility(ability, target);
                 break;
+
             case AbilityType.Direct:
                 PerformDirectAbility(ability, target);
                 break;
+
             case AbilityType.Heal:
                 PerformHealAbility(ability, target);
                 break;
+
             case AbilityType.Shield:
                 PerformShieldAbility(ability, target);
                 break;
@@ -103,113 +105,247 @@ public class HeroController : GameCharacterController
         }
     }
 
-    private void PerformAreaAbility(Ability ability, GameCharacterController target)
+    /// <summary>
+    /// Performs an area ability.
+    /// </summary>
+    /// <param name="ability">The ability to perform.</param>
+    /// <param name="target">Target at the center of the area ability.</param>
+    protected void PerformAreaAbility(Ability ability, GameCharacterController target)
     {
-        Debug.Log("Performing area ability " + ability.name + " on " + target.name);
-        var heroCombat = combat as HeroCombatController;
+        Debug.Log(gameObject.name + ": Performing area ability " + ability.name + " on " + target.name);
 
         switch (ability.abilityRange)
         {
             case AbilityRange.Melee:
-                heroCombat.PerformCleaveAbility(ability, target);
+                HeroCombatController.PerformMeleeAreaAbility(ability, target);
                 break;
+
             case AbilityRange.Ranged:
-                heroCombat.PerformStormAbility(ability, target);
+                HeroCombatController.PerformRangedAreaAbility(ability, target);
                 break;
+
             case AbilityRange.Self:
+                // Not implemented
                 break;
 
             default: break;
         }
     }
 
-    private void PerformDirectAbility(Ability ability, GameCharacterController target)
+    /// <summary>
+    /// Performs a direct ability on a target.
+    /// </summary>
+    /// <param name="ability">The ability to perform.</param>
+    /// <param name="target">The target of the ability.</param>
+    protected void PerformDirectAbility(Ability ability, GameCharacterController target)
     {
-        Debug.Log("Performing direct ability " + ability.name + " on " + target.name);
-        var heroCombat = combat as HeroCombatController;
+        Debug.Log(gameObject.name + ": Performing direct ability " + ability.name + " on " + target.name);
 
         switch (ability.abilityRange)
         {
             case AbilityRange.Melee:
-                combat.PerformMeleeAttack();
+                HeroCombatController.PerformMeleeAttack();
                 break;
+
             case AbilityRange.Ranged:
-                heroCombat.PerformFireball(ability, target);
+                HeroCombatController.PerformFireball(ability, target);
                 break;
+
             case AbilityRange.Self:
+                // Not implemented
                 break;
 
             default: break;
         }
     }
 
-    private void PerformHealAbility(Ability ability, GameCharacterController target)
+    /// <summary>
+    /// Performs a heal ability on a target. Placeholder.
+    /// </summary>
+    /// <param name="ability">The ability to perform.</param>
+    /// <param name="target">The target of the ability.</param>
+    protected void PerformHealAbility(Ability ability, GameCharacterController target)
     {
-        Debug.Log("Performing heal ability " + ability.name + " on " + target.name);
+        Debug.Log(gameObject.name + ": Performing heal ability " + ability.name + " on " + target.name);
+
         switch (ability.abilityRange)
         {
             case AbilityRange.Melee:
+                // Not implemented
                 break;
+
             case AbilityRange.Ranged:
+                // Not implemented
                 break;
+
             case AbilityRange.Self:
+                // Not implemented
                 break;
 
             default: break;
         }
     }
 
-    private void PerformShieldAbility(Ability ability, GameCharacterController target)
+    /// <summary>
+    /// Performs a shield ability on a target.
+    /// </summary>
+    /// <param name="ability">The ability to perform.</param>
+    /// <param name="target">The target of the ability.</param>
+    protected void PerformShieldAbility(Ability ability, GameCharacterController target)
     {
-        Debug.Log("Performing shield ability " + ability.name + " on " + target.name);
+        Debug.Log(gameObject.name + ": Performing shield ability " + ability.name + " on " + target.name);
         switch (ability.abilityRange)
         {
             case AbilityRange.Melee:
-                combat.PerformMeleeAttack();
+                // Not implemented
                 break;
+
             case AbilityRange.Ranged:
-                combat.PerformRangedAttack();
+                // Not implemented
                 break;
+
             case AbilityRange.Self:
-                heroCombat.PerformDefendAbility(ability);
+                HeroCombatController.PerformDefendAbility(ability);
                 break;
 
             default: break;
         }
     }
 
-    protected override void CreateCombatController()
+    /// <summary>
+    /// Registers the hero with the hero manager.
+    /// </summary>
+    protected override void Register()
     {
-        combatControllerReference = gameObject.AddComponent<HeroCombatController>();
-        heroCombat = combat as HeroCombatController;
+        try
+        {
+            GameManager.HeroManager.Register(this);
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.LogWarning(gameObject.name + ": Hero attempted to register with a HeroManager that doesn't exist.");
+            Debug.LogException(e);
+        }
     }
 
-    protected override void CreateMovementController(float maxSpeed)
+    /// <summary>
+    /// Spawns the assigned allies.
+    /// </summary>
+    protected void SpawnAllies()
     {
-        movementControllerReference = gameObject.AddComponent<HeroMovementController>();
-        movementControllerReference.maxSpeed = maxSpeed;
+        if (spawnPoints == null) spawnPoints = new List<Transform>();
+
+        try
+        {
+            for (int i = 0; i < GameManager.RosterManager.Assigned.Count && i < spawnPoints.Count; i++)
+            {
+                var allyName = GameManager.RosterManager.Assigned[i];
+
+                var allyGameObject = Instantiate(GameManager.GameSettings.Prefab.Ally, spawnPoints[i].position, Quaternion.identity) as GameObject;
+                allyGameObject.name = allyName;
+
+                var allyController = allyGameObject.GetComponent<AllyController>();
+                allyController.AllyObject = GameManager.RosterManager.GetEntityObject(allyName) as Ally;
+
+                Debug.Log(gameObject.name + " spawned " + allyName + " as an ally.");
+            }
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.LogWarning(gameObject.name + ": Could not spawn allies.");
+            Debug.LogException(e);
+        }
+        finally
+        {
+            foreach (var spawnPoint in spawnPoints) Destroy(spawnPoint.gameObject);
+        }
     }
 
-    private void CreateHeroInputController()
-    {
-        inputControllerReference = gameObject.AddComponent<HeroInputController>();
-    }
-
-    private void OnDestroy()
-    {
-        
-    }
-
-    public override AttackType attack
+    /// <summary>
+    /// Returns the attack type of the hero.
+    /// </summary>
+    public override AttackType AttackType
     {
         get
         {
-            return HeroObject.attackType;
+            try
+            {
+                return HeroObject.attackType;
+            }
+            catch (NullReferenceException e)
+            {
+                Debug.LogError(gameObject.name + ": Tried to access AttackType of HeroController that lacks a Hero object.");
+                Debug.LogException(e);
+                return AttackType.Melee;
+            }
         }
     }
 
+    /// <summary>
+    /// Returns the character type of the hero.
+    /// </summary>
+    public override CharacterType CharacterType { get { return CharacterType.Hero; } }
+
+    /// <summary>
+    /// Returns the HeroCombatController for the hero.
+    /// </summary>
+    public HeroCombatController HeroCombatController { get { return combatControllerReference as HeroCombatController; } }
+
+    // Set in the inspector
+    /// <summary>
+    /// Reference to the HeroInputController.
+    /// </summary>
+    public HeroInputController HeroInputController { get { return heroInputControllerReference; } }
+
+    public HeroMovementController HeroMovementController { get { return movementControllerReference as HeroMovementController; } }
+
+    /// <summary>
+    /// The ScritableObject of the hero.
+    /// </summary>
+    public Hero HeroObject { get { return heroObject; } set { heroObject = value; } }
+
+    /// <summary>
+    /// Unregisters the hero from the hero manager.
+    /// </summary>
     public override void Unregister()
     {
-        GameManager.HeroManager.Unregister(this);
+        try
+        {
+            GameManager.HeroManager.Unregister(this);
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.LogWarning(gameObject.name + ": GameManager destroyed before Hero could unregister; this should only happen in the editor.");
+            Debug.LogException(e);
+        }
+    }
+
+    /// <summary>
+    /// Attempts to use an ability. Does nothing if the ability is on cooldown. Awaits
+    /// a target if the ability requires one.
+    /// </summary>
+    /// <param name="ability">The ability to perform.</param>
+    public void UseAbility(Ability ability)
+    {
+        if (HeroCombatController.AbilityCooldowns.ContainsKey(ability.name))
+        {
+            Debug.Log(gameObject.name + ": " + ability.name + " is on cooldown.");
+            return;
+        }
+
+        if (ability.abilityRange == AbilityRange.Self) PerformAbility(ability, this);
+
+        if (ability.abilityRange == AbilityRange.Melee || ability.abilityRange == AbilityRange.Ranged)
+        {
+            if (HeroCombatController.TargetController == null)
+            {
+                Debug.Log(gameObject.name + ": Awaiting target for " + ability.name + ".");
+                HeroInputController.AwaitTarget(ability);
+            }
+            else
+            {
+                PerformAbility(ability, CombatController.TargetController);
+            }
+        }
     }
 }

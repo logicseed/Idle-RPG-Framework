@@ -35,18 +35,40 @@ public class SaveGame : ISerializable
     public SaveGame(SerializationInfo info, StreamingContext context)
     {
         experience = info.GetInt32("experience");
+
         unlockedAllies = (List<string>)info.GetValue("unlockedAllies", typeof(List<string>));
+        if (unlockedAllies == null) unlockedAllies = new List<string>();
+
         assignedAllies = (List<string>)info.GetValue("assignedAllies", typeof(List<string>));
+        if (assignedAllies == null) assignedAllies = new List<string>();
+
         unlockedZones = (List<string>)info.GetValue("unlockedZones", typeof(List<string>));
+        if (unlockedZones == null) unlockedZones = new List<string>();
+
         unlockedStages = (List<string>)info.GetValue("unlockedStages", typeof(List<string>));
+        if (unlockedStages == null) unlockedStages = new List<string>();
+
         unlockedEquipment = (List<string>)info.GetValue("unlockedEquipment", typeof(List<string>));
+        if (unlockedEquipment == null) unlockedEquipment = new List<string>();
+
         assignedEquipment = (List<string>)info.GetValue("assignedEquipment", typeof(List<string>));
+        if (assignedEquipment == null) assignedEquipment = new List<string>();
+
         unlockedAbilities = (List<string>)info.GetValue("unlockedAbilities", typeof(List<string>));
+        if (unlockedAbilities == null) unlockedAbilities = new List<string>();
+
         assignedAbilities = (List<string>)info.GetValue("assignedAbilities", typeof(List<string>));
+        if (assignedAbilities == null) assignedAbilities = new List<string>();
+
         lastStage = info.GetString("lastStage");
+
         lastStageTime = (DateTime)info.GetValue("lastStageTime", typeof(DateTime));
+        if (lastStageTime == null) lastStageTime = DateTime.Now;
+
         level = info.GetInt32("level");
+
         allyLevels = (Dictionary<string, int>)info.GetValue("allyLevels", typeof(Dictionary<string, int>));
+        if (allyLevels == null) allyLevels = new Dictionary<string, int>();
     }
 
     /// <summary>

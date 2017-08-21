@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿/// <summary>
+/// Manages the bosses on a stage.
+/// </summary>
 [System.Serializable]
 public class BossManager : EnemyManager
 {

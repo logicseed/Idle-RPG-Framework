@@ -1,11 +1,28 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
+﻿/// <summary>
+/// Manages all the queues on a stage.
+/// </summary>
 [System.Serializable]
 public class QueueManager : RegisterList<QueueController>
 {
+    /// <summary>
+    /// Consructs the queue manager.
+    /// </summary>
     public QueueManager() : base() { }
 
+    /// <summary>
+    /// Returns whether or not there are queues on the stage.
+    /// </summary>
+    public bool HasQueues
+    {
+        get
+        {
+            return list.Count > 0;
+        }
+    }
+
+    /// <summary>
+    /// Returns whether or not any of the queues are still spawning enemies.
+    /// </summary>
     public bool QueuesAreSpawning
     {
         get
@@ -13,17 +30,9 @@ public class QueueManager : RegisterList<QueueController>
             var areSpawning = false;
             foreach (var queue in list)
             {
-                if (queue.spawning) areSpawning = true;
+                if (queue.IsSpawning) areSpawning = true;
             }
             return areSpawning;
-        }
-    }
-
-    public bool HasQueues
-    {
-        get
-        {
-            return list.Count > 0;
         }
     }
 }

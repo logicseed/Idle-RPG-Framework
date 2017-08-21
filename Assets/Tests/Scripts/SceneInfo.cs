@@ -34,7 +34,7 @@ public class SceneInfo : MonoBehaviour
         frameText.AppendLine("SCENE INFO");
 
         if (showSceneTime) frameText.AppendLine("Time: " + Time.timeSinceLevelLoad);
-        if (showExperience) frameText.AppendLine("Experience: " + GameManager.HeroManager.experience);
+        if (showExperience) frameText.AppendLine("Experience: " + GameManager.HeroManager.Experience);
 
         if (showUnlockedAbilities) frameText.AppendLine("Unlocked Abilities: " + GameManager.AbilityManager.Unlocked.ToDelimitedString());
         if (showAssignedAbilities) frameText.AppendLine("Assigned Abilities: " + GameManager.AbilityManager.Assigned.ToDelimitedString());
@@ -47,40 +47,40 @@ public class SceneInfo : MonoBehaviour
 
         if (showFireballCooldown)
         {
-            if (GameManager.Hero.heroCombat.Cooldowns.ContainsKey("Defend"))
-                frameText.AppendLine("Defend Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Defend"]);
+            if (GameManager.Hero.HeroCombatController.AbilityCooldowns.ContainsKey("Defend"))
+                frameText.AppendLine("Defend Cooldown: " + GameManager.Hero.HeroCombatController.AbilityCooldowns["Defend"]);
             else
                 frameText.AppendLine("Defend not on cooldown.");
         }
         if (showFireballCooldown)
         {
-            if (GameManager.Hero.heroCombat.Cooldowns.ContainsKey("Fireball"))
-                frameText.AppendLine("Fireball Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Fireball"]);
+            if (GameManager.Hero.HeroCombatController.AbilityCooldowns.ContainsKey("Fireball"))
+                frameText.AppendLine("Fireball Cooldown: " + GameManager.Hero.HeroCombatController.AbilityCooldowns["Fireball"]);
             else
                 frameText.AppendLine("Fireball not on cooldown.");
         }
         if (showCleaveCooldown)
         {
-            if (GameManager.Hero.heroCombat.Cooldowns.ContainsKey("Cleave"))
-                frameText.AppendLine("Cleave Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Cleave"]);
+            if (GameManager.Hero.HeroCombatController.AbilityCooldowns.ContainsKey("Cleave"))
+                frameText.AppendLine("Cleave Cooldown: " + GameManager.Hero.HeroCombatController.AbilityCooldowns["Cleave"]);
             else
                 frameText.AppendLine("Cleave not on cooldown.");
         }
         if (showStormCooldown)
         {
-            if (GameManager.Hero.heroCombat.Cooldowns.ContainsKey("Storm"))
-                frameText.AppendLine("Storm Cooldown: " + GameManager.Hero.heroCombat.Cooldowns["Storm"]);
+            if (GameManager.Hero.HeroCombatController.AbilityCooldowns.ContainsKey("Storm"))
+                frameText.AppendLine("Storm Cooldown: " + GameManager.Hero.HeroCombatController.AbilityCooldowns["Storm"]);
             else
                 frameText.AppendLine("Storm not on cooldown.");
         }
 
-        if (showHeroLevel) frameText.AppendLine("Hero Level: " + GameManager.HeroManager.level);
+        if (showHeroLevel) frameText.AppendLine("Hero Level: " + GameManager.HeroManager.Level);
         if (showAllyLevels)
         {
             foreach (var allyName in GameManager.RosterManager.Unlocked)
             {
-                if (!GameManager.RosterManager.levels.ContainsKey(allyName)) GameManager.RosterManager.levels.Add(allyName, 1);
-                frameText.AppendLine(allyName + " Level: " + GameManager.RosterManager.levels[allyName]);
+                if (!GameManager.RosterManager.AllyLevels.ContainsKey(allyName)) GameManager.RosterManager.AllyLevels.Add(allyName, 1);
+                frameText.AppendLine(allyName + " Level: " + GameManager.RosterManager.AllyLevels[allyName]);
             }
         }
 

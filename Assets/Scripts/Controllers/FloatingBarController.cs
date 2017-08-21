@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
-using System;
 
 /// <summary>
 /// Controls the position, color, and display of a scroll bar above a
@@ -10,13 +9,18 @@ using System;
 /// </summary>
 public class FloatingBarController : MonoBehaviour
 {
-    public RectTransform background;
-    public RectTransform foreground;
+    [SerializeField]
+    protected RectTransform background;
 
-    private GameCharacterController character;
+    protected GameCharacterController character;
 
-    // Use this for initialization
-    void Start()
+    [SerializeField]
+    protected RectTransform foreground;
+
+    /// <summary>
+    /// Sets up the floating bar.
+    /// </summary>
+    protected void Start()
     {
         // Get reference to the character that this bar is attached to.
         character = transform.parent.gameObject.GetComponent<GameCharacterController>();
@@ -28,13 +32,16 @@ public class FloatingBarController : MonoBehaviour
         foregroundImage.color = GameManager.GameSettings.Constants.Colors.FloatingBarForeground;
     }
 
-    // Update is called once per frame
-    void Update()
+    /// <summary>
+    /// Updates the floating bar every frame.
+    /// </summary>
+    protected void Update()
     {
         try
         {
-            var healthPercentage = (float)character.combat.currentHealth / character.attributes.health;
+            var healthPercentage = (float)character.CombatController.CurrentHealth / character.Attributes.health;
             healthPercentage = Mathf.Max(Mathf.Min(healthPercentage, 1), 0);
+
             var newBarScale = new Vector3(healthPercentage, 1, 1);
             foreground.localScale = newBarScale;
         }

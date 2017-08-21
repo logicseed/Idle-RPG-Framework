@@ -194,31 +194,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCombatDummy: 0
-  animatorController: {fileID: 22100000, guid: e3451c9f074e1b34c9b29a702ae67e1a, type: 2}
-  animatorReference: {fileID: 0}
-  rigidbodyReference: {fileID: 0}
-  baseAttributes:
-    attackDamage: 0
-    abilityDamage: 0
-    defense: 0
-    health: 0
-    healthRegeneration: 0
-    energy: 0
-    energyRegeneration: 0
-    attackSpeed: 0
-    criticalHitChance: 0
-    criticalHitDamage: 0
-    cooldownReduction: 0
-    lifeDrain: 0
-    movementSpeed: 0
-  level: 1
-  characterState: 0
-  HeroObject: {fileID: 11400000, guid: 4191714cc8adf634f840057e2ae4e815, type: 2}
+  heroObject: {fileID: 11400000, guid: 4191714cc8adf634f840057e2ae4e815, type: 2}
   spawnPoints:
   - {fileID: 4764280821308140}
   - {fileID: 4245585757193598}
   - {fileID: 4231141873017710}
-  heroCombat: {fileID: 0}
 --- !u!114 &114804752614921982
 MonoBehaviour:
   m_ObjectHideFlags: 1

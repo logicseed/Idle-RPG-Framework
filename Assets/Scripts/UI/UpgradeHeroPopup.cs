@@ -33,7 +33,7 @@ public class UpgradeHeroPopup : MonoBehaviour
         // Attribute text
         var text = new StringBuilder();
         text.Append("Level: ");
-        text.AppendLine(GameManager.HeroManager.level.ToString());
+        text.AppendLine(GameManager.HeroManager.Level.ToString());
         text.Append("Attack Damage: ");
         text.AppendLine(attributes.attackDamage.ToString());
         text.Append("Ability Damage: ");
@@ -65,9 +65,9 @@ public class UpgradeHeroPopup : MonoBehaviour
         // Upgrade buttont text
         text = new StringBuilder();
         text.AppendLine("UPGRADE");
-        text.Append(GameManager.UpgradeHeroCost().ToString());
+        text.Append(GameManager.UpgradeHeroCost.ToString());
         text.Append(" XP");
         upgradeButtonText.text = text.ToString();
-        upgradeButton.interactable = GameManager.CanUpgradeHero();
+        upgradeButton.interactable = GameManager.CanUpgradeHero;
     }
 }

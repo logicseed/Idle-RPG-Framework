@@ -7,7 +7,7 @@ public class HeroEnergyBar : MonoBehaviour
 
     private void OnGUI()
     {
-        float percent = GameManager.Hero.heroCombat.currentEnergy / (float)GameManager.Hero.attributes.energy;
+        float percent = GameManager.Hero.HeroCombatController.CurrentEnergy / (float)GameManager.Hero.Attributes.energy;
         foreground.localScale = new Vector3(percent, foreground.localScale.y, foreground.localScale.z);
     }
 }

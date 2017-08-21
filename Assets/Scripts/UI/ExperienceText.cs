@@ -13,6 +13,6 @@ public class ExperienceText : MonoBehaviour
 
     private void OnGUI()
     {
-        text.text = GameManager.HeroManager.experience + " XP";
+        text.text = GameManager.HeroManager.Experience + " XP";
     }
 }

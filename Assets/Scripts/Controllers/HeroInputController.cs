@@ -6,21 +6,27 @@ using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
 /// <summary>
-///
+/// Controls the hero input.
 /// </summary>
 public class HeroInputController : MonoBehaviour
 {
-    private HeroController hero;
+    protected HeroController hero;
 
-    private bool awaitingTarget = false;
-    private Ability waitingAbility;
+    protected bool awaitingTarget = false;
+    protected Ability waitingAbility;
 
-    private void Start()
+    /// <summary>
+    /// Sets up the hero input.
+    /// </summary>
+    protected void Start()
     {
         hero = GameManager.Hero;
     }
 
-    private void Update()
+    /// <summary>
+    /// Updates the hero input every frame.
+    /// </summary>
+    protected void Update()
     {
         // Process touch input
         if (Input.touchCount > 0)
@@ -45,29 +51,31 @@ public class HeroInputController : MonoBehaviour
     }
 
     /// <summary>
-    ///
+    /// Process a tap at a screen position.
     /// </summary>
-    /// <param name="position"></param>
+    /// <param name="position">The screen position of the tap.</param>
     private void ProcessTap(Vector2 position)
     {
         var worldPosition = Camera.main.ScreenToWorldPoint(position);
 
         // Character tap
-        foreach ( var character in GameManager.AllCharacters)
+        foreach (var character in GameManager.AllCharacters)
         {
             if (Vector2.Distance(worldPosition, character.transform.position) < GameManager.GameSettings.Constants.Range.Touch)
             {
-                hero.combat.target = character;
+                GameManager.Hero.CombatController.TargetController = character;
+                GameManager.Hero.HeroMovementController.HasLocationTarget = false;
                 if (awaitingTarget && waitingAbility != null)
                 {
                     awaitingTarget = false;
-                    hero.UseAbility(waitingAbility);
+                    GameManager.Hero.UseAbility(waitingAbility);
                 }
                 return;
             }
         }
-        ((HeroMovementController)hero.movement).location = worldPosition;
-        hero.combat.target = null;
+
+        GameManager.Hero.HeroMovementController.Location = worldPosition;
+        GameManager.Hero.CombatController.TargetController = null;
     }
 
     internal void AwaitTarget(Ability ability)
