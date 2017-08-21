@@ -13,7 +13,16 @@ public class Equipment : ListableEntity
     protected EquipmentSlot equipmentSlot;
 
     [SerializeField]
+    [Tooltip("This only applies to weapons.")]
+    protected AttackType attackType;
+
+    [SerializeField]
     protected BaseAttributes attributeModifiers;
+
+    /// <summary>
+    /// Attack type of this equipment if it is a weapon.
+    /// </summary>
+    public AttackType AttackType { get { return attackType; } }
 
     /// <summary>
     /// Modifications to attributes when equipment is assigned.

@@ -270,7 +270,7 @@ public class HeroController : GameCharacterController
         {
             try
             {
-                return HeroObject.AttackType;
+                return GameManager.InventoryManager.AttackType;
             }
             catch (NullReferenceException e)
             {

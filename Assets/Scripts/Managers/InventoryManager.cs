@@ -117,4 +117,21 @@ public class InventoryManager : WorldEntityManager
         save.UnlockedEquipment = Unlocked;
         save.AssignedEquipment = Assigned;
     }
+
+    /// <summary>
+    /// Returns the attack type based on assigned equipment.
+    /// </summary>
+    public AttackType AttackType
+    {
+        get
+        {
+            foreach (var name in assigned)
+            {
+                var equipment = GetEntityObject(name) as Equipment;
+
+                if (equipment.EquipmentType == EquipmentType.Weapon) return equipment.AttackType;
+            }
+            return AttackType.Melee;
+        }
+    }
 }
