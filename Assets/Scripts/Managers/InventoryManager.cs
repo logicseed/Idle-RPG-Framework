@@ -23,7 +23,7 @@ public class InventoryManager : WorldEntityManager
             foreach (var equipment in Assigned)
             {
                 var equipmentObject = GetEntityObject(equipment) as Equipment;
-                attributeModifiers += equipmentObject.attributeModifiers;
+                attributeModifiers += equipmentObject.AttributeModifiers;
             }
             return attributeModifiers;
         }
@@ -52,14 +52,14 @@ public class InventoryManager : WorldEntityManager
     public override void AddAssigned(string name, bool raiseChangeEvent = true)
     {
         var equipmentObject = GetEntityObject(name) as Equipment;
-        var slot = equipmentObject.equipmentSlot;
+        var slot = equipmentObject.EquipmentSlot;
 
         var listToRemove = new List<string>();
 
         foreach (var equipment in Assigned)
         {
             var checkEquipment = GetEntityObject(equipment) as Equipment;
-            var checkSlot = checkEquipment.equipmentSlot;
+            var checkSlot = checkEquipment.EquipmentSlot;
 
             if (slot == EquipmentSlot.TwoHand)
             {
@@ -98,8 +98,8 @@ public class InventoryManager : WorldEntityManager
     {
         if (save != null)
         {
-            foreach (var equipment in save.unlockedEquipment) AddUnlocked(equipment);
-            foreach (var equipment in save.assignedEquipment) AddAssigned(equipment);
+            foreach (var equipment in save.UnlockedEquipment) AddUnlocked(equipment);
+            foreach (var equipment in save.AssignedEquipment) AddAssigned(equipment);
         }
 
         foreach (var equipment in GameManager.GameSettings.CharacterStart.Inventory)
@@ -114,7 +114,7 @@ public class InventoryManager : WorldEntityManager
     /// <param name="save">The save game data.</param>
     public override void Save(ref SaveGame save)
     {
-        save.unlockedEquipment = Unlocked;
-        save.assignedEquipment = Assigned;
+        save.UnlockedEquipment = Unlocked;
+        save.AssignedEquipment = Assigned;
     }
 }

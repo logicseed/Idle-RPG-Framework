@@ -1,7 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Object = UnityEngine.Object;
 
+/// <summary>
+/// Allows dragging a scene into an inspector field.
+/// </summary>
 [System.Serializable]
 public class SceneField
 {

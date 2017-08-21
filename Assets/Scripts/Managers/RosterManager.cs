@@ -58,7 +58,7 @@ public class RosterManager : WorldEntityManager
 
             var entity = GetEntityObject(name) as Ally;
             var manager = GameManager.GetManagerByType(ListableEntityType.Ability);
-            if (manager != null) manager.AddUnlocked(entity.lesson.name, false);
+            if (manager != null) manager.AddUnlocked(entity.Lesson.name, false);
         }
     }
 
@@ -73,21 +73,21 @@ public class RosterManager : WorldEntityManager
 
         if (save != null)
         {
-            if (save.unlockedAllies != null)
+            if (save.UnlockedAllies != null)
             {
-                foreach (var ally in save.unlockedAllies)
+                foreach (var ally in save.UnlockedAllies)
                 {
                     int allyLevel;
-                    if (save.allyLevels != null && save.allyLevels.ContainsKey(ally)) allyLevel = save.allyLevels[ally];
+                    if (save.AllyLevels != null && save.AllyLevels.ContainsKey(ally)) allyLevel = save.AllyLevels[ally];
                     else allyLevel = 1;
 
                     AddUnlocked(ally, allyLevel, false);
                 }
             }
 
-            if (save.assignedAllies != null)
+            if (save.AssignedAllies != null)
             {
-                foreach (var ally in save.assignedAllies)
+                foreach (var ally in save.AssignedAllies)
                 {
                     AddAssigned(ally, false);
                 }
@@ -125,8 +125,8 @@ public class RosterManager : WorldEntityManager
     /// <param name="save">The save game data.</param>
     public override void Save(ref SaveGame save)
     {
-        save.unlockedAllies = Unlocked;
-        save.assignedAllies = Assigned;
-        save.allyLevels = allyLevels;
+        save.UnlockedAllies = Unlocked;
+        save.AssignedAllies = Assigned;
+        save.AllyLevels = allyLevels;
     }
 }

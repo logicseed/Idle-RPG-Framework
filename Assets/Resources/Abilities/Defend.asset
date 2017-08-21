@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Name: Defend
   m_EditorClassIdentifier: 
   icon: {fileID: 21300076, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
-  type: 1
-  effect: {fileID: 0}
   abilityRange: 2
   abilityType: 3
-  cooldown: 5
+  effect: {fileID: 0}
   potency: 0.2
+  cooldown: 5

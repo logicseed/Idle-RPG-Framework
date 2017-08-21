@@ -1,48 +1,30 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
-///
+/// Represents a random collection of loot.
 /// </summary>
 [CreateAssetMenu(menuName = "Idle RPG/Loot Collection - Random")]
 public class RandomLootCollection : LootCollection
 {
-    [HideInInspector]
-    public int lowCurrencyAmount;
-    [HideInInspector]
-    public int highCurrencyAmount;
-    public List<Equipment> equipment;
-
-    public override bool DropEquipment()
-    {
-        if (highCurrencyAmount == 0 && equipment.Count > 0) return true;
-        if (highCurrencyAmount > 0 && equipment.Count <= 0) return false;
-
-        return Random.Range(0.0f, 1.0f) >= 0.5f;
-    }
-
     /// <summary>
-    /// 
+    /// Whether or not equipment dropped.
     /// </summary>
-    /// <returns></returns>
-    public override int GetCurrency()
+    public override bool DropEquipment
     {
-        return Random.Range(lowCurrencyAmount, highCurrencyAmount + 1);
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    public override Equipment GetEquipment()
-    {
-        if (DropEquipment())
+        get
         {
-            return equipment[Random.Range(0, equipment.Count)];
+            return Random.Range(0.0f, 1.0f) <= GameManager.GameSettings.Constants.EquipmentDropChance;
         }
-        return null;
+    }
+
+    /// <summary>
+    /// Get the next piece of equipment that drops.
+    /// </summary>
+    /// <returns>Equipment object that dropped.</returns>
+    public override Equipment GetNextEquipment()
+    {
+        return equipment[Random.Range(0, equipment.Count)];
     }
 }

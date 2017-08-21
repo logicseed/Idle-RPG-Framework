@@ -36,7 +36,7 @@ public class QueueController : MonoBehaviour
         if (isSpawning)
         {
             // Is it time to spawn?
-            if (spawnIndex < queue.enemies.Count &&
+            if (spawnIndex < queue.Enemies.Count &&
                 Time.time > lastSpawnTime + timeBetweenSpawns)
             {
                 SpawnNext();
@@ -45,7 +45,7 @@ public class QueueController : MonoBehaviour
             }
 
             // Should we repeat the queue?
-            if (spawnIndex >= queue.enemies.Count)
+            if (spawnIndex >= queue.Enemies.Count)
             {
                 if (isRepeating) spawnIndex = 0;
                 else isSpawning = false;
@@ -82,14 +82,14 @@ public class QueueController : MonoBehaviour
     {
         // Make sure the position in inspector was filled with
         // character prefab.
-        if (queue.enemies[spawnIndex] != null)
+        if (queue.Enemies[spawnIndex] != null)
         {
             var position = transform.position;
             var rotation = Quaternion.identity; // No rotation
             var parent = this.transform;
             var enemy = Instantiate(GameManager.GameSettings.Prefab.Enemy, position, rotation, parent) as GameObject;
 
-            enemy.GetComponent<EnemyController>().EnemyObject = queue.enemies[spawnIndex];
+            enemy.GetComponent<EnemyController>().EnemyObject = queue.Enemies[spawnIndex];
         }
     }
 }

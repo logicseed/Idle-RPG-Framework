@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Name: New Equipment
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  type: 0
   equipmentType: 0
   equipmentSlot: 0
   attributeModifiers:

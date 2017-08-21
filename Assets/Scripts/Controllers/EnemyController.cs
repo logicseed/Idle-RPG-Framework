@@ -59,7 +59,7 @@ public class EnemyController : GameCharacterController
         {
             try
             {
-                return EnemyObject.attackType;
+                return EnemyObject.AttackType;
             }
             catch (NullReferenceException e)
             {
@@ -84,7 +84,7 @@ public class EnemyController : GameCharacterController
     /// <summary>
     /// Returns the level of the enemy.
     /// </summary>
-    public override int Level { get { return EnemyObject.level; } }
+    public override int Level { get { return EnemyObject.Level; } }
 
     /// <summary>
     /// Unregisters the enemy with the enemy manager.

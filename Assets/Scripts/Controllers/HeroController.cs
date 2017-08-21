@@ -71,7 +71,7 @@ public class HeroController : GameCharacterController
     protected override void CreateMovementController()
     {
         movementControllerReference = gameObject.AddComponent<HeroMovementController>();
-        movementControllerReference.MaxSpeed = Attributes.movementSpeed;
+        movementControllerReference.MaxSpeed = Attributes.MovementSpeed;
     }
 
     /// <summary>
@@ -81,9 +81,9 @@ public class HeroController : GameCharacterController
     /// <param name="target">The target of the ability.</param>
     protected void PerformAbility(Ability ability, GameCharacterController target)
     {
-        HeroCombatController.AbilityCooldowns.Add(ability.name, ability.cooldown);
+        HeroCombatController.AbilityCooldowns.Add(ability.name, ability.Cooldown);
 
-        switch (ability.abilityType)
+        switch (ability.AbilityType)
         {
             case AbilityType.Area:
                 PerformAreaAbility(ability, target);
@@ -114,7 +114,7 @@ public class HeroController : GameCharacterController
     {
         Debug.Log(gameObject.name + ": Performing area ability " + ability.name + " on " + target.name);
 
-        switch (ability.abilityRange)
+        switch (ability.AbilityRange)
         {
             case AbilityRange.Melee:
                 HeroCombatController.PerformMeleeAreaAbility(ability, target);
@@ -141,7 +141,7 @@ public class HeroController : GameCharacterController
     {
         Debug.Log(gameObject.name + ": Performing direct ability " + ability.name + " on " + target.name);
 
-        switch (ability.abilityRange)
+        switch (ability.AbilityRange)
         {
             case AbilityRange.Melee:
                 HeroCombatController.PerformMeleeAttack();
@@ -168,7 +168,7 @@ public class HeroController : GameCharacterController
     {
         Debug.Log(gameObject.name + ": Performing heal ability " + ability.name + " on " + target.name);
 
-        switch (ability.abilityRange)
+        switch (ability.AbilityRange)
         {
             case AbilityRange.Melee:
                 // Not implemented
@@ -194,7 +194,7 @@ public class HeroController : GameCharacterController
     protected void PerformShieldAbility(Ability ability, GameCharacterController target)
     {
         Debug.Log(gameObject.name + ": Performing shield ability " + ability.name + " on " + target.name);
-        switch (ability.abilityRange)
+        switch (ability.AbilityRange)
         {
             case AbilityRange.Melee:
                 // Not implemented
@@ -270,7 +270,7 @@ public class HeroController : GameCharacterController
         {
             try
             {
-                return HeroObject.attackType;
+                return HeroObject.AttackType;
             }
             catch (NullReferenceException e)
             {
@@ -333,9 +333,9 @@ public class HeroController : GameCharacterController
             return;
         }
 
-        if (ability.abilityRange == AbilityRange.Self) PerformAbility(ability, this);
+        if (ability.AbilityRange == AbilityRange.Self) PerformAbility(ability, this);
 
-        if (ability.abilityRange == AbilityRange.Melee || ability.abilityRange == AbilityRange.Ranged)
+        if (ability.AbilityRange == AbilityRange.Melee || ability.AbilityRange == AbilityRange.Ranged)
         {
             if (HeroCombatController.TargetController == null)
             {

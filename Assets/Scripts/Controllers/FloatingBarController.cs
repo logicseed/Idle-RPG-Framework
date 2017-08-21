@@ -39,7 +39,7 @@ public class FloatingBarController : MonoBehaviour
     {
         try
         {
-            var healthPercentage = (float)character.CombatController.CurrentHealth / character.Attributes.health;
+            var healthPercentage = (float)character.CombatController.CurrentHealth / character.Attributes.Health;
             healthPercentage = Mathf.Max(Mathf.Min(healthPercentage, 1), 0);
 
             var newBarScale = new Vector3(healthPercentage, 1, 1);

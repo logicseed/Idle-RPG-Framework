@@ -38,8 +38,8 @@ public class AbilityManager : WorldEntityManager
 
         if (save != null)
         {
-            foreach (var ability in save.unlockedAbilities) AddUnlocked(ability);
-            foreach (var ability in save.assignedAbilities) AddAssigned(ability);
+            foreach (var ability in save.UnlockedAbilities) AddUnlocked(ability);
+            foreach (var ability in save.AssignedAbilities) AddAssigned(ability);
         }
 
         foreach (var ability in GameManager.GameSettings.CharacterStart.Abilities)
@@ -54,9 +54,9 @@ public class AbilityManager : WorldEntityManager
     /// <param name="save">The save game data.</param>
     public override void Save(ref SaveGame save)
     {
-        save.unlockedAbilities = Unlocked;
+        save.UnlockedAbilities = Unlocked;
         var assignedWithoutDefend = new List<string>(Assigned);
         assignedWithoutDefend.Remove("Defend");
-        save.assignedAbilities = assignedWithoutDefend;
+        save.AssignedAbilities = assignedWithoutDefend;
     }
 }

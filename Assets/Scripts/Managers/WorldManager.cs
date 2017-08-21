@@ -27,9 +27,9 @@ public class WorldManager
         unlockedStages = new List<string>();
         if (save != null)
         {
-            unlockedZones = save.unlockedZones;
-            unlockedStages = save.unlockedStages;
-            lastStage = save.lastStage;
+            unlockedZones = save.UnlockedZones;
+            unlockedStages = save.UnlockedStages;
+            lastStage = save.LastStage;
         }
 
         foreach (var zone in GameManager.GameSettings.CharacterStart.Zones)
@@ -63,9 +63,9 @@ public class WorldManager
     /// <param name="save">The save game data.</param>
     public void Save(ref SaveGame save)
     {
-        save.lastStage = lastStage;
-        save.unlockedZones = unlockedZones;
-        save.unlockedStages = unlockedStages;
+        save.LastStage = lastStage;
+        save.UnlockedZones = unlockedZones;
+        save.UnlockedStages = unlockedStages;
     }
 
     /// <summary>

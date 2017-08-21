@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Name: New Ally
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  type: 0
   animator: {fileID: 0}
   attackType: 0
   level: 1
@@ -53,6 +52,7 @@ MonoBehaviour:
     HealthRegeneration: 0
     Energy: 0
     EnergyRegeneration: 0
+    AttackSpeed: 1
     CriticalHitChance: 0
     CriticalHitDamage: 0
     CooldownReduction: 0

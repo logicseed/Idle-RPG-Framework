@@ -55,11 +55,12 @@ public class StageManager : MonoBehaviour
     /// Tries to get the next reward from the stage's loot collection.
     /// </summary>
     /// <returns>A piece of equipment if one dropped; null otherwise.</returns>
-    public Equipment GetReward()
+    public void GetReward()
     {
-        var equipment = lootCollection.GetEquipment();
-        if (equipment != null) GameManager.InventoryManager.AddUnlocked(equipment.name, false);
-        return equipment;
+        if (lootCollection.DropEquipment)
+        {
+            GameManager.InventoryManager.AddUnlocked(lootCollection.GetNextEquipment().name, false);
+        }
     }
 
     /// <summary>

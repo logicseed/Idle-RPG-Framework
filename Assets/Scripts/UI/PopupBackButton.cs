@@ -1,17 +1,26 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls a button to go back from a popup window.
+/// </summary>
 public class PopupBackButton : MonoBehaviour
 {
-    public GameObject popupContainer;
+    [SerializeField]
+    protected GameObject popupContainer;
 
-    public void Start()
+    /// <summary>
+    /// Sets up the button.
+    /// </summary>
+    protected void Start()
     {
         var button = GetComponent<Button>();
         button.onClick.AddListener(ClosePopup);
     }
 
+    /// <summary>
+    /// Closes the popup when the button is clicked.
+    /// </summary>
     public void ClosePopup()
     {
         GameManager.Instance.SaveGame();

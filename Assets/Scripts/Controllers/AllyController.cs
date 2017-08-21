@@ -65,7 +65,7 @@ public class AllyController : GameCharacterController
         {
             try
             {
-                return AllyObject.attackType;
+                return AllyObject.AttackType;
             }
             catch (NullReferenceException e)
             {

@@ -19,9 +19,9 @@ public class HeroCombatController : CombatController
     protected override void Start()
     {
         characterControllerReference = GetComponent<HeroController>();
-        currentHealth = CharacterController.Attributes.health;
-        currentEnergy = CharacterController.Attributes.energy;
-        lastAttackTime = Time.time - (1 / CharacterController.Attributes.attackSpeed);
+        currentHealth = CharacterController.Attributes.Health;
+        currentEnergy = CharacterController.Attributes.Energy;
+        lastAttackTime = Time.time - (1 / CharacterController.Attributes.AttackSpeed);
         abilityCooldowns = new Dictionary<string, float>();
     }
 
@@ -70,7 +70,7 @@ public class HeroCombatController : CombatController
     public void PerformDefendAbility(Ability ability)
     {
         isDefending = true;
-        defenseDuration = ability.potency * GameManager.GameSettings.Constants.DefenseLength;
+        defenseDuration = ability.Potency * GameManager.GameSettings.Constants.DefenseLength;
         Debug.Log(gameObject.name + ": Started defending.");
     }
 
@@ -82,7 +82,7 @@ public class HeroCombatController : CombatController
     public void PerformFireball(Ability ability, GameCharacterController target)
     {
         var criticalModifier = CriticalModifier();
-        var damage = (int)(CharacterController.Attributes.abilityDamage * criticalModifier);
+        var damage = (int)(CharacterController.Attributes.AbilityDamage * criticalModifier);
         SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Fireball, transform.position, damage, target, criticalModifier);
     }
 
@@ -94,7 +94,7 @@ public class HeroCombatController : CombatController
     public void PerformMeleeAreaAbility(Ability ability, GameCharacterController target)
     {
         var criticalModifier = CriticalModifier();
-        var damage = (int)(CharacterController.Attributes.attackDamage * criticalModifier);
+        var damage = (int)(CharacterController.Attributes.AttackDamage * criticalModifier);
 
         target.CombatController.ApplyDamage(damage, criticalModifier > 1);
 
@@ -137,7 +137,7 @@ public class HeroCombatController : CombatController
     public void SpawnStorm(Vector3 location, GameCharacterController target)
     {
         var criticalModifier = CriticalModifier();
-        var damage = (int)(CharacterController.Attributes.attackDamage * criticalModifier);
+        var damage = (int)(CharacterController.Attributes.AttackDamage * criticalModifier);
         SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Storm, location, damage, target, criticalModifier);
     }
 

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Name: Dagger
   m_EditorClassIdentifier: 
   icon: {fileID: 21300020, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
-  type: 2
   equipmentType: 0
   equipmentSlot: 0
   attributeModifiers:

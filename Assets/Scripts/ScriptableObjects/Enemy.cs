@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Represents an enemy.
+/// </summary>
 [CreateAssetMenu(menuName = "Idle RPG/Enemy")]
 public class Enemy : Character
 {
-    public override CharacterType characterType { get { return CharacterType.Enemy; } }
+    /// <summary>
+    /// Character type of the enemy.
+    /// </summary>
+    public override CharacterType CharacterType { get { return CharacterType.Enemy; } }
 }

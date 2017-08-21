@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Provides an inspector interface for constant game values.
+/// </summary>
 [Serializable]
 public class GameSettings
 {
@@ -99,6 +102,24 @@ public class GameSettings
             public int Unlocked;
             public int Assigned;
             public EntityContainer(int unlocked, int assigned) { Unlocked = unlocked; Assigned = assigned; }
+        }
+
+        public AttributeFactorContainer AttributeFactor;
+        [Serializable] public class AttributeFactorContainer
+        {
+            public int AttackDamage = 100;
+            public int AbilityDamage = 100;
+            public int Defense = 50;
+            public int Health = 500;
+            public int HealthRegeneration = 20;
+            public int Energy = 400;
+            public int EnergyRegeneration = 15;
+            public float AttackSpeed = 2.0f;
+            public float CriticalHitChance = 0.5f;
+            public float CriticalHitDamage = 1.0f;
+            public float CooldownReduction = 0.5f;
+            public float LifeDrain = 0.5f;
+            public float MovementSpeed = 0.05f;
         }
     }
 

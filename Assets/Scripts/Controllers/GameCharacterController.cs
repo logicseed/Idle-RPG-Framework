@@ -30,7 +30,7 @@ public class GameCharacterController : MonoBehaviour
     protected virtual void CreateAnimator()
     {
         animatorReference = gameObject.AddComponent<Animator>();
-        animatorReference.runtimeAnimatorController = CharacterObject.animator;
+        animatorReference.runtimeAnimatorController = CharacterObject.Animator;
         animatorReference.Play("IdleRight");
     }
 
@@ -83,7 +83,7 @@ public class GameCharacterController : MonoBehaviour
     protected virtual void CreateMovementController()
     {
         movementControllerReference = gameObject.AddComponent<MovementController>();
-        movementControllerReference.MaxSpeed = Attributes.movementSpeed;
+        movementControllerReference.MaxSpeed = Attributes.MovementSpeed;
     }
 
     /// <summary>
@@ -106,7 +106,7 @@ public class GameCharacterController : MonoBehaviour
     {
         spriteRendererReference = gameObject.AddComponent<SpriteRenderer>();
         spriteRendererReference.sortingLayerName = "Character";
-        spriteRendererReference.sprite = CharacterObject.icon;
+        spriteRendererReference.sprite = CharacterObject.Icon;
     }
 
     /// <summary>

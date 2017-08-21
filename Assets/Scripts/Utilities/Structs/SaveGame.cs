@@ -9,20 +9,20 @@ using System.Runtime.Serialization;
 public class SaveGame : ISerializable
 {
     // Fields to save
-    public int experience;
-    public List<string> unlockedAllies;
-    public List<string> assignedAllies;
-    public List<string> unlockedZones;
-    public List<string> unlockedStages;
-    public List<string> unlockedEquipment;
-    public List<string> assignedEquipment;
-    public List<string> unlockedAbilities;
-    public List<string> assignedAbilities;
-    public string lastStage;
-    public DateTime lastStageTime;
-    public bool isFilled = false;
-    public int level = 1;
-    public Dictionary<string, int> allyLevels;
+    public int Experience;
+    public List<string> UnlockedAllies;
+    public List<string> AssignedAllies;
+    public List<string> UnlockedZones;
+    public List<string> UnlockedStages;
+    public List<string> UnlockedEquipment;
+    public List<string> AssignedEquipment;
+    public List<string> UnlockedAbilities;
+    public List<string> AssignedAbilities;
+    public string LastStage;
+    public DateTime LastStageTime;
+    public bool IsFilled = false;
+    public int Level = 1;
+    public Dictionary<string, int> AllyLevels;
 
     // To add fields to the save game, they must be added above, and then
     // into the serialization methods below.
@@ -34,41 +34,40 @@ public class SaveGame : ISerializable
     /// </summary>
     public SaveGame(SerializationInfo info, StreamingContext context)
     {
-        experience = info.GetInt32("experience");
+        Experience = info.GetInt32("experience");
 
-        unlockedAllies = (List<string>)info.GetValue("unlockedAllies", typeof(List<string>));
-        if (unlockedAllies == null) unlockedAllies = new List<string>();
+        UnlockedAllies = (List<string>)info.GetValue("unlockedAllies", typeof(List<string>));
+        if (UnlockedAllies == null) UnlockedAllies = new List<string>();
 
-        assignedAllies = (List<string>)info.GetValue("assignedAllies", typeof(List<string>));
-        if (assignedAllies == null) assignedAllies = new List<string>();
+        AssignedAllies = (List<string>)info.GetValue("assignedAllies", typeof(List<string>));
+        if (AssignedAllies == null) AssignedAllies = new List<string>();
 
-        unlockedZones = (List<string>)info.GetValue("unlockedZones", typeof(List<string>));
-        if (unlockedZones == null) unlockedZones = new List<string>();
+        UnlockedZones = (List<string>)info.GetValue("unlockedZones", typeof(List<string>));
+        if (UnlockedZones == null) UnlockedZones = new List<string>();
 
-        unlockedStages = (List<string>)info.GetValue("unlockedStages", typeof(List<string>));
-        if (unlockedStages == null) unlockedStages = new List<string>();
+        UnlockedStages = (List<string>)info.GetValue("unlockedStages", typeof(List<string>));
+        if (UnlockedStages == null) UnlockedStages = new List<string>();
 
-        unlockedEquipment = (List<string>)info.GetValue("unlockedEquipment", typeof(List<string>));
-        if (unlockedEquipment == null) unlockedEquipment = new List<string>();
+        UnlockedEquipment = (List<string>)info.GetValue("unlockedEquipment", typeof(List<string>));
+        if (UnlockedEquipment == null) UnlockedEquipment = new List<string>();
 
-        assignedEquipment = (List<string>)info.GetValue("assignedEquipment", typeof(List<string>));
-        if (assignedEquipment == null) assignedEquipment = new List<string>();
+        AssignedEquipment = (List<string>)info.GetValue("assignedEquipment", typeof(List<string>));
+        if (AssignedEquipment == null) AssignedEquipment = new List<string>();
 
-        unlockedAbilities = (List<string>)info.GetValue("unlockedAbilities", typeof(List<string>));
-        if (unlockedAbilities == null) unlockedAbilities = new List<string>();
+        UnlockedAbilities = (List<string>)info.GetValue("unlockedAbilities", typeof(List<string>));
+        if (UnlockedAbilities == null) UnlockedAbilities = new List<string>();
 
-        assignedAbilities = (List<string>)info.GetValue("assignedAbilities", typeof(List<string>));
-        if (assignedAbilities == null) assignedAbilities = new List<string>();
+        AssignedAbilities = (List<string>)info.GetValue("assignedAbilities", typeof(List<string>));
+        if (AssignedAbilities == null) AssignedAbilities = new List<string>();
 
-        lastStage = info.GetString("lastStage");
+        LastStage = info.GetString("lastStage");
 
-        lastStageTime = (DateTime)info.GetValue("lastStageTime", typeof(DateTime));
-        if (lastStageTime == null) lastStageTime = DateTime.Now;
+        LastStageTime = (DateTime)info.GetValue("lastStageTime", typeof(DateTime));
 
-        level = info.GetInt32("level");
+        Level = info.GetInt32("level");
 
-        allyLevels = (Dictionary<string, int>)info.GetValue("allyLevels", typeof(Dictionary<string, int>));
-        if (allyLevels == null) allyLevels = new Dictionary<string, int>();
+        AllyLevels = (Dictionary<string, int>)info.GetValue("allyLevels", typeof(Dictionary<string, int>));
+        if (AllyLevels == null) AllyLevels = new Dictionary<string, int>();
     }
 
     /// <summary>
@@ -76,19 +75,19 @@ public class SaveGame : ISerializable
     /// </summary>
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
-        info.AddValue("experience", experience);
-        info.AddValue("unlockedAllies", unlockedAllies);
-        info.AddValue("assignedAllies", assignedAllies);
-        info.AddValue("unlockedZones", unlockedZones);
-        info.AddValue("unlockedStages", unlockedStages);
-        info.AddValue("unlockedEquipment", unlockedEquipment);
-        info.AddValue("assignedEquipment", assignedEquipment);
-        info.AddValue("unlockedAbilities", unlockedAbilities);
-        info.AddValue("assignedAbilities", assignedAbilities);
-        info.AddValue("lastStage", lastStage);
-        info.AddValue("lastStageTime", lastStageTime);
-        info.AddValue("level", level);
-        info.AddValue("allyLevels", allyLevels);
+        info.AddValue("experience", Experience);
+        info.AddValue("unlockedAllies", UnlockedAllies);
+        info.AddValue("assignedAllies", AssignedAllies);
+        info.AddValue("unlockedZones", UnlockedZones);
+        info.AddValue("unlockedStages", UnlockedStages);
+        info.AddValue("unlockedEquipment", UnlockedEquipment);
+        info.AddValue("assignedEquipment", AssignedEquipment);
+        info.AddValue("unlockedAbilities", UnlockedAbilities);
+        info.AddValue("assignedAbilities", AssignedAbilities);
+        info.AddValue("lastStage", LastStage);
+        info.AddValue("lastStageTime", LastStageTime);
+        info.AddValue("level", Level);
+        info.AddValue("allyLevels", AllyLevels);
     }
 }
 

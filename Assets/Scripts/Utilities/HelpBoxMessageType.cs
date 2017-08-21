@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
+﻿/// <summary>
+/// Type of help box message; affect displayed icon.
+/// </summary>
 public enum HelpBoxMessageType
 {
     None,

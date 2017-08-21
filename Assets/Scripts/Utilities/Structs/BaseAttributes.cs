@@ -10,44 +10,122 @@ public struct BaseAttributes
              "particular attribute. These attributes range from inept (1) to average (50) " +
              "to godlike (100). These values will be scaled to provide the final attributes " +
              "of a character.\n", HelpBoxMessageType.Information)]
-    [Range(0,100)]
-    public int attackDamage;
-
+    [SerializeField]
     [Range(0, 100)]
-    public int abilityDamage;
+    private int attackDamage;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int defense;
+    private int abilityDamage;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int health;
+    private int defense;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int healthRegeneration;
+    private int health;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int energy;
+    private int healthRegeneration;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int energyRegeneration;
+    private int energy;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int attackSpeed;
+    private int energyRegeneration;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int criticalHitChance;
+    private int attackSpeed;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int criticalHitDamage;
+    private int criticalHitChance;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int cooldownReduction;
+    private int criticalHitDamage;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int lifeDrain;
+    private int cooldownReduction;
 
+    [SerializeField]
     [Range(0, 100)]
-    public int movementSpeed;
+    private int lifeDrain;
+
+    [SerializeField]
+    [Range(0, 100)]
+    private int movementSpeed;
+
+    /// <summary>
+    /// Damage done with basic attack.
+    /// </summary>
+    public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } }
+
+    /// <summary>
+    /// Damage done with caster basic attack.
+    /// </summary>
+    public int AbilityDamage { get { return abilityDamage; } set { abilityDamage = value; } }
+
+    /// <summary>
+    /// Damage resisted from basic attacks.
+    /// </summary>
+    public int Defense { get { return defense; } set { defense = value; } }
+
+    /// <summary>
+    /// Health points until death.
+    /// </summary>
+    public int Health { get { return health; } set { health = value; } }
+
+    /// <summary>
+    /// Health points regenerated per second.
+    /// </summary>
+    public int HealthRegeneration { get { return healthRegeneration; } set { healthRegeneration = value; } }
+
+    /// <summary>
+    /// Energy points used for abilities.
+    /// </summary>
+    public int Energy { get { return energy; } set { energy = value; } }
+
+    /// <summary>
+    /// Energy points regnerated per second.
+    /// </summary>
+    public int EnergyRegeneration { get { return energyRegeneration; } set { energyRegeneration = value; } }
+
+    /// <summary>
+    /// Attacks per second.
+    /// </summary>
+    public int AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
+
+    /// <summary>
+    /// Chance for a critical strike.
+    /// </summary>
+    public int CriticalHitChance { get { return criticalHitChance; } set { criticalHitChance = value; } }
+
+    /// <summary>
+    /// Extra damage on critical hits.
+    /// </summary>
+    public int CriticalHitDamage { get { return criticalHitDamage; } set { criticalHitDamage = value; } }
+
+    /// <summary>
+    /// Reduction is ability cooldowns.
+    /// </summary>
+    public int CooldownReduction { get { return cooldownReduction; } set { cooldownReduction = value; } }
+
+    /// <summary>
+    /// Health points regained based on damage.
+    /// </summary>
+    public int LifeDrain { get { return lifeDrain; } set { lifeDrain = value; } }
+
+    /// <summary>
+    /// Units moved per second.
+    /// </summary>
+    public int MovementSpeed { get { return movementSpeed; } set { movementSpeed = value; } }
 
     /// <summary>
     /// Adds two BaseAttributes together and returns a new one.
@@ -59,19 +137,19 @@ public struct BaseAttributes
     {
         var attributes = new BaseAttributes();
 
-        attributes.attackDamage = attributesA.attackDamage + attributesB.attackDamage;
-        attributes.abilityDamage = attributesA.abilityDamage + attributesB.abilityDamage;
-        attributes.defense = attributesA.defense + attributesB.defense;
-        attributes.health = attributesA.health + attributesB.health;
-        attributes.healthRegeneration = attributesA.healthRegeneration + attributesB.healthRegeneration;
-        attributes.energy = attributesA.energy + attributesB.energy;
-        attributes.energyRegeneration = attributesA.energyRegeneration + attributesB.energyRegeneration;
-        attributes.attackSpeed = attributesA.attackSpeed + attributesB.attackSpeed;
-        attributes.criticalHitChance = attributesA.criticalHitChance + attributesB.criticalHitChance;
-        attributes.criticalHitDamage = attributesA.criticalHitDamage + attributesB.criticalHitDamage;
-        attributes.cooldownReduction = attributesA.cooldownReduction + attributesB.cooldownReduction;
-        attributes.lifeDrain = attributesA.lifeDrain + attributesB.lifeDrain;
-        attributes.movementSpeed = attributesA.movementSpeed + attributesB.movementSpeed;
+        attributes.AttackDamage = attributesA.AttackDamage + attributesB.AttackDamage;
+        attributes.AbilityDamage = attributesA.AbilityDamage + attributesB.AbilityDamage;
+        attributes.Defense = attributesA.Defense + attributesB.Defense;
+        attributes.Health = attributesA.Health + attributesB.Health;
+        attributes.HealthRegeneration = attributesA.HealthRegeneration + attributesB.HealthRegeneration;
+        attributes.Energy = attributesA.Energy + attributesB.Energy;
+        attributes.EnergyRegeneration = attributesA.EnergyRegeneration + attributesB.EnergyRegeneration;
+        attributes.AttackSpeed = attributesA.AttackSpeed + attributesB.AttackSpeed;
+        attributes.CriticalHitChance = attributesA.CriticalHitChance + attributesB.CriticalHitChance;
+        attributes.CriticalHitDamage = attributesA.CriticalHitDamage + attributesB.CriticalHitDamage;
+        attributes.CooldownReduction = attributesA.CooldownReduction + attributesB.CooldownReduction;
+        attributes.LifeDrain = attributesA.LifeDrain + attributesB.LifeDrain;
+        attributes.MovementSpeed = attributesA.MovementSpeed + attributesB.MovementSpeed;
 
         return attributes;
     }

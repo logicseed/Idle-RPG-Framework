@@ -5,41 +5,54 @@ using System;
 using UnityEditor;
 #endif
 
+/// <summary>
+/// Allows the easy display of editor gizmos.
+/// </summary>
 public class CustomGizmo : MonoBehaviour
 {
+    /// <summary>
+    /// Properties of the gizmo.
+    /// </summary>
     [Serializable]
     public class Properties
     {
-        public Color color = Color.red;
-        public GizmoShape shape = GizmoShape.Sphere;
-        public bool wireframe = true;
-        public float size = 0.5f;
-        public bool showLabel = true;
+        public Color Color = Color.red;
+        public GizmoShape Shape = GizmoShape.Sphere;
+        public bool Wireframe = true;
+        public float Size = 0.5f;
+        public bool ShowLabel = true;
     }
 
-    public Properties properties;
+    [SerializeField]
+    private Properties properties;
 
+    /// <summary>
+    /// Refreshes on gizmo refresh.
+    /// </summary>
     private void OnDrawGizmos()
     {
-        Gizmos.color = properties.color;
-        var size = properties.size;
+        Gizmos.color = properties.Color;
+        var size = properties.Size;
 
-        switch (properties.shape)
+        switch (properties.Shape)
         {
             case GizmoShape.Cube:
-                if (properties.wireframe) Gizmos.DrawWireCube(transform.position, new Vector3(size, size, size));
+                if (properties.Wireframe) Gizmos.DrawWireCube(transform.position, new Vector3(size, size, size));
                 else Gizmos.DrawCube(transform.position, new Vector3(size, size, size));
                 break;
             case GizmoShape.Sphere:
-                if (properties.wireframe) Gizmos.DrawWireSphere(transform.position, size);
+                if (properties.Wireframe) Gizmos.DrawWireSphere(transform.position, size);
                 else Gizmos.DrawSphere(transform.position, size);
                 break;
         }
 #if UNITY_EDITOR
-        if (properties.showLabel) Handles.Label(transform.position, transform.name);
+        if (properties.ShowLabel) Handles.Label(transform.position, transform.name);
 #endif
     }
 
+    /// <summary>
+    /// Shape of the gizmo.
+    /// </summary>
     public enum GizmoShape
     {
         Cube,

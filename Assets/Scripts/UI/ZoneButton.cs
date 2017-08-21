@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls a button that loads a zone.
+/// </summary>
 public class ZoneButton : MonoBehaviour
 {
-    public SceneField zone;
+    [SerializeField]
+    protected SceneField zone;
 
-    // Use this for initialization
-    void Start()
+    /// <summary>
+    /// Sets up the button.
+    /// </summary>
+    protected void Start()
     {
         var buttonComponent = GetComponent<Button>();
-        buttonComponent.onClick.AddListener(HandlePress);
+        buttonComponent.onClick.AddListener(LoadZone);
 
         var image = GetComponent<Image>();
 
@@ -25,7 +31,10 @@ public class ZoneButton : MonoBehaviour
         }
     }
 
-    private void HandlePress()
+    /// <summary>
+    /// Loads the zone scene when the button is clicked.
+    /// </summary>
+    public void LoadZone()
     {
         GameManager.LoadZone(zone);
     }

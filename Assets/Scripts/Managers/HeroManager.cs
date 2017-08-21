@@ -50,8 +50,8 @@ public class HeroManager : RegisterList<HeroController>
 
         if (save != null)
         {
-            heroManager.Experience = save.experience;
-            heroManager.Level = save.level;
+            heroManager.Experience = save.Experience;
+            heroManager.Level = save.Level;
         }
         else
         {
@@ -60,7 +60,7 @@ public class HeroManager : RegisterList<HeroController>
         }
 
         heroManager.HeroObject = Resources.Load("Heroes/Hero") as Hero;
-        heroManager.HeroObject.level = heroManager.Level;
+        heroManager.HeroObject.Level = heroManager.Level;
 
         return heroManager;
     }
@@ -80,7 +80,7 @@ public class HeroManager : RegisterList<HeroController>
     /// <param name="save">The save game data.</param>
     public void Save(ref SaveGame save)
     {
-        save.experience = Experience;
-        save.level = Level;
+        save.Experience = Experience;
+        save.Level = Level;
     }
 }

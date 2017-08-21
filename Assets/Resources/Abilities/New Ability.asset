@@ -12,9 +12,8 @@ MonoBehaviour:
   m_Name: New Ability
   m_EditorClassIdentifier: 
   icon: {fileID: 0}
-  type: 0
-  effect: {fileID: 0}
   abilityRange: 0
   abilityType: 0
-  cooldown: 0
+  effect: {fileID: 0}
   potency: 0
+  cooldown: 0

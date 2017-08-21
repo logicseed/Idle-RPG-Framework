@@ -1,15 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls a button that takes the player to a stage.
+/// </summary>
 public class StageButton : MonoBehaviour
 {
-    public SceneField stage;
+    [SerializeField]
+    protected SceneField stage;
 
-    // Use this for initialization
-    void Start()
+    /// <summary>
+    /// Sets up the button.
+    /// </summary>
+    protected void Start()
     {
         var buttonComponent = GetComponent<Button>();
-        buttonComponent.onClick.AddListener(HandlePress);
+        buttonComponent.onClick.AddListener(LoadStage);
 
         var image = GetComponent<Image>();
 
@@ -25,7 +31,10 @@ public class StageButton : MonoBehaviour
         }
     }
 
-    private void HandlePress()
+    /// <summary>
+    /// Loads the stage when the button is clicked.
+    /// </summary>
+    public void LoadStage()
     {
         GameManager.LoadStage(stage);
     }

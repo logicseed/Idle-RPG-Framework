@@ -17,7 +17,7 @@ public class SaveGameManagerTest : MonoBehaviour
         if (loadIfExists)
         {
             // Load test
-            if (SaveGameManager.SaveGameExists())
+            if (SaveGameManager.SaveGameExists)
             {
                 Debug.Log("Save exists, loading.");
                 testSaveGame = SaveGameManager.LoadGame();
@@ -33,7 +33,7 @@ public class SaveGameManagerTest : MonoBehaviour
         {
             // Delete test
             SaveGameManager.DeleteSaveGame();
-            if (SaveGameManager.SaveGameExists())
+            if (SaveGameManager.SaveGameExists)
             {
                 Debug.Log("Save still exists, deleting failed.");
             }
@@ -49,7 +49,7 @@ public class SaveGameManagerTest : MonoBehaviour
         if (saveOnDestroy)
         {
             Debug.Log("Saving.");
-            testSaveGame.isFilled = true;
+            testSaveGame.IsFilled = true;
             SaveGameManager.SaveGame(testSaveGame);
         }
     }

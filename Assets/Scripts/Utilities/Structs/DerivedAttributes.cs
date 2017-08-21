@@ -3,24 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+/// <summary>
+/// The derived attributes of a character from base attributes, levels, equipment, etc.
+/// </summary>
 public class DerivedAttributes
 {
-    // Attribute constants
-    private const int FULL_ATTACK_DAMAGE = 100;
-    private const int FULL_ABILITY_DAMAGE = 100;
-    private const int FULL_DEFENSE = 50;
-    private const int FULL_HEALTH = 500;
-    private const int FULL_HEALTH_REGENERATION = 20;
-    private const int FULL_ENERGY = 400;
-    private const int FULL_ENERGY_REGENERATION = 15;
-    private const float FULL_ATTACK_SPEED = 2.0f;
-    private const float FULL_CRITICAL_HIT_CHANCE = 0.5f;
-    private const float FULL_CRITICAL_HIT_DAMAGE = 1.0f;
-    private const float FULL_COOLDOWN_REDUCTION = 0.5f;
-    private const float FULL_LIFE_DRAIN = 0.5f;
-    private const float FULL_MOVEMENT_SPEED = 0.05f;
-
-    // Derived attributes
     private int attackDamageDerived;
     private int abilityDamageDerived;
     private int defenseDerived;
@@ -36,83 +23,107 @@ public class DerivedAttributes
     private float movementSpeedDerived;
 
     /// <summary>
-    ///
+    /// Damage of basic attacks.
     /// </summary>
-    public int attackDamage { get { return attackDamageDerived; } }
+    public int AttackDamage { get { return attackDamageDerived; } }
 
     /// <summary>
-    ///
+    /// Damage of abilities.
     /// </summary>
-    public int abilityDamage { get { return abilityDamageDerived; } }
+    public int AbilityDamage { get { return abilityDamageDerived; } }
 
     /// <summary>
-    ///
+    /// Resistance to damage.
     /// </summary>
-    public int defense { get { return defenseDerived; } }
+    public int Defense { get { return defenseDerived; } }
 
     /// <summary>
-    ///
+    /// Health points before death.
     /// </summary>
-    public int health { get { return healthDerived; } }
+    public int Health { get { return healthDerived; } }
 
     /// <summary>
-    ///
+    /// Health points regained per second.
     /// </summary>
-    public int healthRegeneration { get { return healthRegenerationDerived; } }
+    public int HealthRegeneration { get { return healthRegenerationDerived; } }
 
     /// <summary>
-    ///
+    /// Energy points spend on abilities.
     /// </summary>
-    public int energy { get { return energyDerived; } }
+    public int Energy { get { return energyDerived; } }
 
     /// <summary>
-    ///
+    /// Energy points regained per second.
     /// </summary>
-    public int energyRegeneration { get { return energyRegenerationDerived; } }
+    public int EnergyRegeneration { get { return energyRegenerationDerived; } }
 
     /// <summary>
-    ///
+    /// Attacks per second.
     /// </summary>
-    public float attackSpeed { get { return attackSpeedDerived; } }
+    public float AttackSpeed { get { return attackSpeedDerived; } }
 
     /// <summary>
-    ///
+    /// Chance for a critical hit.
     /// </summary>
-    public float criticalHitChance { get { return criticalHitChanceDerived; } }
+    public float CriticalHitChance { get { return criticalHitChanceDerived; } }
 
     /// <summary>
-    ///
+    /// Damage bonus upon critical hit.
     /// </summary>
-    public float criticalHitDamage { get { return criticalHitDamageDerived; } }
+    public float CriticalHitDamage { get { return criticalHitDamageDerived; } }
 
     /// <summary>
-    ///
+    /// Percentage of cooldowns reduced.
     /// </summary>
-    public float cooldownReduction { get { return cooldownReductionDerived; } }
+    public float CooldownReduction { get { return cooldownReductionDerived; } }
 
     /// <summary>
-    ///
+    /// Life regained per damage done.
     /// </summary>
-    public float lifeDrain { get { return lifeDrainDerived; } }
+    public float LifeDrain { get { return lifeDrainDerived; } }
 
     /// <summary>
-    ///
+    /// Units moved per second.
     /// </summary>
-    public float movementSpeed { get { return movementSpeedDerived; } }
+    public float MovementSpeed { get { return movementSpeedDerived; } }
 
     private Character character;
+    private BaseAttributes bonusAttributes;
+    private LevelUpgrades levelUpgrades;
 
     /// <summary>
-    /// Constructor to create derived attributes from
+    /// Constructor to create derived attributes from a character.
     /// </summary>
     /// <param name="character"></param>
     public DerivedAttributes(Character character)
     {
         this.character = character;
 
+        if (character.CharacterType == CharacterType.Hero)
+        {
+            bonusAttributes = character.BonusAttributes + GameManager.InventoryManager.AttributeModifiers;
+        }
+        else
+        {
+            bonusAttributes = character.BonusAttributes;
+        }
+
+        if (character.CharacterType == CharacterType.Ally)
+        {
+            var ally = character as Ally;
+            levelUpgrades = ally.LevelUpgrades;
+        }
+        else
+        {
+            levelUpgrades = new LevelUpgrades();
+        }
+
         CalculateDerivedAttributes();
     }
 
+    /// <summary>
+    /// Calculate all derived attributes.
+    /// </summary>
     public void CalculateDerivedAttributes()
     {
         DeriveAttackDamage();
@@ -130,123 +141,191 @@ public class DerivedAttributes
         DeriveMovementSpeed();
     }
 
-    private float DeriveAttributeFloat(int baseAttribute, float fullValue, int bonusAttribute)
+    /// <summary>
+    /// Derives a floating point attribute.
+    /// </summary>
+    /// <param name="baseAttribute">Base attribute value.</param>
+    /// <param name="fullValue">Full value of the attribute.</param>
+    /// <param name="bonusAttribute">Bonus attribute values.</param>
+    /// <param name="upgradable">Whether or not the attribute is upgraded by level.</param>
+    /// <returns>The derived attribute.</returns>
+    protected float DeriveAttributeFloat(int baseAttribute, float fullValue, int bonusAttribute, bool upgradable = true)
     {
         float derivedAttribute = baseAttribute;
         derivedAttribute += bonusAttribute;
         derivedAttribute /= 100f;
         derivedAttribute *= fullValue;
-        derivedAttribute *= character.level;
+        if (upgradable) derivedAttribute *= character.Level;
         return derivedAttribute;
     }
 
-    private int DeriveAttributeInt(int baseAttribute, int fullValue, int bonusAttribute)
+    /// <summary>
+    /// Derives an integer attribute.
+    /// </summary>
+    /// <param name="baseAttribute">Base attribute value.</param>
+    /// <param name="fullValue">Full value of the attribute.</param>
+    /// <param name="bonusAttribute">Bonus attribute values.</param>
+    /// <param name="upgradable">Whether or not the attribute is upgraded by level.</param>
+    /// <returns>The derived attribute.</returns>
+    protected int DeriveAttributeInt(int baseAttribute, int fullValue, int bonusAttribute, bool upgradable = true)
     {
         return (int)DeriveAttributeFloat(baseAttribute, fullValue, bonusAttribute);
     }
 
-    private void DeriveAttackDamage()
+    /// <summary>
+    /// Derives the attack damage attribute.
+    /// </summary>
+    protected void DeriveAttackDamage()
     {
         attackDamageDerived = DeriveAttributeInt(
-            character.baseAttributes.attackDamage,
-            FULL_ATTACK_DAMAGE,
-            character.bonusAttributes.attackDamage);
+            character.BaseAttributes.AttackDamage,
+            GameManager.GameSettings.Max.AttributeFactor.AttackDamage,
+            bonusAttributes.AttackDamage,
+            levelUpgrades.AbilityDamage);
     }
 
-    private void DeriveAbilityDamage()
+    /// <summary>
+    /// Derives the ability damage attribute.
+    /// </summary>
+    protected void DeriveAbilityDamage()
     {
         abilityDamageDerived = DeriveAttributeInt(
-            character.baseAttributes.abilityDamage,
-            FULL_ABILITY_DAMAGE,
-            character.bonusAttributes.abilityDamage);
+            character.BaseAttributes.AbilityDamage,
+            GameManager.GameSettings.Max.AttributeFactor.AbilityDamage,
+            bonusAttributes.AbilityDamage,
+            levelUpgrades.AbilityDamage);
     }
 
-    private void DeriveDefense()
+    /// <summary>
+    /// Derives the defense attribute.
+    /// </summary>
+    protected void DeriveDefense()
     {
         defenseDerived = DeriveAttributeInt(
-            character.baseAttributes.defense,
-            FULL_DEFENSE,
-            character.bonusAttributes.defense);
+            character.BaseAttributes.Defense,
+            GameManager.GameSettings.Max.AttributeFactor.Defense,
+            bonusAttributes.Defense,
+            levelUpgrades.Defense);
     }
 
-    private void DeriveHealth()
+    /// <summary>
+    /// Derives the health attribute.
+    /// </summary>
+    protected void DeriveHealth()
     {
         healthDerived = DeriveAttributeInt(
-            character.baseAttributes.health,
-            FULL_HEALTH,
-            character.bonusAttributes.health);
+            character.BaseAttributes.Health,
+            GameManager.GameSettings.Max.AttributeFactor.Health,
+            bonusAttributes.Health,
+            levelUpgrades.Health);
     }
 
-    private void DeriveHealthRegeneration()
+    /// <summary>
+    /// Derives the health regeneration attribute.
+    /// </summary>
+    protected void DeriveHealthRegeneration()
     {
         healthRegenerationDerived = DeriveAttributeInt(
-            character.baseAttributes.healthRegeneration,
-            FULL_HEALTH_REGENERATION,
-            character.bonusAttributes.healthRegeneration);
+            character.BaseAttributes.HealthRegeneration,
+            GameManager.GameSettings.Max.AttributeFactor.HealthRegeneration,
+            bonusAttributes.HealthRegeneration,
+            levelUpgrades.HealthRegeneration);
     }
 
-    private void DeriveEnergy()
+    /// <summary>
+    /// Derives the energy attribute.
+    /// </summary>
+    protected void DeriveEnergy()
     {
         energyDerived = DeriveAttributeInt(
-            character.baseAttributes.energy,
-            FULL_ENERGY,
-            character.bonusAttributes.energy);
+            character.BaseAttributes.Energy,
+            GameManager.GameSettings.Max.AttributeFactor.Energy,
+            bonusAttributes.Energy,
+            levelUpgrades.Energy);
     }
 
-    private void DeriveEnergyRegeneration()
+    /// <summary>
+    /// Derives the energy regeneration attribute.
+    /// </summary>
+    protected void DeriveEnergyRegeneration()
     {
         energyRegenerationDerived = DeriveAttributeInt(
-            character.baseAttributes.energyRegeneration,
-            FULL_ENERGY_REGENERATION,
-            character.bonusAttributes.energyRegeneration);
+            character.BaseAttributes.EnergyRegeneration,
+            GameManager.GameSettings.Max.AttributeFactor.EnergyRegeneration,
+            bonusAttributes.EnergyRegeneration,
+            levelUpgrades.EnergyRegeneration);
     }
 
-    private void DeriveAttackSpeed()
+    /// <summary>
+    /// Derives the attack speed attribute.
+    /// </summary>
+    protected void DeriveAttackSpeed()
     {
         attackSpeedDerived = DeriveAttributeFloat(
-            character.baseAttributes.attackSpeed,
-            FULL_ATTACK_SPEED,
-            character.bonusAttributes.attackSpeed);
+            character.BaseAttributes.AttackSpeed,
+            GameManager.GameSettings.Max.AttributeFactor.AttackSpeed,
+            bonusAttributes.AttackSpeed,
+            levelUpgrades.AttackSpeed);
     }
 
-    private void DeriveCriticalHitChance()
+    /// <summary>
+    /// Derives the critical hit change attribute.
+    /// </summary>
+    protected void DeriveCriticalHitChance()
     {
         criticalHitChanceDerived = DeriveAttributeFloat(
-            character.baseAttributes.criticalHitChance,
-            FULL_CRITICAL_HIT_CHANCE,
-            character.bonusAttributes.criticalHitChance);
+            character.BaseAttributes.CriticalHitChance,
+            GameManager.GameSettings.Max.AttributeFactor.CriticalHitChance,
+            bonusAttributes.CriticalHitChance,
+            levelUpgrades.CriticalHitChance);
     }
 
-    private void DeriveCriticalHitDamage()
+    /// <summary>
+    /// Derives the critical hit damage attribute.
+    /// </summary>
+    protected void DeriveCriticalHitDamage()
     {
         criticalHitDamageDerived = 1 + DeriveAttributeFloat(
-            character.baseAttributes.criticalHitDamage,
-            FULL_CRITICAL_HIT_DAMAGE,
-            character.bonusAttributes.criticalHitDamage);
+            character.BaseAttributes.CriticalHitDamage,
+            GameManager.GameSettings.Max.AttributeFactor.CriticalHitDamage,
+            bonusAttributes.CriticalHitDamage,
+            levelUpgrades.CriticalHitDamage);
     }
 
-    private void DeriveCooldownReduction()
+    /// <summary>
+    /// Derives the cooldown reduction attribute.
+    /// </summary>
+    protected void DeriveCooldownReduction()
     {
         cooldownReductionDerived = DeriveAttributeFloat(
-            character.baseAttributes.cooldownReduction,
-            FULL_COOLDOWN_REDUCTION,
-            character.bonusAttributes.cooldownReduction);
+            character.BaseAttributes.CooldownReduction,
+            GameManager.GameSettings.Max.AttributeFactor.CooldownReduction,
+            bonusAttributes.CooldownReduction,
+            levelUpgrades.CooldownReduction);
     }
 
-    private void DeriveLifeDrain()
+    /// <summary>
+    /// Derives the lide drain attribute.
+    /// </summary>
+    protected void DeriveLifeDrain()
     {
         lifeDrainDerived = DeriveAttributeFloat(
-            character.baseAttributes.lifeDrain,
-            FULL_LIFE_DRAIN,
-            character.bonusAttributes.lifeDrain);
+            character.BaseAttributes.LifeDrain,
+            GameManager.GameSettings.Max.AttributeFactor.LifeDrain,
+            bonusAttributes.LifeDrain,
+            levelUpgrades.LifeDrain);
     }
 
-    private void DeriveMovementSpeed()
+    /// <summary>
+    /// Derives the movement speed attribute.
+    /// </summary>
+    protected void DeriveMovementSpeed()
     {
         movementSpeedDerived = DeriveAttributeFloat(
-            character.baseAttributes.movementSpeed,
-            FULL_MOVEMENT_SPEED,
-            character.bonusAttributes.movementSpeed);
+            character.BaseAttributes.MovementSpeed,
+            GameManager.GameSettings.Max.AttributeFactor.MovementSpeed,
+            bonusAttributes.MovementSpeed,
+            levelUpgrades.MovementSpeed);
     }
 }
 

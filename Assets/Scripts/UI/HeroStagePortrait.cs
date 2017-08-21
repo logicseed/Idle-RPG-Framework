@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 
+/// <summary>
+/// Controls the hero portrait.
+/// </summary>
 public class HeroStagePortrait : MonoBehaviour
 {
-    private Image icon;
+    protected Image icon;
 
-    private void Start()
+    /// <summary>
+    /// Sets up the portrait.
+    /// </summary>
+    protected void Start()
     {
         icon = GetComponent<Image>();
-        icon.sprite = GameManager.HeroManager.HeroObject.icon;
+        icon.sprite = GameManager.HeroManager.HeroObject.Icon;
     }
 }

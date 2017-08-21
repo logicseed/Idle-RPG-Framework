@@ -1,14 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Controls the popup list of ally upgrade buttons.
+/// </summary>
 public class UpgradeAllyPopup : MonoBehaviour
 {
-    public Transform contentPanel;
+    protected List<UpgradeAllyButton> buttons;
 
-    private List<UpgradeAllyButton> buttons;
-
-    void Start()
+    [SerializeField]
+    protected Transform contentPanel;
+    /// <summary>
+    /// Sets up the popup.
+    /// </summary>
+    protected void Start()
     {
         buttons = new List<UpgradeAllyButton>();
 
@@ -22,6 +27,9 @@ public class UpgradeAllyPopup : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Refreshes all of the upgrade ally buttons.
+    /// </summary>
     public void RefreshButtons()
     {
         foreach (var button in buttons) button.RefreshButton();

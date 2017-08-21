@@ -1,29 +1,46 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System.Text;
+using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.Text;
 
+/// <summary>
+/// Controls the button that upgrades an ally.
+/// </summary>
 public class UpgradeAllyButton : MonoBehaviour
 {
-    public Button buttonComponent;
-    public Image imageComponent;
-    public Text textComponent;
-    public string allyName;
+    protected string allyName;
 
-    private UpgradeAllyPopup list;
+    [SerializeField]
+    protected Button buttonComponent;
 
-    void Awake()
+    [SerializeField]
+    protected Image imageComponent;
+
+    protected UpgradeAllyPopup list;
+
+    [SerializeField]
+    protected Text textComponent;
+
+    /// <summary>
+    /// Sets up the button.
+    /// </summary>
+    protected void Awake()
     {
         buttonComponent.onClick.AddListener(UpgradeAlly);
     }
 
-    private void UpgradeAlly()
+    /// <summary>
+    /// Upgrades the ally when the button is clicked.
+    /// </summary>
+    protected void UpgradeAlly()
     {
         GameManager.UpgradeAlly(allyName);
         list.RefreshButtons();
     }
-
+    /// <summary>
+    /// Initializes the values of the button with an ally.
+    /// </summary>
+    /// <param name="allyName">The name of the ally.</param>
+    /// <param name="list">The popup list of allies.</param>
     public void Initialize(string allyName, UpgradeAllyPopup list)
     {
         this.allyName = allyName;
@@ -31,10 +48,13 @@ public class UpgradeAllyButton : MonoBehaviour
         RefreshButton();
     }
 
+    /// <summary>
+    /// Refreshes the button based on ally data.
+    /// </summary>
     public void RefreshButton()
     {
         var allyObject = GameManager.RosterManager.GetEntityObject(allyName);
-        imageComponent.sprite = allyObject.icon;
+        imageComponent.sprite = allyObject.Icon;
 
         var text = new StringBuilder();
         text.Append("Level: ");

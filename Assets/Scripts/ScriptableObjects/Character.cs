@@ -1,22 +1,50 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-
+/// <summary>
+/// Represents a character.
+/// </summary>
 public abstract class Character : ListableEntity
 {
-    public RuntimeAnimatorController animator;
-    public AttackType attackType;
-
-    public int level = 1;
+    [SerializeField]
+    protected RuntimeAnimatorController animator;
 
     [SerializeField]
-    public BaseAttributes baseAttributes;
+    protected AttackType attackType;
 
     [SerializeField]
-    public BaseAttributes bonusAttributes;
+    protected int level = 1;
 
-    public DerivedAttributes derivedAttributes;
+    [SerializeField]
+    protected BaseAttributes baseAttributes;
 
-    public abstract CharacterType characterType { get; }
+    [SerializeField]
+    protected BaseAttributes bonusAttributes;
+
+    /// <summary>
+    /// The animator controller for the character.
+    /// </summary>
+    public RuntimeAnimatorController Animator { get { return animator; } }
+    /// <summary>
+    /// Attack type of the character.
+    /// </summary>
+    public AttackType AttackType { get { return attackType; } }
+    /// <summary>
+    /// Base attributes of the character.
+    /// </summary>
+    public BaseAttributes BaseAttributes { get { return baseAttributes; } }
+
+    /// <summary>
+    /// Bonus attributes of the character.
+    /// </summary>
+    public BaseAttributes BonusAttributes { get { return bonusAttributes; } }
+
+    /// <summary>
+    /// Type of the character.
+    /// </summary>
+    public abstract CharacterType CharacterType { get; }
+
+    /// <summary>
+    /// The level of the character.
+    /// </summary>
+    public int Level { get { return level; } set { level = value; } }
 }

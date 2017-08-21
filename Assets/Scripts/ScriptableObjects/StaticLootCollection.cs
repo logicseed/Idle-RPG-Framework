@@ -1,53 +1,41 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using Random = UnityEngine.Random;
 
 /// <summary>
-///
+/// Represents a static collection of equipment loot.
 /// </summary>
 [CreateAssetMenu(menuName = "Idle RPG/Loot Collection - Static")]
 public class StaticLootCollection : LootCollection
 {
-    [HideInInspector]
-    public int currencyAmount;
-    public List<Equipment> equipment;
-    public bool loopEquipment = false;
-    private int equipmentIterator = -1;
+    protected int equipmentIterator = -1;
 
-    public override bool DropEquipment()
-    {
-        Debug.Log("Checking drop equipment.");
-        if (equipment.Count == 0) return false;
-        if (loopEquipment == false && equipmentIterator >= equipment.Count) return false;
-        Debug.Log("Checking drop chance.");
-        return Random.Range(0.0f, 1.0f) >= 0.5f;
-    }
+    [SerializeField]
+    protected bool loopEquipment = false;
 
     /// <summary>
-    ///
+    /// Whether or not a piece of equipment dropped.
     /// </summary>
-    /// <returns></returns>
-    public override int GetCurrency()
+    public override bool DropEquipment
     {
-        return currencyAmount;
-    }
-
-    /// <summary>
-    ///
-    /// </summary>
-    /// <returns></returns>
-    public override Equipment GetEquipment()
-    {
-        if (DropEquipment())
+        get
         {
-            Debug.Log("Getting equipment.");
-            equipmentIterator++;
-            if (loopEquipment && equipmentIterator >= equipment.Count) equipmentIterator = 0;
-            if (equipmentIterator >= equipment.Count) return null;
-            return equipment[equipmentIterator];
+            if (equipment.Count == 0) return false;
+
+            if (loopEquipment == false && equipmentIterator >= equipment.Count) return false;
+
+            return Random.Range(0.0f, 1.0f) <= GameManager.GameSettings.Constants.EquipmentDropChance;
         }
-        else return null;
+    }
+
+    /// <summary>
+    /// Gets the next piece of equipment to drop.
+    /// </summary>
+    /// <returns>An equipment object.</returns>
+    public override Equipment GetNextEquipment()
+    {
+        equipmentIterator++;
+        if (equipmentIterator >= equipment.Count) equipmentIterator = 0;
+        if (equipmentIterator >= equipment.Count) return null;
+        return equipment[equipmentIterator];
     }
 }

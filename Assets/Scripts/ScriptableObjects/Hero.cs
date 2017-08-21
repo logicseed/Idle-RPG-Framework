@@ -1,8 +1,13 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Represents a hero.
+/// </summary>
 [CreateAssetMenu(menuName = "Idle RPG/Hero")]
 public class Hero : Character
 {
-    public override CharacterType characterType { get { return CharacterType.Hero; } }
+    /// <summary>
+    /// Character type of the hero.
+    /// </summary>
+    public override CharacterType CharacterType { get { return CharacterType.Hero; } }
 }

@@ -1,49 +1,34 @@
-﻿using UnityEngine;
-using System.Collections;
-using System;
-using System.Collections.Generic;
-using UnityEngine.UI;
-using Debug = ConditionalDebug;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
+/// <summary>
+/// Controls a list of world entities.
+/// </summary>
 public class WorldEntityList : MonoBehaviour
 {
-    public ListableEntityType entityType;
-    public WorldEntityListType listType;
-    public ButtonAction buttonAction;
-    public Transform contentPanel;
-    private WorldEntityManager manager;
-    private List<GameObject> buttons;
+    [SerializeField]
+    protected WorldEntityListType listType;
 
-    void Start()
-    {
-        buttons = new List<GameObject>();
-        manager = GameManager.GetManagerByType(entityType);
+    [SerializeField]
+    protected ListableEntityType entityType;
 
-        if (listType == WorldEntityListType.Unlocked) manager.OnUnlockedListChanged += RefreshDisplay;
-        else manager.OnAssignedListChanged += RefreshDisplay;
+    [SerializeField]
+    protected ButtonAction buttonAction;
 
-        RefreshDisplay();
-    }
+    [SerializeField]
+    protected Transform contentPanel;
 
-    void RefreshDisplay()
-    {
-        Debug.Log("Refreshing display: " + gameObject.name);
-        RemoveButtons();
-        AddButtons();
-    }
+    protected List<GameObject> buttons;
 
-    private void RemoveButtons()
-    {
-        foreach (var button in buttons)
-        {
-            Destroy(button);
-        }
-        buttons = new List<GameObject>();
-    }
+    protected WorldEntityManager manager;
 
-    private void AddButtons()
+    /// <summary>
+    /// Adds button based on the content of the list.
+    /// </summary>
+    protected void AddButtons()
     {
         List<string> entityList;
+
         if (listType == WorldEntityListType.Unlocked) entityList = manager.Unlocked;
         else entityList = manager.Assigned;
 
@@ -59,9 +44,47 @@ public class WorldEntityList : MonoBehaviour
         }
     }
 
-    private void OnDestroy()
+    /// <summary>
+    /// Unsubscribes from refresh events when destroyed.
+    /// </summary>
+    protected void OnDestroy()
     {
         if (listType == WorldEntityListType.Unlocked) manager.OnUnlockedListChanged -= RefreshDisplay;
         else manager.OnAssignedListChanged -= RefreshDisplay;
+    }
+
+    /// <summary>
+    /// Refreshes the list.
+    /// </summary>
+    protected void RefreshDisplay()
+    {
+        RemoveButtons();
+        AddButtons();
+    }
+
+    /// <summary>
+    /// Removes all existing buttons.
+    /// </summary>
+    protected void RemoveButtons()
+    {
+        foreach (var button in buttons)
+        {
+            Destroy(button);
+        }
+        buttons = new List<GameObject>();
+    }
+
+    /// <summary>
+    /// Sets up the list.
+    /// </summary>
+    protected void Start()
+    {
+        buttons = new List<GameObject>();
+        manager = GameManager.GetManagerByType(entityType);
+
+        if (listType == WorldEntityListType.Unlocked) manager.OnUnlockedListChanged += RefreshDisplay;
+        else manager.OnAssignedListChanged += RefreshDisplay;
+
+        RefreshDisplay();
     }
 }

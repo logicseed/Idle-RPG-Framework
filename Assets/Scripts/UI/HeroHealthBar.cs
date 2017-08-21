@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Controls the hero health bar.
+/// </summary>
 public class HeroHealthBar : MonoBehaviour
 {
-    public RectTransform foreground;
+    [SerializeField]
+    protected RectTransform foreground;
 
-    private void OnGUI()
+    /// <summary>
+    /// Refreshes the health bar every GUI refresh.
+    /// </summary>
+    protected void OnGUI()
     {
-        float percent = GameManager.Hero.HeroCombatController.CurrentHealth / (float)GameManager.Hero.Attributes.health;
+        float percent = GameManager.Hero.HeroCombatController.CurrentHealth / (float)GameManager.Hero.Attributes.Health;
         foreground.localScale = new Vector3(percent, foreground.localScale.y, foreground.localScale.z);
     }
 }

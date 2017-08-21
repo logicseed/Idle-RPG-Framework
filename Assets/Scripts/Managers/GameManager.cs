@@ -56,7 +56,7 @@ public class GameManager : Singleton<GameManager>
     protected void InitializeGameWorldManagers()
     {
         SaveGame save = null;
-        if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
+        if (SaveGameManager.SaveGameExists) save = SaveGameManager.LoadGame();
 
         worldManager = new WorldManager(save);
     }
@@ -75,7 +75,7 @@ public class GameManager : Singleton<GameManager>
     protected void InitializeWorldEntityManagers()
     {
         SaveGame save = null;
-        if (SaveGameManager.SaveGameExists()) save = SaveGameManager.LoadGame();
+        if (SaveGameManager.SaveGameExists) save = SaveGameManager.LoadGame();
 
         heroManager = HeroManager.Load(save);
         abilityManager = new AbilityManager(save);
@@ -436,7 +436,7 @@ public class GameManager : Singleton<GameManager>
         if (RosterManager != null) RosterManager.Save(ref save);
         if (InventoryManager != null) InventoryManager.Save(ref save);
         if (WorldManager != null) WorldManager.Save(ref save);
-        save.isFilled = true;
+        save.IsFilled = true;
 
         SaveGameManager.SaveGame(save);
     }

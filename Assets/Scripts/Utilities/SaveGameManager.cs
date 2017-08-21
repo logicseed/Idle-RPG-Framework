@@ -3,11 +3,19 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
+/// <summary>
+/// Manages the save games.
+/// </summary>
 public static class SaveGameManager
 {
+    /// <summary>
+    /// Saves the provided save game data.
+    /// </summary>
+    /// <param name="saveGame">The save game data.</param>
+    /// <returns>Whether or not the save was successful.</returns>
     public static bool SaveGame(SaveGame saveGame)
     {
-        if (!saveGame.isFilled)
+        if (!saveGame.IsFilled)
         {
             throw new ArgumentException("Tried to save an incomplete save game file.");
         }
@@ -28,6 +36,10 @@ public static class SaveGameManager
         return true;
     }
 
+    /// <summary>
+    /// Loads save game data from disk.
+    /// </summary>
+    /// <returns>The save game data.</returns>
     public static SaveGame LoadGame()
     {
         if (!File.Exists(SavePath)) return null;
@@ -47,6 +59,10 @@ public static class SaveGameManager
         }
     }
 
+    /// <summary>
+    /// Deletes any existing save game data.
+    /// </summary>
+    /// <returns></returns>
     public static bool DeleteSaveGame()
     {
         try
@@ -60,6 +76,9 @@ public static class SaveGameManager
         return true;
     }
 
+    /// <summary>
+    /// Path of the save game data.
+    /// </summary>
     public static string SavePath
     {
         get
@@ -68,9 +87,15 @@ public static class SaveGameManager
         }
     }
 
-    public static bool SaveGameExists()
+    /// <summary>
+    /// Whetehr or not a save game exists.
+    /// </summary>
+    public static bool SaveGameExists
     {
-        return File.Exists(SavePath);
+        get
+        {
+            return File.Exists(SavePath);
+        }
     }
 }
 

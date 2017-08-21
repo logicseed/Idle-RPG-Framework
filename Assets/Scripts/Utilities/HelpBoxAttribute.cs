@@ -1,7 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+/// <summary>
+/// The attribute applied to fields to display a help box.
+/// </summary>
 public class HelpBoxAttribute : PropertyAttribute
 {
     public string message;

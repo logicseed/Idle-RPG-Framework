@@ -1,13 +1,19 @@
 ﻿using UnityEngine;
-using System.Collections;
 
+/// <summary>
+/// Controls the hero energy bar.
+/// </summary>
 public class HeroEnergyBar : MonoBehaviour
 {
-    public RectTransform foreground;
+    [SerializeField]
+    protected RectTransform foreground;
 
-    private void OnGUI()
+    /// <summary>
+    /// Refreshes energy bar every GUI refresh.
+    /// </summary>
+    protected void OnGUI()
     {
-        float percent = GameManager.Hero.HeroCombatController.CurrentEnergy / (float)GameManager.Hero.Attributes.energy;
+        float percent = GameManager.Hero.HeroCombatController.CurrentEnergy / (float)GameManager.Hero.Attributes.Energy;
         foreground.localScale = new Vector3(percent, foreground.localScale.y, foreground.localScale.z);
     }
 }

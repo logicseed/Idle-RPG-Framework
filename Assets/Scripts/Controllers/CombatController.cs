@@ -34,9 +34,9 @@ public class CombatController : MonoBehaviour
             return;
         }
 
-        currentHealth = CharacterController.Attributes.health;
-        currentEnergy = CharacterController.Attributes.energy;
-        lastAttackTime = Time.time - (1 / CharacterController.Attributes.attackSpeed);
+        currentHealth = CharacterController.Attributes.Health;
+        currentEnergy = CharacterController.Attributes.Energy;
+        lastAttackTime = Time.time - (1 / CharacterController.Attributes.AttackSpeed);
     }
 
     /// <summary>
@@ -157,7 +157,7 @@ public class CombatController : MonoBehaviour
         {
             // Since attack speed is in (attacks/sec) finding the reciprical
             // will give us (secs/attack)
-            var attackTime = 1 / CharacterController.Attributes.attackSpeed;
+            var attackTime = 1 / CharacterController.Attributes.AttackSpeed;
 
             return Time.time - lastAttackTime >= attackTime;
         }
@@ -173,7 +173,7 @@ public class CombatController : MonoBehaviour
     public virtual void ApplyDamage(int damage, bool isCritical = false)
     {
         // How much damage made it through defense; negative values won't heal.
-        var unblockedDamage = damage - CharacterController.Attributes.defense;
+        var unblockedDamage = damage - CharacterController.Attributes.Defense;
 
         // Create floating combat text.
         var textObject = Instantiate(GameManager.GameSettings.Prefab.UI.CombatText, transform);
@@ -255,9 +255,9 @@ public class CombatController : MonoBehaviour
     /// <returns></returns>
     public float CriticalModifier()
     {
-        if (Random.Range(0.0f, 1.0f) <= CharacterController.Attributes.criticalHitChance)
+        if (Random.Range(0.0f, 1.0f) <= CharacterController.Attributes.CriticalHitChance)
         {
-            return CharacterController.Attributes.criticalHitDamage;
+            return CharacterController.Attributes.CriticalHitDamage;
         }
         return 1.0f;
     }
@@ -349,7 +349,7 @@ public class CombatController : MonoBehaviour
         CharacterController.CharacterState = CharacterState.Melee; //TODO: Add ranged
 
         var criticalModifier = CriticalModifier();
-        var damage = (int)(CharacterController.Attributes.attackDamage * criticalModifier);
+        var damage = (int)(CharacterController.Attributes.AttackDamage * criticalModifier);
 
         // Apply damage
         TargetController.CombatController.ApplyDamage(damage, criticalModifier > 1);
@@ -376,7 +376,7 @@ public class CombatController : MonoBehaviour
         var location = CharacterController.Location;
         var target = TargetController;
         var criticalModifier = CriticalModifier();
-        var damage = (int)(CharacterController.Attributes.attackDamage * criticalModifier);
+        var damage = (int)(CharacterController.Attributes.AttackDamage * criticalModifier);
 
         SpawnProjectile(prefab, location, damage, target, criticalModifier);
     }
@@ -390,7 +390,7 @@ public class CombatController : MonoBehaviour
         var location = CharacterController.Location;
         var target = TargetController;
         var criticalModifier = CriticalModifier();
-        var damage = (int)(CharacterController.Attributes.abilityDamage * criticalModifier);
+        var damage = (int)(CharacterController.Attributes.AbilityDamage * criticalModifier);
 
         SpawnProjectile(prefab, location, damage, target, criticalModifier);
     }
