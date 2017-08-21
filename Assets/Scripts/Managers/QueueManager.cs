@@ -35,4 +35,15 @@ public class QueueManager : RegisterList<QueueController>
             return areSpawning;
         }
     }
+
+    /// <summary>
+    /// Whether or not the queues and the enemies they have spawned are completed.
+    /// </summary>
+    public bool QueuesAreComplete
+    {
+        get
+        {
+            return HasQueues && !QueuesAreSpawning && !GameManager.EnemyManager.HasRegisteredEntities;
+        }
+    }
 }

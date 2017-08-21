@@ -297,6 +297,9 @@ public class HeroController : GameCharacterController
     /// </summary>
     public HeroInputController HeroInputController { get { return heroInputControllerReference; } }
 
+    /// <summary>
+    /// Reference to the HeroMovementController.
+    /// </summary>
     public HeroMovementController HeroMovementController { get { return movementControllerReference as HeroMovementController; } }
 
     /// <summary>

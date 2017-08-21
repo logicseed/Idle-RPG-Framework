@@ -164,9 +164,10 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     protected void Update()
     {
-        if (onStage)
+        if (onStage && QueueManager != null && HeroManager.Hero != null)
         {
-            if (queueManager.HasQueues && !queueManager.QueuesAreSpawning && enemyManager.GetAll().Count == 0)
+            // End stage conditions.
+            if (QueueManager.QueuesAreComplete || HeroManager.Hero.IsDead)
             {
                 onStage = false;
                 StageManager.EndStage();

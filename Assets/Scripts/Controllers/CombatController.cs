@@ -214,10 +214,13 @@ public class CombatController : MonoBehaviour
                 ApplyReward();
             }
 
-            CharacterController.Unregister();
+            if (CharacterController.CharacterType != CharacterType.Hero)
+            {
+                CharacterController.Unregister();
 
-            // Despawn body after some amount of time
-            Invoke("Despawn", GameManager.GameSettings.Constants.CombatTime.DespawnBodyDelay);
+                // Despawn body after some amount of time
+                Invoke("Despawn", GameManager.GameSettings.Constants.CombatTime.DespawnBodyDelay);
+            }
         }
     }
 

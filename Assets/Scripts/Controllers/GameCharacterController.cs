@@ -282,4 +282,9 @@ public class GameCharacterController : MonoBehaviour
     /// Unregisters the character from its respective manager.
     /// </summary>
     public virtual void Unregister() { }
+
+    /// <summary>
+    /// Whether or not the character is dead.
+    /// </summary>
+    public virtual bool IsDead { get { return characterState == CharacterState.Dead; } }
 }

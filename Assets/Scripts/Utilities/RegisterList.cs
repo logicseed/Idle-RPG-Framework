@@ -67,4 +67,15 @@ public class RegisterList<T> where T : MonoBehaviour
     {
         if (list.Count > 0) addToList.AddRange(list);
     }
+
+    /// <summary>
+    /// Whether or not the manager has any registered entities.
+    /// </summary>
+    public virtual bool HasRegisteredEntities
+    {
+        get
+        {
+            return list.Count != 0;
+        }
+    }
 }
