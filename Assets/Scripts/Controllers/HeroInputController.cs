@@ -59,12 +59,13 @@ public class HeroInputController : MonoBehaviour
         var worldPosition = Camera.main.ScreenToWorldPoint(position);
 
         // Character tap
-        foreach (var character in GameManager.AllCharacters)
+        foreach (var character in GameManager.AllCharactersExcept(hero))
         {
             if (Vector2.Distance(worldPosition, character.transform.position) < GameManager.GameSettings.Constants.Range.Touch)
             {
                 GameManager.Hero.CombatController.TargetController = character;
                 GameManager.Hero.HeroMovementController.HasLocationTarget = false;
+
                 if (awaitingTarget && waitingAbility != null)
                 {
                     awaitingTarget = false;
@@ -78,7 +79,11 @@ public class HeroInputController : MonoBehaviour
         GameManager.Hero.CombatController.TargetController = null;
     }
 
-    internal void AwaitTarget(Ability ability)
+    /// <summary>
+    /// Awaits a target for targetable abilities when hero doesn't have a target.
+    /// </summary>
+    /// <param name="ability">The ability to use once a target is found.</param>
+    public void AwaitTarget(Ability ability)
     {
         awaitingTarget = true;
         waitingAbility = ability;

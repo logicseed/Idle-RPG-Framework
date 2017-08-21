@@ -174,4 +174,14 @@ public class HeroCombatController : CombatController
             }
         }
     }
+
+    /// <summary>
+    /// Finds an appropriate target for the character if one exists on the stage.
+    /// </summary>
+    public override void UpdateTarget()
+    {
+        if (GameManager.Hero.HeroMovementController.HasLocationTarget == true) return;
+
+        base.UpdateTarget();
+    }
 }
