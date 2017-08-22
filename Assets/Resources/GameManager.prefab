@@ -111,6 +111,10 @@ MonoBehaviour:
         CombatTextCritical: {r: 1, g: 0, b: 0, a: 1}
         FloatingBarForeground: {r: 0, g: 1, b: 0, a: 1}
         FloatingBarBackground: {r: 1, g: 0, b: 0, a: 1}
+      CombatTime:
+        SpawnCasterBallDelay: 0.25
+        SpawnArrowDelay: 0.5
+        DespawnBodyDelay: 1
     Max:
       RewardTime: 8
       Abilities:
@@ -122,6 +126,20 @@ MonoBehaviour:
       Allies:
         Unlocked: 9999
         Assigned: 3
+      AttributeFactor:
+        AttackDamage: 100
+        AbilityDamage: 100
+        Defense: 50
+        Health: 500
+        HealthRegeneration: 20
+        Energy: 400
+        EnergyRegeneration: 15
+        AttackSpeed: 2
+        CriticalHitChance: 0.5
+        CriticalHitDamage: 1
+        CooldownReduction: 0.5
+        LifeDrain: 0.5
+        MovementSpeed: 0.05
     Path:
       Abilities: Abilities/
       Equipment: Equipment/
@@ -174,36 +192,5 @@ MonoBehaviour:
           type: 2}
         HeroStageInformation: {fileID: 1457981774662274, guid: 26f305edbf1d79c4bba802ef10ecca3d,
           type: 2}
-  heroManager:
-    list: []
-    experience: 0
-    level: 1
-    HeroObject: {fileID: 0}
-  rosterManager:
-    unlocked: []
-    assigned: []
-  inventoryManager:
-    unlocked: []
-    assigned: []
-  abilityManager:
-    unlocked: []
-    assigned: []
-  worldManager:
-    unlockedZones: []
-    lastStage: 
-    unlockedStages: []
-  zoneManager:
-    unlockedZones: []
-  stageManager: {fileID: 0}
-  allyManager:
-    list: []
-  enemyManager:
-    list: []
-  bossManager:
-    list: []
-  queueManager:
-    list: []
-  bypassSaveGame: 0
-  loadPercent: 0
-  onStage: 0
-  state: 1
+        StageCompletePopup: {fileID: 1463329420505034, guid: 9dbc4f2da000b3d409482ae5e6e1c1d6,
+          type: 2}

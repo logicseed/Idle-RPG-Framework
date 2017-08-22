@@ -51,7 +51,11 @@ public class StageManager : MonoBehaviour
 
         GameManager.WorldManager.SetIdleFactor(idleRewardsFactor);
 
-        GameManager.InitializeWorld();
+        GameManager.Hero.HeroMovementController.Location = new Vector2(100, 0);
+        GameManager.Hero.CombatController.TargetController = null;
+
+        var canvas = GameObject.Find("UiCanvas");
+        Instantiate(GameManager.GameSettings.Prefab.UI.StageCompletePopup, canvas.transform, false);
     }
 
     /// <summary>

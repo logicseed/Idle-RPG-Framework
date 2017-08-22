@@ -318,10 +318,16 @@ public class GameManager : Singleton<GameManager>
     /// Returns the hero manager.
     /// </summary>
     public static HeroManager HeroManager { get { return GameManager.Instance.heroManager; } }
+    
     /// <summary>
     /// Returns the inventory manager.
     /// </summary>
     public static InventoryManager InventoryManager { get { return GameManager.Instance.inventoryManager; } }
+
+    /// <summary>
+    /// Whether or not the game is on a stage.
+    /// </summary>
+    public static bool OnStage { get { return GameManager.Instance.onStage; } set { GameManager.Instance.onStage = value; } }
 
     /// <summary>
     /// Returns the stage queue manager.

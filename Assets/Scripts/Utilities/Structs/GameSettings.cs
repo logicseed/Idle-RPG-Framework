@@ -167,6 +167,7 @@ public class GameSettings
             public GameObject ExperienceText;
             public GameObject AbilityUsePanel;
             public GameObject HeroStageInformation;
+            public GameObject StageCompletePopup;
         }
     }
 }
