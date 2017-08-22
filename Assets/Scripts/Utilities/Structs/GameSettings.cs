@@ -8,8 +8,7 @@ using UnityEngine;
 [Serializable]
 public class GameSettings
 {
-    public bool ShowResetButton = false;
-
+    [Header("Starting values for the hero.")]
     public StartContainer CharacterStart;
     [Serializable] public class StartContainer
     {
@@ -22,6 +21,7 @@ public class GameSettings
         public List<string> Abilities;
     }
 
+    [Header("Various gameplay constants.")]
     public ConstantsContainer Constants;
     [Serializable] public class ConstantsContainer
     {
@@ -90,6 +90,7 @@ public class GameSettings
         }
     }
 
+    [Header("Maximum gameplay values.")]
     public MaximumContainer Max;
     [Serializable] public class MaximumContainer
     {
@@ -123,6 +124,7 @@ public class GameSettings
         }
     }
 
+    [Header("Resource paths.")]
     public PathContainer Path;
     [Serializable] public class PathContainer
     {
@@ -131,6 +133,7 @@ public class GameSettings
         public string Allies = "Allies/";
     }
 
+    [Header("Resource prefabs.")]
     public PrefabContainer Prefab;
     [Serializable] public class PrefabContainer
     {
@@ -170,4 +173,6 @@ public class GameSettings
             public GameObject StageCompletePopup;
         }
     }
+
+    public bool ShowResetButton = false;
 }

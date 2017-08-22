@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class GameManager : Singleton<GameManager>
 {
+    [HelpBox("Changing these values can have drastic impact on the functionality of the game; edit with caution.", HelpBoxMessageType.Warning)]
     [SerializeField]
     protected GameSettings gameSettings;
     protected bool onStage = false;
