@@ -352,7 +352,7 @@ public class CombatController : MonoBehaviour
     {
         // Update state
         CharacterController.CharacterState = CharacterState.Idle; // Make sure event is fired.
-        CharacterController.CharacterState = CharacterState.Melee; //TODO: Add ranged
+        CharacterController.CharacterState = CharacterState.Melee;
 
         var criticalModifier = CriticalModifier();
         var damage = (int)(CharacterController.Attributes.AttackDamage * criticalModifier);

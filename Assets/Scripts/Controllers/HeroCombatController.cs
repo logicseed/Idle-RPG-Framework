@@ -53,6 +53,7 @@ public class HeroCombatController : CombatController
     {
         if (isDefending) damage = (int)(damage * GameManager.GameSettings.Constants.DefensePercent);
         base.ApplyDamage(damage, isCritical);
+        if (CharacterController.CharacterState == CharacterState.Idle) base.UpdateTarget();
     }
 
     /// <summary>
@@ -181,7 +182,6 @@ public class HeroCombatController : CombatController
     public override void UpdateTarget()
     {
         if (GameManager.Hero.HeroMovementController.HasLocationTarget == true) return;
-
         base.UpdateTarget();
     }
 }

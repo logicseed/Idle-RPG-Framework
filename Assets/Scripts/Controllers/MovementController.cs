@@ -53,11 +53,6 @@ public class MovementController : MonoBehaviour
                     var location = character.CombatController.TargetController.transform.position;
                     movementBehaviour = new WalkMovementBehaviour(
                         movementBehaviour, gameObject, location, SeekTargetDistance);
-                    character.CharacterState = CharacterState.Walk;
-                }
-                else
-                {
-                    if (character.CharacterState == CharacterState.Walk) character.CharacterState = CharacterState.Idle;
                 }
             }
             else if (character.CombatController.TargetController == null)
@@ -72,12 +67,7 @@ public class MovementController : MonoBehaviour
                         var location = GameManager.Hero.Location;
                         movementBehaviour = new WalkMovementBehaviour(
                             movementBehaviour, gameObject, location, SeekTargetDistance);
-                        character.CharacterState = CharacterState.Walk;
                     }
-                }
-                else
-                {
-                    //if (character.state == CharacterState.Walk) character.state = CharacterState.Idle;
                 }
             }
         }
