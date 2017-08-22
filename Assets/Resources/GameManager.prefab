@@ -128,7 +128,7 @@ MonoBehaviour:
       AttributeFactor:
         AttackDamage: 100
         AbilityDamage: 100
-        Defense: 50
+        Defense: 5
         Health: 500
         HealthRegeneration: 20
         Energy: 400
@@ -194,5 +194,7 @@ MonoBehaviour:
         HeroStageInformation: {fileID: 1457981774662274, guid: 26f305edbf1d79c4bba802ef10ecca3d,
           type: 2}
         StageCompletePopup: {fileID: 1463329420505034, guid: 9dbc4f2da000b3d409482ae5e6e1c1d6,
+          type: 2}
+        StageLostPopup: {fileID: 1155336668866480, guid: 3d2ca4e777eb9c04682b1322fdffaad6,
           type: 2}
     ShowResetButton: 1

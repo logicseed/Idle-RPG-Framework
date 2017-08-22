@@ -76,7 +76,10 @@ public class WorldEntityButton : MonoBehaviour
             var entityObject = manager.GetEntityObject(entityName);
             if (entityObject.ListableType == ListableEntityType.Ability)
             {
-                buttonComponent.interactable = !GameManager.Hero.HeroCombatController.AbilityCooldowns.ContainsKey(entityName);
+                if (GameManager.Hero != null)
+                    buttonComponent.interactable = !GameManager.Hero.HeroCombatController.AbilityCooldowns.ContainsKey(entityName);
+                else
+                    buttonComponent.interactable = false;
             }
         }
     }

@@ -16,19 +16,19 @@ MonoBehaviour:
   attackType: 2
   level: 1
   baseAttributes:
-    attackDamage: 27
-    abilityDamage: 18
-    defense: 23
-    health: 31
-    healthRegeneration: 31
-    energy: 28
-    energyRegeneration: 29
-    attackSpeed: 27
-    criticalHitChance: 31
-    criticalHitDamage: 33
-    cooldownReduction: 34
-    lifeDrain: 36
-    movementSpeed: 31
+    attackDamage: 30
+    abilityDamage: 30
+    defense: 30
+    health: 30
+    healthRegeneration: 30
+    energy: 30
+    energyRegeneration: 30
+    attackSpeed: 30
+    criticalHitChance: 30
+    criticalHitDamage: 30
+    cooldownReduction: 30
+    lifeDrain: 30
+    movementSpeed: 30
   bonusAttributes:
     attackDamage: 43
     abilityDamage: 37

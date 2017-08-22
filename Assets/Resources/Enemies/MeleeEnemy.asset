@@ -12,24 +12,23 @@ MonoBehaviour:
   m_Name: MeleeEnemy
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 9b2fbda613536814c8e8b3d3874f34c9, type: 3}
-  type: 0
   animator: {fileID: 22100000, guid: 7195edcfbd4f9cf499829718d9ead37e, type: 2}
   attackType: 0
   level: 1
   baseAttributes:
-    attackDamage: 13
-    abilityDamage: 14
-    defense: 18
-    health: 14
-    healthRegeneration: 18
-    energy: 15
-    energyRegeneration: 21
-    attackSpeed: 21
-    criticalHitChance: 19
+    attackDamage: 20
+    abilityDamage: 20
+    defense: 20
+    health: 20
+    healthRegeneration: 20
+    energy: 20
+    energyRegeneration: 20
+    attackSpeed: 20
+    criticalHitChance: 20
     criticalHitDamage: 20
-    cooldownReduction: 19
-    lifeDrain: 19
-    movementSpeed: 21
+    cooldownReduction: 20
+    lifeDrain: 20
+    movementSpeed: 20
   bonusAttributes:
     attackDamage: 0
     abilityDamage: 0

@@ -12,24 +12,23 @@ MonoBehaviour:
   m_Name: CasterEnemy
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: c3eb4081858e36346bcf463da975d306, type: 3}
-  type: 0
   animator: {fileID: 22100000, guid: 6236820d35d18bc4383734af23a84423, type: 2}
-  attackType: 0
+  attackType: 2
   level: 1
   baseAttributes:
-    attackDamage: 9
-    abilityDamage: 11
-    defense: 45
-    health: 74
-    healthRegeneration: 12
-    energy: 11
-    energyRegeneration: 12
-    attackSpeed: 12
-    criticalHitChance: 13
-    criticalHitDamage: 13
-    cooldownReduction: 13
-    lifeDrain: 13
-    movementSpeed: 52
+    attackDamage: 20
+    abilityDamage: 20
+    defense: 20
+    health: 20
+    healthRegeneration: 20
+    energy: 20
+    energyRegeneration: 20
+    attackSpeed: 20
+    criticalHitChance: 20
+    criticalHitDamage: 20
+    cooldownReduction: 20
+    lifeDrain: 20
+    movementSpeed: 20
   bonusAttributes:
     attackDamage: 0
     abilityDamage: 0

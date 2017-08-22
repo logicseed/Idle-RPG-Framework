@@ -194,11 +194,8 @@ public class GameCharacterController : MonoBehaviour
                 characterState = value;
                 if (OnStateChanged != null) OnStateChanged();
 
-                // TODO: This belongs somewhere else
-                // If dead we don't want it counted as a character anymore
                 if (characterState == CharacterState.Dead)
                 {
-                    gameObject.tag = "DeadBody";
                     GameObject.Destroy(floatingHealthBarReference);
                 }
             }

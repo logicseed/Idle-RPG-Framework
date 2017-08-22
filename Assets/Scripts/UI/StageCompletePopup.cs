@@ -15,6 +15,13 @@ public class StageCompletePopup : MonoBehaviour
     {
         button.onClick.AddListener(EndStage);
         GameManager.OnStage = false;
+        if (GameManager.Hero.IsDead)
+        {
+            foreach (var ally in GameManager.AllFriendlies)
+            {
+                Destroy(ally.gameObject);
+            }
+        }
     }
 
     /// <summary>

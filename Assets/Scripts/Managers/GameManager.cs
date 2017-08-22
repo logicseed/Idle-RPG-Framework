@@ -180,11 +180,17 @@ public class GameManager : Singleton<GameManager>
         if (onStage && QueueManager != null && HeroManager.Hero != null)
         {
             // End stage conditions.
-            if (QueueManager.QueuesAreComplete || HeroManager.Hero.IsDead)
+            if (QueueManager.QueuesAreComplete)
             {
                 onStage = false;
                 lastRewardTime = DateTime.Now;
                 StageManager.EndStage();
+            }
+            else if (Hero.IsDead)
+            {
+                onStage = false;
+                lastRewardTime = DateTime.Now;
+                StageManager.EndStage(Hero.IsDead);
             }
         }
 

@@ -13,7 +13,8 @@ public class HeroHealthBar : MonoBehaviour
     /// </summary>
     protected void OnGUI()
     {
-        float percent = GameManager.Hero.HeroCombatController.CurrentHealth / (float)GameManager.Hero.Attributes.Health;
+        float percent = 0.0f;
+        if (GameManager.Hero != null) percent = GameManager.Hero.HeroCombatController.CurrentHealth / (float)GameManager.Hero.Attributes.Health;
         foreground.localScale = new Vector3(percent, foreground.localScale.y, foreground.localScale.z);
     }
 }

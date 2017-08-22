@@ -110,7 +110,7 @@ public class GameSettings
         {
             public int AttackDamage = 100;
             public int AbilityDamage = 100;
-            public int Defense = 50;
+            public int Defense = 5;
             public int Health = 500;
             public int HealthRegeneration = 20;
             public int Energy = 400;
@@ -172,6 +172,7 @@ public class GameSettings
             public GameObject AbilityUsePanel;
             public GameObject HeroStageInformation;
             public GameObject StageCompletePopup;
+            public GameObject StageLostPopup;
         }
     }
 

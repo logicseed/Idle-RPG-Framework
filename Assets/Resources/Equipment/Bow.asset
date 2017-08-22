@@ -16,7 +16,7 @@ MonoBehaviour:
   equipmentSlot: 2
   attackType: 1
   attributeModifiers:
-    attackDamage: 0
+    attackDamage: 10
     abilityDamage: 0
     defense: 0
     health: 0

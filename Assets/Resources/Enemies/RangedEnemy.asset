@@ -12,24 +12,23 @@ MonoBehaviour:
   m_Name: RangedEnemy
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 972114d06f639ce4cbb28e73b665e2c8, type: 3}
-  type: 0
   animator: {fileID: 22100000, guid: 9a41eb83468ca0d46b106b349c619d4f, type: 2}
-  attackType: 0
+  attackType: 1
   level: 1
   baseAttributes:
-    attackDamage: 15
-    abilityDamage: 16
-    defense: 18
-    health: 15
-    healthRegeneration: 17
-    energy: 16
-    energyRegeneration: 14
-    attackSpeed: 15
-    criticalHitChance: 16
-    criticalHitDamage: 15
-    cooldownReduction: 15
-    lifeDrain: 16
-    movementSpeed: 15
+    attackDamage: 20
+    abilityDamage: 20
+    defense: 20
+    health: 20
+    healthRegeneration: 20
+    energy: 20
+    energyRegeneration: 20
+    attackSpeed: 20
+    criticalHitChance: 20
+    criticalHitDamage: 20
+    cooldownReduction: 20
+    lifeDrain: 20
+    movementSpeed: 20
   bonusAttributes:
     attackDamage: 0
     abilityDamage: 0

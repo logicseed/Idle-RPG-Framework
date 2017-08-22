@@ -41,21 +41,33 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// Ends the stage.
     /// </summary>
-    public void EndStage()
+    public void EndStage(bool stageLost = false)
     {
-        foreach (var stage in stagesToUnlock) GameManager.WorldManager.UnlockStage(stage);
+        if (stageLost)
+        {
+            var canvas = GameObject.Find("UiCanvas");
+            Instantiate(GameManager.GameSettings.Prefab.UI.StageLostPopup, canvas.transform, false);
+            foreach (var ally in GameManager.AllFriendlies)
+            {
+                Destroy(ally.gameObject);
+            }
+        }
+        else
+        {
+            foreach (var stage in stagesToUnlock) GameManager.WorldManager.UnlockStage(stage);
 
-        foreach (var zone in zonesToUnlock) GameManager.WorldManager.UnlockZone(zone);
+            foreach (var zone in zonesToUnlock) GameManager.WorldManager.UnlockZone(zone);
 
-        if (allyReward != null) GameManager.RosterManager.AddUnlocked(allyReward.name);
+            if (allyReward != null) GameManager.RosterManager.AddUnlocked(allyReward.name);
 
-        GameManager.WorldManager.SetIdleFactor(idleRewardsFactor);
+            GameManager.WorldManager.SetIdleFactor(idleRewardsFactor);
 
-        GameManager.Hero.HeroMovementController.Location = new Vector2(100, 0);
-        GameManager.Hero.CombatController.TargetController = null;
+            GameManager.Hero.HeroMovementController.Location = new Vector2(100, 0);
+            GameManager.Hero.CombatController.TargetController = null;
 
-        var canvas = GameObject.Find("UiCanvas");
-        Instantiate(GameManager.GameSettings.Prefab.UI.StageCompletePopup, canvas.transform, false);
+            var canvas = GameObject.Find("UiCanvas");
+            Instantiate(GameManager.GameSettings.Prefab.UI.StageCompletePopup, canvas.transform, false);
+        }
     }
 
     /// <summary>

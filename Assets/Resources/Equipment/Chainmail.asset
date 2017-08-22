@@ -14,10 +14,11 @@ MonoBehaviour:
   icon: {fileID: 21300030, guid: 62c302b9c23b449499c07b5710ed24c9, type: 3}
   equipmentType: 1
   equipmentSlot: 3
+  attackType: 0
   attributeModifiers:
     attackDamage: 0
     abilityDamage: 0
-    defense: 54
+    defense: 5
     health: 0
     healthRegeneration: 0
     energy: 0

@@ -12,35 +12,34 @@ MonoBehaviour:
   m_Name: Hero
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: c4992c249f9a70f4b9ffc8c3877372b0, type: 3}
-  type: 0
   animator: {fileID: 22100000, guid: e3451c9f074e1b34c9b29a702ae67e1a, type: 2}
   attackType: 0
   level: 1
   baseAttributes:
-    attackDamage: 96
-    abilityDamage: 95
-    defense: 8
-    health: 91
-    healthRegeneration: 6
-    energy: 92
-    energyRegeneration: 93
-    attackSpeed: 93
-    criticalHitChance: 94
-    criticalHitDamage: 94
-    cooldownReduction: 94
-    lifeDrain: 94
+    attackDamage: 50
+    abilityDamage: 50
+    defense: 50
+    health: 50
+    healthRegeneration: 50
+    energy: 50
+    energyRegeneration: 50
+    attackSpeed: 50
+    criticalHitChance: 50
+    criticalHitDamage: 50
+    cooldownReduction: 50
+    lifeDrain: 50
     movementSpeed: 50
   bonusAttributes:
-    attackDamage: 89
-    abilityDamage: 89
-    defense: 5
-    health: 88
-    healthRegeneration: 4
-    energy: 91
-    energyRegeneration: 91
-    attackSpeed: 90
-    criticalHitChance: 90
-    criticalHitDamage: 89
-    cooldownReduction: 89
-    lifeDrain: 90
+    attackDamage: 0
+    abilityDamage: 0
+    defense: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeneration: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    cooldownReduction: 0
+    lifeDrain: 0
     movementSpeed: 0
