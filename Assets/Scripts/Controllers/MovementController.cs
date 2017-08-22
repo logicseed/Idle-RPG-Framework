@@ -129,6 +129,11 @@ public class MovementController : MonoBehaviour
             }
         }
 
+        if (desiredVelocity == Vector2.zero && character.CharacterState == CharacterState.Walk)
+        {
+            character.CharacterState = CharacterState.Idle;
+        }
+
         // Finally move to new position
         character.Rigidbody.velocity = desiredVelocity;
         transform.rotation = Quaternion.identity;

@@ -19,14 +19,11 @@ public class HeroMovementController : MovementController
             if (transform.position.SqrDistance(locationTarget) < GameManager.GameSettings.Constants.Range.SeekLocationSqr)
             {
                 hasLocationTarget = false;
-                character.CharacterState = CharacterState.Idle;
-                // Fall through to check for character target.
             }
             else // Otherwise attempt to walk to location.
             {
                 movementBehaviour = new WalkMovementBehaviour(
                     movementBehaviour, gameObject, locationTarget, GameManager.GameSettings.Constants.Range.SeekLocation);
-                character.CharacterState = CharacterState.Walk;
             }
         }
 
