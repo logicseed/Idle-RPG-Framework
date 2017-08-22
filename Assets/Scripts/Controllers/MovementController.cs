@@ -145,7 +145,7 @@ public class MovementController : MonoBehaviour
     /// <summary>
     /// The current velocity of the character.
     /// </summary>
-    public Vector2 CurrentVelocity { get { return currentVelocity; } }
+    public Vector2 CurrentVelocity { get { return character.Rigidbody.velocity; } }
 
     /// <summary>
     /// Gets or sets the maximum speed of the character.
@@ -193,5 +193,6 @@ public class MovementController : MonoBehaviour
         movementBehaviour = new IdleMovementBehaviour();
         GenerateFleeBehaviours();
         GenerateSeekBehaviour();
+        movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, null, 1.0f);
     }
 }

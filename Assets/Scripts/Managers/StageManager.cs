@@ -60,7 +60,7 @@ public class StageManager : MonoBehaviour
     /// <returns>A piece of equipment if one dropped; null otherwise.</returns>
     public void GetReward()
     {
-        if (lootCollection.DropEquipment)
+        if (lootCollection != null && lootCollection.DropEquipment)
         {
             GameManager.InventoryManager.AddUnlocked(lootCollection.GetNextEquipment().name, false);
         }

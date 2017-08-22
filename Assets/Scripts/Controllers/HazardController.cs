@@ -57,4 +57,9 @@ public class HazardController : MonoBehaviour
                 break;
         }
     }
+
+    /// <summary>
+    /// Whether or not characters will path around the hazard.
+    /// </summary>
+    public bool IsPathable { get { return isPathable; } }
 }

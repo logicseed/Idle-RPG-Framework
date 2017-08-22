@@ -328,7 +328,7 @@ public class DerivedAttributes
             character.BaseAttributes.MovementSpeed,
             GameManager.GameSettings.Max.AttributeFactor.MovementSpeed,
             bonusAttributes.MovementSpeed,
-            levelUpgrades.MovementSpeed);
+            false);
     }
 }
 
