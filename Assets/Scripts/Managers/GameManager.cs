@@ -43,19 +43,6 @@ public class GameManager : Singleton<GameManager>
     }
 
     /// <summary>
-    /// Keeps track of a spawned boss and ends the stage after its death.
-    /// </summary>
-    /// <param name="boss">The boss to keep track of.</param>
-    protected IEnumerator CheckBoss(BossController boss)
-    {
-        while (boss != null && boss.CharacterState != CharacterState.Dead)
-        {
-            yield return new WaitForSeconds(1.0f);
-        }
-        StageManager.EndStage();
-    }
-
-    /// <summary>
     /// Initialize game world managers.
     /// </summary>
     protected void InitializeGameWorldManagers()
@@ -180,11 +167,15 @@ public class GameManager : Singleton<GameManager>
         if (onStage && QueueManager != null && HeroManager.Hero != null)
         {
             // End stage conditions.
-            if (QueueManager.QueuesAreComplete)
+            if (QueueManager.QueuesAreComplete && !EnemyManager.HasRegisteredEntities && StageManager.HasSpawnedBoss)
             {
                 onStage = false;
                 lastRewardTime = DateTime.Now;
                 StageManager.EndStage();
+            }
+            else if (QueueManager.QueuesAreComplete && !StageManager.HasSpawnedBoss)
+            {
+                StageManager.SpawnBossAfterDelay();
             }
             else if (Hero.IsDead)
             {

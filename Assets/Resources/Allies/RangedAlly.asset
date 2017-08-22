@@ -30,19 +30,19 @@ MonoBehaviour:
     lifeDrain: 30
     movementSpeed: 30
   bonusAttributes:
-    attackDamage: 38
-    abilityDamage: 35
-    defense: 34
-    health: 30
-    healthRegeneration: 32
-    energy: 32
-    energyRegeneration: 32
-    attackSpeed: 34
-    criticalHitChance: 36
-    criticalHitDamage: 33
-    cooldownReduction: 31
-    lifeDrain: 34
-    movementSpeed: 34
+    attackDamage: 0
+    abilityDamage: 0
+    defense: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeneration: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    cooldownReduction: 0
+    lifeDrain: 0
+    movementSpeed: 0
   lesson: {fileID: 11400000, guid: 702212b0fc90e064bb2074d187c8ab09, type: 2}
   levelUpgrades:
     AttackDamage: 0

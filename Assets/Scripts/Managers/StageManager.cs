@@ -28,7 +28,14 @@ public class StageManager : MonoBehaviour
     [SerializeField]
     protected Transform bossSpawnLocation;
 
+    [SerializeField]
+    protected float bossSpawnDelay = 3.0f;
+
     protected bool hasSpawnedBoss = false;
+
+    protected bool hasInvokedSpawnBoss = false;
+
+    public bool HasSpawnedBoss { get { return hasSpawnedBoss; } }
 
     /// <summary>
     /// Constructs the stage manager.
@@ -36,6 +43,7 @@ public class StageManager : MonoBehaviour
     protected void Start()
     {
         GameManager.StageManager = this;
+        if (boss == null) hasSpawnedBoss = true;
     }
 
     /// <summary>
@@ -87,21 +95,31 @@ public class StageManager : MonoBehaviour
     }
 
     /// <summary>
-    /// Spawns the boss for the stage.
+    /// Spawns the boss for the stage immediately.
     /// </summary>
-    /// <returns>The controller for the boss.</returns>
-    public BossController SpawnBoss()
+    public void SpawnBoss()
     {
+        hasSpawnedBoss = true;
         if (boss != null)
         {
             var position = bossSpawnLocation.position;
             var rotation = Quaternion.identity; // No rotation
-            var boss = Instantiate(GameManager.GameSettings.Prefab.Enemy, position, rotation) as GameObject;
+            var boss = Instantiate(GameManager.GameSettings.Prefab.Boss, position, rotation) as GameObject;
             boss.name = "Boss";
             var bossController = boss.GetComponent<BossController>();
             bossController.EnemyObject = this.boss;
-            return bossController;
         }
-        else return null;
+    }
+
+    /// <summary>
+    /// Spawns the boss for the stage after the delay specified on the stage manager.
+    /// </summary>
+    public void SpawnBossAfterDelay()
+    {
+        if (!hasInvokedSpawnBoss)
+        {
+            hasInvokedSpawnBoss = true;
+            Invoke("SpawnBoss", bossSpawnDelay);
+        }
     }
 }

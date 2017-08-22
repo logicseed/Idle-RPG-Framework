@@ -143,10 +143,12 @@ MonoBehaviour:
       Abilities: Abilities/
       Equipment: Equipment/
       Allies: Allies/
+      Enemies: Enemies/
     Prefab:
       Hero: {fileID: 1990536307461588, guid: bd3bec8cbfdbead43bce31c18b76bc0b, type: 2}
       Ally: {fileID: 1071261792446292, guid: e219a472c19c30e459e20d90f8c987e3, type: 2}
       Enemy: {fileID: 1239132045805106, guid: d7669ce8320bd7f498afd54cac41edfe, type: 2}
+      Boss: {fileID: 1518652160810766, guid: ae431efdd5eaa9a4ca5495d28db12048, type: 2}
       Effect:
         Arrow: {fileID: 1202586162592276, guid: 7c9eac417892f374c84f4782e1fab2db,
           type: 2}

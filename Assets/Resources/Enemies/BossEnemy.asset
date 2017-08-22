@@ -12,15 +12,14 @@ MonoBehaviour:
   m_Name: BossEnemy
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 6c277c7df85a19a4ab89f1a507be872e, type: 3}
-  type: 0
   animator: {fileID: 22100000, guid: af994fc637af6a541920370e7f07a187, type: 2}
   attackType: 0
-  level: 1
+  level: 2
   baseAttributes:
     attackDamage: 50
     abilityDamage: 50
     defense: 50
-    health: 50
+    health: 100
     healthRegeneration: 50
     energy: 50
     energyRegeneration: 50
@@ -29,7 +28,7 @@ MonoBehaviour:
     criticalHitDamage: 50
     cooldownReduction: 50
     lifeDrain: 50
-    movementSpeed: 50
+    movementSpeed: 20
   bonusAttributes:
     attackDamage: 0
     abilityDamage: 0

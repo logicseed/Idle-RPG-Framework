@@ -131,6 +131,7 @@ public class GameSettings
         public string Abilities = "Abilities/";
         public string Equipment = "Equipment/";
         public string Allies = "Allies/";
+        public string Enemies = "Enemies/";
     }
 
     [Header("Resource prefabs.")]
@@ -140,6 +141,7 @@ public class GameSettings
         public GameObject Hero;
         public GameObject Ally;
         public GameObject Enemy;
+        public GameObject Boss;
 
         public EffectContainer Effect;
         [Serializable] public class EffectContainer

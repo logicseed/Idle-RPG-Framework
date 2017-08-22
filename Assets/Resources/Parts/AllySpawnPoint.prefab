@@ -21,7 +21,7 @@ GameObject:
   - component: {fileID: 4816341389783452}
   - component: {fileID: 114773625917525208}
   m_Layer: 0
-  m_Name: AllySpawn
+  m_Name: AllySpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -52,8 +52,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   properties:
-    color: {r: 0.36551726, g: 1, b: 0, a: 1}
-    shape: 1
-    wireframe: 1
-    size: 0.125
-    showLabel: 1
+    Color: {r: 0.075421706, g: 0.6838235, b: 0.2558443, a: 1}
+    Shape: 1
+    Wireframe: 1
+    Size: 0.05
+    ShowLabel: 1

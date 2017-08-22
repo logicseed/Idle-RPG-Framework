@@ -43,7 +43,7 @@ public class QueueManager : RegisterList<QueueController>
     {
         get
         {
-            return HasQueues && !QueuesAreSpawning && !GameManager.EnemyManager.HasRegisteredEntities;
+            return HasQueues && !QueuesAreSpawning;
         }
     }
 }

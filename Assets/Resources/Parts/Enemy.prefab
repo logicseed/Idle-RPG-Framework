@@ -53,11 +53,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   properties:
-    color: {r: 0.509, g: 0, b: 0, a: 1}
-    shape: 1
-    wireframe: 1
-    size: 0.25
-    showLabel: 1
+    Color: {r: 1, g: 0, b: 0, a: 1}
+    Shape: 1
+    Wireframe: 1
+    Size: 0.1
+    ShowLabel: 1
 --- !u!114 &114483060201754080
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,23 +70,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isCombatDummy: 0
-  animatorController: {fileID: 0}
-  animatorReference: {fileID: 0}
-  rigidbodyReference: {fileID: 0}
-  baseAttributes:
-    attackDamage: 0
-    abilityDamage: 0
-    defense: 0
-    health: 0
-    healthRegeneration: 0
-    energy: 0
-    energyRegeneration: 0
-    attackSpeed: 0
-    criticalHitChance: 0
-    criticalHitDamage: 0
-    cooldownReduction: 0
-    lifeDrain: 0
-    movementSpeed: 0
-  level: 1
-  characterState: 0
-  enemy: {fileID: 0}

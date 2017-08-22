@@ -30,16 +30,16 @@ MonoBehaviour:
     lifeDrain: 30
     movementSpeed: 30
   bonusAttributes:
-    attackDamage: 44
-    abilityDamage: 38
-    defense: 37
+    attackDamage: 0
+    abilityDamage: 0
+    defense: 0
     health: 0
     healthRegeneration: 0
-    energy: 43
+    energy: 0
     energyRegeneration: 0
-    attackSpeed: 40
+    attackSpeed: 0
     criticalHitChance: 0
-    criticalHitDamage: 40
+    criticalHitDamage: 0
     cooldownReduction: 0
     lifeDrain: 0
     movementSpeed: 0

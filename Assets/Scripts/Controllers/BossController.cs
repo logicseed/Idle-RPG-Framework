@@ -3,7 +3,5 @@ using System.Collections;
 
 public class BossController : EnemyController
 {
-    public override CharacterType CharacterType { get { return CharacterType.Enemy; } }
-
-
+    public override CharacterType CharacterType { get { return CharacterType.Boss; } }
 }
