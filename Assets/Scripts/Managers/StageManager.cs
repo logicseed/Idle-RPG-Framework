@@ -61,12 +61,16 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// Tries to get the next reward from the stage's loot collection.
     /// </summary>
-    /// <returns>A piece of equipment if one dropped; null otherwise.</returns>
-    public void GetReward()
+    public void GetReward(Vector2 location)
     {
         if (lootCollection != null && lootCollection.DropEquipment)
         {
-            GameManager.InventoryManager.AddUnlocked(lootCollection.GetNextEquipment().name, false);
+            var nextEquipment = lootCollection.GetNextEquipment();
+            GameManager.InventoryManager.AddUnlocked(nextEquipment.name, false);
+
+            var droppedEquipmentObject = Instantiate(GameManager.GameSettings.Prefab.UI.DroppedEquipment, location, Quaternion.identity);
+            var droppedEquipmentController = droppedEquipmentObject.GetComponent<DroppedEquipmentController>();
+            droppedEquipmentController.Image.sprite = nextEquipment.icon;
         }
     }
 

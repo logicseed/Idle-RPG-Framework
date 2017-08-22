@@ -52,7 +52,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameSettings:
-    ShowResetButton: 1
     CharacterStart:
       Experience: 100000
       Level: 1
@@ -160,6 +159,8 @@ MonoBehaviour:
       UI:
         CombatText: {fileID: 1595817452820914, guid: e32f0574ef786f243bd4df6ccccf9c62,
           type: 2}
+        DroppedEquipment: {fileID: 1380868488262940, guid: e2020c9be09f84a419ade38b5b5ed001,
+          type: 2}
         FloatingBar: {fileID: 1964579812323056, guid: bc38e340336e0b842bad2ec0178d6a3f,
           type: 2}
         UiCanvas: {fileID: 1624268022810878, guid: d03ad0050509e8a4eb58b5508af6e92e,
@@ -194,3 +195,4 @@ MonoBehaviour:
           type: 2}
         StageCompletePopup: {fileID: 1463329420505034, guid: 9dbc4f2da000b3d409482ae5e6e1c1d6,
           type: 2}
+    ShowResetButton: 1

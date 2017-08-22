@@ -22,6 +22,8 @@ public class CombatController : MonoBehaviour
 
     protected GameCharacterController targetControllerReference;
 
+    protected bool hasAppliedReward = false;
+
     /// <summary>
     /// Sets up the combat controller.
     /// </summary>
@@ -208,8 +210,9 @@ public class CombatController : MonoBehaviour
             CharacterController.CharacterState = CharacterState.Dead;
 
             // Get experience and rewards if an enemy
-            if (!CharacterController.IsFriendly)
+            if (!CharacterController.IsFriendly && !hasAppliedReward)
             {
+                hasAppliedReward = true;
                 ApplyExperience();
                 ApplyReward();
             }
@@ -238,7 +241,7 @@ public class CombatController : MonoBehaviour
     public void ApplyReward()
     {
         // Rewards are stage dependent
-        GameManager.StageManager.GetReward();
+        GameManager.StageManager.GetReward(CharacterController.Location);
     }
 
     /// <summary>

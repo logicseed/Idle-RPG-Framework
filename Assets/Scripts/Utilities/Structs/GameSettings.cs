@@ -154,6 +154,7 @@ public class GameSettings
         [Serializable] public class UIContainer
         {
             public GameObject CombatText;
+            public GameObject DroppedEquipment;
             public GameObject FloatingBar;
             public GameObject UiCanvas;
             public GameObject WorldEntityButton;
