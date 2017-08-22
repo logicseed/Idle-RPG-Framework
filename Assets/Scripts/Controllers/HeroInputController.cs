@@ -47,7 +47,13 @@ public class HeroInputController : MonoBehaviour
         }
 
         // This works with the Android back button too
-        if (Input.GetKeyDown(KeyCode.Escape)) { SceneManager.LoadScene("World"); }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (GameManager.OnStage)
+            {
+                GameManager.LoadZone(GameManager.WorldManager.LastZone);
+            }
+        }
     }
 
     /// <summary>

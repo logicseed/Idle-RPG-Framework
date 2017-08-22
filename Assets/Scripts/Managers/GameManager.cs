@@ -422,6 +422,7 @@ public class GameManager : Singleton<GameManager>
     public static void LoadWorld()
     {
         SceneManager.LoadScene("World");
+        OnStage = false;
     }
 
     /// <summary>
@@ -434,6 +435,7 @@ public class GameManager : Singleton<GameManager>
         {
             Debug.Log("Loading zone: " + zone);
             WorldManager.SetLastZone(zone);
+            OnStage = false;
             SceneManager.LoadScene(zone);
         }
     }
