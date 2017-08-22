@@ -32,6 +32,7 @@ public class GameSettings
         public float DefensePercent = 0.5f;
         public float UpgradeHeroCost = 10000;
         public float UpgradeAllyCost = 8000;
+        public float AvoidRadius = 0.5f;
 
         public CharacterContainer Character;
         [Serializable] public class CharacterContainer
@@ -45,7 +46,7 @@ public class GameSettings
             public Vector2 ColliderSize = new Vector2(0.4f, 0.2f);
             public CapsuleDirection2D ColliderDirection = CapsuleDirection2D.Horizontal;
 
-            public float VelocityFactor = 200;
+            public float VelocityFactor = 1.0f;
             public float Acceleration = 0.1f;
         }
         public RangeContainer Range;
@@ -58,7 +59,7 @@ public class GameSettings
             public float Touch = 0.2f;
             public float SeekLocation = 0.01f;
             [HideInInspector] public float SeekLocationSqr { get { return SeekLocation * SeekLocation; } }
-            public float AvoidDistance = 0.5f;
+            public float FleeRadius = 1.0f;
         }
         public CombatTextContainer CombatText;
         [Serializable] public class CombatTextContainer
@@ -120,7 +121,7 @@ public class GameSettings
             public float CriticalHitDamage = 1.0f;
             public float CooldownReduction = 0.5f;
             public float LifeDrain = 0.5f;
-            public float MovementSpeed = 0.05f;
+            public float MovementSpeed = 1.0f;
         }
     }
 

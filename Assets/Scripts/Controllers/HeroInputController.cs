@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using Debug = ConditionalDebug;
 
 /// <summary>
 /// Controls the hero input.
@@ -28,6 +29,11 @@ public class HeroInputController : MonoBehaviour
     /// </summary>
     protected void Update()
     {
+        if (EventSystem.current == null)
+        {
+            Debug.LogError("Stage does not have event system; exiting. Add an event system to be able to play this stage.");
+            GameManager.LoadZone(GameManager.WorldManager.LastZone);
+        }
         // Process touch input
         if (Input.touchCount > 0)
         {
@@ -62,6 +68,8 @@ public class HeroInputController : MonoBehaviour
     /// <param name="position">The screen position of the tap.</param>
     private void ProcessTap(Vector2 position)
     {
+        if (!GameManager.OnStage) return;
+
         var worldPosition = Camera.main.ScreenToWorldPoint(position);
 
         // Character tap

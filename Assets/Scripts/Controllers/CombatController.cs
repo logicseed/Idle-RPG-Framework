@@ -441,6 +441,8 @@ public class CombatController : MonoBehaviour
                 default:
                     break;
             }
+            if (TargetController == null && CharacterController.CharacterState != CharacterState.Walk)
+                CharacterController.CharacterState = CharacterState.Idle;
         }
     }
 }

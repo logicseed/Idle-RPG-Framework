@@ -239,7 +239,7 @@ Prefab:
         type: 2}
       propertyPath: allyReward
       value: 
-      objectReference: {fileID: 11400000, guid: 763a3340d46d14742bff55434f8fbe40,
+      objectReference: {fileID: 11400000, guid: de97ef6892e02a14d86f8fcfa4feb841,
         type: 2}
     - target: {fileID: 114740766870718280, guid: 263d73048925fb9468602279ec6c20fc,
         type: 2}

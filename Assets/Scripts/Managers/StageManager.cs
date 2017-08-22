@@ -51,6 +51,7 @@ public class StageManager : MonoBehaviour
     /// </summary>
     public void EndStage(bool stageLost = false)
     {
+        GameManager.OnStage = false;
         if (stageLost)
         {
             var canvas = GameObject.Find("UiCanvas");
@@ -66,7 +67,12 @@ public class StageManager : MonoBehaviour
 
             foreach (var zone in zonesToUnlock) GameManager.WorldManager.UnlockZone(zone);
 
-            if (allyReward != null) GameManager.RosterManager.AddUnlocked(allyReward.name);
+            if (allyReward != null)
+            {
+                GameManager.RosterManager.AddUnlocked(allyReward.name);
+                GameManager.AbilityManager.AddUnlocked(allyReward.Lesson.name, false);
+            }
+
 
             GameManager.WorldManager.SetIdleFactor(idleRewardsFactor);
 
@@ -76,6 +82,7 @@ public class StageManager : MonoBehaviour
             var canvas = GameObject.Find("UiCanvas");
             Instantiate(GameManager.GameSettings.Prefab.UI.StageCompletePopup, canvas.transform, false);
         }
+        GameManager.Instance.SaveGame();
     }
 
     /// <summary>

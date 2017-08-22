@@ -59,7 +59,6 @@ MonoBehaviour:
       - Scenes/Zones/ZoneA
       Stages:
       - Scenes/Stages/StageA
-      - Scenes/Stages/StageC
       Inventory:
       - Sword
       - Shield
@@ -67,9 +66,7 @@ MonoBehaviour:
       Roster:
       - MeleeAlly
       - RangedAlly
-      - CasterAlly
       Abilities:
-      - Fireball
       - Storm
       - Cleave
     Constants:
@@ -79,6 +76,7 @@ MonoBehaviour:
       DefensePercent: 0.5
       UpgradeHeroCost: 10000
       UpgradeAllyCost: 8000
+      AvoidRadius: 0.5
       Character:
         RigidbodyGravityScale: 0
         RigidbodyDrag: 100
@@ -87,7 +85,7 @@ MonoBehaviour:
         ColliderOffset: {x: 0, y: -0.275}
         ColliderSize: {x: 0.4, y: 0.2}
         ColliderDirection: 1
-        VelocityFactor: 200
+        VelocityFactor: 1
         Acceleration: 0.1
       Range:
         MeleeAttack: 0.5
@@ -96,7 +94,7 @@ MonoBehaviour:
         DirectAbilityHit: 0.05
         Touch: 0.2
         SeekLocation: 0.01
-        AvoidDistance: 0.5
+        FleeRadius: 0.5
       CombatText:
         BlockedText: BLOCKED
         NormalText: 
@@ -138,7 +136,7 @@ MonoBehaviour:
         CriticalHitDamage: 1
         CooldownReduction: 0.5
         LifeDrain: 0.5
-        MovementSpeed: 0.05
+        MovementSpeed: 3
     Path:
       Abilities: Abilities/
       Equipment: Equipment/

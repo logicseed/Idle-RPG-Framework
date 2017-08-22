@@ -33,7 +33,7 @@ public class MovementController : MonoBehaviour
         foreach (var character in charactersToAvoid)
         {
             movementBehaviour = new FleeMovementBehaviour(
-                movementBehaviour, gameObject, character.gameObject, GameManager.GameSettings.Constants.Range.AvoidDistance);
+                movementBehaviour, gameObject, character.gameObject, GameManager.GameSettings.Constants.Range.FleeRadius);
         }
     }
 
@@ -83,7 +83,7 @@ public class MovementController : MonoBehaviour
     protected void Move()
     {
         // Get desired velocity
-        var desiredVelocity = movementBehaviour.Steering().normalized * MaxSpeed * GameManager.GameSettings.Constants.Character.VelocityFactor;
+        var desiredVelocity = movementBehaviour.Steering().normalized * MaxSpeed * GameManager.GameSettings.Constants.Character.VelocityFactor * Time.fixedDeltaTime;
 
         // Update state and direction
         if (desiredVelocity != Vector2.zero)
@@ -125,7 +125,10 @@ public class MovementController : MonoBehaviour
         }
 
         // Finally move to new position
-        character.Rigidbody.velocity = desiredVelocity;
+        //character.Rigidbody.velocity = desiredVelocity;
+        var currentPosition = transform.position;
+        character.Rigidbody.MovePosition((Vector2)transform.position + desiredVelocity);
+        if (currentPosition == transform.position) transform.position = (Vector2)transform.position + desiredVelocity;
         transform.rotation = Quaternion.identity;
     }
 
@@ -188,6 +191,6 @@ public class MovementController : MonoBehaviour
         movementBehaviour = new IdleMovementBehaviour();
         GenerateFleeBehaviours();
         GenerateSeekBehaviour();
-        movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, null, 1.0f);
+        movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, null, GameManager.GameSettings.Constants.AvoidRadius);
     }
 }

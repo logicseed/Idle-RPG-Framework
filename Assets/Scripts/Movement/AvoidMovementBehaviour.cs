@@ -70,16 +70,19 @@ public class AvoidMovementBehaviour : AbstractMovementDecorator
 
         var angle = 0.0f;
         // Center only
-        if (avoidCenter && !avoidLeft && !avoidRight)
+        if ((avoidCenter && !avoidLeft && !avoidRight) ||
+            (avoidCenter && avoidLeft && avoidRight))
         {
-            angle = 90;
+            angle = 70;
+            if (avoidCenter && avoidLeft && avoidRight) angle = 90;
+
             if (centerDirection.x < 0) angle *= -1;
             if (agent.transform.position.y >= 0) angle *= -1;
         }
         // Center and left
-        else if (avoidCenter && avoidLeft && !avoidRight) angle = -60;
+        else if (avoidCenter && avoidLeft && !avoidRight) angle = -50;
         // Center and right
-        else if (avoidCenter && !avoidLeft && avoidRight) angle = 60;
+        else if (avoidCenter && !avoidLeft && avoidRight) angle = 50;
         // Left only
         else if (!avoidCenter && avoidLeft && !avoidRight) angle = -30;
         // Right only

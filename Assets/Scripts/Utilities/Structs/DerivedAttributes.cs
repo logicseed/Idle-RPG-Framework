@@ -268,7 +268,7 @@ public class DerivedAttributes
             character.BaseAttributes.AttackSpeed,
             GameManager.GameSettings.Max.AttributeFactor.AttackSpeed,
             bonusAttributes.AttackSpeed,
-            levelUpgrades.AttackSpeed);
+            false);
     }
 
     /// <summary>
