@@ -76,7 +76,7 @@ MonoBehaviour:
       DefensePercent: 0.5
       UpgradeHeroCost: 10000
       UpgradeAllyCost: 8000
-      AvoidRadius: 0.5
+      AvoidRadius: 0.75
       Character:
         RigidbodyGravityScale: 0
         RigidbodyDrag: 100

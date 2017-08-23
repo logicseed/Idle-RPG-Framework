@@ -87,6 +87,8 @@ public class AvoidMovementBehaviour : AbstractMovementDecorator
         else if (!avoidCenter && avoidLeft && !avoidRight) angle = -30;
         // Right only
         else if (!avoidCenter && !avoidLeft && avoidRight) angle = 30;
+        // All
+        else if (avoidCenter && avoidLeft && avoidRight) angle = 180;
 
         desiredVelocity = (Vector2)(Quaternion.Euler(0, 0, angle) * desiredVelocity);
 

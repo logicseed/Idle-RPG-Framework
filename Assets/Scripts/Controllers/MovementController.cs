@@ -50,7 +50,9 @@ public class MovementController : MonoBehaviour
 
                 if (squareDistance > SeekTargetDistanceSquared)
                 {
-                    var location = character.CombatController.TargetController.transform.position;
+                    
+                    var targetLocation = character.CombatController.TargetController.transform.position;
+                    var location = targetLocation + ((transform.position - targetLocation).normalized * SeekTargetDistance);
                     movementBehaviour = new WalkMovementBehaviour(
                         movementBehaviour, gameObject, location, SeekTargetDistance);
                 }
@@ -64,7 +66,8 @@ public class MovementController : MonoBehaviour
 
                     if (squareDistance > SeekTargetDistanceSquared)
                     {
-                        var location = GameManager.Hero.Location;
+                        var location = GameManager.Hero.Location + 
+                            ((transform.position - GameManager.Hero.Location).normalized * SeekTargetDistance);
                         movementBehaviour = new WalkMovementBehaviour(
                             movementBehaviour, gameObject, location, SeekTargetDistance);
                     }
@@ -100,16 +103,21 @@ public class MovementController : MonoBehaviour
 
             try
             {
+                var desiredVelocityNormalized = desiredVelocity.normalized;
                 // Maintain proper character direction
-                if (desiredVelocity.x != 0)
+                if (desiredVelocityNormalized.x != 0)
                 {
-                    if (desiredVelocity.x < 0)
+                    var jitterVariance = 0.1f;
+                    if (desiredVelocityNormalized.x <= -jitterVariance || desiredVelocityNormalized.x >= jitterVariance)
                     {
-                        character.LastDirection = MoveDirection.Left;
-                    }
-                    else
-                    {
-                        character.LastDirection = MoveDirection.Right;
+                        if (desiredVelocityNormalized.x < 0)
+                        {
+                            character.LastDirection = MoveDirection.Left;
+                        }
+                        else
+                        {
+                            character.LastDirection = MoveDirection.Right;
+                        }
                     }
                 }
             }
@@ -125,10 +133,7 @@ public class MovementController : MonoBehaviour
         }
 
         // Finally move to new position
-        //character.Rigidbody.velocity = desiredVelocity;
-        var currentPosition = transform.position;
         character.Rigidbody.MovePosition((Vector2)transform.position + desiredVelocity);
-        if (currentPosition == transform.position) transform.position = (Vector2)transform.position + desiredVelocity;
         transform.rotation = Quaternion.identity;
     }
 
@@ -189,7 +194,7 @@ public class MovementController : MonoBehaviour
     public void GenerateMovementBehaviours()
     {
         movementBehaviour = new IdleMovementBehaviour();
-        GenerateFleeBehaviours();
+        //GenerateFleeBehaviours();
         GenerateSeekBehaviour();
         movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, null, GameManager.GameSettings.Constants.AvoidRadius);
     }
