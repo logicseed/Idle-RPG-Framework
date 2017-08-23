@@ -69,7 +69,7 @@ public class StageManager : MonoBehaviour
 
             if (allyReward != null)
             {
-                GameManager.RosterManager.AddUnlocked(allyReward.name);
+                GameManager.RosterManager.AddUnlocked(allyReward.name, allyReward.Level);
                 GameManager.AbilityManager.AddUnlocked(allyReward.Lesson.name, false);
             }
 
