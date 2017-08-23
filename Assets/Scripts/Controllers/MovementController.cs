@@ -194,8 +194,8 @@ public class MovementController : MonoBehaviour
     public void GenerateMovementBehaviours()
     {
         movementBehaviour = new IdleMovementBehaviour();
-        //GenerateFleeBehaviours();
+        GenerateFleeBehaviours();
         GenerateSeekBehaviour();
-        movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, null, GameManager.GameSettings.Constants.AvoidRadius);
+        movementBehaviour = new AvoidMovementBehaviour(movementBehaviour, gameObject, null, GameManager.GameSettings.Constants.Range.AvoidRadius);
     }
 }

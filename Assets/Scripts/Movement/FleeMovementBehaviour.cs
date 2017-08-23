@@ -26,7 +26,7 @@ public class FleeMovementBehaviour : DirectMovementBehaviour
 
         var distance = Vector2.Distance(agent.transform.position, target.transform.position);
         var radiusFactor = Mathf.Clamp((1.0f - (distance / radius)), 0.0f, 1.0f);
-        desiredVelocity *= radiusFactor;
+        desiredVelocity *= radiusFactor / 2;
 
         if (desiredVelocity.sqrMagnitude < 0.0001f) desiredVelocity = Vector2.zero;
 

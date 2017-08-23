@@ -32,7 +32,6 @@ public class GameSettings
         public float DefensePercent = 0.5f;
         public float UpgradeHeroCost = 10000;
         public float UpgradeAllyCost = 8000;
-        public float AvoidRadius = 0.5f;
 
         public CharacterContainer Character;
         [Serializable] public class CharacterContainer
@@ -55,11 +54,13 @@ public class GameSettings
             public float MeleeAttack = 0.5f;
             public float CasterAttack = 2.0f;
             public float RangedAttack = 3.0f;
+            public float AttackRangeVariance = 0.2f;
             public float DirectAbilityHit = 0.05f;
             public float Touch = 0.2f;
             public float SeekLocation = 0.01f;
             [HideInInspector] public float SeekLocationSqr { get { return SeekLocation * SeekLocation; } }
             public float FleeRadius = 1.0f;
+            public float AvoidRadius = 0.75f;
         }
         public CombatTextContainer CombatText;
         [Serializable] public class CombatTextContainer

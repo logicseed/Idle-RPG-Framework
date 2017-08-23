@@ -67,9 +67,9 @@ public abstract class AbstractMovementDecorator : AbstractMovementBehaviour
     public override Vector2 Steering()
     {
         var desiredVelocity = CalculateDesiredVelocity().normalized * maxSpeed;
-        var desiredAcceleration = desiredVelocity.normalized * maxAccel;
-        var desiredSteering = desiredAcceleration;
+        //var desiredAcceleration = desiredVelocity.normalized * maxAccel;
+        //var desiredSteering = desiredAcceleration;
 
-        return desiredSteering;
+        return desiredVelocity;
     }
 }

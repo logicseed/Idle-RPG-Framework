@@ -139,7 +139,7 @@ public class CombatController : MonoBehaviour
             var combatRangeSquared = DesiredCombatRange * DesiredCombatRange;
 
             // Add a little variance
-            combatRangeSquared = combatRangeSquared * 1.1f; // 10% error
+            combatRangeSquared = combatRangeSquared + GameManager.GameSettings.Constants.Range.AttackRangeVariance;
 
             return squaredDistance <= combatRangeSquared;
         }
