@@ -6,6 +6,7 @@
   - [AbilityType](#P-Ability-AbilityType 'Ability.AbilityType')
   - [Cooldown](#P-Ability-Cooldown 'Ability.Cooldown')
   - [Effect](#P-Ability-Effect 'Ability.Effect')
+  - [EnergyCost](#P-Ability-EnergyCost 'Ability.EnergyCost')
   - [ListableType](#P-Ability-ListableType 'Ability.ListableType')
   - [Potency](#P-Ability-Potency 'Ability.Potency')
 - [AbilityManager](#T-AbilityManager 'AbilityManager')
@@ -126,6 +127,7 @@
   - [GetClosestHostile(hostiles)](#M-CombatController-GetClosestHostile-System-Collections-Generic-List{GameCharacterController}- 'CombatController.GetClosestHostile(System.Collections.Generic.List{GameCharacterController})')
   - [PerformCasterAttack()](#M-CombatController-PerformCasterAttack 'CombatController.PerformCasterAttack')
   - [PerformCombatRound()](#M-CombatController-PerformCombatRound 'CombatController.PerformCombatRound')
+  - [PerformLifeDrain(damage)](#M-CombatController-PerformLifeDrain-System-Int32- 'CombatController.PerformLifeDrain(System.Int32)')
   - [PerformMeleeAttack()](#M-CombatController-PerformMeleeAttack 'CombatController.PerformMeleeAttack')
   - [PerformRangedAttack()](#M-CombatController-PerformRangedAttack 'CombatController.PerformRangedAttack')
   - [SpawnArrow()](#M-CombatController-SpawnArrow 'CombatController.SpawnArrow')
@@ -133,6 +135,7 @@
   - [SpawnProjectile(prefab,location,damage,target,criticalModifier)](#M-CombatController-SpawnProjectile-UnityEngine-GameObject,UnityEngine-Vector3,System-Int32,GameCharacterController,System-Single- 'CombatController.SpawnProjectile(UnityEngine.GameObject,UnityEngine.Vector3,System.Int32,GameCharacterController,System.Single)')
   - [Start()](#M-CombatController-Start 'CombatController.Start')
   - [Update()](#M-CombatController-Update 'CombatController.Update')
+  - [UpdateRegeneration()](#M-CombatController-UpdateRegeneration 'CombatController.UpdateRegeneration')
   - [UpdateStun()](#M-CombatController-UpdateStun 'CombatController.UpdateStun')
   - [UpdateTarget()](#M-CombatController-UpdateTarget 'CombatController.UpdateTarget')
 - [CombatTextController](#T-CombatTextController 'CombatTextController')
@@ -178,6 +181,9 @@
 - [CreateUpgradeHeroPopupButton](#T-CreateUpgradeHeroPopupButton 'CreateUpgradeHeroPopupButton')
   - [SpawnPopup()](#M-CreateUpgradeHeroPopupButton-SpawnPopup 'CreateUpgradeHeroPopupButton.SpawnPopup')
   - [Start()](#M-CreateUpgradeHeroPopupButton-Start 'CreateUpgradeHeroPopupButton.Start')
+- [CurrencyText](#T-CurrencyText 'CurrencyText')
+  - [OnGUI()](#M-CurrencyText-OnGUI 'CurrencyText.OnGUI')
+  - [Start()](#M-CurrencyText-Start 'CurrencyText.Start')
 - [CustomGizmo](#T-CustomGizmo 'CustomGizmo')
   - [OnDrawGizmos()](#M-CustomGizmo-OnDrawGizmos 'CustomGizmo.OnDrawGizmos')
 - [DerivedAttributes](#T-DerivedAttributes 'DerivedAttributes')
@@ -220,6 +226,9 @@
 - [DirectMovementBehaviour](#T-DirectMovementBehaviour 'DirectMovementBehaviour')
   - [#ctor(movementBehaviour,agent,target,radius)](#M-DirectMovementBehaviour-#ctor-AbstractMovementBehaviour,UnityEngine-GameObject,UnityEngine-GameObject,System-Single- 'DirectMovementBehaviour.#ctor(AbstractMovementBehaviour,UnityEngine.GameObject,UnityEngine.GameObject,System.Single)')
   - [CalculateMaximumVelocity(fromPosition,toPosition)](#M-DirectMovementBehaviour-CalculateMaximumVelocity-UnityEngine-Vector2,UnityEngine-Vector2- 'DirectMovementBehaviour.CalculateMaximumVelocity(UnityEngine.Vector2,UnityEngine.Vector2)')
+- [DroppedEquipmentController](#T-DroppedEquipmentController 'DroppedEquipmentController')
+  - [Image](#P-DroppedEquipmentController-Image 'DroppedEquipmentController.Image')
+  - [Animate(startPosition,endPosition)](#M-DroppedEquipmentController-Animate-UnityEngine-Vector3,UnityEngine-Vector3- 'DroppedEquipmentController.Animate(UnityEngine.Vector3,UnityEngine.Vector3)')
 - [Enemy](#T-Enemy 'Enemy')
   - [CharacterType](#P-Enemy-CharacterType 'Enemy.CharacterType')
 - [EnemyController](#T-EnemyController 'EnemyController')
@@ -297,6 +306,7 @@
   - [Hero](#P-GameManager-Hero 'GameManager.Hero')
   - [HeroManager](#P-GameManager-HeroManager 'GameManager.HeroManager')
   - [InventoryManager](#P-GameManager-InventoryManager 'GameManager.InventoryManager')
+  - [OnStage](#P-GameManager-OnStage 'GameManager.OnStage')
   - [QueueManager](#P-GameManager-QueueManager 'GameManager.QueueManager')
   - [RosterManager](#P-GameManager-RosterManager 'GameManager.RosterManager')
   - [StageManager](#P-GameManager-StageManager 'GameManager.StageManager')
@@ -305,7 +315,6 @@
   - [AllCharactersExcept(self)](#M-GameManager-AllCharactersExcept-GameCharacterController- 'GameManager.AllCharactersExcept(GameCharacterController)')
   - [Awake()](#M-GameManager-Awake 'GameManager.Awake')
   - [CanUpgradeAlly(allyName)](#M-GameManager-CanUpgradeAlly-System-String- 'GameManager.CanUpgradeAlly(System.String)')
-  - [CheckBoss(boss)](#M-GameManager-CheckBoss-BossController- 'GameManager.CheckBoss(BossController)')
   - [GenerateIdleRewards()](#M-GameManager-GenerateIdleRewards 'GameManager.GenerateIdleRewards')
   - [GetManagerByType(entityType)](#M-GameManager-GetManagerByType-ListableEntityType- 'GameManager.GetManagerByType(ListableEntityType)')
   - [InitializeGameWorldManagers()](#M-GameManager-InitializeGameWorldManagers 'GameManager.InitializeGameWorldManagers')
@@ -338,6 +347,7 @@
   - [Update()](#M-GraphicsController-Update 'GraphicsController.Update')
   - [UpdateSortingOrder()](#M-GraphicsController-UpdateSortingOrder 'GraphicsController.UpdateSortingOrder')
 - [HazardController](#T-HazardController 'HazardController')
+  - [IsPathable](#P-HazardController-IsPathable 'HazardController.IsPathable')
   - [ApplyEffect()](#M-HazardController-ApplyEffect-GameCharacterController- 'HazardController.ApplyEffect(GameCharacterController)')
   - [OnTriggerEnter2D()](#M-HazardController-OnTriggerEnter2D-UnityEngine-Collider2D- 'HazardController.OnTriggerEnter2D(UnityEngine.Collider2D)')
 - [HazardType](#T-HazardType 'HazardType')
@@ -351,6 +361,7 @@
 - [HeroCombatController](#T-HeroCombatController 'HeroCombatController')
   - [AbilityCooldowns](#P-HeroCombatController-AbilityCooldowns 'HeroCombatController.AbilityCooldowns')
   - [ApplyDamage(damage,isCritical)](#M-HeroCombatController-ApplyDamage-System-Int32,System-Boolean- 'HeroCombatController.ApplyDamage(System.Int32,System.Boolean)')
+  - [ApplyEnergyLoss(energyCost)](#M-HeroCombatController-ApplyEnergyLoss-System-Int32- 'HeroCombatController.ApplyEnergyLoss(System.Int32)')
   - [PerformCombatRound()](#M-HeroCombatController-PerformCombatRound 'HeroCombatController.PerformCombatRound')
   - [PerformDefendAbility(ability)](#M-HeroCombatController-PerformDefendAbility-Ability- 'HeroCombatController.PerformDefendAbility(Ability)')
   - [PerformFireball(ability,target)](#M-HeroCombatController-PerformFireball-Ability,GameCharacterController- 'HeroCombatController.PerformFireball(Ability,GameCharacterController)')
@@ -390,11 +401,13 @@
   - [OnGUI()](#M-HeroHealthBar-OnGUI 'HeroHealthBar.OnGUI')
 - [HeroInputController](#T-HeroInputController 'HeroInputController')
   - [AwaitTarget(ability)](#M-HeroInputController-AwaitTarget-Ability- 'HeroInputController.AwaitTarget(Ability)')
+  - [IsPointerOverUIObject()](#M-HeroInputController-IsPointerOverUIObject 'HeroInputController.IsPointerOverUIObject')
   - [ProcessTap(position)](#M-HeroInputController-ProcessTap-UnityEngine-Vector2- 'HeroInputController.ProcessTap(UnityEngine.Vector2)')
   - [Start()](#M-HeroInputController-Start 'HeroInputController.Start')
   - [Update()](#M-HeroInputController-Update 'HeroInputController.Update')
 - [HeroManager](#T-HeroManager 'HeroManager')
   - [#ctor()](#M-HeroManager-#ctor 'HeroManager.#ctor')
+  - [Currency](#P-HeroManager-Currency 'HeroManager.Currency')
   - [Experience](#P-HeroManager-Experience 'HeroManager.Experience')
   - [Hero](#P-HeroManager-Hero 'HeroManager.Hero')
   - [HeroObject](#P-HeroManager-HeroObject 'HeroManager.HeroObject')
@@ -510,10 +523,14 @@
   - [CenterIfLastStage()](#M-StageButton-CenterIfLastStage 'StageButton.CenterIfLastStage')
   - [LoadStage()](#M-StageButton-LoadStage 'StageButton.LoadStage')
   - [Start()](#M-StageButton-Start 'StageButton.Start')
+- [StageCompletePopup](#T--StageCompletePopup '.StageCompletePopup')
+  - [EndStage()](#M-StageCompletePopup-EndStage 'StageCompletePopup.EndStage')
+  - [Start()](#M-StageCompletePopup-Start 'StageCompletePopup.Start')
 - [StageManager](#T-StageManager 'StageManager')
-  - [EndStage()](#M-StageManager-EndStage 'StageManager.EndStage')
-  - [GetReward()](#M-StageManager-GetReward 'StageManager.GetReward')
+  - [EndStage()](#M-StageManager-EndStage-System-Boolean- 'StageManager.EndStage(System.Boolean)')
+  - [GetReward()](#M-StageManager-GetReward-UnityEngine-Vector2- 'StageManager.GetReward(UnityEngine.Vector2)')
   - [SpawnBoss()](#M-StageManager-SpawnBoss 'StageManager.SpawnBoss')
+  - [SpawnBossAfterDelay()](#M-StageManager-SpawnBossAfterDelay 'StageManager.SpawnBossAfterDelay')
   - [Start()](#M-StageManager-Start 'StageManager.Start')
 - [StaticLootCollection](#T-StaticLootCollection 'StaticLootCollection')
   - [DropEquipment](#P-StaticLootCollection-DropEquipment 'StaticLootCollection.DropEquipment')
@@ -627,6 +644,13 @@ Cooldown of the ability in seconds.
 ##### Summary
 
 Visual effect for the ability.
+
+<a name='P-Ability-EnergyCost'></a>
+### EnergyCost `property` [#](#P-Ability-EnergyCost 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Energy cost.
 
 <a name='P-Ability-ListableType'></a>
 ### ListableType `property` [#](#P-Ability-ListableType 'Go To Here') [=](#contents 'Back To Contents')
@@ -1701,6 +1725,19 @@ Performs a combat round.
 
 This method has no parameters.
 
+<a name='M-CombatController-PerformLifeDrain-System-Int32-'></a>
+### PerformLifeDrain(damage) `method` [#](#M-CombatController-PerformLifeDrain-System-Int32- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Performs life steal based on the character attribute and the damage done.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| damage | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | Damage to life steal from. |
+
 <a name='M-CombatController-PerformMeleeAttack'></a>
 ### PerformMeleeAttack() `method` [#](#M-CombatController-PerformMeleeAttack 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -1779,6 +1816,17 @@ This method has no parameters.
 ##### Summary
 
 Updates the combat controller every frame.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-CombatController-UpdateRegeneration'></a>
+### UpdateRegeneration() `method` [#](#M-CombatController-UpdateRegeneration 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Updates the health and energy based on regeneration rates.
 
 ##### Parameters
 
@@ -2466,6 +2514,39 @@ Sets up the button.
 
 This method has no parameters.
 
+<a name='T-CurrencyText'></a>
+## CurrencyText [#](#T-CurrencyText 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Updates the text object to reflect current currency.
+
+<a name='M-CurrencyText-OnGUI'></a>
+### OnGUI() `method` [#](#M-CurrencyText-OnGUI 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Refreshes every GUI refresh.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-CurrencyText-Start'></a>
+### Start() `method` [#](#M-CurrencyText-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the text.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-CustomGizmo'></a>
 ## CustomGizmo [#](#T-CustomGizmo 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -2892,6 +2973,38 @@ Maximum velocity to go from start position to end position.
 | ---- | ---- | ----------- |
 | fromPosition | [UnityEngine.Vector2](#T-UnityEngine-Vector2 'UnityEngine.Vector2') | The start position. |
 | toPosition | [UnityEngine.Vector2](#T-UnityEngine-Vector2 'UnityEngine.Vector2') | The end position. |
+
+<a name='T-DroppedEquipmentController'></a>
+## DroppedEquipmentController [#](#T-DroppedEquipmentController 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+##### Summary
+
+Controls the motion of dropped equipment on the stage.
+
+<a name='P-DroppedEquipmentController-Image'></a>
+### Image `property` [#](#P-DroppedEquipmentController-Image 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Image component of dropped equipment indicator.
+
+<a name='M-DroppedEquipmentController-Animate-UnityEngine-Vector3,UnityEngine-Vector3-'></a>
+### Animate(startPosition,endPosition) `method` [#](#M-DroppedEquipmentController-Animate-UnityEngine-Vector3,UnityEngine-Vector3- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Animates the dropped equipment from start position to end position.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| startPosition | [UnityEngine.Vector3](#T-UnityEngine-Vector3 'UnityEngine.Vector3') |  |
+| endPosition | [UnityEngine.Vector3](#T-UnityEngine-Vector3 'UnityEngine.Vector3') |  |
 
 <a name='T-Enemy'></a>
 ## Enemy [#](#T-Enemy 'Go To Here') [=](#contents 'Back To Contents')
@@ -3577,6 +3690,13 @@ Returns the hero manager.
 
 Returns the inventory manager.
 
+<a name='P-GameManager-OnStage'></a>
+### OnStage `property` [#](#P-GameManager-OnStage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Whether or not the game is on a stage.
+
 <a name='P-GameManager-QueueManager'></a>
 ### QueueManager `property` [#](#P-GameManager-QueueManager 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -3656,19 +3776,6 @@ Whether or not the ally can be upgraded.
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | allyName | [System.String](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.String 'System.String') | The name of the ally to upgrade. |
-
-<a name='M-GameManager-CheckBoss-BossController-'></a>
-### CheckBoss(boss) `method` [#](#M-GameManager-CheckBoss-BossController- 'Go To Here') [=](#contents 'Back To Contents')
-
-##### Summary
-
-Keeps track of a spawned boss and ends the stage after its death.
-
-##### Parameters
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| boss | [BossController](#T-BossController 'BossController') | The boss to keep track of. |
 
 <a name='M-GameManager-GenerateIdleRewards'></a>
 ### GenerateIdleRewards() `method` [#](#M-GameManager-GenerateIdleRewards 'Go To Here') [=](#contents 'Back To Contents')
@@ -4049,6 +4156,13 @@ This method has no parameters.
 
 Controls interactions with hazards.
 
+<a name='P-HazardController-IsPathable'></a>
+### IsPathable `property` [#](#P-HazardController-IsPathable 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Whether or not characters will path around the hazard.
+
 <a name='M-HazardController-ApplyEffect-GameCharacterController-'></a>
 ### ApplyEffect() `method` [#](#M-HazardController-ApplyEffect-GameCharacterController- 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -4174,6 +4288,19 @@ Applies damage to the hero.
 | ---- | ---- | ----------- |
 | damage | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | The amount of damage to apply. |
 | isCritical | [System.Boolean](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Boolean 'System.Boolean') | Whether or not the damage includes critical damage. |
+
+<a name='M-HeroCombatController-ApplyEnergyLoss-System-Int32-'></a>
+### ApplyEnergyLoss(energyCost) `method` [#](#M-HeroCombatController-ApplyEnergyLoss-System-Int32- 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Applies a loss of energy to the hero.
+
+##### Parameters
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| energyCost | [System.Int32](http://msdn.microsoft.com/query/dev14.query?appId=Dev14IDEF1&l=EN-US&k=k:System.Int32 'System.Int32') | The amount of energy to lose. |
 
 <a name='M-HeroCombatController-PerformCombatRound'></a>
 ### PerformCombatRound() `method` [#](#M-HeroCombatController-PerformCombatRound 'Go To Here') [=](#contents 'Back To Contents')
@@ -4605,6 +4732,21 @@ Awaits a target for targetable abilities when hero doesn't have a target.
 | ---- | ---- | ----------- |
 | ability | [Ability](#T-Ability 'Ability') | The ability to use once a target is found. |
 
+<a name='M-HeroInputController-IsPointerOverUIObject'></a>
+### IsPointerOverUIObject() `method` [#](#M-HeroInputController-IsPointerOverUIObject 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Detects if a touch or click is over a UI object.
+
+##### Returns
+
+True if a UI was tapped; false otherwise.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='M-HeroInputController-ProcessTap-UnityEngine-Vector2-'></a>
 ### ProcessTap(position) `method` [#](#M-HeroInputController-ProcessTap-UnityEngine-Vector2- 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -4661,6 +4803,13 @@ Constructs the hero manager.
 ##### Parameters
 
 This constructor has no parameters.
+
+<a name='P-HeroManager-Currency'></a>
+### Currency `property` [#](#P-HeroManager-Currency 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Gets or sets the hero's currency.
 
 <a name='P-HeroManager-Experience'></a>
 ### Experience `property` [#](#P-HeroManager-Experience 'Go To Here') [=](#contents 'Back To Contents')
@@ -5876,6 +6025,35 @@ Sets up the button.
 
 This method has no parameters.
 
+<a name='T--StageCompletePopup'></a>
+## StageCompletePopup [#](#T--StageCompletePopup 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Namespace
+
+
+
+<a name='M-StageCompletePopup-EndStage'></a>
+### EndStage() `method` [#](#M-StageCompletePopup-EndStage 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Ends the stage when the button is clicked.
+
+##### Parameters
+
+This method has no parameters.
+
+<a name='M-StageCompletePopup-Start'></a>
+### Start() `method` [#](#M-StageCompletePopup-Start 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Sets up the popup.
+
+##### Parameters
+
+This method has no parameters.
+
 <a name='T-StageManager'></a>
 ## StageManager [#](#T-StageManager 'Go To Here') [=](#contents 'Back To Contents')
 
@@ -5887,8 +6065,8 @@ This method has no parameters.
 
 Manages the functionality of a stage.
 
-<a name='M-StageManager-EndStage'></a>
-### EndStage() `method` [#](#M-StageManager-EndStage 'Go To Here') [=](#contents 'Back To Contents')
+<a name='M-StageManager-EndStage-System-Boolean-'></a>
+### EndStage() `method` [#](#M-StageManager-EndStage-System-Boolean- 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
@@ -5898,16 +6076,12 @@ Ends the stage.
 
 This method has no parameters.
 
-<a name='M-StageManager-GetReward'></a>
-### GetReward() `method` [#](#M-StageManager-GetReward 'Go To Here') [=](#contents 'Back To Contents')
+<a name='M-StageManager-GetReward-UnityEngine-Vector2-'></a>
+### GetReward() `method` [#](#M-StageManager-GetReward-UnityEngine-Vector2- 'Go To Here') [=](#contents 'Back To Contents')
 
 ##### Summary
 
 Tries to get the next reward from the stage's loot collection.
-
-##### Returns
-
-A piece of equipment if one dropped; null otherwise.
 
 ##### Parameters
 
@@ -5918,11 +6092,18 @@ This method has no parameters.
 
 ##### Summary
 
-Spawns the boss for the stage.
+Spawns the boss for the stage immediately.
 
-##### Returns
+##### Parameters
 
-The controller for the boss.
+This method has no parameters.
+
+<a name='M-StageManager-SpawnBossAfterDelay'></a>
+### SpawnBossAfterDelay() `method` [#](#M-StageManager-SpawnBossAfterDelay 'Go To Here') [=](#contents 'Back To Contents')
+
+##### Summary
+
+Spawns the boss for the stage after the delay specified on the stage manager.
 
 ##### Parameters
 

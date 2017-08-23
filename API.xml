@@ -64,6 +64,11 @@
             Updates the combat controller every frame.
             </summary>
         </member>
+        <member name="M:CombatController.UpdateRegeneration">
+            <summary>
+            Updates the health and energy based on regeneration rates.
+            </summary>
+        </member>
         <member name="M:CombatController.UpdateStun">
             <summary>
             Removes stun from character after duration.
@@ -174,6 +179,12 @@
             <summary>
             Performs a melee attack on the current target.
             </summary>
+        </member>
+        <member name="M:CombatController.PerformLifeDrain(System.Int32)">
+            <summary>
+            Performs life steal based on the character attribute and the damage done.
+            </summary>
+            <param name="damage">Damage to life steal from.</param>
         </member>
         <member name="M:CombatController.PerformRangedAttack">
             <summary>
@@ -544,6 +555,11 @@
             Applies the hazard's effect to a character.
             </summary>
         </member>
+        <member name="P:HazardController.IsPathable">
+            <summary>
+            Whether or not characters will path around the hazard.
+            </summary>
+        </member>
         <member name="T:HeroCombatController">
             <summary>
             Controls the combat for the hero.
@@ -582,6 +598,12 @@
             Performs a defend ability.
             </summary>
             <param name="ability">The ability to perform.</param>
+        </member>
+        <member name="M:HeroCombatController.ApplyEnergyLoss(System.Int32)">
+            <summary>
+            Applies a loss of energy to the hero.
+            </summary>
+            <param name="energyCost">The amount of energy to lose.</param>
         </member>
         <member name="M:HeroCombatController.PerformFireball(Ability,GameCharacterController)">
             <summary>
@@ -775,6 +797,12 @@
             </summary>
             <param name="ability">The ability to use once a target is found.</param>
         </member>
+        <member name="M:HeroInputController.IsPointerOverUIObject">
+            <summary>
+            Detects if a touch or click is over a UI object.
+            </summary>
+            <returns>True if a UI was tapped; false otherwise.</returns>
+        </member>
         <member name="M:HeroMovementController.GenerateSeekBehaviour">
             <summary>
             Generates movement behaviour to seek a location, or to seek a target if not seeking
@@ -855,6 +883,23 @@
             Decorates the base idle movement behaviour with other movement behaviours
             appropriate to the character and situation.
             </summary>
+        </member>
+        <member name="T:DroppedEquipmentController">
+            <summary>
+            Controls the motion of dropped equipment on the stage.
+            </summary>
+        </member>
+        <member name="P:DroppedEquipmentController.Image">
+            <summary>
+            Image component of dropped equipment indicator.
+            </summary>
+        </member>
+        <member name="M:DroppedEquipmentController.Animate(UnityEngine.Vector3,UnityEngine.Vector3)">
+            <summary>
+            Animates the dropped equipment from start position to end position.
+            </summary>
+            <param name="startPosition"></param>
+            <param name="endPosition"></param>
         </member>
         <member name="T:QueueController">
             <summary>
@@ -954,12 +999,6 @@
             <summary>
             Performs initialization prior to next frame.
             </summary>
-        </member>
-        <member name="M:GameManager.CheckBoss(BossController)">
-            <summary>
-            Keeps track of a spawned boss and ends the stage after its death.
-            </summary>
-            <param name="boss">The boss to keep track of.</param>
         </member>
         <member name="M:GameManager.InitializeGameWorldManagers">
             <summary>
@@ -1078,6 +1117,11 @@
             Returns the inventory manager.
             </summary>
         </member>
+        <member name="P:GameManager.OnStage">
+            <summary>
+            Whether or not the game is on a stage.
+            </summary>
+        </member>
         <member name="P:GameManager.QueueManager">
             <summary>
             Returns the stage queue manager.
@@ -1193,6 +1237,11 @@
         <member name="P:HeroManager.Experience">
             <summary>
             Gets or sets the hero's experience.
+            </summary>
+        </member>
+        <member name="P:HeroManager.Currency">
+            <summary>
+            Gets or sets the hero's currency.
             </summary>
         </member>
         <member name="P:HeroManager.Hero">
@@ -1382,22 +1431,25 @@
             Constructs the stage manager.
             </summary>
         </member>
-        <member name="M:StageManager.EndStage">
+        <member name="M:StageManager.EndStage(System.Boolean)">
             <summary>
             Ends the stage.
             </summary>
         </member>
-        <member name="M:StageManager.GetReward">
+        <member name="M:StageManager.GetReward(UnityEngine.Vector2)">
             <summary>
             Tries to get the next reward from the stage's loot collection.
             </summary>
-            <returns>A piece of equipment if one dropped; null otherwise.</returns>
         </member>
         <member name="M:StageManager.SpawnBoss">
             <summary>
-            Spawns the boss for the stage.
+            Spawns the boss for the stage immediately.
             </summary>
-            <returns>The controller for the boss.</returns>
+        </member>
+        <member name="M:StageManager.SpawnBossAfterDelay">
+            <summary>
+            Spawns the boss for the stage after the delay specified on the stage manager.
+            </summary>
         </member>
         <member name="T:WorldEntityManager">
             <summary>
@@ -1823,6 +1875,11 @@
             Visual effect for the ability.
             </summary>
         </member>
+        <member name="P:Ability.EnergyCost">
+            <summary>
+            Energy cost.
+            </summary>
+        </member>
         <member name="P:Ability.ListableType">
             <summary>
             Type of lists this ability belongs to.
@@ -2120,6 +2177,31 @@
         <member name="M:HeroStagePortrait.Start">
             <summary>
             Sets up the portrait.
+            </summary>
+        </member>
+        <member name="T:CurrencyText">
+            <summary>
+            Updates the text object to reflect current currency.
+            </summary>
+        </member>
+        <member name="M:CurrencyText.OnGUI">
+            <summary>
+            Refreshes every GUI refresh.
+            </summary>
+        </member>
+        <member name="M:CurrencyText.Start">
+            <summary>
+            Sets up the text.
+            </summary>
+        </member>
+        <member name="M:StageCompletePopup.Start">
+            <summary>
+            Sets up the popup.
+            </summary>
+        </member>
+        <member name="M:StageCompletePopup.EndStage">
+            <summary>
+            Ends the stage when the button is clicked.
             </summary>
         </member>
         <member name="T:UpgradeAllyPopup">
