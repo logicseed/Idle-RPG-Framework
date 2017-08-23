@@ -26,7 +26,8 @@ public class GameManager : Singleton<GameManager>
     protected WorldManager worldManager;
 
     protected DateTime lastRewardTime;
-    protected float partialRewards;
+    protected float partialExperience;
+    protected float partialCurrency;
 
     /// <summary>
     /// Performs initialization prior to next frame.
@@ -106,6 +107,7 @@ public class GameManager : Singleton<GameManager>
         Instantiate(GameSettings.Prefab.UI.UpgradePanel, uiCanvas.transform, false);
         if (GameSettings.ShowResetButton) Instantiate(GameSettings.Prefab.UI.ResetButton, uiCanvas.transform, false);
         Instantiate(GameSettings.Prefab.UI.ExperienceText, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.CurrencyText, uiCanvas.transform, false);
     }
 
     /// <summary>
@@ -119,6 +121,7 @@ public class GameManager : Singleton<GameManager>
         Instantiate(GameSettings.Prefab.UI.UpgradePanel, uiCanvas.transform, false);
         Instantiate(GameSettings.Prefab.UI.BackToWorldButton, uiCanvas.transform, false);
         Instantiate(GameSettings.Prefab.UI.ExperienceText, uiCanvas.transform, false);
+        Instantiate(GameSettings.Prefab.UI.CurrencyText, uiCanvas.transform, false);
     }
 
     /// <summary>
@@ -202,23 +205,21 @@ public class GameManager : Singleton<GameManager>
         var maxRewardSeconds = GameManager.GameSettings.Max.RewardTime * 3600;
         if (rewardSeconds > maxRewardSeconds) rewardSeconds = maxRewardSeconds;
 
-        var newExperience = 0.0f;
+        float reward = RosterManager.TotalAssignedLevels + HeroManager.Level;
+        reward *= WorldManager.LastIdleFactor;
+        reward *= (float)rewardSeconds;
 
-        newExperience += RosterManager.TotalAssignedLevels + HeroManager.Level;
-        newExperience *= WorldManager.LastIdleFactor;
-        newExperience *= (float)rewardSeconds;
+        partialExperience += reward;
+        partialCurrency += reward * 0.5f;
 
-        newExperience += partialRewards;
-        partialRewards = 0.0f;
-        if (newExperience > 1.0f)
-        {
-            HeroManager.Experience += (int)newExperience;
-            partialRewards = newExperience - (int)newExperience;
-        }
-        else
-        {
-            partialRewards = newExperience;
-        }
+        var newExperience = Mathf.FloorToInt(partialExperience);
+        var newCurrency = Mathf.FloorToInt(partialCurrency);
+
+        if (newExperience > 0) partialExperience -= newExperience;
+        if (newCurrency > 0) partialCurrency -= newCurrency;
+
+        HeroManager.Experience += newExperience;
+        HeroManager.Currency += newCurrency;
     }
 
     /// <summary>

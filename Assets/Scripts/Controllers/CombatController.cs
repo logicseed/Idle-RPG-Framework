@@ -24,6 +24,10 @@ public class CombatController : MonoBehaviour
 
     protected bool hasAppliedReward = false;
 
+    protected float partialHealth;
+
+    protected float partialEnergy;
+
     /// <summary>
     /// Sets up the combat controller.
     /// </summary>
@@ -52,7 +56,26 @@ public class CombatController : MonoBehaviour
         if (CharacterController.isCombatDummy) return;
 
         UpdateTarget();
+        UpdateRegeneration();
         PerformCombatRound();
+    }
+
+    /// <summary>
+    /// Updates the health and energy based on regeneration rates.
+    /// </summary>
+    protected virtual void UpdateRegeneration()
+    {
+        partialHealth += CharacterController.Attributes.HealthRegeneration * Time.deltaTime;
+        partialEnergy += CharacterController.Attributes.EnergyRegeneration * Time.deltaTime;
+
+        var newHealth = Mathf.FloorToInt(partialHealth);
+        var newEnergy = Mathf.FloorToInt(partialEnergy);
+
+        if (newHealth > 0) partialHealth -= newHealth;
+        if (newEnergy > 0) partialEnergy -= newEnergy;
+
+        currentHealth = Mathf.Min(CharacterController.Attributes.Health, currentHealth + newHealth);
+        currentEnergy = Mathf.Min(CharacterController.Attributes.Energy, currentEnergy + newEnergy);
     }
 
     /// <summary>
@@ -202,7 +225,9 @@ public class CombatController : MonoBehaviour
         }
 
         // Combat dummies don't take damage
-        if (!CharacterController.isCombatDummy) currentHealth -= unblockedDamage;
+        if (CharacterController.isCombatDummy) return;
+
+        currentHealth = Mathf.Max(currentHealth - unblockedDamage, 0);
 
         // Handle character death
         if (CurrentHealth < 1)
@@ -357,8 +382,20 @@ public class CombatController : MonoBehaviour
         var criticalModifier = CriticalModifier();
         var damage = (int)(CharacterController.Attributes.AttackDamage * criticalModifier);
 
+        PerformLifeDrain(damage);
+
         // Apply damage
         TargetController.CombatController.ApplyDamage(damage, criticalModifier > 1);
+    }
+
+    /// <summary>
+    /// Performs life steal based on the character attribute and the damage done.
+    /// </summary>
+    /// <param name="damage">Damage to life steal from.</param>
+    public virtual void PerformLifeDrain(int damage)
+    {
+        var lifeDrain = damage * CharacterController.Attributes.LifeDrain;
+        currentHealth = Mathf.Min(CharacterController.Attributes.Health, currentHealth + (int)lifeDrain);
     }
 
     /// <summary>
@@ -384,6 +421,8 @@ public class CombatController : MonoBehaviour
         var criticalModifier = CriticalModifier();
         var damage = (int)(CharacterController.Attributes.AttackDamage * criticalModifier);
 
+        PerformLifeDrain(damage);
+
         SpawnProjectile(prefab, location, damage, target, criticalModifier);
     }
 
@@ -397,6 +436,8 @@ public class CombatController : MonoBehaviour
         var target = TargetController;
         var criticalModifier = CriticalModifier();
         var damage = (int)(CharacterController.Attributes.AbilityDamage * criticalModifier);
+
+        PerformLifeDrain(damage);
 
         SpawnProjectile(prefab, location, damage, target, criticalModifier);
     }

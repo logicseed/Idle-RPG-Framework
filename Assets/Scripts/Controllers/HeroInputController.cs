@@ -34,6 +34,7 @@ public class HeroInputController : MonoBehaviour
             Debug.LogError("Stage does not have event system; exiting. Add an event system to be able to play this stage.");
             GameManager.LoadZone(GameManager.WorldManager.LastZone);
         }
+
         // Process touch input
         if (Input.touchCount > 0)
         {
@@ -41,18 +42,17 @@ public class HeroInputController : MonoBehaviour
             {
                 if (touch.phase == TouchPhase.Ended)
                 {
-                    if (!EventSystem.current.IsPointerOverGameObject()) ProcessTap(touch.position);
+                    if (!IsPointerOverUIObject()) ProcessTap(touch.position);
                 }
             }
         }
 
-        // Process keyboard input
         if (Input.GetMouseButton(0))
         {
-            if (!EventSystem.current.IsPointerOverGameObject()) ProcessTap(Input.mousePosition);
+            if (!IsPointerOverUIObject()) ProcessTap(Input.mousePosition);
         }
 
-        // This works with the Android back button too
+        // This works with the mobile back button too
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             if (GameManager.OnStage)
@@ -101,5 +101,18 @@ public class HeroInputController : MonoBehaviour
     {
         awaitingTarget = true;
         waitingAbility = ability;
+    }
+
+    /// <summary>
+    /// Detects if a touch or click is over a UI object.
+    /// </summary>
+    /// <returns>True if a UI was tapped; false otherwise.</returns>
+    private bool IsPointerOverUIObject()
+    {
+        PointerEventData eventDataCurrentPosition = new PointerEventData(EventSystem.current);
+        eventDataCurrentPosition.position = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+        List<RaycastResult> results = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(eventDataCurrentPosition, results);
+        return results.Count > 0;
     }
 }

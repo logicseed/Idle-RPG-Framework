@@ -16,4 +16,5 @@ MonoBehaviour:
   abilityType: 1
   effect: {fileID: 0}
   potency: 3.67
+  energyCost: 10
   cooldown: 2

@@ -20,6 +20,10 @@ public class Ability : ListableEntity
     protected float potency;
 
     [SerializeField]
+    protected int energyCost;
+
+
+    [SerializeField]
     public float cooldown;
 
     /// <summary>
@@ -41,6 +45,11 @@ public class Ability : ListableEntity
     /// Visual effect for the ability.
     /// </summary>
     public Sprite Effect { get { return effect; } }
+
+    /// <summary>
+    /// Energy cost.
+    /// </summary>
+    public int EnergyCost { get { return energyCost * GameManager.HeroManager.Level; } }
 
     /// <summary>
     /// Type of lists this ability belongs to.

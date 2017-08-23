@@ -86,7 +86,8 @@ public class HeroController : GameCharacterController
     /// <param name="target">The target of the ability.</param>
     protected void PerformAbility(Ability ability, GameCharacterController target)
     {
-        HeroCombatController.AbilityCooldowns.Add(ability.name, ability.Cooldown);
+        HeroCombatController.AbilityCooldowns.Add(ability.name, ability.Cooldown * Mathf.Max(0,1.0f - Attributes.CooldownReduction));
+        HeroCombatController.ApplyEnergyLoss(ability.EnergyCost);
 
         switch (ability.AbilityType)
         {

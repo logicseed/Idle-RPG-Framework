@@ -10,6 +10,7 @@ public class SaveGame : ISerializable
 {
     // Fields to save
     public int Experience;
+    public int Currency;
     public List<string> UnlockedAllies;
     public List<string> AssignedAllies;
     public List<string> UnlockedZones;
@@ -37,6 +38,7 @@ public class SaveGame : ISerializable
     public SaveGame(SerializationInfo info, StreamingContext context)
     {
         Experience = info.GetInt32("experience");
+        Currency = info.GetInt32("currency");
 
         UnlockedAllies = (List<string>)info.GetValue("unlockedAllies", typeof(List<string>));
         if (UnlockedAllies == null) UnlockedAllies = new List<string>();
@@ -80,6 +82,7 @@ public class SaveGame : ISerializable
     public void GetObjectData(SerializationInfo info, StreamingContext context)
     {
         info.AddValue("experience", Experience);
+        info.AddValue("currency", Currency);
         info.AddValue("unlockedAllies", UnlockedAllies);
         info.AddValue("assignedAllies", AssignedAllies);
         info.AddValue("unlockedZones", UnlockedZones);

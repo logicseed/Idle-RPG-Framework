@@ -13,6 +13,7 @@ public class GameSettings
     [Serializable] public class StartContainer
     {
         public int Experience = 0;
+        public int Currency = 0;
         public int Level = 1;
         public List<string> Zones;
         public List<string> Stages;
@@ -173,6 +174,7 @@ public class GameSettings
             public GameObject UpgradeAlliesPopup;
             public GameObject UpgradeAllyButton;
             public GameObject ExperienceText;
+            public GameObject CurrencyText;
             public GameObject AbilityUsePanel;
             public GameObject HeroStageInformation;
             public GameObject StageCompletePopup;

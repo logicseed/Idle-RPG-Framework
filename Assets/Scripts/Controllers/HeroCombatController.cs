@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Debug = ConditionalDebug;
 
@@ -34,6 +35,7 @@ public class HeroCombatController : CombatController
 
         UpdateDefend();
         UpdateCooldowns();
+        UpdateRegeneration();
         UpdateTarget();
         PerformCombatRound();
     }
@@ -76,6 +78,15 @@ public class HeroCombatController : CombatController
     }
 
     /// <summary>
+    /// Applies a loss of energy to the hero.
+    /// </summary>
+    /// <param name="energyCost">The amount of energy to lose.</param>
+    public void ApplyEnergyLoss(int energyCost)
+    {
+        currentEnergy = Mathf.Max(currentEnergy - energyCost, 0);
+    }
+
+    /// <summary>
     /// Spawns a fireball projectile.
     /// </summary>
     /// <param name="ability">The ability to perform.</param>
@@ -84,6 +95,9 @@ public class HeroCombatController : CombatController
     {
         var criticalModifier = CriticalModifier();
         var damage = (int)(CharacterController.Attributes.AbilityDamage * criticalModifier);
+
+        PerformLifeDrain(damage);
+
         SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Fireball, transform.position, damage, target, criticalModifier);
     }
 
@@ -106,6 +120,7 @@ public class HeroCombatController : CombatController
             if (enemy.Location.SqrDistance(target.Location) < 1.2f)
             {
                 enemy.CombatController.ApplyDamage(damage, criticalModifier > 1);
+                PerformLifeDrain(damage / 2);
             }
         }
     }
@@ -139,6 +154,9 @@ public class HeroCombatController : CombatController
     {
         var criticalModifier = CriticalModifier();
         var damage = (int)(CharacterController.Attributes.AttackDamage * criticalModifier);
+
+        PerformLifeDrain(damage / 2);
+
         SpawnProjectile(GameManager.GameSettings.Prefab.Effect.Storm, location, damage, target, criticalModifier);
     }
 

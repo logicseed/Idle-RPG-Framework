@@ -9,6 +9,7 @@ using UnityEngine;
 public class HeroManager : RegisterList<HeroController>
 {
     protected int experience = 0;
+    protected int currency = 0;
 
     protected Hero heroObject;
 
@@ -23,6 +24,11 @@ public class HeroManager : RegisterList<HeroController>
     /// Gets or sets the hero's experience.
     /// </summary>
     public int Experience { get { return experience; } set { experience = value; } }
+
+    /// <summary>
+    /// Gets or sets the hero's currency.
+    /// </summary>
+    public int Currency { get { return currency; } set { currency = value; } }
 
     /// <summary>
     /// Returns the hero controller.
@@ -51,11 +57,13 @@ public class HeroManager : RegisterList<HeroController>
         if (save != null)
         {
             heroManager.Experience = save.Experience;
+            heroManager.Currency = save.Currency;
             heroManager.Level = save.Level;
         }
         else
         {
             heroManager.Experience = GameManager.GameSettings.CharacterStart.Experience;
+            heroManager.Currency = GameManager.GameSettings.CharacterStart.Currency;
             heroManager.Level = GameManager.GameSettings.CharacterStart.Level;
         }
 

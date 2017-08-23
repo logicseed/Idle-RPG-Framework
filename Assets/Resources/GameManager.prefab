@@ -54,6 +54,7 @@ MonoBehaviour:
   gameSettings:
     CharacterStart:
       Experience: 100000
+      Currency: 100
       Level: 1
       Zones:
       - Scenes/Zones/ZoneA
@@ -189,6 +190,8 @@ MonoBehaviour:
         UpgradeAllyButton: {fileID: 1204506481325362, guid: cabf8cafe21dfef49860b70507097356,
           type: 2}
         ExperienceText: {fileID: 1940980552363930, guid: 43809072f7b2d3b459ce9f04467eafc5,
+          type: 2}
+        CurrencyText: {fileID: 1266054299454214, guid: 5ebfb31a788659d49b38e8d30e512072,
           type: 2}
         AbilityUsePanel: {fileID: 1257002223116160, guid: 478cc4b8d360db042995c21d2e50f191,
           type: 2}

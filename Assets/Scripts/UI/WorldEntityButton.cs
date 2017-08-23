@@ -76,10 +76,18 @@ public class WorldEntityButton : MonoBehaviour
             var entityObject = manager.GetEntityObject(entityName);
             if (entityObject.ListableType == ListableEntityType.Ability)
             {
-                if (GameManager.Hero != null)
-                    buttonComponent.interactable = !GameManager.Hero.HeroCombatController.AbilityCooldowns.ContainsKey(entityName);
+                var ability = entityObject as Ability;
+
+                if (GameManager.Hero != null &&
+                    GameManager.Hero.HeroCombatController.AbilityCooldowns.ContainsKey(entityName) == false &&
+                    GameManager.Hero.HeroCombatController.CurrentEnergy >= ability.EnergyCost)
+                {
+                    buttonComponent.interactable = true;
+                }
                 else
+                {
                     buttonComponent.interactable = false;
+                }
             }
         }
     }
