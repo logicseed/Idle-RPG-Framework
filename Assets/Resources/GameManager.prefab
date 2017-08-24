@@ -133,7 +133,7 @@ MonoBehaviour:
         HealthRegeneration: 20
         Energy: 400
         EnergyRegeneration: 15
-        AttackSpeed: 2
+        AttackSpeed: 1
         CriticalHitChance: 0.5
         CriticalHitDamage: 1
         CooldownReduction: 0.5

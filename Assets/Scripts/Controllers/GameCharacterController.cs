@@ -221,6 +221,19 @@ public class GameCharacterController : MonoBehaviour
     }
 
     /// <summary>
+    /// Returns a reference to the character's graphics controller.
+    /// </summary>
+    public GraphicsController GraphicsController
+    {
+        get
+        {
+            if (graphicsControllerReference == null) CreateGraphicsController();
+
+            return graphicsControllerReference;
+        }
+    }
+
+    /// <summary>
     /// Returns whether or not the character is considered friendly to the hero.
     /// </summary>
     public bool IsFriendly

@@ -37,12 +37,64 @@ public class GraphicsController : MonoBehaviour
     {
         try
         {
-            animator.StopPlayback();
-            animator.Play(GetStateAnimationString());
+            if (!IsAttackAnimationPlaying()) animator.StopPlayback();
+
+            var animationName = GetStateAnimationString();
+
+            if (character.CharacterState == CharacterState.Melee ||
+                character.CharacterState == CharacterState.Ranged ||
+                character.CharacterState == CharacterState.Cast)
+            {
+                
+                foreach (var clip in animator.runtimeAnimatorController.animationClips)
+                {
+                    if (clip.name == animationName)
+                    {
+                        if (clip.length > (1.0f / character.Attributes.AttackSpeed))
+                        {
+                            animator.speed = clip.length / (1.0f / character.Attributes.AttackSpeed);
+                        }
+                        else
+                        {
+                            animator.speed = 1.0f;
+                        }
+                        break;
+                    }
+                }
+
+            }
+            else
+            {
+                animator.speed = 1.0f;
+            }
+
+            animator.Play(animationName);
         }
         catch (NullReferenceException)
         {
             animator = GetComponent<Animator>();
+        }
+    }
+
+    /// <summary>
+    /// Whether or not an attack animation is playing.
+    /// </summary>
+    /// <returns>True if an attack animation is playing; false otherwise.</returns>
+    public bool IsAttackAnimationPlaying()
+    {
+        var animLayer = animator.GetLayerIndex("Base Layer");
+        if (animator.GetCurrentAnimatorStateInfo(animLayer).IsName(CharacterState.Melee.ToString() + MoveDirection.Left.ToString()) ||
+            animator.GetCurrentAnimatorStateInfo(animLayer).IsName(CharacterState.Melee.ToString() + MoveDirection.Right.ToString()) ||
+            animator.GetCurrentAnimatorStateInfo(animLayer).IsName(CharacterState.Ranged.ToString() + MoveDirection.Left.ToString()) ||
+            animator.GetCurrentAnimatorStateInfo(animLayer).IsName(CharacterState.Ranged.ToString() + MoveDirection.Right.ToString()) ||
+            animator.GetCurrentAnimatorStateInfo(animLayer).IsName(CharacterState.Cast.ToString() + MoveDirection.Left.ToString()) ||
+            animator.GetCurrentAnimatorStateInfo(animLayer).IsName(CharacterState.Cast.ToString() + MoveDirection.Right.ToString()))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 
