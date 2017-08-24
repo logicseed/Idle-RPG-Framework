@@ -54,8 +54,14 @@ public class HeroCombatController : CombatController
     public override void ApplyDamage(int damage, bool isCritical = false)
     {
         if (isDefending) damage = (int)(damage * GameManager.GameSettings.Constants.DefensePercent);
+
         base.ApplyDamage(damage, isCritical);
-        if (CharacterController.CharacterState != CharacterState.Walk) base.UpdateTarget();
+
+        if (GameManager.Hero.HeroMovementController.HasJustMoved)
+        {
+            GameManager.Hero.HeroMovementController.HasJustMoved = false;
+            UpdateTarget();
+        }
     }
 
     /// <summary>
@@ -199,7 +205,8 @@ public class HeroCombatController : CombatController
     /// </summary>
     public override void UpdateTarget()
     {
-        if (GameManager.Hero.HeroMovementController.HasLocationTarget == true) return;
+        if (GameManager.Hero.HeroMovementController.HasLocationTarget == true ||
+            GameManager.Hero.HeroMovementController.HasJustMoved == true) return;
         base.UpdateTarget();
     }
 }

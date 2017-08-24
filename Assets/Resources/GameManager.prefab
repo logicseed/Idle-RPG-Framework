@@ -94,7 +94,7 @@ MonoBehaviour:
         AttackRangeVariance: 0.2
         DirectAbilityHit: 0.05
         Touch: 0.2
-        SeekLocation: 0.01
+        SeekLocation: 0.05
         FleeRadius: 0.3
         AvoidRadius: 0.75
       CombatText:

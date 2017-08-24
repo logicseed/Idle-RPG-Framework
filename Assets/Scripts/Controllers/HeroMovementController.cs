@@ -4,6 +4,7 @@ public class HeroMovementController : MovementController
 {
     protected bool hasLocationTarget;
     protected Vector2 locationTarget;
+    protected bool hasJustMoved;
 
     /// <summary>
     /// Generates movement behaviour to seek a location, or to seek a target if not seeking
@@ -19,6 +20,7 @@ public class HeroMovementController : MovementController
             if (transform.position.SqrDistance(locationTarget) < GameManager.GameSettings.Constants.Range.SeekLocationSqr)
             {
                 hasLocationTarget = false;
+                hasJustMoved = true;
             }
             else // Otherwise attempt to walk to location.
             {
@@ -40,6 +42,9 @@ public class HeroMovementController : MovementController
         character = GameManager.Hero;
     }
 
+    /// <summary>
+    /// Whether or not the hero has a location target and is trying to walk to it.
+    /// </summary>
     public bool HasLocationTarget { get { return hasLocationTarget; } set { hasLocationTarget = value; } }
 
     /// <summary>
@@ -59,4 +64,10 @@ public class HeroMovementController : MovementController
             locationTarget = value;
         }
     }
+
+    /// <summary>
+    /// Whether or not the character just finished moving. A character that just finished
+    /// moving will delay autoattacking until they receive damage.
+    /// </summary>
+    public bool HasJustMoved { get { return hasJustMoved; } set { hasJustMoved = value; } }
 }
