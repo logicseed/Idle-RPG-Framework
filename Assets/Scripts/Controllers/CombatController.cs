@@ -465,7 +465,7 @@ public class CombatController : MonoBehaviour
     /// </summary>
     public virtual void UpdateTarget()
     {
-        if (CharacterController.GraphicsController.IsAttackAnimationPlaying()) return;
+        if (CharacterController.GraphicsController != null && CharacterController.GraphicsController.IsAttackAnimationPlaying()) return;
 
         if (TargetController == null || TargetController.CharacterState == CharacterState.Dead)
         {
@@ -485,9 +485,13 @@ public class CombatController : MonoBehaviour
                     break;
             }
         }
-            if (TargetController == null && CharacterController.CharacterState != CharacterState.Walk)
+        if (TargetController == null && CharacterController.CharacterState != CharacterState.Walk)
+        {
+            if (CharacterController.GraphicsController != null &&
+                !CharacterController.GraphicsController.IsAttackAnimationPlaying())
             {
-                if (!CharacterController.GraphicsController.IsAttackAnimationPlaying()) CharacterController.CharacterState = CharacterState.Idle;
+                CharacterController.CharacterState = CharacterState.Idle;
             }
+        }
     }
 }

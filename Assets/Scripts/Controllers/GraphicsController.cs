@@ -82,6 +82,8 @@ public class GraphicsController : MonoBehaviour
     /// <returns>True if an attack animation is playing; false otherwise.</returns>
     public bool IsAttackAnimationPlaying()
     {
+        if (animator == null) return false;
+
         var animLayer = animator.GetLayerIndex("Base Layer");
         if (animator.GetCurrentAnimatorStateInfo(animLayer).IsName(CharacterState.Melee.ToString() + MoveDirection.Left.ToString()) ||
             animator.GetCurrentAnimatorStateInfo(animLayer).IsName(CharacterState.Melee.ToString() + MoveDirection.Right.ToString()) ||
