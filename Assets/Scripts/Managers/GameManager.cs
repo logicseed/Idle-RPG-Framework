@@ -39,8 +39,6 @@ public class GameManager : Singleton<GameManager>
         InitializeWorldEntityManagers();
         InitializeStageEntityManagers();
         InitializeGameWorldManagers();
-
-        SceneManager.activeSceneChanged += OnSceneChanged;
     }
 
     /// <summary>
@@ -48,6 +46,7 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     protected void Start()
     {
+        SceneManager.activeSceneChanged += OnSceneChanged;
         DontDestroyOnLoad(gameObject);
         InitializeWorld();
     }
