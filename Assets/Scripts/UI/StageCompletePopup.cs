@@ -29,6 +29,6 @@ public class StageCompletePopup : MonoBehaviour
     /// </summary>
     private void EndStage()
     {
-        GameManager.InitializeWorld();
+        GameManager.InitializeWorld(true);
     }
 }

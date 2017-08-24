@@ -94,13 +94,13 @@ public class GameManager : Singleton<GameManager>
     /// <summary>
     /// Initializes the world.
     /// </summary>
-    public static void InitializeWorld()
+    public static void InitializeWorld(bool endStage = false)
     {
         if (StageManager != null)
         {
             OnStage = true;
         }
-        if (SceneManager.GetActiveScene().name == "Start")
+        if (SceneManager.GetActiveScene().name == "Start" || endStage)
         { 
             if (WorldManager.LastZone != null && WorldManager.LastZone != String.Empty)
             {
