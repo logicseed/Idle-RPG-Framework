@@ -96,24 +96,12 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public static void InitializeWorld()
     {
-        // If we have a stage manager we must be on a stage scene
         if (StageManager != null)
         {
-            Instance.LoadStageUi();
+            OnStage = true;
         }
-        // If we're not on a stage, and the scene isn't the world scene we must be on a zone scene
-        else if (SceneManager.GetActiveScene().name != "Start" && SceneManager.GetActiveScene().name != "World")
-        {
-            Instance.LoadZoneUi();
-        }
-        // If neither of those, we might be on the world scene
-        else if (SceneManager.GetActiveScene().name == "World")
-        {
-            Instance.LoadWorldUi();
-        }
-        // Finally we must be on the start scene
-        else
-        {
+        if (SceneManager.GetActiveScene().name == "Start")
+        { 
             if (WorldManager.LastZone != null && WorldManager.LastZone != String.Empty)
             {
                 LoadZone(WorldManager.LastZone);
@@ -190,6 +178,7 @@ public class GameManager : Singleton<GameManager>
         if (sceneType == "Zones") LoadZoneUi();
         else LoadStageUi();
     }
+
     /// <summary>
     /// Updates the game manager every frame.
     /// </summary>

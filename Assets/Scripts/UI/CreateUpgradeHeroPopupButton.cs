@@ -20,7 +20,9 @@ public class CreateUpgradeHeroPopupButton : MonoBehaviour
     /// </summary>
     public void SpawnPopup()
     {
-        var canvas = GameObject.Find("UiCanvas");
+        var canvas = GameObject.Find("PopupCanvas");
+        if (canvas == null) canvas = Instantiate(GameManager.GameSettings.Prefab.UI.UiCanvas);
+        canvas.name = "PopupCanvas";
         Instantiate(GameManager.GameSettings.Prefab.UI.UpgradeHeroPopup, canvas.transform, false);
     }
 }
