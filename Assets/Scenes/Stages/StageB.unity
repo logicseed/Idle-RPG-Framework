@@ -108,6 +108,48 @@ NavMeshSettings:
     tileSize: 256
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &84722058
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053708093955950, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: f610c4f4a09d0cb41876b41a8b762e8c, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &125285502
 Prefab:
   m_ObjectHideFlags: 0
@@ -269,7 +311,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4114019572881650, guid: 081e24dba53d3da43be860d891c60b0d, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1608026765373482, guid: 081e24dba53d3da43be860d891c60b0d, type: 2}
       propertyPath: m_Name
@@ -377,7 +419,7 @@ GameObject:
   - component: {fileID: 1139277428}
   - component: {fileID: 1139277427}
   m_Layer: 0
-  m_Name: Stage_TestA_0
+  m_Name: Background Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,7 +477,7 @@ Transform:
   m_LocalScale: {x: 2.3899105, y: 3.1122844, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1275037996
 Prefab:
@@ -474,7 +516,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4114019572881650, guid: 081e24dba53d3da43be860d891c60b0d, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1608026765373482, guid: 081e24dba53d3da43be860d891c60b0d, type: 2}
       propertyPath: m_Name
@@ -536,7 +578,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4114019572881650, guid: 081e24dba53d3da43be860d891c60b0d, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1608026765373482, guid: 081e24dba53d3da43be860d891c60b0d, type: 2}
       propertyPath: m_Name
@@ -598,7 +640,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4979654516286214, guid: bd3bec8cbfdbead43bce31c18b76bc0b, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: bd3bec8cbfdbead43bce31c18b76bc0b, type: 2}
@@ -645,7 +687,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4016606476916310, guid: a6688595468cd81478678eafb426c31e, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 60897053231962688, guid: a6688595468cd81478678eafb426c31e,
         type: 2}

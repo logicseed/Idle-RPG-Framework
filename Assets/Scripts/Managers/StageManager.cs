@@ -40,7 +40,7 @@ public class StageManager : MonoBehaviour
     /// <summary>
     /// Constructs the stage manager.
     /// </summary>
-    protected void Start()
+    protected void Awake()
     {
         GameManager.StageManager = this;
         if (boss == null) hasSpawnedBoss = true;

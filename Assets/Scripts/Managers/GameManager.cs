@@ -44,6 +44,40 @@ public class GameManager : Singleton<GameManager>
     }
 
     /// <summary>
+    /// Sets up the game manager.
+    /// </summary>
+    protected void Start()
+    {
+        DontDestroyOnLoad(gameObject);
+        InitializeWorld();
+    }
+
+    /// <summary>
+    /// Initialize world entity managers.
+    /// </summary>
+    protected void InitializeWorldEntityManagers()
+    {
+        SaveGame save = null;
+        if (SaveGameManager.SaveGameExists) save = SaveGameManager.LoadGame();
+
+        heroManager = HeroManager.Load(save);
+        abilityManager = new AbilityManager(save);
+        rosterManager = new RosterManager(save);
+        inventoryManager = new InventoryManager(save);
+    }
+
+    /// <summary>
+    /// Initializes the stage entity managers.
+    /// </summary>
+    public void InitializeStageEntityManagers()
+    {
+        allyManager = new AllyManager();
+        enemyManager = new EnemyManager();
+        bossManager = new BossManager();
+        queueManager = new QueueManager();
+    }
+
+    /// <summary>
     /// Initialize game world managers.
     /// </summary>
     protected void InitializeGameWorldManagers()
@@ -62,28 +96,32 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public static void InitializeWorld()
     {
-        if (WorldManager.LastZone != null && WorldManager.LastZone != String.Empty)
+        // If we have a stage manager we must be on a stage scene
+        if (StageManager != null)
         {
-            LoadZone(WorldManager.LastZone);
-            return;
+            Instance.LoadStageUi();
         }
-        LoadWorld();
+        // If we're not on a stage, and the scene isn't the world scene we must be on a zone scene
+        else if (SceneManager.GetActiveScene().name != "Start" && SceneManager.GetActiveScene().name != "World")
+        {
+            Instance.LoadZoneUi();
+        }
+        // If neither of those, we might be on the world scene
+        else if (SceneManager.GetActiveScene().name == "World")
+        {
+            Instance.LoadWorldUi();
+        }
+        // Finally we must be on the start scene
+        else
+        {
+            if (WorldManager.LastZone != null && WorldManager.LastZone != String.Empty)
+            {
+                LoadZone(WorldManager.LastZone);
+                return;
+            }
+            LoadWorld();
+        }
     }
-
-    /// <summary>
-    /// Initialize world entity managers.
-    /// </summary>
-    protected void InitializeWorldEntityManagers()
-    {
-        SaveGame save = null;
-        if (SaveGameManager.SaveGameExists) save = SaveGameManager.LoadGame();
-
-        heroManager = HeroManager.Load(save);
-        abilityManager = new AbilityManager(save);
-        rosterManager = new RosterManager(save);
-        inventoryManager = new InventoryManager(save);
-    }
-
     /// <summary>
     /// Loads the user interface for a stage scene.
     /// </summary>
@@ -152,16 +190,6 @@ public class GameManager : Singleton<GameManager>
         if (sceneType == "Zones") LoadZoneUi();
         else LoadStageUi();
     }
-
-    /// <summary>
-    /// Sets up the game manager.
-    /// </summary>
-    protected void Start()
-    {
-        DontDestroyOnLoad(gameObject);
-        InitializeWorld();
-    }
-
     /// <summary>
     /// Updates the game manager every frame.
     /// </summary>
@@ -297,7 +325,6 @@ public class GameManager : Singleton<GameManager>
             return UpgradeHeroCost <= GameManager.HeroManager.Experience;
         }
     }
-
     /// <summary>
     /// Returns the stage enemy manager.
     /// </summary>
@@ -406,6 +433,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (WorldManager.UnlockedStages.Contains(stage))
         {
+            StageManager = null;
             Debug.Log("Loading stage: " + stage);
             WorldManager.SetLastStage(stage);
             GameManager.Instance.onStage = true;
@@ -419,6 +447,7 @@ public class GameManager : Singleton<GameManager>
     /// </summary>
     public static void LoadWorld()
     {
+        StageManager = null;
         SceneManager.LoadScene("World");
         OnStage = false;
     }
@@ -431,6 +460,7 @@ public class GameManager : Singleton<GameManager>
     {
         if (WorldManager.UnlockedZones.Contains(zone))
         {
+            StageManager = null;
             Debug.Log("Loading zone: " + zone);
             WorldManager.SetLastZone(zone);
             OnStage = false;
@@ -472,18 +502,6 @@ public class GameManager : Singleton<GameManager>
             GameManager.HeroManager.Level++;
         }
     }
-
-    /// <summary>
-    /// Initializes the stage entity managers.
-    /// </summary>
-    public void InitializeStageEntityManagers()
-    {
-        allyManager = new AllyManager();
-        enemyManager = new EnemyManager();
-        bossManager = new BossManager();
-        queueManager = new QueueManager();
-    }
-
     /// <summary>
     /// Saves the game.
     /// </summary>
