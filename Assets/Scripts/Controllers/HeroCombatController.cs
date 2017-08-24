@@ -55,7 +55,7 @@ public class HeroCombatController : CombatController
     {
         if (isDefending) damage = (int)(damage * GameManager.GameSettings.Constants.DefensePercent);
         base.ApplyDamage(damage, isCritical);
-        if (CharacterController.CharacterState == CharacterState.Idle) base.UpdateTarget();
+        if (CharacterController.CharacterState != CharacterState.Walk) base.UpdateTarget();
     }
 
     /// <summary>
