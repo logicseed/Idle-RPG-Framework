@@ -1,0 +1,204 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications: []
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 1473963820156770}
+  m_IsPrefabParent: 1
+--- !u!1 &1473963820156770
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 4053708093955950}
+  - component: {fileID: 114775853311972390}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: GameController
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4053708093955950
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473963820156770}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &114775853311972390
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1473963820156770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11968bfbd4812774ab485cd262e358dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gameSettings:
+    CharacterStart:
+      Experience: 100000
+      Currency: 100
+      Level: 1
+      Zones:
+      - Scenes/Zones/ZoneA
+      Stages:
+      - Scenes/Stages/StageA
+      Inventory:
+      - Sword
+      - Shield
+      - Chainmail
+      Roster:
+      - MeleeAlly
+      - RangedAlly
+      Abilities:
+      - Storm
+      - Cleave
+    Constants:
+      EquipmentDropChance: 0.5
+      ExperiencePerLevel: 1000
+      DefenseLength: 10
+      DefensePercent: 0.5
+      UpgradeHeroCost: 10000
+      UpgradeAllyCost: 8000
+      Character:
+        RigidbodyGravityScale: 0
+        RigidbodyDrag: 100
+        RigidbodyAngularDrag: 100
+        RigidbodyMass: 100
+        ColliderOffset: {x: 0, y: -0.275}
+        ColliderSize: {x: 0.4, y: 0.2}
+        ColliderDirection: 1
+        VelocityFactor: 1
+        Acceleration: 0.1
+      Range:
+        MeleeAttack: 0.5
+        CasterAttack: 2
+        RangedAttack: 3
+        AttackRangeVariance: 0.2
+        DirectAbilityHit: 0.05
+        Touch: 0.2
+        SeekLocation: 0.05
+        FleeRadius: 0.3
+        AvoidRadius: 0.75
+      CombatText:
+        BlockedText: BLOCKED
+        NormalText: 
+        CriticalText: CRITICAL
+        DisplayTime: 2
+        FloatDistance: 2
+        HorizontalShift: 0.5
+      Colors:
+        CombatTextBlocked: {r: 0, g: 1, b: 0, a: 1}
+        CombatTextNormal: {r: 1, g: 0.92156863, b: 0.015686275, a: 1}
+        CombatTextCritical: {r: 1, g: 0, b: 0, a: 1}
+        FloatingBarForeground: {r: 0, g: 1, b: 0, a: 1}
+        FloatingBarBackground: {r: 1, g: 0, b: 0, a: 1}
+      CombatTime:
+        SpawnCasterBallDelay: 0.25
+        SpawnArrowDelay: 0.5
+        DespawnBodyDelay: 1
+    Max:
+      RewardTime: 8
+      Abilities:
+        Unlocked: 9999
+        Assigned: 3
+      Equipment:
+        Unlocked: 9999
+        Assigned: 9999
+      Allies:
+        Unlocked: 9999
+        Assigned: 3
+      AttributeFactor:
+        AttackDamage: 100
+        AbilityDamage: 100
+        Defense: 5
+        Health: 500
+        HealthRegeneration: 20
+        Energy: 400
+        EnergyRegeneration: 15
+        AttackSpeed: 1
+        CriticalHitChance: 0.5
+        CriticalHitDamage: 1
+        CooldownReduction: 0.5
+        LifeDrain: 0.5
+        MovementSpeed: 3
+    Path:
+      Abilities: Abilities/
+      Equipment: Equipment/
+      Allies: Allies/
+      Enemies: Enemies/
+    Prefab:
+      Hero: {fileID: 1990536307461588, guid: bd3bec8cbfdbead43bce31c18b76bc0b, type: 2}
+      Ally: {fileID: 1071261792446292, guid: e219a472c19c30e459e20d90f8c987e3, type: 2}
+      Enemy: {fileID: 1239132045805106, guid: d7669ce8320bd7f498afd54cac41edfe, type: 2}
+      Boss: {fileID: 1518652160810766, guid: ae431efdd5eaa9a4ca5495d28db12048, type: 2}
+      Effect:
+        Arrow: {fileID: 1202586162592276, guid: 7c9eac417892f374c84f4782e1fab2db,
+          type: 2}
+        Casterball: {fileID: 1492086375752678, guid: e449682e48612874eb370938b25c7c16,
+          type: 2}
+        Storm: {fileID: 1522269451602124, guid: 62d0d45a842e7104eae799a1abc6bc40,
+          type: 2}
+        Fireball: {fileID: 1677568107922774, guid: ce6361a9b9045ab4f92127e8b348a4da,
+          type: 2}
+      UI:
+        CombatText: {fileID: 1595817452820914, guid: e32f0574ef786f243bd4df6ccccf9c62,
+          type: 2}
+        DroppedEquipment: {fileID: 1380868488262940, guid: e2020c9be09f84a419ade38b5b5ed001,
+          type: 2}
+        FloatingBar: {fileID: 1964579812323056, guid: bc38e340336e0b842bad2ec0178d6a3f,
+          type: 2}
+        UiCanvas: {fileID: 1624268022810878, guid: d03ad0050509e8a4eb58b5508af6e92e,
+          type: 2}
+        WorldEntityButton: {fileID: 1779098270501832, guid: 9705a4e34a885c242810575f31af1b8c,
+          type: 2}
+        BackToWorldButton: {fileID: 1169837827153134, guid: 3a0e014a4e9cdeb40af0fcfd488f22b4,
+          type: 2}
+        ResetButton: {fileID: 1307722920169142, guid: 3d029ec1cc493504d8d0f0a17e885de8,
+          type: 2}
+        AbilitySelection: {fileID: 1627934290031368, guid: 6bd3b48291e867340a09782fb9362209,
+          type: 2}
+        InventorySelection: {fileID: 1762379476474538, guid: ff5613de4f328714b95e1c216311e78f,
+          type: 2}
+        RosterSelection: {fileID: 1662936299388258, guid: 18c130669e0b5d645aee243d08dcfce6,
+          type: 2}
+        AssignmentPanel: {fileID: 1145731288885080, guid: 1ff7ed08293f600499ce1e50b4c97e04,
+          type: 2}
+        UpgradePanel: {fileID: 1467911740268166, guid: 8393b42fe2f5a034ebefa7b517c9799c,
+          type: 2}
+        UpgradeHeroPopup: {fileID: 1568672000705382, guid: 495206a5ce97e8c4e8fa44bed66365fa,
+          type: 2}
+        UpgradeAlliesPopup: {fileID: 1947709563445964, guid: 5226a5f6ccb428144b456a97871bac14,
+          type: 2}
+        UpgradeAllyButton: {fileID: 1204506481325362, guid: cabf8cafe21dfef49860b70507097356,
+          type: 2}
+        ExperienceText: {fileID: 1940980552363930, guid: 43809072f7b2d3b459ce9f04467eafc5,
+          type: 2}
+        CurrencyText: {fileID: 1266054299454214, guid: 5ebfb31a788659d49b38e8d30e512072,
+          type: 2}
+        AbilityUsePanel: {fileID: 1257002223116160, guid: 478cc4b8d360db042995c21d2e50f191,
+          type: 2}
+        HeroStageInformation: {fileID: 1457981774662274, guid: 26f305edbf1d79c4bba802ef10ecca3d,
+          type: 2}
+        StageCompletePopup: {fileID: 1463329420505034, guid: 9dbc4f2da000b3d409482ae5e6e1c1d6,
+          type: 2}
+        StageLostPopup: {fileID: 1155336668866480, guid: 3d2ca4e777eb9c04682b1322fdffaad6,
+          type: 2}
+    ShowResetButton: 1

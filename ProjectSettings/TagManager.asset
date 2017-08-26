@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags:
+  - Hero
+  - Ally
+  - Enemy
+  - DeadBody
+  - Queue
+  - Hazard
+  - Obstacle
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - 
+  - 
+  - Background
+  - Hazard
+  - Obstacle
+  - Loot
+  - Character
+  - Effects
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 2585226795
+    locked: 0
+  - name: Hazard
+    uniqueID: 2584682633
+    locked: 0
+  - name: Obstacle
+    uniqueID: 907359057
+    locked: 0
+  - name: Loot
+    uniqueID: 1061117575
+    locked: 0
+  - name: Character
+    uniqueID: 238355861
+    locked: 0
+  - name: Effects
+    uniqueID: 1408427233
+    locked: 0

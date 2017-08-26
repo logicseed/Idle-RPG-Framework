@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab926e5b8a677184b9c545d6345a1caa, type: 3}
+  m_Name: CasterEnemy
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: c3eb4081858e36346bcf463da975d306, type: 3}
+  animator: {fileID: 22100000, guid: 6236820d35d18bc4383734af23a84423, type: 2}
+  attackType: 2
+  level: 1
+  baseAttributes:
+    attackDamage: 20
+    abilityDamage: 20
+    defense: 20
+    health: 20
+    healthRegeneration: 20
+    energy: 20
+    energyRegeneration: 20
+    attackSpeed: 20
+    criticalHitChance: 20
+    criticalHitDamage: 20
+    cooldownReduction: 20
+    lifeDrain: 20
+    movementSpeed: 20
+  bonusAttributes:
+    attackDamage: 0
+    abilityDamage: 0
+    defense: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeneration: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    cooldownReduction: 0
+    lifeDrain: 0
+    movementSpeed: 0

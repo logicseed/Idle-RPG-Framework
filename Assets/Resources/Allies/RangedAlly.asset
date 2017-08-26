@@ -1,0 +1,60 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 27e5011aa2f255c4cb6aed061e869615, type: 3}
+  m_Name: RangedAlly
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 7be663f44d4aad54a94f828a8bc6f217, type: 3}
+  animator: {fileID: 22100000, guid: 7bbf16f5f8b30f7449954e1e5faa060b, type: 2}
+  attackType: 1
+  level: 1
+  baseAttributes:
+    attackDamage: 30
+    abilityDamage: 30
+    defense: 30
+    health: 30
+    healthRegeneration: 30
+    energy: 30
+    energyRegeneration: 30
+    attackSpeed: 30
+    criticalHitChance: 30
+    criticalHitDamage: 30
+    cooldownReduction: 30
+    lifeDrain: 30
+    movementSpeed: 30
+  bonusAttributes:
+    attackDamage: 0
+    abilityDamage: 0
+    defense: 0
+    health: 0
+    healthRegeneration: 0
+    energy: 0
+    energyRegeneration: 0
+    attackSpeed: 0
+    criticalHitChance: 0
+    criticalHitDamage: 0
+    cooldownReduction: 0
+    lifeDrain: 0
+    movementSpeed: 0
+  lesson: {fileID: 11400000, guid: 702212b0fc90e064bb2074d187c8ab09, type: 2}
+  levelUpgrades:
+    AttackDamage: 0
+    AbilityDamage: 0
+    Defense: 0
+    Health: 0
+    HealthRegeneration: 0
+    Energy: 0
+    EnergyRegeneration: 0
+    AttackSpeed: 1
+    CriticalHitChance: 0
+    CriticalHitDamage: 0
+    CooldownReduction: 0
+    LifeDrain: 0
+    MovementSpeed: 0
