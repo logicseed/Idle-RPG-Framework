@@ -1,4 +1,4 @@
-:warning: | __The source code in this repository is explicitly NOT LICENSED for use, modification, or sharing. Per GitHub's terms of service it may only be viewed. See [No License] for more information.__ | :warning:
+:warning: | __The contents of this repository is explicitly NOT LICENSED for use, modification, or sharing. Per GitHub's terms of service it may only be viewed. See [No License] for more information.__ | :warning:
 --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------
 
 [No License]: https://choosealicense.com/no-permission/
@@ -29,7 +29,7 @@ __Timeline:__ 8 months for requirements gathering, design, implementation, testi
 
 ### Sample Game
 
-The following animations showcase a sample game that was created to showcase the framework to the
+The following animations comprise a sample game that was created to showcase the framework to the
 client. All art is placeholder art, and the interface is more simplistic than the hooks provided
 by the framework can allow.
 
