@@ -1,4 +1,4 @@
-:warning: | __The contents of this repository is explicitly NOT LICENSED for use, modification, or sharing. Per GitHub's terms of service it may only be viewed. See [No License] for more information.__ | :warning:
+:warning: | __The content of this repository is explicitly NOT LICENSED for use, modification, or sharing. Per GitHub's terms of service it may only be viewed. See [No License] for more information.__ | :warning:
 --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ---------
 
 [No License]: https://choosealicense.com/no-permission/
@@ -87,7 +87,7 @@ was provided to the client to detail the effect of changing these values.*
 
 [![InspectorGameManager](Screenshots/InspectorGameManager.png?raw=true "InspectorGameManager")](Screenshots/InspectorGameManager.png?raw=true)
 
-*All the entities are implemented using Unity's ScriptableObjecct methodology, making it simple and
+*All the entities are implemented using Unity's ScriptableObject methodology, making it simple and
 straight-forward to create and maintain.*
 
 [![InspectorAlly](Screenshots/InspectorAlly.png?raw=true "InspectorAlly")](Screenshots/InspectorAlly.png?raw=true)
