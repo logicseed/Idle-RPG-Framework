@@ -56,7 +56,7 @@ weapon, or a weapon and shield, or a two-handed weapon assigned.*
 
 [![EquipmentSelection](Screenshots/EquipmentSelection.gif?raw=true "EquipmentSelection")](Screenshots/EquipmentSelection.gif?raw=true)
 
-*Abiliies allow the hero to perform special actions during combat. A hero always has the defend ability
+*Abilities allow the hero to perform special actions during combat. A hero always has the defend ability
 and can assign up to three more abilities. New abilities are learned from allies when they are acquired.*
 
 [![AbilitySelection](Screenshots/AbilitySelection.gif?raw=true "AbilitySelection")](Screenshots/AbilitySelection.gif?raw=true)
